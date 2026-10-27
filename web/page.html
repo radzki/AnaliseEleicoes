@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eleição 2026: testes forenses</title>
+<meta name="description" content="Os números da eleição presidencial de 2026 mostram sinais de fraude? Testes estatísticos nos boletins de urna de Lula e Flávio Bolsonaro, comparados com 2022, a partir dos dados abertos do TSE.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eleição presidencial de 2026: os números mostram sinais de fraude?">
+<meta property="og:description" content="Testes estatísticos nos boletins de urna do 2º turno, comparados com 2022, a partir dos dados abertos do TSE.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="theme.css">
+<style>
+{{style}}
+</style>
+<script src="vendor/d3.v7.9.0.min.js"></script>
+<script src="dash.js" data-params='{"cand":"ambos"}' data-datasets="{{dataset_ids}}"></script>
+</head>
+<body>
+<div id="dash-root">
+{{body}}
+<footer class="site-foot">
+  <p>Fonte: dados abertos do Tribunal Superior Eleitoral (TSE), resultados presidenciais por seção de 2026 e 2022.
+    Código, método e dados intermediários: <a href="https://github.com/radzki/AnaliseEleicoes">github.com/radzki/AnaliseEleicoes</a>.</p>
+  <p>Os dados exatos de cada gráfico e tabela, em JSON:</p>
+  <ul>
+{{datasets}}
+  </ul>
+</footer>
+</div>
+</body>
+</html>

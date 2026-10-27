@@ -1,0 +1,422 @@
+<style>
+  .vf { display: grid; gap: var(--cds-gap-xl); max-width: 72rem; margin-inline: auto; font-family: var(--font-anthropic-sans); }
+  .vf b { font-weight: var(--cds-font-weight-medium); }
+  .vf-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+  .vf-take { margin: var(--cds-gap-sm) 0 0; max-width: 62ch; color: var(--color-fg-muted); }
+  .vf-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+  .vf-kpi, .vf-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+  .vf-kpi .vf-lbl, .vf-kpi .vf-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-kpi .vf-num { display: block; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; margin: var(--cds-gap-xs) 0; }
+  .vf h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+  .vf-intro { margin: 0 0 var(--cds-gap-md); max-width: 68ch; color: var(--color-fg-muted); }
+  .vf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-md); }
+  .vf-wide { grid-column: 1 / -1; }
+  .vf-card h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .vf-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); max-width: 75ch; }
+  .vf-after { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-md) 0 0; max-width: 75ch; }
+  .vf-chart { position: relative; min-height: 260px; }
+  .vf-chart.vf-tall { min-height: 320px; }
+  .vf-svg { display: block; overflow: visible; }
+  .vf-axis text, .vf-tick { fill: var(--color-fg-muted); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); font-variant-numeric: tabular-nums; }
+  .vf-axis line { stroke: var(--cds-chart-grid); }
+  .vf-multiples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: var(--cds-gap-md); }
+  .vf-multiples.vf-two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+  .vf-mtitle { font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); margin-bottom: var(--cds-gap-xs); }
+  .vf-mnote { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-xs) var(--cds-gap-md); margin-top: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
+  .vf-sw { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .vf-sw-line { width: 16px; height: 2px; display: inline-block; }
+  .vf-sw-box { border-radius: 2px; border: 1.5px solid var(--cds-chart-status-critical); background: transparent; }
+  .vf-ramp { width: 72px; height: 8px; border-radius: 4px; display: inline-block; }
+  .vf-tip { position: absolute; z-index: 2; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .vf-tip-h { color: var(--cds-text-secondary); margin-bottom: 2px; }
+  .vf-tip-r { display: flex; align-items: center; gap: var(--cds-gap-xs); }
+  .vf-tip-r i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .vf-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); min-height: inherit; height: 100%; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .vf-dot { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--color-bad); }
+  .vf-seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; margin-bottom: var(--cds-gap-sm); }
+  .vf-seg button { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 0; background: transparent; color: var(--color-fg-muted); cursor: pointer; }
+  .vf-seg button[aria-pressed="true"] { background: var(--color-bg); color: var(--color-fg); }
+  .vf-scroll { max-height: 26rem; overflow: auto; }
+  .vf-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .vf-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: bottom; }
+  .vf-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+  .vf-table .vf-n { text-align: right; white-space: nowrap; }
+  .vf-sort { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
+  .vf-search { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); margin-bottom: var(--cds-gap-sm); width: min(100%, 20rem); }
+  .vf-method { margin: 0; padding-left: 1.2em; max-width: 75ch; color: var(--color-fg-muted); }
+  .vf-method li { margin-bottom: var(--cds-gap-xs); }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  .vf-page { display: grid; gap: var(--cds-gap-xl); }
+  .vf-page[hidden] { display: none; }
+  .vf-tabs { display: flex; gap: var(--cds-gap-lg); border-bottom: 1px solid var(--color-border-line); margin-top: var(--cds-gap-md); }
+  .vf-tabs button { font: inherit; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: var(--cds-pad-sm) 0; color: var(--color-fg-muted); cursor: pointer; }
+  .vf-tabs button[aria-selected="true"] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+  .vf-answer { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xl); }
+  .vf-answer-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-answer-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: var(--cds-gap-xs) 0 var(--cds-gap-sm); }
+  .vf-answer p:last-child { margin: 0; max-width: 65ch; }
+  .vf-explain p { margin: var(--cds-gap-sm) 0 0; max-width: 68ch; }
+  .vf-qs { display: grid; gap: var(--cds-gap-md); }
+  .vf-q p { margin: var(--cds-gap-sm) 0 0; max-width: 68ch; }
+  .vf-q-head { display: flex; align-items: center; flex-wrap: wrap; gap: var(--cds-gap-sm); }
+  .vf-q-head h3 { flex: 1 1 14rem; font-size: var(--cds-font-size-heading); }
+  .vf-q-n { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-chip { font-size: var(--cds-font-size-caption); padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+  .vf-chip.vf-ok { color: var(--color-ok); }
+  .vf-chip.vf-warn { color: var(--color-warn); }
+  .vf-q .vf-chart { margin-top: var(--cds-gap-md); min-height: 0; }
+  .vf-q .vf-h170 { min-height: 170px; }
+  .vf-q .vf-h180 { min-height: 180px; }
+  .vf-q .vf-h210 { min-height: 210px; }
+  .vf-q .vf-h280 { min-height: 280px; }
+  .vf-q .vf-q-sum { margin-top: var(--cds-gap-md); padding-top: var(--cds-gap-sm); border-top: 1px solid var(--color-border-line); }
+  .vf-caption { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-link { font: inherit; font-size: var(--cds-font-size-caption); margin-top: var(--cds-gap-md); padding: var(--cds-pad-xs) var(--cds-pad-sm); background: none; color: var(--color-fg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); cursor: pointer; }
+  .vf-inline { font: inherit; padding: 0; background: none; border: 0; color: inherit; text-decoration: underline; cursor: pointer; }
+  .vf-gloss { margin: var(--cds-gap-md) 0 0; max-width: 68ch; }
+  .vf-gloss dt { font-weight: var(--cds-font-weight-medium); }
+  .vf-gloss dd { margin: 0 0 var(--cds-gap-sm); color: var(--color-fg-muted); }
+  .vf-strong { fill: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+  .vf-filter { display: flex; align-items: center; flex-wrap: wrap; gap: var(--cds-gap-sm); margin-top: var(--cds-gap-md); }
+  .vf-filter .vf-seg { margin-bottom: 0; }
+  .vf-filter-lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf[data-show="lula"] [data-cand="flavio"], .vf[data-show="flavio"] [data-cand="lula"] { display: none !important; }
+  .vf-single { display: block; }
+  .vf-gloss a { color: inherit; }
+  .vf { container: vf / inline-size; overflow-x: clip; }
+  .vf-seg { flex-wrap: wrap; max-width: 100%; }
+  .vf-tip { white-space: normal; width: max-content; max-width: 100%; }
+  @container vf (max-width: 600px) {
+    .vf-answer, .vf-card, .vf-kpi { padding: var(--cds-pad-md); }
+    .vf-q-head h3 { font-size: var(--cds-font-size-body); }
+    .vf-scroll { max-height: 32rem; }
+    /* Wide tables become one small card per row: the column name before each value. */
+    .vf-table.vf-stack thead { display: none; }
+    .vf-table.vf-stack, .vf-table.vf-stack tbody, .vf-table.vf-stack tr { display: block; }
+    .vf-table.vf-stack tr { padding: var(--cds-pad-sm) 0; border-bottom: 1px solid var(--color-border-line); }
+    .vf-table.vf-stack td { display: flex; justify-content: space-between; gap: var(--cds-gap-md); padding: 2px 0; border: 0; text-align: right; white-space: normal; }
+    .vf-table.vf-stack td::before { content: attr(data-label); flex: none; max-width: 45%; text-align: left; color: var(--color-fg-muted); }
+    .vf-table.vf-stack td:first-child { display: block; text-align: left; font-weight: var(--cds-font-weight-medium); }
+    .vf-table.vf-stack td:first-child::before { content: none; }
+  }
+</style>
+
+<div class="vf" lang="pt-BR">
+  <header class="vf-head" id="topo">
+    <h1>Eleição presidencial de 2026: os números mostram sinais de fraude?</h1>
+    <div class="vf-filter"><span class="vf-filter-lbl">Mostrar:</span><div class="vf-seg" id="cand-pick" role="group" aria-label="Candidato"><button type="button" data-v="lula" aria-pressed="false">Lula</button><button type="button" data-v="flavio" aria-pressed="false">Flávio</button><button type="button" data-v="ambos" aria-pressed="true">Ambos</button></div></div>
+    <div class="vf-tabs" id="vf-tabs" role="tablist" aria-label="Versão do relatório">
+      <button type="button" role="tab" id="tab-simples" data-tab="simples" aria-controls="simples" aria-selected="true">Resumo para todos</button>
+      <button type="button" role="tab" id="tab-tecnico" data-tab="tecnico" aria-controls="tecnico" aria-selected="false">Versão técnica</button>
+    </div>
+  </header>
+
+  <div class="vf-page" id="simples" data-page role="tabpanel" aria-labelledby="tab-simples">
+    <div class="vf-answer">
+      <div class="vf-answer-label">Resposta curta</div>
+      <p class="vf-answer-big">Não encontramos sinais de fraude nos números.</p>
+      <p>Analisamos os <b data-source="summary" data-where="year=2026&amp;round=2" data-field="sections" data-fmt="int">—</b> boletins de urna do 2º turno (o resultado que cada urna imprime ao fim da votação) com testes usados no mundo todo para descobrir números inventados ou urnas “engordadas”. Em todos eles, 2026 se comporta como uma eleição normal, do mesmo jeito que 2022.</p>
+    </div>
+
+    <div class="vf-kpis">
+      <div class="vf-kpi" data-cand="lula">
+        <div class="vf-lbl">Lula</div>
+        <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="lula_share" data-fmt="pct">—</span>
+        <div class="vf-sub">dos votos válidos no 2º turno · no 1º turno, <span data-source="summary" data-where="year=2026&amp;round=1" data-field="lula_share" data-fmt="pct">—</span></div>
+      </div>
+      <div class="vf-kpi" data-cand="flavio">
+        <div class="vf-lbl">Flávio</div>
+        <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="right_share" data-fmt="pct">—</span>
+        <div class="vf-sub">dos votos válidos no 2º turno · no 1º turno, <span data-source="summary" data-where="year=2026&amp;round=1" data-field="right_share" data-fmt="pct">—</span></div>
+      </div>
+      <div class="vf-kpi">
+        <div class="vf-lbl">Diferença final</div>
+        <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="absCompact">—</span>
+        <div class="vf-sub">de votos a favor de Lula · no 1º turno, Flávio estava <span data-source="summary" data-where="year=2026&amp;round=1" data-field="margin" data-fmt="absCompact">—</span> à frente</div>
+      </div>
+    </div>
+
+    <div class="vf-card vf-explain" id="como-checamos">
+      <h2>Como checamos, em 1 minuto</h2>
+      <p>Pessoas são péssimas em inventar números que pareçam aleatórios. Quem altera resultados à mão deixa rastros sem perceber: números redondos demais, urnas muito diferentes das vizinhas, resultados “perfeitos” demais. Procuramos esses rastros nos dados oficiais do TSE, urna por urna.</p>
+      <p>Para saber o que é “normal”, usamos a eleição de 2022 como régua: as mesmas urnas, os mesmos arquivos e exatamente o mesmo método. Se 2026 se parece com 2022 nesses testes, não há nada fora do comum.</p>
+    </div>
+
+    <div class="vf-qs">
+      <article class="vf-card vf-q" id="numeros-inventados">
+        <div class="vf-q-head"><span class="vf-q-n">1</span><h3>Os números parecem inventados?</h3><span class="vf-chip vf-ok">Normal</span></div>
+        <p>Olhe para o último algarismo de cada contagem de votos: 1.234 termina em 4; 870 termina em 0. Em votos de verdade, esse último algarismo é como um sorteio: cada número de 0 a 9 aparece em mais ou menos 1 de cada 10 urnas. Quem inventa números costuma repetir alguns, como 0 e 5, e isso apareceria como barras mais altas.</p>
+        <div class="vf-chart vf-h210 dash-skeleton" id="s-digits" data-source="last_digit"></div>
+        <p class="vf-q-sum"><b>Resultado:</b> em 2026, cada algarismo aparece em <span data-source="digit_range" data-row="0" data-field="min" data-fmt="pct">—</span> a <span data-source="digit_range" data-row="0" data-field="max" data-fmt="pct">—</span> das urnas, para os dois candidatos. É exatamente o que um sorteio daria.</p>
+      </article>
+
+      <article class="vf-card vf-q" id="resultados-redondos">
+        <div class="vf-q-head"><span class="vf-q-n">2</span><h3>Há urnas com resultados “redondos” demais?</h3><span class="vf-chip vf-ok">Normal</span></div>
+        <p>Se alguém ajustasse resultados à mão, sobrariam urnas com percentuais certinhos, como Lula com exatamente 50%, 60% ou 70% dos votos. Algumas urnas sempre caem em números redondos por pura aritmética (numa urna pequena, 100 votos divididos 50 a 50 dão 50% cravado), então comparamos com o que o acaso produz sozinho.</p>
+        <p>No 2º turno só há dois candidatos, então, quando Lula tem um percentual redondo, Flávio também tem (50% e 50%, 60% e 40%). O teste vale para os dois ao mesmo tempo.</p>
+        <p class="vf-q-sum"><b>Resultado:</b> <span data-source="scorecard" data-where="id=int|Lula share|2|2026" data-field="observed" data-fmt="int">—</span> urnas deram a Lula um percentual inteiro exato. O acaso, sozinho, daria cerca de <span data-source="scorecard" data-where="id=int|Lula share|2|2026" data-field="expected" data-fmt="int">—</span>. Praticamente o mesmo número.</p>
+      </article>
+
+      <article class="vf-card vf-q" id="urnas-que-destoam">
+        <div class="vf-q-head"><span class="vf-q-n">3</span><h3>Alguma urna destoa demais das vizinhas?</h3><span class="vf-chip vf-ok">Normal</span></div>
+        <p>Numa mesma escola costuma haver várias urnas, com eleitores do mesmo bairro; por isso os resultados delas costumam ser parecidos. Uma urna adulterada ficaria muito diferente das vizinhas. Em toda eleição algumas urnas destoam naturalmente (por exemplo, uma seção só com eleitores mais velhos), então o que importa é comparar com 2022. Abaixo, quantas urnas ficaram muito diferentes das vizinhas, para cada lado:</p>
+        <div class="vf-chart vf-h170 dash-skeleton" id="s-outliers" data-source="scorecard"></div>
+        <p class="vf-q-sum"><b>Resultado:</b> são praticamente as mesmas quantidades de 2022, para os dois lados, numa fração mínima das quase 500 mil urnas. <span data-cand="lula">E <span data-source="scorecard" data-where="id=persist|2026" data-field="observed" data-fmt="pctv">—</span> das que destoaram a favor de Lula no 2º turno já destoavam assim no 1º: são lugares que sempre votam diferente, não urnas que mudaram de repente.</span></p>
+      </article>
+
+      <article class="vf-card vf-q" id="urnas-quase-unanimes">
+        <div class="vf-q-head"><span class="vf-q-n">4</span><h3>E as urnas em que quase todos votaram no mesmo candidato?</h3><span class="vf-chip vf-warn">Chamou atenção, mas tem explicação</span></div>
+        <p>Uma urna em que quase todo mundo votou, e quase todos no mesmo candidato, é o sinal clássico de urna “engordada”. Por isso contamos as urnas do 2º turno com 95% ou mais de comparecimento e 90% ou mais dos votos para um só candidato.</p>
+        <p data-cand="lula"><b>Lula:</b> foram <span data-source="corner_summary" data-where="candidate=lula" data-field="sections" data-fmt="int">—</span> urnas; em 2022 foram <span data-source="scorecard" data-where="id=corner|2|2022" data-field="observed" data-fmt="int">—</span>. <span data-source="corner_summary" data-where="candidate=lula" data-field="strong_r1" data-fmt="int">—</span> delas já davam 90% ou mais a Lula no 1º turno, e muitas ficam em aldeias indígenas e comunidades rurais, onde quase todo mundo vota, e vota igual. Como o comparecimento foi maior no 2º turno, mais delas passaram da marca de 95%. Juntas, têm <span data-source="corner_vs_margin" data-row="0" data-field="eligible" data-fmt="int">—</span> eleitores, o equivalente a <span data-source="corner_vs_margin" data-row="0" data-field="share" data-fmt="pct">—</span> da diferença final: mesmo que todos tivessem votado em Flávio, Lula ainda venceria com folga.</p>
+        <p data-cand="flavio"><b>Flávio:</b> foram <span data-source="corner_summary" data-where="candidate=flavio" data-field="sections" data-fmt="int">—</span> urnas; em 2022, Jair Bolsonaro teve <span data-source="scorecard" data-where="id=corner|2|2022" data-field="stat" data-fmt="int">—</span>. Também são comunidades rurais pequenas, que já votavam em peso nele no 1º turno. Juntas, têm <span data-source="corner_summary" data-where="candidate=flavio" data-field="eligible" data-fmt="int">—</span> eleitores.</p>
+        <p class="vf-q-sum"><b>Resultado:</b> nos dois casos, são lugares pequenos que já votavam assim antes. Nada aqui tem tamanho para mudar o resultado.</p>
+        <button type="button" class="vf-link" data-goto="tecnico" data-target="secoes-quadro-vermelho">Ver a lista completa dessas urnas</button>
+      </article>
+
+      <article class="vf-card vf-q" id="virada-na-apuracao">
+        <div class="vf-q-head"><span class="vf-q-n">5</span><h3>A virada durante a apuração é suspeita?</h3><span class="vf-chip vf-ok">Normal</span></div>
+        <p>Na noite da eleição, Lula começou atrás e passou à frente durante a apuração. Isso acontece em toda eleição recente: os boletins do Norte e do Nordeste, onde Lula tem mais votos, costumam chegar mais tarde. Em 2022 foi igual. Em 2026 houve um detalhe a mais: a votação, que terminaria às 17h, foi prorrogada até as 19h, e por isso a maioria dos boletins chegou depois das 19h.</p>
+        <p class="vf-caption">Cada linha mostra o percentual de um candidato entre os dois à medida que os votos eram apurados. O eixo de baixo é quanto da apuração já tinha sido feito.</p>
+        <div class="vf-chart vf-h280 dash-skeleton" id="s-progress" data-source="timing"></div>
+        <p class="vf-q-sum"><b>Resultado:</b> as duas eleições têm o mesmo desenho. E, comparando urnas da mesma região, as que chegaram tarde quase não diferem das que chegaram cedo: a virada vem de onde moram os eleitores, não da hora em que os votos chegaram.</p>
+      </article>
+
+      <article class="vf-card vf-q" id="de-onde-veio-a-virada">
+        <div class="vf-q-head"><span class="vf-q-n">6</span><h3>De onde veio a virada?</h3><span class="vf-chip vf-ok">As contas fecham</span></div>
+        <p>No 1º turno, Flávio teve <span data-source="summary" data-where="year=2026&amp;round=1" data-field="margin" data-fmt="absCompact">—</span> de votos a mais que Lula. No 2º, Lula terminou com <span data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="absCompact">—</span> a mais. Como? Os <span data-source="between_rounds" data-where="id=others" data-field="r1" data-fmt="compact">—</span> de votos dos candidatos que saíram da disputa ficaram livres, o comparecimento subiu <span data-source="between_rounds" data-where="id=turnout" data-field="change" data-fmt="absCompact">—</span> e os brancos e nulos caíram <span data-source="between_rounds" data-where="id=blank_null" data-field="change" data-fmt="absCompact">—</span>. Esses votos foram divididos: Lula ganhou <span data-source="between_rounds" data-where="id=lula" data-field="change" data-fmt="absCompact">—</span> e Flávio <span data-source="between_rounds" data-where="id=flavio" data-field="change" data-fmt="absCompact">—</span>.</p>
+        <p class="vf-caption">Quanto cada grupo ganhou (à direita) ou perdeu (à esquerda) do 1º para o 2º turno.</p>
+        <div class="vf-chart vf-h180 dash-skeleton" id="s-balance" data-source="between_rounds"></div>
+        <p class="vf-q-sum"><b>Resultado:</b> o voto é secreto, então ninguém sabe em quem cada eleitor votou. Mas as contas fecham: tudo o que saiu de um lado entrou do outro.</p>
+      </article>
+
+      <article class="vf-card vf-q" id="soma-oficial">
+        <div class="vf-q-head"><span class="vf-q-n">7</span><h3>A soma das urnas bate com o resultado oficial?</h3><span class="vf-chip vf-ok">Normal</span></div>
+        <p>Somamos os boletins urna por urna e comparamos com os totais que o TSE divulga por município. Bateu exatamente em todos os <span data-source="consistency" data-where="id=2026|QT_APTOS" data-field="units" data-fmt="int">—</span> recortes de município e zona do 1º turno.</p>
+        <p>A única diferença foram <span data-source="consistency" data-where="id=2026|QT_VOTOS_NOMINAIS" data-field="abs_difference" data-fmt="int">—</span> votos do 1º turno dados a Leonardo Alves de Araújo, que também era candidato a presidente no 1º turno e não tem nada a ver com a disputa entre Lula e Flávio. Nos arquivos por urna, esses votos aparecem como votos nele; no total oficial, o TSE os conta como nulos (“votos nulos técnicos”, a categoria usada quando o registro do candidato é negado ou cancelado). O relatório oficial do TSE mostra exatamente esse número, então a diferença está explicada.</p>
+        <p class="vf-q-sum"><b>Falta conferir:</b> o TSE ainda não publicou os totais do 2º turno por município. Quando saírem, dá para refazer esta conferência.</p>
+      </article>
+    </div>
+
+    <div class="vf-card vf-explain" id="limites">
+      <h2>O que estes testes não conseguem mostrar</h2>
+      <p>Eles encontram números inventados à mão e urnas “engordadas”. Não encontram uma mudança que alterasse todas as urnas na mesma proporção, porque ela não deixaria nenhum desses rastros. Para isso existem outros controles, que estão fora destes dados: o boletim impresso de cada urna, que fica público, e as auditorias e testes de urna do TSE.</p>
+    </div>
+
+    <div class="vf-card vf-explain" id="glossario">
+      <h2>Palavras que usamos</h2>
+      <dl class="vf-gloss">
+        <dt>Urna ou seção</dt><dd>Cada seção eleitoral tem uma urna. Aqui usamos as duas palavras como sinônimos.</dd>
+        <dt>Boletim de urna</dt><dd>O resultado que cada urna imprime ao fim da votação, com os votos de cada candidato. O TSE publica todos.</dd>
+        <dt>Comparecimento</dt><dd>A parte dos eleitores aptos que foi votar.</dd>
+        <dt>Votos válidos</dt><dd>Os votos dados a candidatos, sem contar brancos e nulos.</dd>
+        <dt>Régua (2022)</dt><dd>A eleição anterior, que mostra como uma eleição normal se sai nos mesmos testes.</dd>
+      </dl>
+      <button type="button" class="vf-link" data-goto="tecnico">Ver todos os testes na versão técnica</button>
+    </div>
+  </div>
+
+  <div class="vf-page" id="tecnico" data-page role="tabpanel" aria-labelledby="tab-tecnico" hidden>
+    <p class="vf-take">Em <b data-source="summary" data-where="year=2026&amp;round=2" data-field="sections" data-fmt="int">—</b> boletins de urna, nem os testes de números redondos nem os de curva normal mostram sinais de votos inventados ou adicionados na vitória de Lula no 2º turno, por uma margem de <b data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="signedCompact">—</b> votos. Os poucos padrões que chamam atenção são pequenos, e a maioria também aparece na eleição de 2022, usada aqui como referência.</p>
+
+    <div class="vf-card vf-explain" id="como-ler">
+      <h2>Como ler esta versão</h2>
+      <p>Aqui estão todos os testes, com os valores e as estatísticas de cada um. Para uma explicação sem jargão, veja o <button type="button" class="vf-inline" data-goto="simples">Resumo para todos</button>.</p>
+      <dl class="vf-gloss">
+        <dt>p-valor (p)</dt><dd>A chance de um resultado tão fora do esperado aparecer só por acaso. Abaixo de 0,05 (5%) costuma valer um olhar de perto; mas, com muitos testes, alguns ficam abaixo disso por puro acaso. <a href="https://filipezabala.com/fs/th-class#p-value" target="_blank" rel="noopener">Saiba mais</a></dd>
+        <dt>z</dt><dd>Quantos desvios-padrão um valor está longe do esperado. Até ±2 é comum; além de ±4 é raro.</dd>
+        <dt>Curva normal</dt><dd>A curva em forma de sino que descreve como os valores se espalham em torno da média quando muitas pequenas variações independentes se somam. <a href="https://filipezabala.com/fs/scd#normal" target="_blank" rel="noopener">Saiba mais</a></dd>
+        <dt>Desvio-padrão (dp)</dt><dd>A distância típica entre os valores e a média. Numa curva normal, 95% dos casos ficam a menos de 2 desvios-padrão da média. <a href="https://filipezabala.com/fs/measures-of-dispersion#standard-deviation" target="_blank" rel="noopener">Saiba mais</a></dd>
+        <dt>Escala logarítmica</dt><dd>Cada linha do eixo vale 10 vezes a anterior. Serve para mostrar no mesmo gráfico números muito grandes e muito pequenos.</dd>
+        <dt>p.p. (pontos percentuais)</dt><dd>A diferença entre dois percentuais: de 50% para 52% são 2 p.p.</dd>
+        <dt>Correlação (r)</dt><dd>Mede se duas coisas sobem juntas: 0 é nenhuma relação, 1 é relação perfeita. <a href="https://filipezabala.com/fs/correlation#pearson" target="_blank" rel="noopener">Saiba mais</a></dd>
+        <dt>Espelho (Flávio)</dt><dd>No 2º turno só há dois candidatos, então o percentual de Flávio é exatamente 100% menos o de Lula. Os gráficos de percentual de Flávio são o espelho dos de Lula, calculados a partir dos mesmos dados. Já as contagens de votos (último dígito, números redondos) são independentes para cada um.</dd>
+      </dl>
+      <p class="vf-caption">Os links “Saiba mais” levam ao livro <i>Fundamentals of Statistics</i>, de Filipe J. Zabala (em inglês).</p>
+    </div>
+
+
+    <div class="vf-kpis" id="destaques">
+      <div class="vf-kpi" data-cand="lula">
+        <div class="vf-lbl">Lula, 2º turno</div>
+        <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="lula_share" data-fmt="pct">—</span>
+        <div class="vf-sub">dos votos válidos · 1º turno <span data-source="summary" data-where="year=2026&amp;round=1" data-field="lula_share" data-fmt="pct">—</span></div>
+      </div>
+      <div class="vf-kpi" data-cand="flavio">
+        <div class="vf-lbl">Flávio, 2º turno</div>
+        <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="right_share" data-fmt="pct">—</span>
+        <div class="vf-sub">dos votos válidos · 1º turno <span data-source="summary" data-where="year=2026&amp;round=1" data-field="right_share" data-fmt="pct">—</span></div>
+      </div>
+      <div class="vf-kpi">
+        <div class="vf-lbl">Margem de Lula, 2º turno</div>
+        <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="signedCompact">—</span>
+        <div class="vf-sub">1º turno <span data-source="summary" data-where="year=2026&amp;round=1" data-field="margin" data-fmt="signedCompact">—</span>, Flávio à frente</div>
+      </div>
+      <div class="vf-kpi">
+        <div class="vf-lbl">Comparecimento, 2º turno</div>
+        <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="turnout" data-fmt="pct">—</span>
+        <div class="vf-sub">1º turno <span data-source="summary" data-where="year=2026&amp;round=1" data-field="turnout" data-fmt="pct">—</span></div>
+      </div>
+      <div class="vf-kpi">
+        <div class="vf-lbl">Seções analisadas, 2º turno</div>
+        <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="sections" data-fmt="int">—</span>
+        <div class="vf-sub">cada uma com uma urna e um boletim impresso</div>
+      </div>
+    </div>
+
+    <section id="numeros-redondos">
+      <h2>Números redondos</h2>
+      <p class="vf-intro">Quando alguém inventa ou altera resultados à mão, os dígitos deixam de ser aleatórios: sobram contagens terminadas em 0 ou 5, e seções demais caem em percentuais redondos. Testamos a contagem de cada seção e também os totais por zona e por município.</p>
+      <div class="vf-grid">
+        <div class="vf-card" id="ultimo-digito">
+          <h3>Último dígito de cada contagem, 2º turno</h3>
+          <p class="vf-note">Cada dígito deveria encerrar cerca de 10% das contagens. A faixa sombreada é a variação que o acaso produz em 95% das vezes.</p>
+          <div class="vf-chart dash-skeleton" id="ld-chart" data-source="last_digit"></div>
+        </div>
+        <div class="vf-card" id="percentuais-inteiros">
+          <h3>Seções por percentual, em passos de 0,1 ponto (2º turno de 2026)</h3>
+          <p class="vf-note">Resultados inventados se acumulam em percentuais inteiros, o que apareceria como um pico a cada ponto. Os únicos picos estão em frações simples, como 50% e 66,7%, onde seções pequenas se dividem por igual, e a linha esperada, calculada a partir das próprias contagens, tem os mesmos picos.</p>
+          <div class="vf-seg" id="pct-pick" role="group" aria-label="Medida"><button type="button" data-v="share" aria-pressed="true">% do candidato</button><button type="button" data-v="Turnout" aria-pressed="false">Comparecimento</button></div>
+          <div class="vf-chart dash-skeleton" id="pct-chart" data-source="pct_hist"></div>
+        </div>
+        <div class="vf-card vf-wide" id="testes-numeros-redondos">
+          <h3>Testes de números redondos, 2026 ao lado de 2022</h3>
+          <p class="vf-note">“Só o acaso” é o que uma apuração limpa produz em média. Um p abaixo de 0,05, ou um z além de ±2, mereceria um olhar mais atento.</p>
+          <div class="vf-scroll">
+            <table class="vf-table vf-stack" id="tests-rn" data-source="tests" data-row-key="key">
+              <thead><tr><th data-field="test">Teste</th><th data-field="variable">Contagem</th><th data-field="round">Turno</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">Só o acaso</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="vf-after">2026 passa em todos. A referência de 2022 “reprova” em dois: o último dígito de Bolsonaro no 1º turno (p = <span data-source="scorecard" data-where="id=ld|Right candidate|1|2022" data-field="stat" data-fmt="dec3">—</span>) e no 2º (p = <span data-source="scorecard" data-where="id=ld|Right candidate|2|2022" data-field="stat" data-fmt="dec3">—</span>). Com meio milhão de seções, um teste falha por acaso de vez em quando, e é por isso que a referência importa. Brancos e nulos têm um pouco menos de contagens redondas do que o esperado nos dois anos, o contrário do que números inventados produzem; são contagens pequenas, nas quais esse teste é menos preciso.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="curva-normal">
+      <h2>Curva normal</h2>
+      <p class="vf-intro">Seções do mesmo local de votação, em geral uma escola, compartilham a vizinhança; por isso, o resultado de cada seção deveria ficar perto da média do local, espalhado mais ou menos como uma curva normal. Uma urna adulterada ou “engordada” ficaria longe das vizinhas.</p>
+      <div class="vf-grid">
+        <div class="vf-card" id="secao-vs-local">
+          <h3>Distância de cada seção em relação ao seu local de votação, 2º turno</h3>
+          <p class="vf-note">Distância em desvios-padrão; contagens em escala logarítmica. Eleições reais têm caudas mais grossas que a curva normal perfeita, por isso a régua é a linha de 2022, não a curva de livro.</p>
+          <div class="vf-seg" id="z-pick" role="group" aria-label="Medida"><button type="button" data-v="share" aria-pressed="true">% do candidato</button><button type="button" data-v="Turnout" aria-pressed="false">Comparecimento</button><button type="button" data-v="Swing" aria-pressed="false">Variação entre turnos</button></div>
+          <div class="vf-chart dash-skeleton" id="z-chart" data-source="z_hist"></div>
+        </div>
+        <div class="vf-card" id="impressao-digital">
+          <h3>Comparecimento × % do candidato, todas as seções, 2º turno</h3>
+          <p class="vf-note">Quanto mais escuro, mais seções. O enchimento de urnas espalha os resultados em direção ao quadro vermelho: comparecimento quase total, com quase todos os votos para um candidato. Nenhum dos dois anos mostra esse espalhamento, para nenhum dos candidatos.</p>
+          <div class="vf-chart vf-tall dash-skeleton" id="fp-chart" data-source="fingerprint"></div>
+        </div>
+        <div class="vf-card vf-wide" id="testes-curva-normal">
+          <h3>Testes de curva normal, 2026 ao lado de 2022</h3>
+          <p class="vf-note">Seções atípicas são as que ficam a mais de 4 desvios-padrão do seu local de votação; “só o acaso” é a quantidade que uma curva normal perfeita daria.</p>
+          <div class="vf-scroll">
+            <table class="vf-table vf-stack" id="tests-dist" data-source="tests" data-row-key="key">
+              <thead><tr><th data-field="test">Teste</th><th data-field="variable">Medida</th><th data-field="round">Turno</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">Só o acaso</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="vf-after">Seções fortemente pró-Lula são quase tão comuns quanto em 2022, e <span data-source="scorecard" data-where="id=persist|2026" data-field="observed" data-fmt="pctv">—</span> das do 2º turno já eram pró-Lula no 1º: os mesmos lugares, não lugares novos. A única inclinação: entre as <span data-source="scorecard" data-where="id=hiT|2|2026" data-field="stat" data-fmt="int">—</span> seções com comparecimento atipicamente alto para o seu local de votação, <span data-source="scorecard" data-where="id=hiT|2|2026" data-field="observed" data-fmt="pctv">—</span> também pendem para Lula, contra <span data-source="scorecard" data-where="id=hiT|2|2022" data-field="observed" data-fmt="pctv">—</span> em 2022.</p>
+        </div>
+        <div class="vf-card vf-wide" id="secoes-quadro-vermelho">
+          <h3>Seções do quadro vermelho no 2º turno</h3>
+          <p class="vf-note" data-cand="lula"><b>Lula:</b> <span data-source="corner_summary" data-where="candidate=lula" data-field="sections" data-fmt="int">—</span> seções (em 2022, <span data-source="scorecard" data-where="id=corner|2|2022" data-field="observed" data-fmt="int">—</span>), com <span data-source="corner_summary" data-where="candidate=lula" data-field="eligible" data-fmt="int">—</span> eleitores aptos. <span data-source="corner_summary" data-where="candidate=lula" data-field="strong_r1" data-fmt="int">—</span> já davam 90% ou mais a Lula no 1º turno, e <span data-source="corner_summary" data-where="candidate=lula" data-field="community" data-fmt="int">—</span> votam em locais com nome de aldeia indígena, assentamento ou comunidade rural. O comparecimento maior no 2º turno empurrou mais dessas seções, já muito desequilibradas, para além de 95%.</p>
+        <p class="vf-note" data-cand="flavio"><b>Flávio:</b> <span data-source="corner_summary" data-where="candidate=flavio" data-field="sections" data-fmt="int">—</span> seções (em 2022, Jair Bolsonaro teve <span data-source="scorecard" data-where="id=corner|2|2022" data-field="stat" data-fmt="int">—</span>), com <span data-source="corner_summary" data-where="candidate=flavio" data-field="eligible" data-fmt="int">—</span> eleitores aptos, em comunidades rurais pequenas que já votavam em peso nele no 1º turno.</p>
+          <input class="vf-search" id="corner-search" type="search" placeholder="Buscar candidato, UF, município ou local" aria-label="Buscar seções">
+          <div class="vf-scroll">
+            <table class="vf-table vf-stack" id="corner-table" data-source="corner_view" data-row-key="section_id">
+              <thead><tr><th data-field="nome">Candidato</th><th data-field="uf">UF</th><th data-field="municipality">Município</th><th data-field="place">Local de votação</th><th data-field="eligible" data-fmt="int" class="vf-n">Aptos</th><th data-field="turnout_1" data-fmt="pct" class="vf-n">Comparec., 1º</th><th data-field="turnout_2" data-fmt="pct" class="vf-n">Comparec., 2º</th><th data-field="share_1" data-fmt="pct" class="vf-n">Candidato, 1º</th><th data-field="share_2" data-fmt="pct" class="vf-n">Candidato, 2º</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="outros-testes">
+      <h2>Ordem de apuração, mudança entre turnos e urnas</h2>
+      <p class="vf-intro">Mais três lugares onde uma fraude poderia se esconder: nos boletins que chegam tarde, nas seções que mudam de forma diferente das vizinhas e em um modelo específico de urna.</p>
+      <div class="vf-grid">
+        <div class="vf-card vf-wide" id="progressao-apuracao">
+          <h3>% de cada candidato nos votos apurados até cada momento</h3>
+          <p class="vf-note">Os boletins do Norte e do Nordeste, onde Lula é mais forte, costumam chegar mais tarde; por isso o percentual dele sobe ao longo da apuração, em 2022 como em 2026. No 2º turno, as seções deveriam fechar às 17h, mas a votação foi prorrogada até as 19h, e a maioria dos boletins chegou depois das 19h; por isso o eixo mostra a fração dos votos apurados, não o horário. Dentro da mesma zona, as seções que chegaram mais tarde no 2º turno pendem para Lula em apenas <span data-source="scorecard" data-where="id=time|2|2026" data-field="observed" data-fmt="pph">—</span>.</p>
+          <div class="vf-chart dash-skeleton" id="time-chart" data-source="timing"></div>
+        </div>
+        <div class="vf-card" id="entre-turnos">
+          <h3>Do 1º para o 2º turno, 2026</h3>
+          <p class="vf-note">O voto é secreto: não há como saber em quem cada eleitor de Cury, Renan Santos ou Caiado votou no 2º turno. O que os dados mostram são os saldos: <span data-source="between_rounds" data-where="id=others" data-field="r1" data-fmt="compact">—</span> de votos em candidatos eliminados, comparecimento variando <span data-source="between_rounds" data-where="id=turnout" data-field="change" data-fmt="signedCompact">—</span> e brancos e nulos variando <span data-source="between_rounds" data-where="id=blank_null" data-field="change" data-fmt="signedCompact">—</span>. Lula ganhou <span data-source="between_rounds" data-where="id=lula" data-field="change" data-fmt="signedCompact">—</span> e Flávio <span data-source="between_rounds" data-where="id=flavio" data-field="change" data-fmt="signedCompact">—</span>, e as contas fecham.</p>
+          <div class="vf-scroll">
+            <table class="vf-table" id="between-table" data-source="between_rounds" data-row-key="id">
+              <thead><tr><th data-field="item">Votos</th><th data-field="r1" data-fmt="int" class="vf-n">1º turno</th><th data-field="r2" data-fmt="int" class="vf-n">2º turno</th><th data-field="change" data-fmt="sint" class="vf-n">Variação</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="vf-card" id="estados">
+          <h3>Estado por estado, 2026</h3>
+          <p class="vf-note">Do 1º para o 2º turno, a fatia de Lula entre os dois candidatos subiu em todos os estados e no exterior (ZZ), de <span data-source="swing_range" data-row="0" data-field="min" data-fmt="pp">—</span> a <span data-source="swing_range" data-row="0" data-field="max" data-fmt="pp">—</span>, e a de Flávio caiu na mesma medida. Dentro dos locais de votação, as seções onde o comparecimento subiu mais não migraram mais para Lula (correlação de <span data-source="scorecard" data-where="id=swing|dturn|2026" data-field="observed" data-fmt="dec3">—</span>); ou seja, os eleitores a mais do 2º turno não se concentraram onde Lula cresceu.</p>
+          <div class="vf-scroll">
+            <table class="vf-table" id="states-table" data-source="states_view" data-row-key="year,uf">
+              <thead><tr><th data-field="uf">UF</th><th data-field="sections" data-fmt="int" class="vf-n">Seções</th><th data-field="turnout_1" data-fmt="pct" class="vf-n">Comparec., 1º</th><th data-field="turnout_2" data-fmt="pct" class="vf-n">Comparec., 2º</th><th data-field="lula_share_2" data-fmt="pct" class="vf-n" data-cand="lula">Lula, 2º</th><th data-field="flavio_share_2" data-fmt="pct" class="vf-n" data-cand="flavio">Flávio, 2º</th><th data-field="swing_pp" data-fmt="pp" class="vf-n" data-cand="lula">Variação de Lula</th><th data-field="flavio_swing_pp" data-fmt="pp" class="vf-n" data-cand="flavio">Variação de Flávio</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="vf-card" id="urnas">
+          <h3>Modelo de urna, 2º turno de 2026</h3>
+          <p class="vf-note">Os percentuais brutos variam por modelo porque as urnas mais antigas se concentram em algumas regiões. Comparado com outras urnas do mesmo local de votação, nenhum modelo difere mais de <span data-source="scorecard" data-where="id=urna|2|2026" data-field="observed" data-fmt="pp2">—</span>.</p>
+          <div class="vf-scroll">
+            <table class="vf-table" id="urna-table" data-source="urna_view" data-row-key="id">
+              <thead><tr><th data-field="model">Modelo</th><th data-field="sections" data-fmt="int" class="vf-n">Seções</th><th data-field="raw_share" data-fmt="pct" class="vf-n" data-cand="lula">Lula, bruto</th><th data-field="flavio_raw" data-fmt="pct" class="vf-n" data-cand="flavio">Flávio, bruto</th><th data-field="vs_place_pp" data-fmt="spp2" class="vf-n" data-cand="lula">Lula vs. mesmo local</th><th data-field="flavio_vs_place_pp" data-fmt="spp2" class="vf-n" data-cand="flavio">Flávio vs. mesmo local</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="vf-card" id="testes-outros">
+          <h3>Testes de mudança entre turnos, horário e urnas, 2026 ao lado de 2022</h3>
+          <p class="vf-note">Seções de mudança atípica são as que se afastaram mais de 4 desvios-padrão do seu local de votação entre os turnos.</p>
+          <div class="vf-scroll">
+            <table class="vf-table vf-stack" id="tests-other" data-source="tests" data-row-key="key">
+              <thead><tr><th data-field="test">Teste</th><th data-field="round">Turno</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">Só o acaso</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="conferencia">
+      <h2>A conta fecha?</h2>
+      <p class="vf-intro">O TSE publica o boletim de cada seção e, separadamente, os totais por município e zona. Somadas, as seções reproduzem os totais oficiais em todos os campos: todas as <span data-source="consistency" data-where="id=2026|QT_APTOS" data-field="units" data-fmt="int">—</span> unidades município-zona do 1º turno de 2026 e todas as <span data-source="consistency" data-where="id=2022|QT_APTOS" data-field="units" data-fmt="int">—</span> dos dois turnos de 2022.</p>
+      <div class="vf-card">
+        <div class="vf-scroll">
+          <table class="vf-table vf-stack" id="cons-table" data-source="consistency_pt" data-row-key="id">
+            <thead><tr><th data-field="year">Ano</th><th data-field="turnos">Turnos</th><th data-field="campo">Campo</th><th data-field="units_with_difference" data-fmt="int" class="vf-n">Unidades com diferença</th><th data-field="abs_difference" data-fmt="int" class="vf-n">Diferença</th><th data-field="section_sum" data-fmt="int" class="vf-n">Soma das seções</th><th data-field="official" data-fmt="int" class="vf-n">Total oficial</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="vf-after">A única diferença são <span data-source="consistency" data-where="id=2026|QT_VOTOS_NOMINAIS" data-field="abs_difference" data-fmt="int">—</span> votos válidos nos arquivos por seção que o total oficial do 1º turno conta como nulos. São os votos de Leonardo Alves de Araújo (número 28), um dos candidatos a presidente do 1º turno, sem relação com a disputa do 2º turno. O TSE os classifica como “votos nulos técnicos”, a categoria usada quando o registro do candidato é negado ou cancelado, e o relatório oficial do 1º turno lista exatamente esse número. O TSE ainda não publicou os totais do 2º turno por município, então o 2º turno só poderá ser conferido dessa forma quando eles saírem.</p>
+      </div>
+    </section>
+
+    <section id="metodo">
+      <h2>Como foi feito</h2>
+      <ul class="vf-method">
+        <li>Dados: dados abertos do TSE (dadosabertos.tse.jus.br, resultados-2026 e resultados-2022), arquivos de votação por seção e de detalhes por seção (comparecimento, horário de recebimento do boletim, modelo de urna), baixados em 26 de outubro de 2026. Apenas presidente.</li>
+        <li>Unidade: a seção eleitoral, ou seja, uma urna e o seu boletim de urna impresso.</li>
+        <li>Referência: a eleição de 2022, com as mesmas urnas e o mesmo formato de arquivo, processada pelo mesmo código.</li>
+        <li>Testes: último dígito (Beber e Scacco, 2012), excesso de múltiplos de 10, picos em percentuais inteiros comparados a uma reamostragem das próprias contagens, desvio de cada seção em relação ao seu local de votação, a “impressão digital” comparecimento × percentual (Klimek et al., 2012), mudanças atípicas entre turnos, ordem de chegada dos boletins, modelo de urna e soma das seções contra os totais oficiais.</li>
+        <li>O voto é secreto, então nada aqui diz como um eleitor ou grupo de eleitores votou; todos os números vêm de contagens por seção.</li>
+        <li>Limites: esses testes pegam números inventados à mão e votos adicionados em seções individuais. Uma alteração que deslocasse todas as urnas na mesma proporção não deixaria nenhuma dessas marcas; verificar isso exige os boletins impressos e as auditorias de urna do TSE, que estão fora destes dados.</li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<script src="core.js"></script>
+<script src="charts.js"></script>
+<script src="tables.js"></script>
+<script src="simple.js"></script>

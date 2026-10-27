@@ -1,0 +1,142 @@
+/* Theme tokens and base styles that the claude.ai dashboard runtime provides, for the static site.
+   Colors follow the light/dark system setting; a data-theme attribute on <html> overrides it. */
+:root {
+  color-scheme: light;
+  --font-anthropic-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-anthropic-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+
+  --color-bg: #faf9f5;
+  --color-panel: #ffffff;
+  --color-fg: #0b0b0b;
+  --color-fg-muted: #52514e;
+  --color-border-line: rgba(11, 11, 11, 0.12);
+  --color-ok: #006300;
+  --color-warn: #8a5a00;
+  --color-bad: #d03b3b;
+
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+
+  --cds-border: rgba(11, 11, 11, 0.12);
+  --cds-text-secondary: #52514e;
+  --cds-surface-popover: #ffffff;
+  --cds-shadow-popover: 0 4px 16px rgba(11, 11, 11, 0.12);
+  --cds-chart-grid: #e1e0d9;
+  --cds-chart-axis: #c3c2b7;
+  --cds-chart-muted: #a3a19a;
+  --cds-chart-reference: #52514e;
+  --cds-chart-status-critical: #d03b3b;
+
+  --cds-font-size-caption: 0.8125rem;
+  --cds-font-size-body: 0.9375rem;
+  --cds-font-size-heading: 1.125rem;
+  --cds-font-size-title: clamp(1.5rem, 1.15rem + 1.5vw, 2.125rem);
+  --cds-font-weight-medium: 560;
+
+  --cds-gap-xs: 4px;
+  --cds-gap-sm: 8px;
+  --cds-gap-md: 12px;
+  --cds-gap-lg: 16px;
+  --cds-gap-xl: 24px;
+  --cds-pad-xs: 4px;
+  --cds-pad-sm: 8px;
+  --cds-pad-md: 12px;
+  --cds-pad-lg: 16px;
+  --cds-pad-xl: 24px;
+  --cds-radius: 8px;
+  --cds-dur-slow: 300ms;
+  --cds-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #1a1a19;
+    --color-panel: #232321;
+    --color-fg: #f0efec;
+    --color-fg-muted: #c3c2b7;
+    --color-border-line: rgba(255, 255, 255, 0.12);
+    --color-ok: #0ca30c;
+    --color-warn: #fab219;
+    --color-bad: #e66767;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --cds-border: rgba(255, 255, 255, 0.12);
+    --cds-text-secondary: #c3c2b7;
+    --cds-surface-popover: #2c2c2a;
+    --cds-shadow-popover: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --cds-chart-grid: #2c2c2a;
+    --cds-chart-axis: #4a4a46;
+    --cds-chart-muted: #6e6d68;
+    --cds-chart-reference: #c3c2b7;
+    --cds-chart-status-critical: #e66767;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #1a1a19;
+  --color-panel: #232321;
+  --color-fg: #f0efec;
+  --color-fg-muted: #c3c2b7;
+  --color-border-line: rgba(255, 255, 255, 0.12);
+  --color-ok: #0ca30c;
+  --color-warn: #fab219;
+  --color-bad: #e66767;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --cds-border: rgba(255, 255, 255, 0.12);
+  --cds-text-secondary: #c3c2b7;
+  --cds-surface-popover: #2c2c2a;
+  --cds-shadow-popover: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --cds-chart-grid: #2c2c2a;
+  --cds-chart-axis: #4a4a46;
+  --cds-chart-muted: #6e6d68;
+  --cds-chart-reference: #c3c2b7;
+  --cds-chart-status-critical: #e66767;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-anthropic-sans);
+  font-size: var(--cds-font-size-body);
+  line-height: 1.5;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: inherit; }
+#dash-root { padding: var(--cds-pad-xl) 16px; }
+
+/* Placeholder while a dataset loads: a rounded bar for text, a block for a chart. */
+.dash-skeleton { color: transparent !important; background: var(--color-border-line); border-radius: var(--cds-radius); }
+span.dash-skeleton, b.dash-skeleton, strong.dash-skeleton { display: inline-block; min-width: 4ch; line-height: 1.1; }
+div.dash-skeleton { min-height: 12rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .dash-skeleton { animation: dash-pulse 1.2s var(--cds-ease-out) infinite alternate; }
+}
+@keyframes dash-pulse { from { opacity: 0.45; } to { opacity: 1; } }
+
+/* Footer added by the static build: where the data and the code come from. */
+.site-foot { max-width: 72rem; margin: var(--cds-gap-xl) auto 0; padding: var(--cds-pad-lg) 0 var(--cds-pad-xl); border-top: 1px solid var(--color-border-line); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.site-foot p { margin: 0 0 var(--cds-gap-sm); max-width: 72ch; }
+.site-foot ul { margin: 0 0 var(--cds-gap-md); padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-lg); }

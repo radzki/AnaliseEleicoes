@@ -1,0 +1,11 @@
+# Raw and intermediate TSE data (2.3 GB): see README to download and rebuild
+data/
+
+# Generated
+site/
+report/store/
+*.log
+
+# Python
+.venv/
+__pycache__/
