@@ -92,6 +92,10 @@ conferir os votos nulos técnicos.
 `scripts/05_site.py` só usa a biblioteca padrão do Python, e `results/dash` está no repositório,
 então o site pode ser montado sem baixar os dados do TSE.
 
+- **Cloudflare Pages (GitHub Actions):** `.github/workflows/deploy.yml` monta e publica o site a
+  cada push ou merge em `main`, no projeto `eleicao-2026`. Precisa dos secrets
+  `CLOUDFLARE_API_TOKEN` (permissão Account › Cloudflare Pages › Edit) e `CLOUDFLARE_ACCOUNT_ID`
+  em Settings › Secrets and variables › Actions.
 - **Cloudflare Pages (direto):** `python3 scripts/05_site.py . site && npx wrangler pages deploy site --project-name <nome>`
 - **Cloudflare Pages (pelo GitHub):** comando de build `python3 scripts/05_site.py . site`, diretório de saída `site`.
 - **nginx ou outro servidor:** sirva a pasta `site/` como arquivos estáticos.

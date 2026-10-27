@@ -1,0 +1,60 @@
+# Builds the static site and deploys it to Cloudflare Pages on every push or merge to main
+# (and by hand, from the Actions tab). Needs two repository secrets: CLOUDFLARE_API_TOKEN
+# (permission: Account > Cloudflare Pages > Edit) and CLOUDFLARE_ACCOUNT_ID.
+# Without them the run only builds and leaves a warning.
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+env:
+  PROJECT: eleicao-2026
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build site
+        run: python3 -I scripts/05_site.py . site
+
+      - name: Check Cloudflare secrets
+        id: check
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID is not set; the site was built but not deployed."
+          fi
+
+      - name: Create the Pages project if it doesn't exist
+        if: steps.check.outputs.ok == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if npx --yes wrangler@4 pages project list | grep -q "\b$PROJECT\b"; then
+            echo "$PROJECT already exists"
+          else
+            npx --yes wrangler@4 pages project create "$PROJECT" --production-branch main
+          fi
+
+      - name: Deploy
+        if: steps.check.outputs.ok == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 pages deploy site --project-name "$PROJECT" --branch main
