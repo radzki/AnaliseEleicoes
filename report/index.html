@@ -108,6 +108,16 @@
   #dash-root { --vf-lula: #e34948; --vf-flavio: #2a78d6; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #dash-root { --vf-lula: #e66767; --vf-flavio: #3987e5; } }
   :root[data-theme="dark"] #dash-root { --vf-lula: #e66767; --vf-flavio: #3987e5; }
+  /* Candidate filter: a dot in each candidate's color; the pressed option filled (deeper red and blue keep white text readable). */
+  #cand-pick button::before { content: ""; display: inline-block; width: 0.6em; height: 0.6em; border-radius: 50%; margin-right: 0.4em; vertical-align: 0.02em; }
+  #cand-pick button[data-v="lula"]::before { background: var(--vf-lula); }
+  #cand-pick button[data-v="flavio"]::before { background: var(--vf-flavio); }
+  #cand-pick button[data-v="ambos"]::before { background: linear-gradient(90deg, var(--vf-lula) 50%, var(--vf-flavio) 50%); }
+  #cand-pick button[aria-pressed="true"] { color: #fff; font-weight: var(--cds-font-weight-medium); }
+  #cand-pick button[data-v="lula"][aria-pressed="true"] { background: #cc3b3a; }
+  #cand-pick button[data-v="flavio"][aria-pressed="true"] { background: #256abf; }
+  #cand-pick button[data-v="lula"][aria-pressed="true"]::before, #cand-pick button[data-v="flavio"][aria-pressed="true"]::before { background: #fff; }
+  #cand-pick button[data-v="ambos"][aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); }
 </style>
 
 <div class="vf" lang="pt-BR">
