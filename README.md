@@ -4,7 +4,7 @@ Testes estatísticos de forense eleitoral aplicados aos boletins de urna de cada
 presidencial de 2026 (Lula × Flávio Bolsonaro), com a eleição de 2022 como régua. Tudo parte dos
 dados abertos do Tribunal Superior Eleitoral (TSE).
 
-**Relatório publicado:** https://eleicao-2026.pages.dev
+**Relatório publicado:** https://eleicoes.radzkitech.com
 
 **Resposta curta: não foram encontrados sinais de fraude manual capazes de mudar o resultado.** Em quase todos
 os testes, 2026 se comporta como uma eleição normal, do mesmo jeito que 2022. A principal exceção
