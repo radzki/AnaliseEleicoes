@@ -138,5 +138,5 @@ div.dash-skeleton { min-height: 12rem; }
 
 /* Footer added by the static build: where the data and the code come from. */
 .site-foot { max-width: 72rem; margin: var(--cds-gap-xl) auto 0; padding: var(--cds-pad-lg) 0 var(--cds-pad-xl); border-top: 1px solid var(--color-border-line); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
-.site-foot p { margin: 0 0 var(--cds-gap-sm); max-width: 72ch; }
+.site-foot p { margin: 0 0 var(--cds-gap-sm); }
 .site-foot ul { margin: 0 0 var(--cds-gap-md); padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-lg); }
