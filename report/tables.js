@@ -69,7 +69,7 @@
 
   dash.calc('corner_summary', {
     inputs: ['corner'],
-    title: 'Seções do quadro vermelho, em resumo',
+    title: 'Seções do quadro destacado, em resumo',
     description: 'Para cada candidato: quantas seções do 2º turno tiveram comparecimento ≥ 95% e 90% ou mais dos votos para ele, seus eleitores aptos, quantas já lhe deram 90%+ no 1º turno e quantos locais têm nome de comunidade indígena ou rural.',
     fn: (corner) => ['lula', 'flavio'].map((candidate) => {
       const rows = corner.filter((r) => r.candidate === candidate);
@@ -85,8 +85,8 @@
 
   dash.calc('corner_view', {
     inputs: ['corner'],
-    title: 'Seções do quadro vermelho, com nome do candidato',
-    description: 'As seções do quadro vermelho, com o nome do candidato que recebeu 90% ou mais dos votos.',
+    title: 'Seções do quadro destacado, com nome do candidato',
+    description: 'As seções do quadro destacado, com o nome do candidato que recebeu 90% ou mais dos votos.',
     fn: (corner) => corner.map((r) => ({ ...r, nome: r.candidate === 'lula' ? 'Lula' : 'Flávio' })),
   });
 

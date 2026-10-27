@@ -207,7 +207,7 @@
         .attr('y', (r) => y(r.share + 1)).attr('height', y(0) - y(1) + 0.4)
         .style('fill', (r) => v.ramp(t(r.sections)));
       s.append('rect').attr('x', x(95)).attr('width', x(100) - x(95)).attr('y', y(100)).attr('height', y(90) - y(100))
-        .style('fill', 'none').style('stroke', 'var(--cds-chart-status-critical)').attr('stroke-width', 1.5);
+        .style('fill', 'none').style('stroke', 'var(--color-fg)').attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
       s.append('rect').attr('x', ml).attr('width', w - 6 - ml).attr('y', 6).attr('height', h - 30).style('fill', 'transparent')
         .on('pointermove pointerdown', (ev) => {
           const [px, py] = d3.pointer(ev);

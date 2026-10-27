@@ -255,9 +255,10 @@ window.vf = (() => {
   // data-show, and CSS hides every [data-cand] element of the candidate not shown.
   const CANDS = { lula: ['lula'], flavio: ['flavio'], ambos: ['lula', 'flavio'] };
   const cands = () => CANDS[dash.params().cand] ?? CANDS.ambos;
+  // Party colors, not palette slots: Lula red, Flávio blue (--vf-lula / --vf-flavio in index.html, light and dark).
   const cand = {
-    lula: { name: 'Lula', name22: 'Lula', color: () => dash.colors[0] },
-    flavio: { name: 'Flávio', name22: 'Jair Bolsonaro', color: () => dash.colors[1] },
+    lula: { name: 'Lula', name22: 'Lula', color: () => 'var(--vf-lula)' },
+    flavio: { name: 'Flávio', name22: 'Jair Bolsonaro', color: () => 'var(--vf-flavio)' },
   };
   const pick = document.getElementById('cand-pick');
   pick.addEventListener('click', (ev) => {

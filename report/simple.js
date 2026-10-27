@@ -19,7 +19,7 @@
 
   dash.calc('corner_vs_margin', {
     inputs: ['corner', 'summary'],
-    title: 'Urnas do quadro vermelho frente à margem',
+    title: 'Urnas do quadro destacado frente à margem',
     description: 'Eleitores aptos nas urnas com comparecimento ≥ 95% e Lula ≥ 90%, como fração da margem de Lula no 2º turno de 2026.',
     fn: (corner, summary) => {
       const margin = summary.find((r) => r.year === 2026 && r.round === 2).margin;
@@ -109,7 +109,7 @@
     const x = d3.scaleLinear(d3.extent([0, ...rows.map((r) => r.change)]), [ml + vw, w - vw]);
     rows.forEach((r, i) => {
       const y0 = 6 + i * rowH + (narrow ? 20 : 0);
-      const color = r.id === 'lula' ? dash.colors[0] : r.id === 'flavio' ? dash.colors[1] : MUTED;
+      const color = vf.cand[r.id]?.color() ?? MUTED;
       s.append('text').attr('class', 'vf-tick vf-strong').attr('x', 0).attr('y', narrow ? y0 - 10 : y0 + 11).attr('dy', '0.32em').text(label[r.id]);
       s.append('rect').attr('x', Math.min(x(0), x(r.change))).attr('y', y0).attr('height', 22).attr('rx', 4)
         .attr('width', Math.max(2, Math.abs(x(r.change) - x(0)))).style('fill', color);
