@@ -24,7 +24,7 @@ DATASETS = next(ast.literal_eval(n.value) for n in tree.body
 if out.exists():
     shutil.rmtree(out)
 (out / "data").mkdir(parents=True)
-for name in ("dash.js", "theme.css", "_headers"):
+for name in ("dash.js", "theme.css", "_headers", "robots.txt", "sitemap.xml", "404.html", "og.png"):
     shutil.copy2(web / name, out / name)
 for d in ("vendor", "fonts"):
     shutil.copytree(web / d, out / d)
