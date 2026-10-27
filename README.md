@@ -45,6 +45,8 @@ scripts/02_analyze.py      testes forenses -> results/results_<ano>.json, states
 scripts/03_consistency.py  soma das seções x totais oficiais por município e zona
 scripts/04_export.py       results/*.json -> results/dash/*.json, as tabelas que o relatório lê
 scripts/05_site.py         monta o site estático em site/
+scripts/06_og_image.py     gera a imagem de compartilhamento (web/og.png)
+scripts/07_urna_logs.py    lê os registros (logs) de uma amostra de urnas no site de resultados do TSE
 report/                    a página do relatório (HTML + JavaScript com d3), em português
 web/                       o que o site estático acrescenta: dash.js (carrega os dados e roda os
                            cálculos da página), theme.css (cores, fontes, espaçamentos, claro e
@@ -84,6 +86,7 @@ python -I scripts/02_analyze.py data/processed results 2026
 python -I scripts/02_analyze.py data/processed2022 results 2022
 python -I scripts/03_consistency.py data/raw data/processed results 2026
 python -I scripts/03_consistency.py data/raw2022 data/processed2022 results 2022
+python -I scripts/07_urna_logs.py data/processed data/urna_logs results   # baixa ~250 MB do TSE
 python -I scripts/04_export.py results data/processed data/processed2022 results/dash
 python -I scripts/05_site.py . site
 ```

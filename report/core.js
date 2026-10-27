@@ -4,6 +4,7 @@ window.vf = (() => {
   const f = d3.formatLocale({ decimal: ',', thousands: '.', grouping: [3], currency: ['R$', ''], minus: '−', percent: '%' }).format;
   const nf = f(',');
   const compact = new Intl.NumberFormat('pt-BR', { notation: 'compact', maximumFractionDigits: 2 });
+  const compact0 = new Intl.NumberFormat('pt-BR', { notation: 'compact', maximumFractionDigits: 0 });
   const signed = (v, s) => (v > 0 ? '+' : v < 0 ? '−' : '') + s;
   const dec = (v, n) => f(`.${n}f`)(Math.abs(v));
   const fmt = {
@@ -11,6 +12,7 @@ window.vf = (() => {
     int: (v) => nf(Math.round(v)),
     sint: (v) => signed(v, nf(Math.abs(Math.round(v)))),
     compact: (v) => compact.format(v),
+    compact0: (v) => compact0.format(v),
     signedCompact: (v) => signed(v, compact.format(Math.abs(v))),
     absCompact: (v) => compact.format(Math.abs(v)),
     pct: (v) => f('.1%')(v),
@@ -19,6 +21,7 @@ window.vf = (() => {
     pp2: (v) => `${dec(v, 2)} p.p.`,
     spp2: (v) => signed(v, `${dec(v, 2)} p.p.`),
     pph: (v) => signed(v, `${dec(v, 2)} p.p./h`),
+    hm: (v) => `${Math.floor(v)}h${String(Math.floor((v % 1) * 60 + 1e-9)).padStart(2, '0')}`,
     dec2: (v) => f('.2f')(v),
     dec3: (v) => f('.3f')(v),
   };

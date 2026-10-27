@@ -211,6 +211,39 @@ for grp, s in (("lula90", m[(m.lula >= 0.9) & (m.lula_22 >= 0.9)]),
                  "turnout_2022": s.turnout_22.mean(), "turnout_2026": s.turnout.mean()})
 dump("strongholds", rows)
 
+# machine logs, from the sample read by scripts/07_urna_logs.py: votes after 17h (Brasília), closing times
+# and how voters were identified, per group and round, on machines whose log holds both rounds and whose
+# runoff vote count matches the official turnout (abroad excluded: it votes on local time)
+lp = res_dir / "urna_logs_sample.csv"
+if lp.exists():
+    L0 = pd.read_csv(lp)
+    ok = L0[L0.status == "ok"]
+    L = ok[(ok.votes_2 == ok.QT_COMPARECIMENTO) & (ok.SG_UF != "ZZ") & ok.votes_1.notna()]
+    rows = [{"id": "check", "kind": "check", "sampled": len(L0), "read": len(ok),
+             "matched": int((ok.votes_2 == ok.QT_COMPARECIMENTO).sum()), "replaced": int((ok.votes_2 != ok.QT_COMPARECIMENTO).sum())}]
+    for g, d in L.groupby("group"):
+        for t in (1, 2):
+            v = d[f"votes_{t}"].sum()
+            rows.append({"id": f"{g}|{t}", "kind": "group", "group": g, "round": t, "machines": len(d), "votes": int(v),
+                         "late": int(d[f"late_{t}"].sum()), "late_pct": 100 * d[f"late_{t}"].sum() / v,
+                         "nofp_share": 1 - d[f"bio_{t}"].sum() / v, "manual_share": d[f"manual_{t}"].sum() / v,
+                         "close_median": d[f"close_brt_{t}"].median(), "open_after_18": (d[f"close_brt_{t}"] > 18).mean()})
+    rnd = L[L.group == "random"]
+    late_share = lambda d: d.late_2.sum() / d.votes_2.sum()
+    rng = np.random.default_rng(2026)
+    boots = np.array([late_share(rnd.iloc[rng.integers(0, len(rnd), len(rnd))]) for _ in range(2000)])
+    voters = R[2026]["totals"]["2"]["comparecimento"]
+    margin = R[2026]["totals"]["2"]["lula"] - R[2026]["totals"]["2"]["right"]
+    est = late_share(rnd) * voters
+    rows.append({"id": "national", "kind": "estimate", "votes_est": est, "est_low": np.percentile(boots, 2.5) * voters,
+                 "est_high": np.percentile(boots, 97.5) * voters, "margin_share": est / margin})
+    lo = rnd[rnd.close_brt_2 > 18.5]
+    rows.append({"id": "open_late", "kind": "open_late", "machines": len(lo), "late": int(lo.late_2.sum()), "max_late": int(lo.late_2.max())})
+    c = L[L.group == "corner_lula"]
+    rows.append({"id": "corner_change", "kind": "change", "machines": len(c), "added": int(c.votes_2.sum() - c.votes_1.sum()),
+                 "added_fp": int(c.bio_2.sum() - c.bio_1.sum())})
+    dump("urna_logs", rows)
+
 # timing (recomputed with explicit 10-minute bins) --------------------------------
 rows = []
 for y, p in ((2026, p26), (2022, p22)):
