@@ -153,7 +153,9 @@ window.vf = (() => {
 
   function svg(box, height) {
     const w = Math.max(240, box.clientWidth);
-    const s = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${height}`).attr('class', 'vf-svg');
+    // The chart box carries the description for screen readers (role="img" in index.html), not the drawing.
+    const s = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${height}`).attr('class', 'vf-svg')
+      .attr('aria-hidden', 'true');
     return { s, w, h: height };
   }
 
@@ -233,9 +235,16 @@ window.vf = (() => {
   function tabs() {
     const bar = document.getElementById('vf-tabs');
     const pages = [...document.querySelectorAll('#dash-root [data-page]')];
+    const tabsList = [...bar.querySelectorAll('[data-tab]')];
+    const mark = (id) => {
+      for (const b of tabsList) {
+        b.setAttribute('aria-selected', String(b.dataset.tab === id));
+        b.tabIndex = b.dataset.tab === id ? 0 : -1;
+      }
+    };
     const show = (id, target) => {
       for (const p of pages) p.hidden = p.id !== id;
-      for (const b of bar.querySelectorAll('[data-tab]')) b.setAttribute('aria-selected', String(b.dataset.tab === id));
+      mark(id);
       for (const fn of charts) fn();
       const el = target && document.getElementById(target);
       if (el) el.scrollIntoView();
@@ -245,6 +254,17 @@ window.vf = (() => {
       const b = ev.target.closest('[data-tab], [data-goto]');
       if (b) show(b.dataset.tab ?? b.dataset.goto, b.dataset.target);
     });
+    // Arrow keys, Home and End move between tabs, as screen-reader users expect of a tab list.
+    bar.addEventListener('keydown', (ev) => {
+      const i = tabsList.indexOf(document.activeElement);
+      const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabsList.length - 1 }[ev.key];
+      if (i < 0 || to === undefined) return;
+      ev.preventDefault();
+      const b = tabsList[(to + tabsList.length) % tabsList.length];
+      b.focus();
+      show(b.dataset.tab);
+    });
+    mark(tabsList.find((b) => b.getAttribute('aria-selected') === 'true')?.dataset.tab);
     const named = document.getElementById(location.hash.slice(1));
     const page = named?.closest('[data-page]');
     if (page && page.hidden) show(page.id, named.id);
@@ -270,6 +290,16 @@ window.vf = (() => {
     document.querySelector('#dash-root .vf').dataset.show = c;
     for (const b of pick.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.v === c));
   });
+
+  // Theme switch: only where the host lets the page pick its theme (the static site's dash.js);
+  // on claude.ai the viewer's own setting applies.
+  const themeBox = document.querySelector('#dash-root .vf-theme');
+  if (themeBox && dash.setTheme) {
+    const tp = document.getElementById('theme-pick');
+    for (const b of tp.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.v === dash.theme()));
+    segmented(tp, (v) => dash.setTheme(v));
+    themeBox.hidden = false;
+  }
 
   dash.onData(fill);
   return { f, format, gate, table, sortable, tooltip, svg, panels, textWidth, axis, legend, resolve, segmented, draw, tabs, cands, cand };

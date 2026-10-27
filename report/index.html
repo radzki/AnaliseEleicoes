@@ -1,12 +1,12 @@
 <style>
   .vf { display: grid; gap: var(--cds-gap-xl); max-width: 72rem; margin-inline: auto; font-family: var(--font-anthropic-sans); }
   .vf b { font-weight: var(--cds-font-weight-medium); }
-  .vf-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+  .vf-head h1 { font-family: var(--font-anthropic-serif); font-weight: var(--vf-display-weight, 400); letter-spacing: -0.01em; line-height: 1.2; font-size: var(--cds-font-size-title); margin: 0; }
   .vf-take { margin: var(--cds-gap-sm) 0 0; color: var(--color-fg-muted); }
   .vf-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
   .vf-kpi, .vf-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
   .vf-kpi .vf-lbl, .vf-kpi .vf-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-  .vf-kpi .vf-num { display: block; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; margin: var(--cds-gap-xs) 0; }
+  .vf-kpi .vf-num { display: block; font-family: var(--font-anthropic-serif); font-weight: var(--vf-display-weight, 400); font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; margin: var(--cds-gap-xs) 0; }
   .vf h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
   .vf-intro { margin: 0 0 var(--cds-gap-md); color: var(--color-fg-muted); }
   .vf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-md); }
@@ -35,8 +35,8 @@
   .vf-tip-r i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
   .vf-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); min-height: inherit; height: 100%; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
   .vf-dot { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--color-bad); }
-  .vf-seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; margin-bottom: var(--cds-gap-sm); }
-  .vf-seg button { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 0; background: transparent; color: var(--color-fg-muted); cursor: pointer; }
+  .vf-seg { display: inline-flex; border: 1px solid var(--vf-control, var(--color-border-line)); border-radius: var(--cds-radius); overflow: hidden; margin-bottom: var(--cds-gap-sm); }
+  .vf-seg button { font: inherit; font-size: var(--cds-font-size-caption); min-height: 2.25rem; display: inline-flex; align-items: center; padding: 0 var(--cds-pad-md); border: 0; background: transparent; color: var(--color-fg-muted); cursor: pointer; }
   .vf-seg button[aria-pressed="true"] { background: var(--color-bg); color: var(--color-fg); }
   .vf-scroll { max-height: 26rem; overflow: auto; }
   .vf-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
@@ -44,7 +44,7 @@
   .vf-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
   .vf-table .vf-n { text-align: right; white-space: nowrap; }
   .vf-sort { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
-  .vf-search { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); margin-bottom: var(--cds-gap-sm); width: min(100%, 20rem); }
+  .vf-search { font: inherit; font-size: var(--cds-font-size-caption); min-height: 2.5rem; padding: var(--cds-pad-xs) var(--cds-pad-md); border: 1px solid var(--vf-control, var(--color-border-line)); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); margin-bottom: var(--cds-gap-sm); width: min(100%, 20rem); }
   .vf-method { margin: 0; padding-left: 1.2em; color: var(--color-fg-muted); }
   .vf-method li { margin-bottom: var(--cds-gap-xs); }
   [data-dash-source-state=empty] { color: transparent; }
@@ -56,7 +56,7 @@
   .vf-tabs button[aria-selected="true"] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
   .vf-answer { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xl); }
   .vf-answer-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-  .vf-answer-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: var(--cds-gap-xs) 0 var(--cds-gap-sm); }
+  .vf-answer-big { font-family: var(--font-anthropic-serif); font-weight: var(--vf-display-weight, 400); line-height: 1.25; font-size: var(--cds-font-size-title); margin: var(--cds-gap-xs) 0 var(--cds-gap-sm); }
   .vf-answer p:last-child { margin: 0; }
   .vf-explain p { margin: var(--cds-gap-sm) 0 0; }
   .vf-qs { display: grid; gap: var(--cds-gap-md); }
@@ -74,7 +74,7 @@
   .vf-q .vf-h280 { min-height: 280px; }
   .vf-q .vf-q-sum { margin-top: var(--cds-gap-md); padding-top: var(--cds-gap-sm); border-top: 1px solid var(--color-border-line); }
   .vf-caption { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-  .vf-link { font: inherit; font-size: var(--cds-font-size-caption); margin-top: var(--cds-gap-md); padding: var(--cds-pad-xs) var(--cds-pad-sm); background: none; color: var(--color-fg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); cursor: pointer; }
+  .vf-link { font: inherit; font-size: var(--cds-font-size-caption); margin-top: var(--cds-gap-md); min-height: 2.25rem; padding: var(--cds-pad-xs) var(--cds-pad-md); background: none; color: var(--color-fg); border: 1px solid var(--vf-control, var(--color-border-line)); border-radius: var(--cds-radius); cursor: pointer; }
   .vf-inline { font: inherit; padding: 0; background: none; border: 0; color: inherit; text-decoration: underline; cursor: pointer; }
   .vf-gloss { margin: var(--cds-gap-md) 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md) var(--cds-gap-xl); }
   .vf-gloss dt { font-weight: var(--cds-font-weight-medium); }
@@ -105,25 +105,33 @@
   .vf a.vf-src, .vf-refs a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .vf-refs ol { margin: var(--cds-gap-md) 0 0; padding-left: 1.6em; display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   /* Candidate colors: Lula red, Flávio blue, stepped for light and dark backgrounds. */
-  #dash-root { --vf-lula: #e34948; --vf-flavio: #2a78d6; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #dash-root { --vf-lula: #e66767; --vf-flavio: #3987e5; } }
-  :root[data-theme="dark"] #dash-root { --vf-lula: #e66767; --vf-flavio: #3987e5; }
+  #dash-root { --vf-lula: #c62f2f; --vf-flavio: #1d64c2; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #dash-root { --vf-lula: #f0716d; --vf-flavio: #5c9cf0; } }
+  :root[data-theme="dark"] #dash-root { --vf-lula: #f0716d; --vf-flavio: #5c9cf0; }
   /* Candidate filter: a dot in each candidate's color; the pressed option filled (deeper red and blue keep white text readable). */
   #cand-pick button::before { content: ""; display: inline-block; width: 0.6em; height: 0.6em; border-radius: 50%; margin-right: 0.4em; vertical-align: 0.02em; }
   #cand-pick button[data-v="lula"]::before { background: var(--vf-lula); }
   #cand-pick button[data-v="flavio"]::before { background: var(--vf-flavio); }
   #cand-pick button[data-v="ambos"]::before { background: linear-gradient(90deg, var(--vf-lula) 50%, var(--vf-flavio) 50%); }
   #cand-pick button[aria-pressed="true"] { color: #fff; font-weight: var(--cds-font-weight-medium); }
-  #cand-pick button[data-v="lula"][aria-pressed="true"] { background: #cc3b3a; }
-  #cand-pick button[data-v="flavio"][aria-pressed="true"] { background: #256abf; }
+  #cand-pick button[data-v="lula"][aria-pressed="true"] { background: #c62f2f; }
+  #cand-pick button[data-v="flavio"][aria-pressed="true"] { background: #1d64c2; }
   #cand-pick button[data-v="lula"][aria-pressed="true"]::before, #cand-pick button[data-v="flavio"][aria-pressed="true"]::before { background: #fff; }
   #cand-pick button[data-v="ambos"][aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); }
+  /* Keyboard focus: a ring in the text color, inset where the control sits inside a clipped group. */
+  .vf :is(a, button, input, [tabindex]):focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; border-radius: 4px; }
+  .vf .vf-seg button:focus-visible { outline: 2px solid currentColor; outline-offset: -5px; border-radius: 6px; }
+  .vf-tabs button { min-height: 2.75rem; }
+  /* Theme switch (static site only): pushed to the right end of the row with the candidate filter. */
+  .vf-theme { margin-left: auto; display: flex; align-items: center; gap: var(--cds-gap-sm); }
+  .vf-theme[hidden] { display: none; }
+  #theme-pick button[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); font-weight: var(--cds-font-weight-medium); }
 </style>
 
 <div class="vf" lang="pt-BR">
   <header class="vf-head" id="topo">
     <h1>Eleição presidencial de 2026: os números mostram sinais de fraude?</h1>
-    <div class="vf-filter"><span class="vf-filter-lbl">Mostrar:</span><div class="vf-seg" id="cand-pick" role="group" aria-label="Candidato"><button type="button" data-v="lula" aria-pressed="false">Lula</button><button type="button" data-v="flavio" aria-pressed="false">Flávio</button><button type="button" data-v="ambos" aria-pressed="true">Ambos</button></div></div>
+    <div class="vf-filter"><span class="vf-filter-lbl" id="cand-lbl">Mostrar:</span><div class="vf-seg" id="cand-pick" role="group" aria-labelledby="cand-lbl"><button type="button" data-v="lula" aria-pressed="false">Lula</button><button type="button" data-v="flavio" aria-pressed="false">Flávio</button><button type="button" data-v="ambos" aria-pressed="true">Ambos</button></div><div class="vf-theme" hidden><span class="vf-filter-lbl" id="theme-lbl">Tema:</span><div class="vf-seg" id="theme-pick" role="group" aria-labelledby="theme-lbl"><button type="button" data-v="auto" aria-pressed="true">Automático</button><button type="button" data-v="claro" aria-pressed="false">Claro</button><button type="button" data-v="escuro" aria-pressed="false">Escuro</button></div></div></div>
     <div class="vf-tabs" id="vf-tabs" role="tablist" aria-label="Versão do relatório">
       <button type="button" role="tab" id="tab-simples" data-tab="simples" aria-controls="simples" aria-selected="true">Resumo para todos</button>
       <button type="button" role="tab" id="tab-tecnico" data-tab="tecnico" aria-controls="tecnico" aria-selected="false">Versão técnica</button>
@@ -165,7 +173,7 @@
       <article class="vf-card vf-q" id="numeros-inventados">
         <div class="vf-q-head"><span class="vf-q-n">1</span><h3>Os números parecem inventados?</h3><span class="vf-chip vf-ok">Normal</span></div>
         <p>Olhe para o último algarismo de cada contagem de votos: 1.234 termina em 4; 870 termina em 0. Em votos de verdade, esse último algarismo é como um sorteio: cada número de 0 a 9 aparece em mais ou menos 1 de cada 10 urnas. Quem inventa números tende a usar alguns algarismos mais que outros (<a class="vf-src" href="https://doi.org/10.1093/pan/mps003" target="_blank" rel="noopener">Beber e Scacco, 2012</a>), e isso apareceria como barras mais altas.</p>
-        <div class="vf-chart vf-h210 dash-skeleton" id="s-digits" data-source="last_digit"></div>
+        <div class="vf-chart vf-h210 dash-skeleton" id="s-digits" role="img" aria-label="Gráfico de barras: fração das contagens de votos terminadas em cada algarismo, de 0 a 9, para cada candidato no 2º turno de 2026. O resultado está no texto abaixo do gráfico." data-source="last_digit"></div>
         <p class="vf-q-sum"><b>Resultado:</b> em 2026, cada algarismo aparece no fim de <span data-source="digit_range" data-row="0" data-field="min" data-fmt="pct">—</span> a <span data-source="digit_range" data-row="0" data-field="max" data-fmt="pct">—</span> das contagens, para os dois candidatos (contamos as urnas em que o candidato teve 10 votos ou mais). É exatamente o que um sorteio daria.</p>
       </article>
 
@@ -179,7 +187,7 @@
       <article class="vf-card vf-q" id="urnas-que-destoam">
         <div class="vf-q-head"><span class="vf-q-n">3</span><h3>Alguma urna destoa demais das vizinhas?</h3><span class="vf-chip vf-ok">Normal</span></div>
         <p>Numa mesma escola costuma haver várias urnas, com eleitores do mesmo bairro; por isso os resultados delas costumam ser parecidos: nos dados, a diferença típica entre uma urna e as vizinhas é só <span data-source="scorecard" data-where="id=pz|pos|2|2026" data-field="stat" data-fmt="dec2">—</span> vez a que o puro acaso daria. Uma urna adulterada ficaria muito diferente das vizinhas. Ainda assim, algumas urnas destoam naturalmente: em 2022, <span data-source="scorecard" data-where="id=pz|pos|2|2022" data-field="observed" data-fmt="int">—</span> ficaram muito acima das vizinhas e <span data-source="scorecard" data-where="id=pz|neg|2|2022" data-field="observed" data-fmt="int">—</span> muito abaixo, quando o puro acaso daria cerca de <span data-source="scorecard" data-where="id=pz|pos|2|2022" data-field="expected" data-fmt="int">—</span> de cada lado. Por isso o que importa é comparar com 2022. Abaixo, quantas urnas ficaram muito diferentes das vizinhas, para cada lado:</p>
-        <div class="vf-chart vf-h170 dash-skeleton" id="s-outliers" data-source="scorecard"></div>
+        <div class="vf-chart vf-h170 dash-skeleton" id="s-outliers" role="img" aria-label="Gráfico de barras: quantas urnas ficaram muito diferentes das vizinhas, a favor de cada candidato, em 2026 e em 2022." data-source="scorecard"></div>
         <p class="vf-q-sum"><b>Resultado:</b> são praticamente as mesmas quantidades de 2022, para os dois lados, numa fração mínima das quase 500 mil urnas. <span data-cand="lula">E <span data-source="scorecard" data-where="id=persist|2026" data-field="observed" data-fmt="pctv">—</span> das que destoaram a favor de Lula no 2º turno já ficavam acima das vizinhas no 1º turno, por uma régua um pouco mais folgada (em 2022, <span data-source="scorecard" data-where="id=persist|2022" data-field="observed" data-fmt="pctv">—</span>): são lugares que já votavam diferente, não urnas que mudaram de repente.</span></p>
       </article>
 
@@ -198,7 +206,7 @@
         <p>Na noite da eleição, a liderança trocou de mãos duas vezes. Lula abriu a apuração na frente; às 19h45, com 13% das urnas apuradas, Flávio passou a liderar; às 20h25, com 47%, Lula voltou à frente e não perdeu mais a liderança (<a class="vf-src" href="https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html" target="_blank" rel="noopener">Terra</a>). Os boletins não chegam em ordem aleatória: cada lugar termina a votação e a transmissão num horário, e os que chegaram por último votaram mais em Lula. Em 2022 foi parecido: Bolsonaro liderou o começo e Lula passou à frente com cerca de dois terços dos votos apurados (gráfico abaixo).</p>
         <p>Em 2026 houve um detalhe a mais. Às 16h32, o ministro Cristiano Zanin, do STF, prorrogou a votação até as 19h, por causa da falta de ônibus em cidades de vários estados. A imprensa divergiu sobre o alcance: segundo a <a class="vf-src" href="https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026" target="_blank" rel="noopener">Rádio Senado</a>, valeu para o país todo, mas seções que já tinham encerrado não reabriram, e no Distrito Federal não chegou a ser aplicada; segundo a <a class="vf-src" href="https://exame.com/brasil/o-horario-da-votacao-sera-estendido/" target="_blank" rel="noopener">Exame</a>, valeu só para as seções afetadas. O TSE só começou a divulgar a apuração às 19h (<a class="vf-src" href="https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html" target="_blank" rel="noopener">Terra</a>), e <span data-source="late_share" data-row="0" data-field="share" data-fmt="pct">—</span> dos votos chegaram ao TSE depois desse horário. Como seções que já tinham fechado também só aparecem depois das 19h, o horário de chegada mostra quando o boletim foi recebido, não quando a urna fechou.</p>
         <p class="vf-caption">Cada linha mostra o percentual de um candidato entre os dois à medida que os votos eram apurados. O eixo de baixo é quanto da apuração já tinha sido feito.</p>
-        <div class="vf-chart vf-h280 dash-skeleton" id="s-progress" data-source="timing"></div>
+        <div class="vf-chart vf-h280 dash-skeleton" id="s-progress" role="img" aria-label="Gráfico de linhas: percentual de cada candidato entre os dois à medida que os votos eram apurados, nos 2º turnos de 2022 e de 2026." data-source="timing"></div>
         <p class="vf-q-sum"><b>Resultado:</b> as duas eleições têm o mesmo desenho. E, comparando urnas da mesma zona eleitoral, as que chegaram tarde quase não diferem das que chegaram cedo: a virada vem de quais lugares terminam a contagem por último, não da hora em que os votos chegaram.</p>
       </article>
 
@@ -206,7 +214,7 @@
         <div class="vf-q-head"><span class="vf-q-n">6</span><h3>De onde veio a virada?</h3><span class="vf-chip vf-ok">As contas fecham</span></div>
         <p>No 1º turno, Flávio teve <span data-source="summary" data-where="year=2026&amp;round=1" data-field="margin" data-fmt="absCompact">—</span> de votos a mais que Lula. No 2º, Lula terminou com <span data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="absCompact">—</span> a mais. Como? Os <span data-source="between_rounds" data-where="id=others" data-field="r1" data-fmt="compact">—</span> de votos dos candidatos que saíram da disputa ficaram livres, o comparecimento subiu <span data-source="between_rounds" data-where="id=turnout" data-field="change" data-fmt="absCompact">—</span> e os brancos e nulos caíram <span data-source="between_rounds" data-where="id=blank_null" data-field="change" data-fmt="absCompact">—</span>. Esses votos foram divididos: Lula ganhou <span data-source="between_rounds" data-where="id=lula" data-field="change" data-fmt="absCompact">—</span> e Flávio <span data-source="between_rounds" data-where="id=flavio" data-field="change" data-fmt="absCompact">—</span>.</p>
         <p class="vf-caption">Quanto cada grupo ganhou (à direita) ou perdeu (à esquerda) do 1º para o 2º turno.</p>
-        <div class="vf-chart vf-h180 dash-skeleton" id="s-balance" data-source="between_rounds"></div>
+        <div class="vf-chart vf-h180 dash-skeleton" id="s-balance" role="img" aria-label="Gráfico de barras: quanto cada grupo ganhou ou perdeu do 1º para o 2º turno de 2026: Lula, Flávio, candidatos que saíram, abstenções, brancos e nulos." data-source="between_rounds"></div>
         <p class="vf-q-sum"><b>Resultado:</b> o voto é secreto, então ninguém sabe em quem cada eleitor votou. Mas as contas fecham: tudo o que saiu de um lado entrou do outro.</p>
       </article>
 
@@ -292,13 +300,13 @@
         <div class="vf-card" id="ultimo-digito">
           <h3>Último dígito de cada contagem, 2º turno</h3>
           <p class="vf-note">Cada dígito deveria encerrar cerca de 10% das contagens. A faixa sombreada é a variação que o acaso produz em 95% das vezes.</p>
-          <div class="vf-chart dash-skeleton" id="ld-chart" data-source="last_digit"></div>
+          <div class="vf-chart dash-skeleton" id="ld-chart" role="img" aria-label="Gráfico de pontos: fração das contagens terminadas em cada algarismo no 2º turno, em 2026 e em 2022, com a faixa de variação que o acaso produz." data-source="last_digit"></div>
         </div>
         <div class="vf-card" id="percentuais-inteiros">
           <h3>Seções por percentual, em passos de 0,1 ponto (2º turno de 2026)</h3>
           <p class="vf-note">Resultados inventados se acumulam em percentuais inteiros, o que apareceria como um pico a cada ponto (<a class="vf-src" href="https://doi.org/10.1214/16-AOAS904" target="_blank" rel="noopener">Kobak, Shpilkin e Pshenichnikov, 2016</a>). Os únicos picos estão em frações simples, como 50% e 66,7%: muitas combinações de votos dão exatamente o mesmo valor (100 de 200, 101 de 202, 150 de 300…), enquanto um valor como 50,37% quase não tem combinações. A linha esperada, calculada a partir das próprias contagens, tem os mesmos picos.</p>
           <div class="vf-seg" id="pct-pick" role="group" aria-label="Medida"><button type="button" data-v="share" aria-pressed="true">% do candidato</button><button type="button" data-v="Turnout" aria-pressed="false">Comparecimento</button></div>
-          <div class="vf-chart dash-skeleton" id="pct-chart" data-source="pct_hist"></div>
+          <div class="vf-chart dash-skeleton" id="pct-chart" role="img" aria-label="Histograma: número de seções em cada faixa de 0,1 ponto percentual no 2º turno de 2026, com a linha esperada só pelas contagens." data-source="pct_hist"></div>
         </div>
         <div class="vf-card vf-wide" id="testes-numeros-redondos">
           <h3>Testes de números redondos, 2026 ao lado de 2022</h3>
@@ -322,12 +330,12 @@
           <h3>Distância de cada seção em relação ao seu local de votação, 2º turno</h3>
           <p class="vf-note">Distância em desvios-padrão; contagens em escala logarítmica. Na prática, há mais seções longe do seu local do que a curva normal perfeita prevê: no 2º turno de 2022, <span data-source="scorecard" data-where="id=pz|pos|2|2022" data-field="observed" data-fmt="int">—</span> seções ficaram mais de 4 desvios-padrão acima do seu local e <span data-source="scorecard" data-where="id=pz|neg|2|2022" data-field="observed" data-fmt="int">—</span> abaixo, quando a curva daria cerca de <span data-source="scorecard" data-where="id=pz|pos|2|2022" data-field="expected" data-fmt="int">—</span> de cada lado. Por isso a régua é a linha de 2022, não a curva de livro.</p>
           <div class="vf-seg" id="z-pick" role="group" aria-label="Medida"><button type="button" data-v="share" aria-pressed="true">% do candidato</button><button type="button" data-v="Turnout" aria-pressed="false">Comparecimento</button><button type="button" data-v="Swing" aria-pressed="false">Variação entre turnos</button></div>
-          <div class="vf-chart dash-skeleton" id="z-chart" data-source="z_hist"></div>
+          <div class="vf-chart dash-skeleton" id="z-chart" role="img" aria-label="Histograma em escala logarítmica: distância de cada seção em relação ao seu local de votação, com a curva normal perfeita e a linha de 2022." data-source="z_hist"></div>
         </div>
         <div class="vf-card" id="impressao-digital">
           <h3>Comparecimento × % do candidato, todas as seções, 2º turno</h3>
           <p class="vf-note">Quanto mais escuro, mais seções. O enchimento de urnas espalha os resultados em direção ao quadro destacado: comparecimento quase total, com quase todos os votos para um candidato (<a class="vf-src" href="https://doi.org/10.1073/pnas.1210722109" target="_blank" rel="noopener">Klimek et al., 2012</a>). Nenhum dos dois anos mostra esse espalhamento em massa, para nenhum dos candidatos; as poucas seções dentro do quadro estão listadas mais abaixo.</p>
-          <div class="vf-chart vf-tall dash-skeleton" id="fp-chart" data-source="fingerprint"></div>
+          <div class="vf-chart vf-tall dash-skeleton" id="fp-chart" role="img" aria-label="Mapas de calor: seções por comparecimento e percentual do candidato no 2º turno, em 2026 e em 2022, com um quadro tracejado no canto de comparecimento de 95% ou mais e candidato com 90% ou mais." data-source="fingerprint"></div>
         </div>
         <div class="vf-card vf-wide" id="testes-curva-normal">
           <h3>Testes de curva normal, 2026 ao lado de 2022</h3>
@@ -362,7 +370,7 @@
         <div class="vf-card vf-wide" id="progressao-apuracao">
           <h3>% de cada candidato nos votos apurados até cada momento</h3>
           <p class="vf-note">Os boletins não chegam em ordem aleatória, e os lugares que terminaram a transmissão por último votaram mais em Lula; por isso o percentual dele sobe ao longo da apuração, em 2022 como em 2026. No 2º turno de 2026, o STF prorrogou a votação até as 19h (<a class="vf-src" href="https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026" target="_blank" rel="noopener">Rádio Senado</a>), o TSE só começou a divulgar a apuração nesse horário (<a class="vf-src" href="https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html" target="_blank" rel="noopener">Terra</a>) e <span data-source="late_share" data-row="0" data-field="share" data-fmt="pct">—</span> dos votos chegaram depois das 19h, inclusive de seções que já tinham fechado; por isso o eixo mostra a fração dos votos apurados, não o horário. Dentro da mesma zona, as seções que chegaram mais tarde no 2º turno pendem para Lula em apenas <span data-source="scorecard" data-where="id=time|2|2026" data-field="observed" data-fmt="pph">—</span>.</p>
-          <div class="vf-chart dash-skeleton" id="time-chart" data-source="timing"></div>
+          <div class="vf-chart dash-skeleton" id="time-chart" role="img" aria-label="Gráfico de linhas: percentual de cada candidato à medida que os votos eram apurados, nos dois turnos de 2026 e no 2º turno de 2022." data-source="timing"></div>
         </div>
         <div class="vf-card" id="entre-turnos">
           <h3>Do 1º para o 2º turno, 2026</h3>

@@ -24,12 +24,10 @@ DATASETS = next(ast.literal_eval(n.value) for n in tree.body
 if out.exists():
     shutil.rmtree(out)
 (out / "data").mkdir(parents=True)
-(out / "vendor").mkdir()
-
 for name in ("dash.js", "theme.css", "_headers"):
     shutil.copy2(web / name, out / name)
-for f in (web / "vendor").iterdir():
-    shutil.copy2(f, out / "vendor" / f.name)
+for d in ("vendor", "fonts"):
+    shutil.copytree(web / d, out / d)
 scripts = re.findall(r'<script src="([^"/]+\.js)"></script>', (rep / "index.html").read_text(encoding="utf-8"))
 for name in scripts:
     shutil.copy2(rep / name, out / name)

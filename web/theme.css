@@ -1,54 +1,76 @@
 /* Theme tokens and base styles that the claude.ai dashboard runtime provides, for the static site.
-   Colors follow the light/dark system setting; a data-theme attribute on <html> overrides it. */
+   Colors follow the light/dark system setting; a data-theme attribute on <html> (set by the theme
+   switch in dash.js) overrides it. Every text color is at least 4.5:1 on its background, and
+   chart marks and control outlines at least 3:1, in both themes. */
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("fonts/AtkinsonHyperlegibleNext-latin.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("fonts/AtkinsonHyperlegibleNext-latin-italic.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   color-scheme: light;
-  --font-anthropic-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-anthropic-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  /* One family throughout: Atkinson Hyperlegible keeps 0/O and 1/l/I apart, which matters on a page about digits. */
+  --font-anthropic-sans: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-anthropic-serif: var(--font-anthropic-sans);
+  --vf-display-weight: 700;
 
-  --color-bg: #faf9f5;
+  --color-bg: #f3f4f6;
   --color-panel: #ffffff;
-  --color-fg: #0b0b0b;
-  --color-fg-muted: #52514e;
-  --color-border-line: rgba(11, 11, 11, 0.12);
-  --color-ok: #006300;
+  --color-fg: #14171c;
+  --color-fg-muted: #4a515c;
+  --color-border-line: #dde1e6;
+  --vf-control: #7d848f;
+  --color-ok: #1a7f37;
   --color-warn: #8a5a00;
-  --color-bad: #d03b3b;
+  --color-bad: #b42318;
 
-  --series-1: #2a78d6;
-  --series-2: #eb6834;
+  --series-1: #1d64c2;
+  --series-2: #c62f2f;
   --series-3: #1baf7a;
   --series-4: #eda100;
   --series-5: #e87ba4;
   --series-6: #008300;
   --series-7: #6250d6;
-  --series-8: #e34948;
+  --series-8: #c62f2f;
 
-  --cds-border: rgba(11, 11, 11, 0.12);
-  --cds-text-secondary: #52514e;
+  --cds-border: #dde1e6;
+  --cds-text-secondary: #4a515c;
   --cds-surface-popover: #ffffff;
-  --cds-shadow-popover: 0 4px 16px rgba(11, 11, 11, 0.12);
-  --cds-chart-grid: #e1e0d9;
-  --cds-chart-axis: #c3c2b7;
-  --cds-chart-muted: #a3a19a;
-  --cds-chart-reference: #52514e;
-  --cds-chart-status-critical: #d03b3b;
+  --cds-shadow-popover: 0 4px 16px rgba(20, 23, 28, 0.14);
+  --cds-chart-grid: #e6e9ed;
+  --cds-chart-axis: #b9bec6;
+  --cds-chart-muted: #858b94;
+  --cds-chart-reference: #4a515c;
+  --cds-chart-status-critical: #b42318;
 
-  --cds-font-size-caption: 0.8125rem;
-  --cds-font-size-body: 0.9375rem;
-  --cds-font-size-heading: 1.125rem;
-  --cds-font-size-title: clamp(1.5rem, 1.15rem + 1.5vw, 2.125rem);
-  --cds-font-weight-medium: 560;
+  --cds-font-size-caption: 0.875rem;
+  --cds-font-size-body: 1.0625rem;
+  --cds-font-size-heading: 1.25rem;
+  --cds-font-size-title: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
+  --cds-font-weight-medium: 650;
 
   --cds-gap-xs: 4px;
   --cds-gap-sm: 8px;
   --cds-gap-md: 12px;
   --cds-gap-lg: 16px;
-  --cds-gap-xl: 24px;
+  --cds-gap-xl: 28px;
   --cds-pad-xs: 4px;
   --cds-pad-sm: 8px;
   --cds-pad-md: 12px;
-  --cds-pad-lg: 16px;
-  --cds-pad-xl: 24px;
+  --cds-pad-lg: 18px;
+  --cds-pad-xl: 26px;
   --cds-radius: 8px;
   --cds-dur-slow: 300ms;
   --cds-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -57,60 +79,62 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --color-bg: #1a1a19;
-    --color-panel: #232321;
-    --color-fg: #f0efec;
-    --color-fg-muted: #c3c2b7;
-    --color-border-line: rgba(255, 255, 255, 0.12);
-    --color-ok: #0ca30c;
-    --color-warn: #fab219;
-    --color-bad: #e66767;
-    --series-1: #3987e5;
-    --series-2: #d95926;
+    --color-bg: #101317;
+    --color-panel: #191d23;
+    --color-fg: #eef0f3;
+    --color-fg-muted: #b3bac4;
+    --color-border-line: #2c323b;
+    --vf-control: #6f7783;
+    --color-ok: #56c271;
+    --color-warn: #f2b33d;
+    --color-bad: #f0716d;
+    --series-1: #5c9cf0;
+    --series-2: #f0716d;
     --series-3: #199e70;
     --series-4: #c98500;
     --series-5: #d55181;
     --series-6: #008300;
     --series-7: #9085e9;
-    --series-8: #e66767;
-    --cds-border: rgba(255, 255, 255, 0.12);
-    --cds-text-secondary: #c3c2b7;
-    --cds-surface-popover: #2c2c2a;
+    --series-8: #f0716d;
+    --cds-border: #2c323b;
+    --cds-text-secondary: #b3bac4;
+    --cds-surface-popover: #222730;
     --cds-shadow-popover: 0 4px 16px rgba(0, 0, 0, 0.5);
-    --cds-chart-grid: #2c2c2a;
-    --cds-chart-axis: #4a4a46;
-    --cds-chart-muted: #6e6d68;
-    --cds-chart-reference: #c3c2b7;
-    --cds-chart-status-critical: #e66767;
+    --cds-chart-grid: #262b33;
+    --cds-chart-axis: #4a515c;
+    --cds-chart-muted: #6c737e;
+    --cds-chart-reference: #b3bac4;
+    --cds-chart-status-critical: #f0716d;
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --color-bg: #1a1a19;
-  --color-panel: #232321;
-  --color-fg: #f0efec;
-  --color-fg-muted: #c3c2b7;
-  --color-border-line: rgba(255, 255, 255, 0.12);
-  --color-ok: #0ca30c;
-  --color-warn: #fab219;
-  --color-bad: #e66767;
-  --series-1: #3987e5;
-  --series-2: #d95926;
+  --color-bg: #101317;
+  --color-panel: #191d23;
+  --color-fg: #eef0f3;
+  --color-fg-muted: #b3bac4;
+  --color-border-line: #2c323b;
+  --vf-control: #6f7783;
+  --color-ok: #56c271;
+  --color-warn: #f2b33d;
+  --color-bad: #f0716d;
+  --series-1: #5c9cf0;
+  --series-2: #f0716d;
   --series-3: #199e70;
   --series-4: #c98500;
   --series-5: #d55181;
   --series-6: #008300;
   --series-7: #9085e9;
-  --series-8: #e66767;
-  --cds-border: rgba(255, 255, 255, 0.12);
-  --cds-text-secondary: #c3c2b7;
-  --cds-surface-popover: #2c2c2a;
+  --series-8: #f0716d;
+  --cds-border: #2c323b;
+  --cds-text-secondary: #b3bac4;
+  --cds-surface-popover: #222730;
   --cds-shadow-popover: 0 4px 16px rgba(0, 0, 0, 0.5);
-  --cds-chart-grid: #2c2c2a;
-  --cds-chart-axis: #4a4a46;
-  --cds-chart-muted: #6e6d68;
-  --cds-chart-reference: #c3c2b7;
-  --cds-chart-status-critical: #e66767;
+  --cds-chart-grid: #262b33;
+  --cds-chart-axis: #4a515c;
+  --cds-chart-muted: #6c737e;
+  --cds-chart-reference: #b3bac4;
+  --cds-chart-status-critical: #f0716d;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -121,7 +145,7 @@ body {
   color: var(--color-fg);
   font-family: var(--font-anthropic-sans);
   font-size: var(--cds-font-size-body);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 button, input, select, textarea { font: inherit; color: inherit; }
 a { color: inherit; }
@@ -140,3 +164,4 @@ div.dash-skeleton { min-height: 12rem; }
 .site-foot { max-width: 72rem; margin: var(--cds-gap-xl) auto 0; padding: var(--cds-pad-lg) 0 var(--cds-pad-xl); border-top: 1px solid var(--color-border-line); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
 .site-foot p { margin: 0 0 var(--cds-gap-sm); }
 .site-foot ul { margin: 0 0 var(--cds-gap-md); padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-lg); }
+.site-foot a:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; border-radius: 3px; }

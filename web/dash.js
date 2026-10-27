@@ -18,6 +18,19 @@ window.dash = (() => {
   }
   let params = { ...DEFAULTS, ...fromUrl() };
 
+  // Theme: 'auto' follows the system; 'claro' or 'escuro' is kept for the next visit. Applied here,
+  // in <head>, so the page never paints in the wrong theme first.
+  const THEMES = { claro: 'light', escuro: 'dark' };
+  let theme = 'auto';
+  try {
+    theme = THEMES[localStorage.getItem('tema')] ? localStorage.getItem('tema') : 'auto';
+  } catch {}
+  function applyTheme() {
+    if (THEMES[theme]) document.documentElement.dataset.theme = THEMES[theme];
+    else delete document.documentElement.dataset.theme;
+  }
+  applyTheme();
+
   let queued = false;
   function schedule() {
     if (queued) return;
@@ -124,6 +137,17 @@ window.dash = (() => {
     schedule();
   }
 
+  function setTheme(t) {
+    theme = THEMES[t] ? t : 'auto';
+    try {
+      if (theme === 'auto') localStorage.removeItem('tema');
+      else localStorage.setItem('tema', theme);
+    } catch {}
+    applyTheme();
+    version++;
+    schedule();
+  }
+
   function setLink(name) {
     history.replaceState(null, '', `${location.pathname}${location.search}${name ? `#${name}` : ''}`);
   }
@@ -136,6 +160,8 @@ window.dash = (() => {
     setParams,
     resetParams: () => setParams(Object.fromEntries(Object.keys(params).map((k) => [k, DEFAULTS[k] ?? null]))),
     setLink,
+    theme: () => theme,
+    setTheme,
     refresh: () => {},
     colors: [1, 2, 3, 4, 5, 6, 7, 8].map((i) => `var(--series-${i})`),
   };
