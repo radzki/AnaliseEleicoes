@@ -135,6 +135,33 @@
     },
   });
 
+  dash.calc('swing_years', {
+    inputs: ['states'],
+    title: 'Direção da migração por UF, 2022 e 2026',
+    description: 'Por ano: em quantas das 27 UFs e no exterior o percentual de Lula entre os dois finalistas subiu ou caiu do 1º para o 2º turno, e a menor e a maior variação a favor de quem cresceu.',
+    fn: (states) => [2022, 2026].map((year) => {
+      const s = states.filter((r) => r.year === year).map((r) => r.swing_pp);
+      const lulaUp = s.filter((v) => v > 0).length;
+      const gain = lulaUp >= s.length / 2 ? s : s.map((v) => -v);
+      return { year, units: s.length, lula_up: lulaUp, right_up: s.length - lulaUp, min: Math.min(...gain), max: Math.max(...gain) };
+    }),
+  });
+
+  dash.calc('net_available', {
+    inputs: ['summary'],
+    title: 'Votos disponíveis para os finalistas no 2º turno de 2026',
+    description: 'Votos dos candidatos eliminados, mais o aumento do comparecimento, mais a queda de brancos e nulos, do 1º para o 2º turno de 2026; e quanto disso Lula e Flávio ganharam.',
+    fn: (summary) => {
+      const [a, b] = [1, 2].map((round) => summary.find((r) => r.year === 2026 && r.round === round));
+      const eliminated = a.valid - a.lula - a.right;
+      const turnoutUp = b.comparecimento - a.comparecimento;
+      const blankNullDown = a.brancos + a.nulos - b.brancos - b.nulos;
+      const available = eliminated + turnoutUp + blankNullDown;
+      return [{ eliminated, turnout_up: turnoutUp, blank_null_down: blankNullDown, available,
+                lula_gain: b.lula - a.lula, flavio_gain: b.right - a.right, lula_share: (b.lula - a.lula) / available }];
+    },
+  });
+
   dash.calc('between_rounds', {
     inputs: ['summary'],
     title: 'Do 1º para o 2º turno, 2026',
