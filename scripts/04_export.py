@@ -181,6 +181,36 @@ for cand in ("lula", "flavio"):
                      "share_1": round(c[f"{cand}_1"], 4), "share_2": round(c[cand], 4)})
 dump("corner", rows)
 
+# strongholds: how often a candidate's 90%+ sections reach turnout >= 95%, per year and round (>= 100 eligible),
+# and the same runoff sections compared one by one between 2022 and 2026
+def wide(p):
+    w = pd.read_parquet(p / "secao_wide.parquet", columns=["NR_TURNO", *SEC, "QT_APTOS", "QT_COMPARECIMENTO",
+                                                           "QT_VOTOS_NOMINAIS", "v13", "v22"])
+    w = w[w.v13.notna() & (w.QT_VOTOS_NOMINAIS > 0) & (w.QT_APTOS >= 100)].copy()
+    w["turnout"] = w.QT_COMPARECIMENTO / w.QT_APTOS
+    w["lula"] = w.v13 / w.QT_VOTOS_NOMINAIS
+    w["right"] = w.v22.fillna(0) / w.QT_VOTOS_NOMINAIS
+    return w
+
+
+WY = {2026: wide(p26), 2022: wide(p22)}
+rows = []
+for y, w in WY.items():
+    for t, g in w.groupby("NR_TURNO"):
+        for grp, s in (("all", g), ("lula90", g[g.lula >= 0.9]), ("right90", g[g.right >= 0.9])):
+            rows.append({"id": f"{y}|{t}|{grp}", "kind": "group", "year": y, "round": int(t), "group": grp,
+                         "sections": len(s), "eligible": int(s.QT_APTOS.sum()), "voters": int(s.QT_COMPARECIMENTO.sum()),
+                         "turnout": s.QT_COMPARECIMENTO.sum() / s.QT_APTOS.sum(),
+                         "t95_sections": int((s.turnout >= 0.95).sum()), "t95_share": (s.turnout >= 0.95).mean()})
+m = WY[2026][WY[2026].NR_TURNO == 2].merge(WY[2022][WY[2022].NR_TURNO == 2], on=SEC, suffixes=("", "_22"))
+for grp, s in (("lula90", m[(m.lula >= 0.9) & (m.lula_22 >= 0.9)]),
+               ("mid", m[m.lula.between(0.4, 0.6) & m.lula_22.between(0.4, 0.6)])):
+    rows.append({"id": f"matched|{grp}", "kind": "matched", "year": 2026, "round": 2, "group": grp, "sections": len(s),
+                 "eligible_change": (s.QT_APTOS / s.QT_APTOS_22 - 1).median(),
+                 "voters_change": (s.QT_COMPARECIMENTO / s.QT_COMPARECIMENTO_22 - 1).median(),
+                 "turnout_2022": s.turnout_22.mean(), "turnout_2026": s.turnout.mean()})
+dump("strongholds", rows)
+
 # timing (recomputed with explicit 10-minute bins) --------------------------------
 rows = []
 for y, p in ((2026, p26), (2022, p22)):

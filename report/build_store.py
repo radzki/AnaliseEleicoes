@@ -23,8 +23,9 @@ DATASETS = {
     "timing": ("a6ffa75bed1ffacd6e5d9f8e5ebac9c4", "Progressão da apuração", "Fração dos votos recebidos e percentual de Lula entre os dois finalistas, em passos de 10 minutos a partir das 17h, por turno e ano."),
     "urna": ("be7704617c40d8c3469ee7afb8bfb098", "Resultados por modelo de urna", "Seções e percentual de Lula por modelo de urna, bruto e comparado com outras urnas do mesmo local de votação."),
     "consistency": ("1243a9b36bf84e5e31307154ce8e1f24", "Seções vs. totais oficiais", "Boletins das seções somados por unidade município-zona, comparados aos totais publicados separadamente pelo TSE, campo a campo."),
+    "strongholds": ("4383205ada88579925d457050b3709f2", "Redutos e comparecimento quase total", "Por ano e turno, seções com 100 ou mais eleitores aptos: todas, as com Lula ≥ 90% e as com o candidato Bolsonaro ≥ 90% (eleitores aptos, votantes, comparecimento e quantas chegaram a 95% ou mais de comparecimento); e as mesmas seções do 2º turno comparadas uma a uma entre 2022 e 2026 (variação mediana de aptos e de votantes)."),
 }
-UPDATED_AT = {"corner": "2026-10-27T02:22:38Z"}
+UPDATED_AT = {"corner": "2026-10-27T02:22:38Z", "strongholds": "2026-10-27T05:59:06Z"}
 docs = [("dash", "meta", {"title": "Eleição 2026: testes forenses"}), ("dash", "params", {"cand": "ambos"})]
 for i, (aid, title, desc) in DATASETS.items():
     docs.append(("datasets", i, {"title": title, "description": f"{desc} {SRC}",

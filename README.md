@@ -4,8 +4,11 @@ Testes estatísticos de forense eleitoral aplicados aos boletins de urna de cada
 presidencial de 2026 (Lula × Flávio Bolsonaro), com a eleição de 2022 como régua. Tudo parte dos
 dados abertos do Tribunal Superior Eleitoral (TSE).
 
-**Resposta curta: não encontramos sinais de fraude nos números.** Em todos os testes, 2026 se
-comporta como uma eleição normal, do mesmo jeito que 2022.
+**Resposta curta: não encontramos sinais de fraude capazes de mudar o resultado.** Em quase todos
+os testes, 2026 se comporta como uma eleição normal, do mesmo jeito que 2022. A principal exceção
+são seções com comparecimento quase total e quase todos os votos em Lula, que ficaram mais comuns
+do que em 2022. Estes dados não explicam por quê, mas o efeito é pequeno demais para mudar o
+resultado (veja a tabela abaixo).
 
 ## Escopo
 
@@ -22,10 +25,10 @@ comporta como uma eleição normal, do mesmo jeito que 2022.
 | Último dígito (Beber & Scacco, 2012) e excesso de múltiplos de 10 | Números inventados à mão | 2026 passa em todos. Em 2022, o último dígito dos votos de Jair Bolsonaro ficou fora do esperado em dois testes (p = 0,002 e 0,044), o que acontece por acaso quando se fazem dezenas de testes |
 | Percentuais inteiros (Kobak, Shpilkin & Pshenichnikov, 2016) | Resultados ajustados para 50%, 60%, 70%… | 10.184 urnas com percentual inteiro exato de Lula; o acaso daria cerca de 10.234 |
 | Seção comparada às outras do mesmo local de votação | Urnas que destoam das vizinhas | 1.059 urnas destoam a favor de Lula (1.105 em 2022) e 497 a favor de Flávio (494 a favor de Jair em 2022) |
-| Comparecimento × percentual (Klimek et al., 2012) | Urnas "engordadas": comparecimento ≥ 95% e candidato ≥ 90% | 92 seções para Lula (30 em 2022), com 18.280 eleitores, 0,4% da margem; 64 já davam 90% ou mais a Lula no 1º turno. Para Flávio, 5 seções (3 para Jair em 2022) |
-| Ordem de apuração e modelo de urna | Uma virada que dependesse da hora de chegada ou da máquina | Mesmo desenho de 2022; dentro da mesma zona, +0,24 p.p. por hora de atraso; entre modelos de urna no mesmo local, no máximo 0,06 p.p. |
+| Comparecimento × percentual (Klimek et al., 2012) | Urnas "engordadas": comparecimento ≥ 95% e candidato ≥ 90% | **Chamou atenção.** 92 seções para Lula (30 em 2022), com 18.280 eleitores, 0,4% da margem; 64 já davam 90% ou mais a Lula no 1º turno. Entre as seções com Lula ≥ 90%, a fatia com comparecimento ≥ 95% foi de 1,4%, contra 0,3% em 2022; nas mesmas seções, os eleitores aptos ficaram estáveis e os votantes subiram 5,1%. Nos redutos de Flávio/Jair a fatia ficou estável (1,4% e 1,5%). Os dados não dizem por quê; se o comparecimento nos redutos de Lula tivesse ficado no nível de 2022, seriam cerca de 62 mil votantes a menos, 1,4% da margem. Para Flávio, 5 seções (3 para Jair em 2022) |
+| Ordem de apuração e modelo de urna | Uma virada que dependesse da hora de chegada ou da máquina | Mesmo desenho de 2022; dentro da mesma zona, +0,24 p.p. por hora de atraso; entre modelos de urna no mesmo local, no máximo 0,06 p.p. No 2º turno de 2026, 99,6% dos votos chegaram ao TSE depois das 19h, quando o TSE começou a divulgar a apuração, depois da prorrogação da votação pelo STF |
 | Migração entre turnos | Mudanças concentradas em poucas urnas | Lula ganhou de 1,2 a 4,3 p.p. em todas as UFs; dentro do mesmo local, a correlação entre aumento de comparecimento e migração é 0,013 |
-| Soma das seções × totais oficiais | Votos que somem ou aparecem entre a urna e o total | 2022 bate nos dois turnos. 2026, 1º turno: bate, com exceção dos 5.246 votos nulos técnicos de Leonardo Alves de Araújo, que o relatório oficial do TSE mostra exatamente. 2026, 2º turno: o TSE ainda não publicou os totais por município |
+| Soma das seções × totais oficiais | Votos que somem ou aparecem entre a urna e o total | 2022 bate nos dois turnos. 2026, 1º turno: bate, com exceção dos votos válidos em 2.148 das 6.292 unidades município-zona; em cada uma, a diferença é exatamente o número de votos de Leonardo Alves de Araújo (PRTB, 28), que desistiu da candidatura em 30 de setembro e cujos 5.246 votos o TSE conta como nulos técnicos. Como os totais saem da mesma apuração dos boletins, isso mostra que os arquivos do TSE batem entre si, não que cada boletim registrou corretamente a sua urna. 2026, 2º turno: o TSE ainda não publicou os totais por município |
 
 **O que estes testes não conseguem mostrar:** eles encontram números inventados à mão e urnas
 "engordadas". Não encontram uma mudança que alterasse todas as urnas na mesma proporção, porque ela

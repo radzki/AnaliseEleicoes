@@ -90,6 +90,25 @@
     fn: (corner) => corner.map((r) => ({ ...r, nome: r.candidate === 'lula' ? 'Lula' : 'Flávio' })),
   });
 
+  dash.calc('stronghold_excess', {
+    inputs: ['strongholds', 'summary'],
+    title: 'Comparecimento a mais nos redutos de Lula',
+    description: 'Votantes a mais nas seções com Lula ≥ 90% no 2º turno de 2026, em relação ao que o comparecimento dessas seções em 2022 daria, e essa quantidade como fração da margem de Lula.',
+    fn: (strongholds, summary) => {
+      const now = strongholds.find((r) => r.id === '2026|2|lula90');
+      const then = strongholds.find((r) => r.id === '2022|2|lula90');
+      const excess = now.voters - now.eligible * then.turnout;
+      return [{ excess, share: excess / summary.find((r) => r.year === 2026 && r.round === 2).margin }];
+    },
+  });
+
+  dash.calc('late_share', {
+    inputs: ['timing'],
+    title: 'Votos recebidos depois das 19h',
+    description: 'Fração dos votos do 2º turno de 2026 cujos boletins chegaram ao TSE depois das 19h (horário de Brasília).',
+    fn: (timing) => [{ share: 1 - timing.find((r) => r.year === 2026 && r.round === 2 && r.minutes === 120).pct_counted }],
+  });
+
   dash.calc('states_view', {
     inputs: ['states'],
     title: 'UFs no 2º turno de 2026, os dois candidatos',
