@@ -12,8 +12,8 @@
   .vf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-md); }
   .vf-wide { grid-column: 1 / -1; }
   .vf-card h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
-  .vf-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); max-width: 75ch; }
-  .vf-after { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-md) 0 0; max-width: 75ch; }
+  .vf-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); }
+  .vf-after { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-md) 0 0; }
   .vf-chart { position: relative; min-height: 260px; }
   .vf-chart.vf-tall { min-height: 320px; }
   .vf-svg { display: block; overflow: visible; }
@@ -57,10 +57,10 @@
   .vf-answer { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xl); }
   .vf-answer-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   .vf-answer-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: var(--cds-gap-xs) 0 var(--cds-gap-sm); }
-  .vf-answer p:last-child { margin: 0; max-width: 65ch; }
-  .vf-explain p { margin: var(--cds-gap-sm) 0 0; max-width: 68ch; }
+  .vf-answer p:last-child { margin: 0; }
+  .vf-explain p { margin: var(--cds-gap-sm) 0 0; }
   .vf-qs { display: grid; gap: var(--cds-gap-md); }
-  .vf-q p { margin: var(--cds-gap-sm) 0 0; max-width: 68ch; }
+  .vf-q p { margin: var(--cds-gap-sm) 0 0; }
   .vf-q-head { display: flex; align-items: center; flex-wrap: wrap; gap: var(--cds-gap-sm); }
   .vf-q-head h3 { flex: 1 1 14rem; font-size: var(--cds-font-size-heading); }
   .vf-q-n { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
@@ -76,9 +76,9 @@
   .vf-caption { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   .vf-link { font: inherit; font-size: var(--cds-font-size-caption); margin-top: var(--cds-gap-md); padding: var(--cds-pad-xs) var(--cds-pad-sm); background: none; color: var(--color-fg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); cursor: pointer; }
   .vf-inline { font: inherit; padding: 0; background: none; border: 0; color: inherit; text-decoration: underline; cursor: pointer; }
-  .vf-gloss { margin: var(--cds-gap-md) 0 0; max-width: 68ch; }
+  .vf-gloss { margin: var(--cds-gap-md) 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md) var(--cds-gap-xl); }
   .vf-gloss dt { font-weight: var(--cds-font-weight-medium); }
-  .vf-gloss dd { margin: 0 0 var(--cds-gap-sm); color: var(--color-fg-muted); }
+  .vf-gloss dd { margin: 0; color: var(--color-fg-muted); }
   .vf-strong { fill: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
   .vf-filter { display: flex; align-items: center; flex-wrap: wrap; gap: var(--cds-gap-sm); margin-top: var(--cds-gap-md); }
   .vf-filter .vf-seg { margin-bottom: 0; }
@@ -208,11 +208,11 @@
     <div class="vf-card vf-explain" id="glossario">
       <h2>Palavras que usamos</h2>
       <dl class="vf-gloss">
-        <dt>Urna ou seção</dt><dd>Cada seção eleitoral tem uma urna. Aqui usamos as duas palavras como sinônimos.</dd>
-        <dt>Boletim de urna</dt><dd>O resultado que cada urna imprime ao fim da votação, com os votos de cada candidato. O TSE publica todos.</dd>
-        <dt>Comparecimento</dt><dd>A parte dos eleitores aptos que foi votar.</dd>
-        <dt>Votos válidos</dt><dd>Os votos dados a candidatos, sem contar brancos e nulos.</dd>
-        <dt>Régua (2022)</dt><dd>A eleição anterior, que mostra como uma eleição normal se sai nos mesmos testes.</dd>
+        <div><dt>Urna ou seção</dt><dd>Cada seção eleitoral tem uma urna. Aqui usamos as duas palavras como sinônimos.</dd></div>
+        <div><dt>Boletim de urna</dt><dd>O resultado que cada urna imprime ao fim da votação, com os votos de cada candidato. O TSE publica todos.</dd></div>
+        <div><dt>Comparecimento</dt><dd>A parte dos eleitores aptos que foi votar.</dd></div>
+        <div><dt>Votos válidos</dt><dd>Os votos dados a candidatos, sem contar brancos e nulos.</dd></div>
+        <div><dt>Régua (2022)</dt><dd>A eleição anterior, que mostra como uma eleição normal se sai nos mesmos testes.</dd></div>
       </dl>
       <button type="button" class="vf-link" data-goto="tecnico">Ver todos os testes na versão técnica</button>
     </div>
@@ -225,14 +225,14 @@
       <h2>Como ler esta versão</h2>
       <p>Aqui estão todos os testes, com os valores e as estatísticas de cada um. Para uma explicação sem jargão, veja o <button type="button" class="vf-inline" data-goto="simples">Resumo para todos</button>.</p>
       <dl class="vf-gloss">
-        <dt>p-valor (p)</dt><dd>A chance de um resultado tão fora do esperado aparecer só por acaso. Abaixo de 0,05 (5%) costuma valer um olhar de perto; mas, com muitos testes, alguns ficam abaixo disso por puro acaso. <a href="https://filipezabala.com/fs/th-class#p-value" target="_blank" rel="noopener">Saiba mais</a></dd>
-        <dt>z</dt><dd>Quantos desvios-padrão um valor está longe do esperado. Até ±2 é comum; além de ±4 é raro.</dd>
-        <dt>Curva normal</dt><dd>A curva em forma de sino que descreve como os valores se espalham em torno da média quando muitas pequenas variações independentes se somam. <a href="https://filipezabala.com/fs/scd#normal" target="_blank" rel="noopener">Saiba mais</a></dd>
-        <dt>Desvio-padrão (dp)</dt><dd>A distância típica entre os valores e a média. Numa curva normal, 95% dos casos ficam a menos de 2 desvios-padrão da média. <a href="https://filipezabala.com/fs/measures-of-dispersion#standard-deviation" target="_blank" rel="noopener">Saiba mais</a></dd>
-        <dt>Escala logarítmica</dt><dd>Cada linha do eixo vale 10 vezes a anterior. Serve para mostrar no mesmo gráfico números muito grandes e muito pequenos.</dd>
-        <dt>p.p. (pontos percentuais)</dt><dd>A diferença entre dois percentuais: de 50% para 52% são 2 p.p.</dd>
-        <dt>Correlação (r)</dt><dd>Mede se duas coisas sobem juntas: 0 é nenhuma relação, 1 é relação perfeita. <a href="https://filipezabala.com/fs/correlation#pearson" target="_blank" rel="noopener">Saiba mais</a></dd>
-        <dt>Espelho (Flávio)</dt><dd>No 2º turno só há dois candidatos, então o percentual de Flávio é exatamente 100% menos o de Lula. Os gráficos de percentual de Flávio são o espelho dos de Lula, calculados a partir dos mesmos dados. Já as contagens de votos (último dígito, números redondos) são independentes para cada um.</dd>
+        <div><dt>p-valor (p)</dt><dd>A chance de um resultado tão fora do esperado aparecer só por acaso. Abaixo de 0,05 (5%) costuma valer um olhar de perto; mas, com muitos testes, alguns ficam abaixo disso por puro acaso. <a href="https://filipezabala.com/fs/th-class#p-value" target="_blank" rel="noopener">Saiba mais</a></dd></div>
+        <div><dt>z</dt><dd>Quantos desvios-padrão um valor está longe do esperado. Até ±2 é comum; além de ±4 é raro.</dd></div>
+        <div><dt>Curva normal</dt><dd>A curva em forma de sino que descreve como os valores se espalham em torno da média quando muitas pequenas variações independentes se somam. <a href="https://filipezabala.com/fs/scd#normal" target="_blank" rel="noopener">Saiba mais</a></dd></div>
+        <div><dt>Desvio-padrão (dp)</dt><dd>A distância típica entre os valores e a média. Numa curva normal, 95% dos casos ficam a menos de 2 desvios-padrão da média. <a href="https://filipezabala.com/fs/measures-of-dispersion#standard-deviation" target="_blank" rel="noopener">Saiba mais</a></dd></div>
+        <div><dt>Escala logarítmica</dt><dd>Cada linha do eixo vale 10 vezes a anterior. Serve para mostrar no mesmo gráfico números muito grandes e muito pequenos.</dd></div>
+        <div><dt>p.p. (pontos percentuais)</dt><dd>A diferença entre dois percentuais: de 50% para 52% são 2 p.p.</dd></div>
+        <div><dt>Correlação (r)</dt><dd>Mede se duas coisas sobem juntas: 0 é nenhuma relação, 1 é relação perfeita. <a href="https://filipezabala.com/fs/correlation#pearson" target="_blank" rel="noopener">Saiba mais</a></dd></div>
+        <div><dt>Espelho (Flávio)</dt><dd>No 2º turno só há dois candidatos, então o percentual de Flávio é exatamente 100% menos o de Lula. Os gráficos de percentual de Flávio são o espelho dos de Lula, calculados a partir dos mesmos dados. Já as contagens de votos (último dígito, números redondos) são independentes para cada um.</dd></div>
       </dl>
       <p class="vf-caption">Os links “Saiba mais” levam ao livro <i>Fundamentals of Statistics</i>, de Filipe J. Zabala (em inglês).</p>
     </div>
