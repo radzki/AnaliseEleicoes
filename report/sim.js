@@ -258,6 +258,18 @@
     }
     r.corner = { lula: cl, flavio: cf };
 
+    // for the charts: the z of each section in 0.25 bins from -10 to +10, and sections per 1-point cell of
+    // turnout x Lula's share (the page's two pictures, recomputed)
+    const zh = new Int32Array(80);
+    for (const v of zs) zh[Math.floor((Math.min(9.999, Math.max(-9.999, v)) + 10) / 0.25)]++;
+    const fp = new Int32Array(10000);
+    for (let i = 0; i < n; i++) {
+      const v = L[i] + F[i];
+      if (!v || !A[i]) continue;
+      fp[Math.min(99, Math.floor((100 * C[i]) / A[i])) * 100 + Math.min(99, Math.floor((100 * L[i]) / v))]++;
+    }
+    r.zh = zh; r.fp = fp;
+
     // machine model vs same polling place: weighted mean of (section share - rest of place). Its noise
     // comes from the spread of the sections themselves, so tampering spread over every model does not
     // read as a model effect; only a gap that stands out from that spread does.
@@ -537,8 +549,124 @@
       return `${head}<tr${r.bad ? ' class="vf-sim-hit"' : ''}><th scope="row">${r.label}${r.what ? `<small>${r.what}</small>` : ''}</th><td class="vf-n">${r.real}</td><td class="vf-n">${r.now}${r.note ? `<small>${r.note}</small>` : ''}</td><td><span class="vf-chip ${r.bad ? 'vf-bad' : 'vf-ok'}">${r.bad ? 'Sim' : 'Não'}</span></td></tr>`;
     }).join('');
     renderOutside(f, caught);
+    drawCharts(t);
     announce(sim ? `Simulação: vence ${NAME[win]}, por ${int(Math.abs(l - fl))} votos. A fraude aparece em ${bad} dos ${rows.length} testes${!bad && state.type === 'software' ? ', mas o teste de integridade a pegaria, se o programa não reconhecer o teste' : ''}.` : 'Resultado real, sem fraude.');
   }
+  // The page's curve and fingerprint, redrawn with the fraud, for the favoured candidate's share (for Flávio,
+  // Lula's z bins and share cells are mirrored, since in the runoff his share is 1 minus Lula's).
+  const phi = (x) => {
+    const t = 1 / (1 + 0.3275911 * Math.abs(x) / Math.SQRT2);
+    const e = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x / 2);
+    return 0.5 * (1 + Math.sign(x) * e);
+  };
+  // the fingerprint opens as an analyst would see it; "diff" marks in red the cells that gained sections
+  let fpMode = 'plain', lastT = null;
+  function drawCharts(t) {
+    lastT = t;
+    const box = ui.charts;
+    const flavio = state.ben === 'flavio', name = NAME[state.ben];
+    const color = vf.cand[state.ben].color(), MUTED = 'var(--cds-chart-muted)', FG = 'var(--color-fg)', GAIN = 'var(--color-warn)';
+    const zMir = (h) => (flavio ? Int32Array.from(h).reverse() : h);
+    const fpAt = (fp, i, j) => fp[i * 100 + (flavio ? 99 - j : j)];
+    const zs = zMir(t.zh), zr = zMir(D.base.zh);
+    const nz = zs.reduce((a, b) => a + b, 0);
+    box.replaceChildren();
+    const tip = vf.tooltip(box);
+    const [c1, c2] = vf.panels(box, [`% de ${name}: cada seção frente ao seu local`, `Comparecimento × % de ${name}`]);
+
+    // 1. the curve, log scale, as on the page
+    {
+      const { s, w, h } = vf.svg(c1, 240);
+      const step = 0.25, z0 = (k) => -10 + k * step;
+      const normal = (k) => nz * (phi(z0(k + 1) / t.place.rsd) - phi(z0(k) / t.place.rsd));
+      const top = Math.max(...zs, ...zr) * 1.5;
+      const y = d3.scaleLog([0.5, top], [h - 24, 8]);
+      const ticks = [1, 10, 100, 1000, 10000, 100000].filter((v) => v <= top);
+      const ml = vf.textWidth(s, ticks.map((v) => v.toLocaleString('pt-BR'))) + 8;
+      const x = d3.scaleLinear([-10, 10], [ml, w - 8]);
+      for (const [a, b] of [[-10, -4], [4, 10]]) {
+        s.append('rect').attr('x', x(a)).attr('width', x(b) - x(a)).attr('y', 8).attr('height', h - 32).style('fill', 'var(--cds-chart-grid)').style('opacity', 0.6);
+      }
+      s.append('g').attr('transform', `translate(${ml},0)`)
+        .call(d3.axisLeft(y).tickValues(ticks).tickFormat((v) => v.toLocaleString('pt-BR')).tickSize(-(w - ml - 8))).call(vf.axis);
+      s.append('g').attr('transform', `translate(0,${h - 24})`)
+        .call(d3.axisBottom(x).tickValues([-8, -4, 0, 4, 8]).tickFormat((d) => (d > 0 ? '+' : '') + d).tickSize(0).tickPadding(8)).call(vf.axis);
+      const ks = d3.range(80);
+      s.append('g').selectAll('rect').data(ks.filter((k) => zs[k] > 0)).join('rect')
+        .attr('x', (k) => x(z0(k)) + 0.5).attr('width', Math.max(1, x(step) - x(0) - 1))
+        .attr('y', (k) => y(zs[k])).attr('height', (k) => y(0.5) - y(zs[k])).style('fill', color);
+      s.append('path').datum(ks.filter((k) => zr[k] > 0)).attr('d', d3.line().x((k) => x(z0(k) + step / 2)).y((k) => y(zr[k])))
+        .style('fill', 'none').style('stroke', MUTED).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+      s.append('path').datum(ks.filter((k) => normal(k) >= 0.5)).attr('d', d3.line().x((k) => x(z0(k) + step / 2)).y((k) => y(normal(k))))
+        .style('fill', 'none').style('stroke', FG).attr('stroke-width', 1.5);
+      s.append('rect').attr('x', ml).attr('width', w - 8 - ml).attr('height', h).style('fill', 'transparent')
+        .on('pointermove pointerdown', (ev) => {
+          const k = Math.max(0, Math.min(79, Math.floor((x.invert(d3.pointer(ev)[0]) + 10) / step)));
+          tip.show(ev, `z de ${dec(z0(k), 2)} a ${dec(z0(k + 1), 2)}`, [
+            { label: 'Com a fraude', value: int(zs[k]), color },
+            { label: 'Real', value: int(zr[k]), color: MUTED, line: true },
+            { label: 'Curva normal', value: int(Math.round(normal(k))), color: FG, line: true },
+          ]);
+        })
+        .on('pointerleave', tip.leave);
+    }
+
+    // 2. the fingerprint: cells drawn as one path per shade; cells that gained sections, in red
+    {
+      const { s, w, h } = vf.svg(c2, 240);
+      let lo = 0, cum = 0;
+      const byT = d3.range(100).map((i) => d3.range(100).reduce((a, j) => a + D.base.fp[i * 100 + j], 0));
+      const total = d3.sum(byT);
+      while (lo < 99 && (cum += byT[lo]) / total < 0.002) lo++;
+      const ml = vf.textWidth(s, ['100%']) + 8;
+      const x = d3.scaleLinear([lo, 100], [ml, w - 6]);
+      const y = d3.scaleLinear([0, 100], [h - 24, 6]);
+      s.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((d) => `${d}%`).tickSize(0).tickPadding(6)).call(vf.axis);
+      s.append('g').attr('transform', `translate(0,${h - 24})`).call(d3.axisBottom(x).ticks(5).tickFormat((d) => `${d}%`).tickSize(0).tickPadding(8)).call(vf.axis);
+      const max = Math.max(...t.fp, ...D.base.fp);
+      const level = (v) => Math.min(9, Math.floor((Math.log(v) / Math.log(max + 1)) * 10));
+      const paths = { base: Array.from({ length: 10 }, () => []), gain: Array.from({ length: 10 }, () => []) };
+      const cw = x(lo + 1) - x(lo) + 0.4, ch = y(0) - y(1) + 0.4;
+      for (let i = lo; i < 100; i++) {
+        for (let j = 0; j < 100; j++) {
+          const v = fpAt(t.fp, i, j);
+          if (!v) continue;
+          const gain = fpMode === 'diff' ? v - fpAt(D.base.fp, i, j) : 0;
+          const d = `M${x(i).toFixed(1)},${y(j + 1).toFixed(1)}h${cw.toFixed(1)}v${ch.toFixed(1)}h${(-cw).toFixed(1)}z`;
+          if (gain > 0) paths.gain[level(gain)].push(d); else paths.base[level(v)].push(d);
+        }
+      }
+      const bg = vf.resolve('var(--color-panel)');
+      // in "diff" mode the other cells turn grey, so the gained ones stand out for either candidate
+      const ramp = d3.interpolateRgb(bg, vf.resolve(fpMode === 'diff' ? MUTED : color)), rampGain = d3.interpolateRgb(bg, vf.resolve(GAIN));
+      for (const [kind, rp] of [['base', ramp], ['gain', rampGain]]) {
+        paths[kind].forEach((ds, l) => {
+          // gained cells start darker: most gain only a few sections and would be too pale to see
+          const floor = kind === 'gain' ? 0.5 : 0.16;
+          if (ds.length) s.append('path').attr('d', ds.join('')).style('fill', rp(floor + (1 - floor) * (l + 1) / 10));
+        });
+      }
+      s.append('rect').attr('x', x(95)).attr('width', x(100) - x(95)).attr('y', y(100)).attr('height', y(90) - y(100))
+        .style('fill', 'none').style('stroke', FG).attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
+      s.append('rect').attr('x', ml).attr('width', w - 6 - ml).attr('y', 6).attr('height', h - 30).style('fill', 'transparent')
+        .on('pointermove pointerdown', (ev) => {
+          const [px, py] = d3.pointer(ev);
+          const i = Math.max(lo, Math.min(99, Math.floor(x.invert(px)))), j = Math.max(0, Math.min(99, Math.floor(y.invert(py))));
+          tip.show(ev, `Comparecimento ${i}–${i + 1}% · ${name} ${j}–${j + 1}%`, [
+            { label: 'Com a fraude', value: int(fpAt(t.fp, i, j)) },
+            { label: 'Real', value: int(fpAt(D.base.fp, i, j)) },
+          ]);
+        })
+        .on('pointerleave', tip.leave);
+    }
+    vf.legend(box, [
+      { label: 'Seções com a fraude', color },
+      { label: 'Resultado real', color: MUTED, line: true },
+      { label: 'Curva normal', color: FG, line: true },
+      ...(fpMode === 'diff' ? [{ label: 'Células que ganharam seções', color: GAIN }] : []),
+    ]);
+  }
+
   // one short summary for screen readers, once the controls stop moving
   let said = 0;
   function announce(text) {
@@ -603,7 +731,8 @@
     ui.machRange = $('sim-machines'); ui.machNum = $('sim-machines-n'); ui.machOf = $('sim-machines-of');
     ui.intRange = $('sim-intensity'); ui.intOut = $('sim-intensity-out'); ui.intLabel = $('sim-intensity-lbl');
     ui.result = $('sim-result'); ui.score = $('sim-score'); ui.tbody = page.querySelector('#sim-tests tbody'); ui.outside = $('sim-outside');
-    ui.minNote = $('sim-min-note'); ui.status = $('sim-status'); ui.minBtn = $('sim-min');
+    ui.minNote = $('sim-min-note'); ui.status = $('sim-status'); ui.minBtn = $('sim-min'); ui.charts = $('sim-charts');
+    vf.segmented($('sim-fp-mode'), (v) => { fpMode = v; if (lastT) drawCharts(lastT); });
     ui.both = $('sim-both'); ui.bothRow = $('sim-both-row'); ui.roundNote = $('sim-round-note');
     page.querySelector('.vf-sim-controls').addEventListener('submit', (ev) => ev.preventDefault());
     ui.modelSel.innerHTML = D.meta.models.map((m, i) => `<option value="${i}">${m}</option>`).join('');

@@ -164,6 +164,9 @@ de todas as 499.205 urnas do 2º turno de 2026 e refaz os testes da página.
   cenário em que Lula perdeu: os testes tratam os dois lados igualmente, então isso só repetiria o
   lado de Flávio com os nomes trocados, e com a geografia errada (os redutos de Lula iriam parar
   onde Flávio é forte).
+- **Gráficos:** a curva normal (cada seção frente ao seu local) e a grade comparecimento × percentual do
+  candidato favorecido são refeitas a cada mudança. A grade abre como um analista a veria; "O que a fraude
+  mudou" destaca as células que ganharam seções, o que só existe porque a simulação conhece o resultado real.
 - **Fora dos dados:** a aba explica o que pegaria cada fraude fora destes números (teste de
   integridade, boletim impresso, fiscais). Quando o programa em todas as urnas passa pelos 16
   testes sem aparecer, o resumo acima da tabela já diz que o teste de integridade a pegaria: todas
