@@ -300,3 +300,81 @@ c22 = C[2022]
 for f, v in c22["fields"].items():
     rows.append(cons_row(f"2022|{f}", 2022, "+".join(str(r) for r in c22["rounds_available"]), f, c22["units"], v))
 dump("consistency", rows)
+
+# more tests: scripts/10_more_tests.py, 12_urna_bursts.py, 13_mixture.py --------------------------
+# one row per test and year (or planted fraud, or machine group), read by the "Mais testes" section
+MT = {y: json.loads((res_dir / f"more_tests_{y}.json").read_text(encoding="utf-8")) for y in (2026, 2022)}
+MX = {y: json.loads((res_dir / f"mixture_{y}.json").read_text(encoding="utf-8")) for y in (2026, 2022)}
+margin = R[2026]["totals"]["2"]["lula"] - R[2026]["totals"]["2"]["right"]
+rows, curve = [], []
+for y, m in MT.items():
+    s = m["size"]["real"]["max_step"]
+    rows.append({"id": f"size|{y}", "step_pp": s["step_pp"], "at": s["at"], "t": s["t"]})
+    curve += [{"series": str(y), **c} for c in m["size"]["real"]["curve"]]
+    p = m["prop_swing"]["real"]
+    rows.append({"id": f"prop|{y}", "slope": p["slope"], "se": p["se"]})
+    h = m["homogeneity"]
+    rows.append({"id": f"homog|{y}", "phi_median": h["phi_median"], "p001": h["share_p_below_001"],
+                 "p05": h["share_p_below_005"], "places": h["places"]})
+    sh = m["shpilkin"]["2"]
+    rows.append({"id": f"shpilkin|{y}", "state_lula": sh["by_state"]["lula"], "state_right": sh["by_state"]["right"],
+                 "national_lula": sh["national"]["lula"], "national_right": sh["national"]["right"]})
+    b = m["benford2"]["2"]
+    rows.append({"id": f"benford2|{y}", "lula_mean": b["lula"]["mean"], "right_mean": b["right"]["mean"],
+                 "expected": b["lula"]["expected_mean"], "lula_p": b["lula"]["p"], "right_p": b["right"]["p"]})
+    x = MX[y]["real"]
+    rows.append({"id": f"mixture|{y}", "f_i": x["f_i"], "f_e": x["f_e"], "sections_extreme": x["sections_extreme"],
+                 "votes_incremental": x["votes_incremental"], "fit_gain": 1 - x["loss"] / x["loss_no_fraud"]})
+m = MT[2026]
+for p in m["size"]["planted"]:
+    rows.append({"id": f"size|planted|{p['above']}", "step_pp": p["step_pp"], "flip_share": p["flip_share"], "machines": p["machines"]})
+    if p["above"] == 250:
+        curve += [{"series": "planted", **c} for c in p["curve"]]
+rows.append({"id": "size|bigonly", "above": 350, "possible": any(p["above"] == 350 for p in m["size"]["planted"])})
+real, ref = m["prop_swing"]["real"]["slope"], MT[2022]["prop_swing"]["real"]["slope"]
+pl = next(p for p in m["prop_swing"]["planted"] if p["from"] == "right")
+gap_votes = (real - ref) / (pl["slope"] - real) * m["move"]
+rows.append({"id": "prop|planted", "slope": pl["slope"], "flip_share": pl["flip_share"], "gap": real - ref,
+             "gap_votes": gap_votes, "move": m["move"], "margin_without": margin - 2 * gap_votes,
+             "added": pl["slope"] - real})
+# the same slope state by state: how much it moves between the two elections without a program, which
+# would add the same amount in every state
+g = pd.Series(m["prop_swing"]["by_state"]) - pd.Series(MT[2022]["prop_swing"]["by_state"])
+g = g.dropna()
+rows.append({"id": "prop|states", "units": len(g), "gap_min": g.min(), "gap_max": g.max(), "gap_sd": g.std(),
+             "negative": int((g < 0).sum())})
+rows.append({"id": "shpilkin|bound", "margin_after": margin - m["shpilkin"]["2"]["national"]["lula"]})
+# the national figure comes from differences between states: runoff turnout change 2022 -> 2026 in the states
+# where Lula had 60% or more in 2026, and in the others
+t2 = {y: ST[y][ST[y].turno == 2].set_index("uf") for y in (2026, 2022)}
+chg = t2[2026].turnout_pct - t2[2022].turnout_pct
+strong = t2[2026].lula_pct >= 60
+rows.append({"id": "shpilkin|states", "lula60_states": int(strong.sum()), "lula60_change_pp": chg[strong].mean(),
+             "other_change_pp": chg[~strong].mean(), "corr": float(np.corrcoef(chg, t2[2026].lula_pct.loc[chg.index])[0, 1])})
+for y in (2026, 2022):
+    for p in MX[y]["planted"]:
+        rows.append({"id": f"mixture|planted|{p['planted_sections']}|{y}", "planted_sections": p["planted_sections"],
+                     "found_sections": p["sections_extreme"], "f_e": p["f_e"]})
+B = json.loads((res_dir / "urna_bursts.json").read_text(encoding="utf-8"))
+for g in B["groups"]:
+    rows.append({"id": f"bursts|{g['group']}|{g['round']}", **{k: v for k, v in g.items() if k not in ("group", "round")}})
+for how in ("run", "mixed"):
+    rows.append({"id": f"bursts|planted|{how}", "extra_votes": B["planted"]["extra_votes"], **B["planted"][how]})
+dump("more_tests", rows)
+dump("size_curve", curve)
+
+# digital signatures and RDV recount of the same sample (scripts/11_urna_assinaturas.py) -----------
+sp = res_dir / "urna_assinaturas.csv"
+if sp.exists():
+    S = pd.read_csv(sp)
+    t = S[S.fileset == "Totalizado"]
+    F = ["aptos", "comparecimento", "13", "22", "branco", "nulo"]
+    bu_pub = (t[[f"bu_{f}" for f in F]].values == t[[f"pub_{f}" for f in F]].values).all(1)
+    rdv_bu = ((t[[f"rdv_{f}" for f in F[2:]]].values == t[[f"bu_{f}" for f in F[2:]]].values).all(1)
+              & (t.rdv_votos == t.bu_comparecimento).values)
+    dump("urna_assinaturas", [{
+        "id": "summary", "sampled": len(S), "checked": len(t), "not_totalized": int((S.fileset != "Totalizado").sum()),
+        "signatures_valid": int((t.signatures == "valid").sum()), "certificates_ok": int((t.cert_ok == True).sum()),
+        "bu_equals_published": int(bu_pub.sum()), "rdv_equals_bu": int(rdv_bu.sum()),
+        "tamper_rejected": int((t.tamper_rejected == True).sum()), "votes": int(t.bu_comparecimento.sum()),
+        "contingency": int((t.bu_tipo_urna == 4).sum()) if "bu_tipo_urna" in t else None}])

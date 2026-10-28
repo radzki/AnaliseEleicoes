@@ -290,4 +290,48 @@
   }
   vf.draw(() => drawTiming(document.getElementById('time-chart')));
   vf.timingChart = drawTiming;
+
+  // 6. Section size: Lula's share minus the rest of the polling place, by number of voters -----
+  const sizeBox = document.getElementById('size-chart');
+  function drawSize() {
+    if (!sizeBox || !vf.gate(sizeBox, 'size_curve')) return;
+    const rows = dash.data('size_curve').data.filter((r) => r.sections >= 500);
+    const series = [
+      { key: '2026', label: '2026', color: FG, width: 2.5 },
+      { key: '2022', label: '2022', color: MUTED, width: 1.75 },
+      { key: 'planted', label: 'Com fraude plantada acima de 250 votantes', color: 'var(--color-bad)', width: 1.75, dash: '5 4' },
+    ].map((s) => ({ ...s, pts: rows.filter((r) => r.series === s.key).map((r) => ({ x: r.from + 12.5, v: r.mean_pp, n: r.sections })) }));
+    sizeBox.replaceChildren();
+    const tip = vf.tooltip(sizeBox);
+    const { s, w, h } = vf.svg(sizeBox, 240);
+    const [y0, y1] = d3.extent(series.flatMap((sr) => sr.pts), (p) => p.v);
+    const y = d3.scaleLinear([Math.min(y0, -0.5), Math.max(y1, 0.5)], [h - 24, 10]).nice();
+    const fmtY = (v) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${d1(Math.abs(v))}`;
+    const ml = vf.textWidth(s, y.ticks(5).map(fmtY)) + 8;
+    const x = d3.scaleLinear([0, 500], [ml, w - 8]);
+    s.append('g').attr('transform', `translate(${ml},0)`)
+      .call(d3.axisLeft(y).ticks(5).tickFormat(fmtY).tickSize(-(w - ml - 8))).call(vf.axis);
+    s.append('g').attr('transform', `translate(0,${h - 24})`)
+      .call(d3.axisBottom(x).ticks(5).tickSize(0).tickPadding(8)).call(vf.axis);
+    s.append('line').attr('x1', ml).attr('x2', w - 8).attr('y1', y(0)).attr('y2', y(0))
+      .style('stroke', REF).attr('stroke-dasharray', '4 3');
+    for (const sr of series) {
+      s.append('path').datum(sr.pts).attr('d', d3.line().x((p) => x(p.x)).y((p) => y(p.v)))
+        .style('fill', 'none').style('stroke', sr.color).attr('stroke-width', sr.width)
+        .attr('stroke-dasharray', sr.dash ?? null).attr('stroke-linejoin', 'round');
+    }
+    vf.legend(sizeBox, series.map((sr) => ({ label: sr.label, color: sr.color, line: true, dash: sr.dash })));
+    s.append('rect').attr('x', ml).attr('width', w - 8 - ml).attr('height', h).style('fill', 'transparent')
+      .on('pointermove pointerdown', (ev) => {
+        const at = x.invert(d3.pointer(ev)[0]);
+        const near = (pts) => pts.reduce((a, b) => (Math.abs(b.x - at) < Math.abs(a.x - at) ? b : a));
+        const p0 = near(series[0].pts);
+        tip.show(ev, `Seções com ${p0.x - 12.5} a ${p0.x + 12.5} votantes`, series.map((sr) => {
+          const p = near(sr.pts);
+          return { label: sr.label, value: `${fmtY(p.v)} p.p.`, color: sr.color, line: true, dash: sr.dash };
+        }));
+      })
+      .on('pointerleave', tip.leave);
+  }
+  vf.draw(drawSize);
 })();

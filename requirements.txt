@@ -2,3 +2,7 @@ numpy==2.5.4
 pandas==3.1.0
 pyarrow==26.0.0
 scipy==1.18.1
+asn1tools==0.169.0
+cryptography==50.0.2
+# ECPy with the Ed521 curve (UE2020 and UE2022 signatures) is only on GitHub, as in TSE's instructions
+ECPy @ git+https://github.com/cslashm/ECPy.git@8143d9ac017de0cb7f980bedaf56cefe6b4d9180

@@ -49,6 +49,12 @@ scripts/06_og_image.py     gera a imagem de compartilhamento (web/og.png)
 scripts/07_urna_logs.py    lê os registros (logs) de uma amostra de urnas no site de resultados do TSE
 scripts/08_runoff_totals.py  soma das seções x votos de cada candidato por município e zona e x relatório oficial do 2º turno
 scripts/09_sim_data.py     empacota as seções do 2º turno de 2026 para a aba "Tente fraudar!" (results/sim)
+scripts/10_more_tests.py   mais testes (tamanho da seção, migração proporcional, qui-quadrado por local,
+                           Shpilkin, segundo algarismo de Benford), com fraudes plantadas -> more_tests_<ano>.json
+scripts/11_urna_assinaturas.py  na mesma amostra de urnas: assinaturas digitais do boletim, do RDV e do
+                           registro, boletim x dados publicados e recontagem do RDV -> urna_assinaturas.csv
+scripts/12_urna_bursts.py  votos em rajada e liberações pelo mesário nos registros da amostra de urnas, com enchimento plantado
+scripts/13_mixture.py      modelo de mistura (Klimek et al., 2012), por estado, com fraude plantada -> mixture_<ano>.json
 report/                    a página do relatório (HTML + JavaScript com d3), em português
 web/                       o que o site estático acrescenta: dash.js (carrega os dados e roda os
                            cálculos da página), theme.css (cores, fontes, espaçamentos, claro e
@@ -94,9 +100,23 @@ python -I scripts/03_consistency.py data/raw2022 data/processed2022 results 2022
 python -I scripts/07_urna_logs.py data/processed data/urna_logs results   # baixa ~250 MB do TSE
 python -I scripts/08_runoff_totals.py data/raw_t2 data/processed results
 python -I scripts/09_sim_data.py data/processed results
+python -I scripts/10_more_tests.py data/processed results 2026
+python -I scripts/10_more_tests.py data/processed2022 results 2022
+python -I scripts/11_urna_assinaturas.py data/processed data/urna_files results   # baixa ~350 MB do TSE
+python -I scripts/12_urna_bursts.py data/urna_logs results
+python -I scripts/13_mixture.py data/processed results 2026        # alguns minutos por ano
+python -I scripts/13_mixture.py data/processed2022 results 2022
 python -I scripts/04_export.py results data/processed data/processed2022 results/dash
 python -I scripts/05_site.py . site
 ```
+
+`scripts/11_urna_assinaturas.py` segue o pacote de documentação técnica do TSE
+(`formato-arquivos-bu-rdv-ass-digital-v2.zip`: especificações ASN.1 do boletim, do RDV e da assinatura, e scripts
+de exemplo). O site do TSE responde 403 a downloads por script, então o pacote vem de uma cópia pública no GitHub e
+só é aceito com o SHA-256 publicado em outras cópias independentes (veja a docstring do script). O arquivo de
+assinatura de 2026 tem duas diferenças em relação à especificação publicada, descritas no script. A cadeia de
+certificados é conferida até as autoridades certificadoras das urnas; os certificados raiz não estão disponíveis
+para download.
 
 `results/totalizacao_T1_BR.txt` é o texto do relatório oficial de totalização do 1º turno de 2026
 (`relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip`), usado para
