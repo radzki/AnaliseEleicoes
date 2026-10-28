@@ -276,14 +276,14 @@
       s.append('text').attr('class', 'vf-tick').attr('x', w - mr + 6).attr('y', e.y).attr('dy', '0.32em').text(e.text)
         .style('fill', e.sr.color === MUTED ? 'var(--color-fg-muted)' : e.sr.color);
     }
-    if (narrow) vf.legend(tBox, ends.map((e) => ({ label: e.text, color: e.sr.color, line: true })));
+    if (narrow) vf.legend(tBox, ends.map((e) => ({ label: e.text, color: e.sr.color, line: true, dash: e.sr.dash })));
     const clock = (m) => `${17 + Math.floor(m / 60)}h${String(m % 60).padStart(2, '0')}`;
     s.append('rect').attr('x', ml).attr('width', w - mr - ml).attr('height', h).style('fill', 'transparent')
       .on('pointermove pointerdown', (ev) => {
         const at = x.invert(d3.pointer(ev)[0]);
         tip.show(ev, `${pct1(Math.max(0, Math.min(1, at)))} dos votos apurados`, series.map((sr) => {
           const p = sr.pts.reduce((a, b) => (Math.abs(b.pct_counted - at) < Math.abs(a.pct_counted - at) ? b : a));
-          return { label: `${sr.label} (até ${clock(p.minutes)})`, value: pct1(p.v), color: sr.color };
+          return { label: `${sr.label} (até ${clock(p.minutes)})`, value: pct1(p.v), color: sr.color, line: true, dash: sr.dash };
         }));
       })
       .on('pointerleave', tip.leave);

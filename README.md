@@ -48,6 +48,7 @@ scripts/05_site.py         monta o site estático em site/
 scripts/06_og_image.py     gera a imagem de compartilhamento (web/og.png)
 scripts/07_urna_logs.py    lê os registros (logs) de uma amostra de urnas no site de resultados do TSE
 scripts/08_runoff_totals.py  soma das seções x votos de cada candidato por município e zona e x relatório oficial do 2º turno
+scripts/09_sim_data.py     empacota as seções do 2º turno de 2026 para a aba "Tente fraudar!" (results/sim)
 report/                    a página do relatório (HTML + JavaScript com d3), em português
 web/                       o que o site estático acrescenta: dash.js (carrega os dados e roda os
                            cálculos da página), theme.css (cores, fontes, espaçamentos, claro e
@@ -92,6 +93,7 @@ python -I scripts/03_consistency.py data/raw data/processed results 2026
 python -I scripts/03_consistency.py data/raw2022 data/processed2022 results 2022
 python -I scripts/07_urna_logs.py data/processed data/urna_logs results   # baixa ~250 MB do TSE
 python -I scripts/08_runoff_totals.py data/raw_t2 data/processed results
+python -I scripts/09_sim_data.py data/processed results
 python -I scripts/04_export.py results data/processed data/processed2022 results/dash
 python -I scripts/05_site.py . site
 ```
@@ -106,6 +108,48 @@ município e zona, os dois turnos) e o mesmo `Relatorio_Resultado_Totalizacao_20
 27 de outubro traz também o relatório do 2º turno. `results/totalizacao_T2_BR.txt` é o texto desse
 relatório (`6258_BR_BRASIL_2026_T2_PRESIDENTE.pdf`), extraído com `pypdf` (`PdfReader`, página a
 página); o mesmo método reproduz exatamente o texto do 1º turno.
+
+## Tente fraudar!
+
+A terceira aba da página é um simulador. O leitor escolhe a quem favorecer e como fraudar (um
+programa em todas as urnas, trocar votos em algumas urnas, encher urnas ou inventar os números do
+boletim), quantas urnas e com que intensidade. O navegador aplica a fraude a uma cópia dos boletins
+de todas as 499.205 urnas do 2º turno de 2026 e refaz os testes da página.
+
+- **Dados:** `scripts/09_sim_data.py` grava `results/sim/secoes_2026_t2.bin` (2,8 MB, colunas
+  compactadas com gzip e lidas com `DecompressionStream`) e `results/sim/meta.json`. Os dados só
+  são baixados quando a aba é aberta.
+- **Testes:** `report/sim.js` refaz, com as mesmas definições de `scripts/02_analyze.py`, o último
+  dígito, o excesso de números redondos, os percentuais inteiros, as urnas que destoam do seu local, o
+  canto comparecimento × percentual, a diferença entre modelos de urna e a mudança entre os turnos.
+  Sem fraude, ele reproduz exatamente os números da página. A única aproximação é o número de
+  percentuais inteiros esperado ao acaso: o simulador o calcula pela distribuição binomial, enquanto
+  a página usa a média de 200 sorteios (10.232 contra 10.234).
+- **"A fraude aparece?":** "Sim" quando a fraude muda o número mais do que o acaso explica, em
+  comparação com o resultado real: p < 0,001 no último dígito, mais de 4 desvios-padrão nos outros.
+  A coluna não diz se o número real é normal (isso é o que a página avalia; nos números reais, a
+  pergunta 4 chamou atenção). A diferença entre modelos compara cada modelo com a média de todos, e
+  a correlação entre comparecimento e mudança entre turnos só conta quando se afasta de zero.
+- **Turnos:** as fraudes feitas por programa (em todas as urnas ou em algumas) agem por padrão nos
+  dois turnos, como agiria um programa instalado na urna; o leitor pode limitá-las ao 2º turno, o
+  que deixa uma marca a mais na mudança entre os turnos. Encher urnas e reescrever boletins são
+  feitos só no 2º turno.
+- **Para não virar desinformação:** a aba abre no resultado real. Com qualquer fraude, o quadro
+  do resultado diz "SIMULAÇÃO · não é o resultado real", o nome de cada candidato leva
+  "· simulação" e o resultado real aparece logo abaixo.
+- **A favor de Lula:** Lula venceu, então não há resultado a virar. O botão passa a ser "Do tamanho
+  da vitória de Lula": dimensiona a fraude que teria fabricado essa vitória (mover mais da metade
+  da diferença, ou acrescentar mais que a diferença ao encher urnas) e a aplica por cima dos dados
+  reais, para mostrar as marcas que ela deixaria. Não invertemos os candidatos para criar um
+  cenário em que Lula perdeu: os testes tratam os dois lados igualmente, então isso só repetiria o
+  lado de Flávio com os nomes trocados, e com a geografia errada (os redutos de Lula iriam parar
+  onde Flávio é forte).
+- **Fora dos dados:** a aba explica o que pegaria cada fraude fora destes números (teste de
+  integridade, boletim impresso, fiscais). Quando o programa em todas as urnas passa pelos 16
+  testes sem aparecer, o resumo acima da tabela já diz que o teste de integridade a pegaria: todas
+  as urnas sorteadas estariam adulteradas, e basta um voto trocado para o boletim não bater com as
+  cédulas (desde que o programa não saiba distinguir o teste de uma votação real). O número de urnas do teste de integridade (540) é uma
+  estimativa a partir de reportagens sobre os TREs (de 20 a 33 urnas por estado).
 
 ## Publicar
 

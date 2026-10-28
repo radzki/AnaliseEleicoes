@@ -32,7 +32,7 @@ for i, (aid, title, desc) in DATASETS.items():
     docs.append(("datasets", i, {"title": title, "description": f"{desc} {SRC}",
                                   "source": {"kind": "file", "url": f"/_blob/{aid}", "name": f"{i}.json"},
                                   "updated": {**UPDATED, "at": UPDATED_AT.get(i, UPDATED["at"])}, "fixed": True}))
-for f in ("index.html", "core.js", "charts.js", "tables.js", "simple.js"):
+for f in ("index.html", "core.js", "charts.js", "tables.js", "simple.js", "sim.js"):
     docs.append(("files", f, {"text": (rep / f).read_text(encoding="utf-8")}))
 for coll, doc_id, data in docs:
     p = out / f"{coll}__{doc_id}.json"

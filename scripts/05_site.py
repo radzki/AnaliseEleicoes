@@ -33,6 +33,8 @@ for name in scripts:
     shutil.copy2(rep / name, out / name)
 for i in DATASETS:
     shutil.copy2(repo / "results" / "dash" / f"{i}.json", out / "data" / f"{i}.json")
+# "Tente fraudar!" reads every runoff section from here (scripts/09_sim_data.py)
+shutil.copytree(repo / "results" / "sim", out / "data" / "sim")
 
 # The report page is a fragment: its leading <style> goes to <head>, the rest into #dash-root.
 frag = (rep / "index.html").read_text(encoding="utf-8")

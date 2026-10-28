@@ -1,0 +1,142 @@
+{
+ "source": "TSE, votacao_secao e detalhe_votacao_secao 2026, 2º turno (scripts/09_sim_data.py)",
+ "sections": 499205,
+ "places": 94215,
+ "raw_bytes": 7083085,
+ "packed_bytes": 2765417,
+ "columns": [
+  {
+   "name": "place_size",
+   "type": "u8",
+   "offset": 0,
+   "length": 94215
+  },
+  {
+   "name": "lula",
+   "type": "u16p",
+   "offset": 94215,
+   "length": 499205
+  },
+  {
+   "name": "flavio",
+   "type": "u16p",
+   "offset": 1092625,
+   "length": 499205
+  },
+  {
+   "name": "other",
+   "type": "u8",
+   "offset": 2091035,
+   "length": 499205
+  },
+  {
+   "name": "abstencao",
+   "type": "u16p",
+   "offset": 2590240,
+   "length": 499205
+  },
+  {
+   "name": "lula_1",
+   "type": "u8",
+   "offset": 3588650,
+   "length": 499205,
+   "zigzag_from": "lula"
+  },
+  {
+   "name": "flavio_1",
+   "type": "u8",
+   "offset": 4087855,
+   "length": 499205,
+   "zigzag_from": "flavio"
+  },
+  {
+   "name": "comparecimento_1",
+   "type": "u16p",
+   "offset": 4587060,
+   "length": 499205,
+   "zigzag_from": "comparecimento"
+  },
+  {
+   "name": "aptos_1",
+   "type": "u8",
+   "offset": 5585470,
+   "length": 499205,
+   "zigzag_from": "aptos"
+  },
+  {
+   "name": "model",
+   "type": "u8",
+   "offset": 6084675,
+   "length": 499205
+  },
+  {
+   "name": "uf",
+   "type": "u8",
+   "offset": 6583880,
+   "length": 499205
+  }
+ ],
+ "ufs": [
+  "AC",
+  "AL",
+  "AM",
+  "AP",
+  "BA",
+  "CE",
+  "DF",
+  "ES",
+  "GO",
+  "MA",
+  "MG",
+  "MS",
+  "MT",
+  "PA",
+  "PB",
+  "PE",
+  "PI",
+  "PR",
+  "RJ",
+  "RN",
+  "RO",
+  "RR",
+  "RS",
+  "SC",
+  "SE",
+  "SP",
+  "TO",
+  "ZZ"
+ ],
+ "models": [
+  "UE 2013",
+  "UE 2015",
+  "UE 2020",
+  "UE 2022"
+ ],
+ "totals": {
+  "lula": 64256232,
+  "flavio": 59826041,
+  "aptos": 158744977,
+  "comparecimento": 128236074
+ },
+ "reference": {
+  "2026": {
+   "place_pos4": 1059,
+   "place_neg4": 497,
+   "corner_lula": 92,
+   "corner_right": 5,
+   "swing_pos4": 296,
+   "swing_neg4": 221,
+   "corr_dturn_swing": 0.012907007641868182
+  },
+  "2022": {
+   "place_pos4": 1105,
+   "place_neg4": 494,
+   "corner_lula": 30,
+   "corner_right": 3,
+   "swing_pos4": 213,
+   "swing_neg4": 261,
+   "corr_dturn_swing": 0.04313003430532441
+  }
+ },
+ "integrity_test_machines": 540
+}

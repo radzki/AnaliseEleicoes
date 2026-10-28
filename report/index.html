@@ -33,6 +33,7 @@
   .vf-tip-h { color: var(--cds-text-secondary); margin-bottom: 2px; }
   .vf-tip-r { display: flex; align-items: center; gap: var(--cds-gap-xs); }
   .vf-tip-r i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .vf-tip-r i.vf-sw-line { width: 16px; height: 2px; border-radius: 0; flex: none; }
   .vf-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); min-height: inherit; height: 100%; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
   .vf-dot { width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--color-bad); }
   .vf-seg { display: inline-flex; border: 1px solid var(--vf-control, var(--color-border-line)); border-radius: var(--cds-radius); overflow: hidden; margin-bottom: var(--cds-gap-sm); }
@@ -125,6 +126,15 @@
   /* Theme switch (static site only): pushed to the right end of the row with the candidate filter. */
   .vf-theme { margin-left: auto; display: flex; align-items: center; gap: var(--cds-gap-sm); }
   .vf-theme[hidden] { display: none; }
+  /* Phones: the row would wrap and leave the theme hanging at the right, so stack it above the
+     candidate filter instead, labels in one column and the two groups lined up beside them. */
+  @media (max-width: 40rem) {
+    .vf-head .vf-filter { display: grid; grid-template-columns: auto 1fr; align-items: center; }
+    .vf-head .vf-filter .vf-seg { justify-self: start; }
+    .vf-head .vf-theme:not([hidden]) { display: contents; }
+    .vf-head .vf-theme .vf-filter-lbl { order: -2; }
+    .vf-head .vf-theme .vf-seg { order: -1; }
+  }
   #theme-pick button[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); font-weight: var(--cds-font-weight-medium); }
   /* Question 8: one block per claim, set off by a rule on the left. */
   .vf-claims { margin: var(--cds-gap-md) 0 0; display: grid; gap: var(--cds-gap-lg); }
@@ -132,6 +142,73 @@
   .vf-claims dt { font-weight: var(--cds-font-weight-medium); }
   .vf-claims dd { margin: 0; }
   .vf-claims dd p { margin: var(--cds-gap-xs) 0 0; }
+  /* "Tente fraudar!": controls on the left, result and verdicts on the right; one column on phones. */
+  .vf-sim { display: grid; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); gap: var(--cds-gap-md); align-items: start; }
+  @media (max-width: 52rem) { .vf-sim { grid-template-columns: minmax(0, 1fr); } }
+  .vf-sim-main { display: grid; gap: var(--cds-gap-md); min-width: 0; }
+  .vf-sim-controls { display: grid; gap: var(--cds-gap-md); position: sticky; top: var(--cds-gap-md); }
+  @media (max-width: 52rem) { .vf-sim-controls { position: static; } }
+  .vf-sim-controls h3, .vf-sim-main h3 { margin: 0; font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
+  .vf-sim-field { display: grid; gap: var(--cds-gap-xs); }
+  .vf-sim-field > label, .vf-sim-field > .vf-filter-lbl, .vf-sim-types legend { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-sim-field .vf-seg { margin-bottom: 0; }
+  .vf-sim-types { border: 0; margin: 0; padding: 0; display: grid; gap: var(--cds-gap-xs); }
+  .vf-sim-types label { display: grid; grid-template-columns: auto 1fr; column-gap: var(--cds-gap-sm); padding: var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); cursor: pointer; }
+  .vf-sim-types label:has(input:checked) { border-color: var(--color-fg); }
+  .vf-sim-types input { grid-row: span 2; margin: 0.2em 0 0; accent-color: var(--color-fg); }
+  .vf-sim-types span { grid-column: 2; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-sim input[type="range"] { width: 100%; accent-color: var(--color-fg); }
+  .vf-sim select, .vf-sim input[type="number"] { font: inherit; font-size: var(--cds-font-size-caption); min-height: 2.25rem; padding: 0 var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); }
+  .vf-sim input[type="number"] { width: 7.5rem; font-variant-numeric: tabular-nums; }
+  .vf-sim-inline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-sim-inline output { color: var(--color-fg); font-variant-numeric: tabular-nums; font-weight: var(--cds-font-weight-medium); }
+  .vf-sim-actions { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); margin: 0; }
+  .vf-btn { font: inherit; font-size: var(--cds-font-size-caption); min-height: 2.25rem; padding: 0 var(--cds-pad-md); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); cursor: pointer; }
+  .vf-btn:hover { border-color: var(--color-fg); }
+  .vf-btn.vf-btn-main { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+  .vf-sim-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-sim-note:empty { display: none; }
+  .vf-sim-totals { display: grid; grid-template-columns: 1fr 1fr; gap: var(--cds-gap-md); }
+  .vf-sim-cand { display: grid; gap: 2px; }
+  .vf-sim-cand span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-sim-cand b { font-family: var(--font-anthropic-serif); font-weight: var(--vf-display-weight, 400); font-size: var(--cds-font-size-title); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .vf-sim-cand span:first-child::before { content: ""; display: inline-block; width: 0.7em; height: 0.7em; border-radius: 2px; margin-right: 0.4em; }
+  .vf-sim-cand[data-c="lula"] span:first-child::before { background: var(--vf-lula); }
+  .vf-sim-cand[data-c="flavio"] { text-align: right; }
+  .vf-sim-cand[data-c="flavio"] span:first-child::before { background: var(--vf-flavio); }
+  .vf-sim-bar { height: 10px; border-radius: 5px; background: var(--vf-flavio); overflow: hidden; margin: var(--cds-gap-sm) 0; position: relative; }
+  .vf-sim-bar i { display: block; height: 100%; background: var(--vf-lula); border-right: 2px solid var(--color-panel); }
+  .vf-sim-bar::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 2px solid var(--color-fg); }
+  .vf-sim-verdict { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cds-gap-sm); }
+  .vf-chip.vf-bad { color: var(--color-bad); }
+  #sim-tests th[scope="row"] { position: static; background: none; color: var(--color-fg); font-weight: 400; border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+  #sim-tests small { display: block; color: var(--color-fg-muted); font-size: 0.85em; white-space: normal; }
+  #sim-tests .vf-sim-group th { position: static; padding-top: var(--cds-pad-md); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  #sim-tests tr.vf-sim-hit th[scope="row"], #sim-tests tr.vf-sim-hit td { background: color-mix(in srgb, var(--color-bad) 8%, transparent); }
+  #sim-score { margin: 0 0 var(--cds-gap-sm); }
+  .vf-sim-scroll { overflow-x: auto; }
+  .vf-sim [hidden] { display: none !important; }
+  .vf-sim-flag { margin: 0 0 var(--cds-gap-sm); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-bad); border-radius: var(--cds-radius); color: var(--color-bad); font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); letter-spacing: 0.04em; }
+  .vf-sim-flag.vf-sim-real { border-color: var(--color-border-line); color: var(--color-fg-muted); letter-spacing: 0; }
+  .vf-sim-realline { margin: var(--cds-gap-sm) 0 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .vf-sim-check { display: grid; grid-template-columns: auto 1fr; column-gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); cursor: pointer; }
+  .vf-sim-check input { margin: 0.2em 0 0; accent-color: var(--color-fg); }
+  .vf-sim-check span { grid-column: 2; color: var(--color-fg-muted); }
+  .vf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  /* Phones: each test becomes a block, name on top, then real, with fraud and verdict. */
+  @media (max-width: 40rem) {
+    #sim-tests thead { display: none; }
+    #sim-tests tr { display: grid; grid-template-columns: 1fr 1fr auto; column-gap: var(--cds-gap-sm); align-items: start; padding: var(--cds-pad-xs) 0; border-bottom: 1px solid var(--color-border-line); }
+    #sim-tests tr > * { border-bottom: 0; padding: 2px 0; }
+    #sim-tests th[scope="row"], #sim-tests .vf-sim-group th { grid-column: 1 / -1; border-bottom: 0; }
+    #sim-tests .vf-n { text-align: left; white-space: normal; }
+    #sim-tests td.vf-n::before { display: block; font-size: 0.85em; color: var(--color-fg-muted); }
+    #sim-tests td.vf-n:nth-of-type(1)::before { content: "Real"; }
+    #sim-tests td.vf-n:nth-of-type(2)::before { content: "Com a fraude"; }
+    .vf-sim-cand b { font-size: var(--cds-font-size-heading); }
+  }
+  .vf-sim-busy .vf-sim-main { opacity: 0.6; transition: opacity 0.15s; }
+  @media (prefers-reduced-motion: reduce) { .vf-sim-busy .vf-sim-main { transition: none; } }
 </style>
 
 <div class="vf" lang="pt-BR">
@@ -141,6 +218,7 @@
     <div class="vf-tabs" id="vf-tabs" role="tablist" aria-label="Versão do relatório">
       <button type="button" role="tab" id="tab-simples" data-tab="simples" aria-controls="simples" aria-selected="true">Resumo para todos</button>
       <button type="button" role="tab" id="tab-tecnico" data-tab="tecnico" aria-controls="tecnico" aria-selected="false">Versão técnica</button>
+      <button type="button" role="tab" id="tab-fraude" data-tab="fraude" aria-controls="fraude" aria-selected="false">Tente fraudar!</button>
     </div>
   </header>
 
@@ -481,6 +559,79 @@
     </section>
   </div>
 
+  <div class="vf-page" id="fraude" data-page role="tabpanel" aria-labelledby="tab-fraude" hidden>
+    <section>
+      <h2>Tente fraudar a eleição</h2>
+      <p class="vf-intro">Faça de conta que você quer mudar o resultado do 2º turno de 2026. Escolha quem favorecer e como fraudar: os testes desta página são refeitos na hora, sobre os boletins de todas as 499.205 urnas, e mostram se a sua fraude deixaria marcas. É uma simulação no seu navegador; nenhum dado real é alterado.</p>
+    </section>
+    <div class="vf-card" id="sim-loading" role="status">Carregando os boletins das 499.205 urnas (2,8 MB)…</div>
+    <div class="vf-sim" id="sim-app" hidden>
+      <form class="vf-card vf-sim-controls" aria-label="Sua fraude">
+        <h3>Sua fraude</h3>
+        <div class="vf-sim-field">
+          <span class="vf-filter-lbl" id="sim-ben-lbl">A favor de</span>
+          <div class="vf-seg" id="sim-ben" role="group" aria-labelledby="sim-ben-lbl"><button type="button" data-v="flavio" aria-pressed="true">Flávio</button><button type="button" data-v="lula" aria-pressed="false">Lula</button></div>
+        </div>
+        <fieldset class="vf-sim-types">
+          <legend>Como</legend>
+          <label><input type="radio" name="sim-type" value="software" checked><b>Programa em todas as urnas</b><span>Um código escondido troca, em cada urna do país, uma parte dos votos do adversário.</span></label>
+          <label><input type="radio" name="sim-type" value="flip"><b>Trocar votos em algumas urnas</b><span>Só as urnas que você escolher trocam votos.</span></label>
+          <label><input type="radio" name="sim-type" value="stuff"><b>Encher urnas</b><span>Mesários votam no lugar de quem faltou, sempre no seu candidato.</span></label>
+          <label><input type="radio" name="sim-type" value="invent"><b>Inventar números</b><span>O boletim é reescrito à mão, com mais votos para o seu candidato.</span></label>
+        </fieldset>
+        <label class="vf-sim-check" id="sim-both-row"><input type="checkbox" id="sim-both" checked><b>O programa também agiu no 1º turno</b><span>Uma urna adulterada rodaria o mesmo programa nos dois turnos. Desmarque para fraudar só o 2º turno, o que deixa uma marca a mais: a mudança entre os turnos.</span></label>
+        <p class="vf-sim-note" id="sim-round-note" hidden>Esta fraude é feita só no 2º turno; o 1º turno fica como foi.</p>
+        <div class="vf-sim-field" id="sim-where-row">
+          <label for="sim-where">Quais urnas</label>
+          <select id="sim-where">
+            <option value="random">Sorteadas no país</option>
+            <option value="reduto_adv">Onde o adversário é mais forte</option>
+            <option value="reduto_ben">Onde o seu candidato é mais forte</option>
+            <option value="model">Só um modelo de urna</option>
+            <option value="uf">Só um estado</option>
+          </select>
+          <select id="sim-model" aria-label="Modelo de urna" hidden></select>
+          <select id="sim-uf" aria-label="Estado" hidden></select>
+        </div>
+        <div class="vf-sim-field" id="sim-machines-row">
+          <label for="sim-machines">Urnas adulteradas</label>
+          <input type="range" id="sim-machines" min="0" max="1000" step="1">
+          <div class="vf-sim-inline"><input type="number" id="sim-machines-n" min="1" aria-label="Número de urnas adulteradas"><span id="sim-machines-of"></span></div>
+        </div>
+        <div class="vf-sim-field">
+          <label for="sim-intensity" id="sim-intensity-lbl">Intensidade</label>
+          <input type="range" id="sim-intensity">
+          <div class="vf-sim-inline"><output for="sim-intensity" id="sim-intensity-out"></output></div>
+        </div>
+        <div class="vf-sim-actions">
+          <button type="button" class="vf-btn vf-btn-main" id="sim-min">Mínimo para virar o resultado</button>
+          <button type="button" class="vf-btn" id="sim-reseed">Sortear de novo</button>
+          <button type="button" class="vf-btn" id="sim-reset">Voltar ao resultado real</button>
+        </div>
+        <p class="vf-sim-note" id="sim-min-note" aria-live="polite"></p>
+      </form>
+      <div class="vf-sim-main">
+        <div class="vf-card" id="sim-result"></div>
+        <p class="vf-sr" id="sim-status" role="status"></p>
+        <div class="vf-card">
+          <h3>O que os testes desta página veriam</h3>
+          <p id="sim-score"></p>
+          <div class="vf-sim-scroll">
+            <table class="vf-table" id="sim-tests">
+              <thead><tr><th scope="col">Teste</th><th scope="col" class="vf-n">Real</th><th scope="col" class="vf-n">Com a fraude</th><th scope="col">A fraude aparece?</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="vf-after">“Sim” quer dizer que a fraude mudou o número mais do que o acaso explicaria, em comparação com o resultado real (no último dígito, p &lt; 0,001; nos outros testes, mais de 4 desvios-padrão). A coluna não diz se o número real é normal; isso é o que o resto da página avalia, e nos números reais um teste já chamou atenção: as urnas com comparecimento de 95% ou mais e 90% ou mais dos votos para Lula (pergunta 4 do Resumo). A soma das urnas contra os totais oficiais não está na lista: os totais saem dos mesmos boletins, então ela bate com qualquer fraude feita dentro da urna.</p>
+        </div>
+        <div class="vf-card">
+          <h3>E fora destes dados?</h3>
+          <div id="sim-outside"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="vf-card vf-explain vf-refs" id="referencias">
     <h2>Referências</h2>
     <p>Os dados, as notícias e os artigos usados para escrever e conferir esta página.</p>
@@ -514,3 +665,4 @@
 <script src="charts.js"></script>
 <script src="tables.js"></script>
 <script src="simple.js"></script>
+<script src="sim.js"></script>

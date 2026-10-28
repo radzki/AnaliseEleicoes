@@ -115,6 +115,13 @@ window.vf = (() => {
     }
   }
 
+  // A line swatch with the same dashes as an SVG stroke-dasharray such as '5 4'.
+  function swatch(color, dash) {
+    if (!dash) return color;
+    const [on, off] = dash.split(' ').map(Number);
+    return `repeating-linear-gradient(to right, ${color} 0 ${on}px, transparent ${on}px ${on + off}px)`;
+  }
+
   function tooltip(box) {
     const t = document.createElement('div');
     t.className = 'vf-tip';
@@ -130,7 +137,8 @@ window.vf = (() => {
           r.className = 'vf-tip-r';
           if (l.color) {
             const sw = document.createElement('i');
-            sw.style.background = l.color;
+            if (l.line) sw.className = 'vf-sw-line';
+            sw.style.background = swatch(l.color, l.dash);
             r.append(sw);
           }
           const b = document.createElement('b');
@@ -200,7 +208,7 @@ window.vf = (() => {
       const span = document.createElement('span');
       const sw = document.createElement('i');
       sw.className = it.line ? 'vf-sw-line' : 'vf-sw';
-      sw.style.background = it.color;
+      sw.style.background = swatch(it.color, it.dash);
       span.append(sw, it.label);
       l.append(span);
     }
