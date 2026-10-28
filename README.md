@@ -149,7 +149,7 @@ de todas as 499.205 urnas do 2º turno de 2026 e refaz os testes da página.
   testes sem aparecer, o resumo acima da tabela já diz que o teste de integridade a pegaria: todas
   as urnas sorteadas estariam adulteradas, e basta um voto trocado para o boletim não bater com as
   cédulas, desde que o programa não saiba distinguir o teste de uma votação real. Desde 2022, parte
-  das urnas do teste (56 a 58 de cerca de 640, num projeto-piloto) é liberada com a biometria de
+  das urnas do teste (em 2022, 58 de 641, num projeto-piloto, segundo a Gazeta do Povo) é liberada com a biometria de
   eleitores de verdade, para dificultar essa distinção. Segundo reportagens sobre os TREs, o teste de integridade
   sorteia de 20 a 33 urnas por estado. Como o sorteio, a chance de uma urna adulterada ser sorteada
   é calculada estado por estado, com 20 urnas por estado (o mínimo, 540 no país) e nenhuma no
