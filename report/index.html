@@ -55,6 +55,9 @@
   .vf-tabs { display: flex; gap: var(--cds-gap-lg); border-bottom: 1px solid var(--color-border-line); margin-top: var(--cds-gap-md); }
   .vf-tabs button { font: inherit; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: var(--cds-pad-sm) 0; color: var(--color-fg-muted); cursor: pointer; }
   .vf-tabs button[aria-selected="true"] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+  /* "Tente fraudar!" in the alert red of the simulation banner (about 6:1 on the page in both themes). */
+  .vf-tabs #tab-fraude { color: var(--color-bad); }
+  .vf-tabs #tab-fraude[aria-selected="true"] { border-bottom-color: var(--color-bad); }
   .vf-answer { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xl); }
   .vf-answer-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   .vf-answer-big { font-family: var(--font-anthropic-serif); font-weight: var(--vf-display-weight, 400); line-height: 1.25; font-size: var(--cds-font-size-title); margin: var(--cds-gap-xs) 0 var(--cds-gap-sm); }
