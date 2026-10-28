@@ -14,7 +14,8 @@ resultado (veja a tabela abaixo).
 
 ## Escopo
 
-- Só a eleição para presidente (`CD_CARGO == 1`), 1º e 2º turnos, de 2026 e de 2022.
+- Só a eleição para presidente (`CD_CARGO == 1`), 1º e 2º turnos, de 2026 e de 2022; na seção "Com 2018
+  também", também de 2018 (Haddad × Jair Bolsonaro), como segunda referência.
 - A unidade de análise é a seção eleitoral: uma urna, um boletim de urna.
 - O voto é secreto. O relatório mostra apenas contagens observadas e variações líquidas entre os
   turnos; ele não estima como um grupo de eleitores votou (por exemplo, "os eleitores de X foram
@@ -31,6 +32,11 @@ resultado (veja a tabela abaixo).
 | Ordem de apuração e modelo de urna | Uma virada que dependesse da hora de chegada ou da máquina | Mesmo desenho de 2022; dentro da mesma zona, +0,24 p.p. por hora de atraso; entre modelos de urna no mesmo local, no máximo 0,06 p.p. No 2º turno de 2026, 99,6% dos votos chegaram ao TSE depois das 19h, quando o TSE começou a divulgar a apuração, depois da prorrogação da votação pelo STF |
 | Migração entre turnos | Mudanças concentradas em poucas urnas | Lula ganhou de 1,2 a 4,3 p.p. em todas as UFs; dentro do mesmo local, a correlação entre aumento de comparecimento e migração é 0,013 |
 | Soma das seções × totais oficiais | Votos que somem ou aparecem entre a urna e o total | 2022 bate nos dois turnos. 2026, 1º turno: bate, com exceção dos votos válidos em 2.148 das 6.292 unidades município-zona; em cada uma, a diferença é exatamente o número de votos de Leonardo Alves de Araújo (PRTB, 28), que desistiu da candidatura em 30 de setembro e cujos 5.246 votos o TSE conta como nulos técnicos. Como os totais saem da mesma apuração dos boletins, isso mostra que os arquivos do TSE batem entre si, não que cada boletim registrou corretamente a sua urna. 2026, 2º turno (totais publicados pelo TSE em 27 de outubro): todos os campos e os votos de Lula e de Flávio batem nas 6.292 unidades município-zona, e os mesmos números batem com o relatório oficial de totalização, no país, em cada UF e no exterior |
+| Com 2018: seções quase unânimes e que destoam do local | As perguntas 3 e 4 com uma segunda eleição de referência | Quase unânimes para o PT: 92 em 2026, 30 em 2022 e 38 em 2018 (para o candidato Bolsonaro, 5, 3 e 29). Seções que destoam do local a favor do PT: 1.059, 1.105 e 1.281 |
+| Um candidato ganhou votos e o outro perdeu, entre os turnos | O "21 para 1" que circulou depois do 2º turno | 21,6 para 1 a favor de Lula em 2026, 9,9 para 1 a favor de Jair em 2022 e 1,6 para 1 a favor de Haddad em 2018 (os dois perderam). Um modelo em que cada seção segue o ganho médio do seu município, com desvios sorteados entre seções do mesmo estado com ganhos parecidos, dá 20,7, 9,5 e 1,7: dados ÷ modelo = 1,04, 1,04 e 0,94. Com fraude plantada em 1 de cada 5 seções, 1,37; em todas as seções, 0,97 (não aparece) |
+| Concentração do voto | Votos acrescentados em redutos | Seções com 90% ou mais no 2º turno, para o PT: 6.899 em 2026, 9.538 em 2022 e 15.133 em 2018 (Haddad perdeu); para o adversário: 384, 220 e 1.328 (Jair venceu em 2018). Os dois lados têm o máximo em 2018, o 2º turno com o voto mais dividido entre lugares (18,5% das seções com 80% ou mais para um dos dois, contra 10,0% e 8,7%): seções extremas não acompanham quem vence. As com comparecimento ≥ 90% e PT ≥ 90% subiram de 427 para 761 (eram 786 em 2018), o mesmo sinal da pergunta 4 |
+| Esperado × observado, sem ver o município | Mudança aplicada a um município inteiro | Municípios a mais de 4 erros típicos a favor do PT: 11 em 2026, 12 em 2022 e 14 em 2018. Fraco: com o modelo treinado de novo, 5% dos votos de Flávio trocados em 1.000 municípios sorteados são apontados em 9; 10%, em 358; os mesmos 5% em todos os municípios não aparecem |
+| Detector automático (Isolation Forest e LOF) | Seções estranhas em vários números ao mesmo tempo | Acima do corte de 0,60: 185 seções por 100 mil em 2026, 162 em 2022 e 477 em 2018; sem as do exterior, 47, 66 e 352. 2018 tem mais por ter outros níveis de brancos, nulos e tamanho de seção; 2026 e 2022 são comparáveis. As mais estranhas são do exterior, pequenas, de presídios e de aldeias. Fraco para fraude: enchimento plantado em 100 seções, 13 passam do corte |
 
 **O que estes testes não conseguem mostrar:** eles encontram números inventados à mão e urnas
 "engordadas". Não encontram uma mudança que alterasse todas as urnas na mesma proporção, porque ela
@@ -55,6 +61,8 @@ scripts/11_urna_assinaturas.py  na mesma amostra de urnas: assinaturas digitais 
                            registro, boletim x dados publicados e recontagem do RDV -> urna_assinaturas.csv
 scripts/12_urna_bursts.py  votos em rajada e liberações pelo mesário nos registros da amostra de urnas, com enchimento plantado
 scripts/13_mixture.py      modelo de mistura (Klimek et al., 2012), por estado, com fraude plantada -> mixture_<ano>.json
+scripts/14_three_elections.py  2026, 2022 e 2018: testes de referência, um ganhou e o outro perdeu (com modelo nulo),
+                           concentração, esperado × observado sem ver o município, Isolation Forest e LOF -> three_elections.json
 report/                    a página do relatório (HTML + JavaScript com d3), em português
 web/                       o que o site estático acrescenta: dash.js (carrega os dados e roda os
                            cálculos da página), theme.css (cores, fontes, espaçamentos, claro e
@@ -77,7 +85,7 @@ pip install -r requirements.txt
 ```
 
 Baixe os arquivos do TSE (`https://cdn.tse.jus.br/estatistica/sead/odsele/`) para `data/raw`
-(2026) e `data/raw2022` (2022). O CDN do TSE às vezes entrega uma cópia antiga em cache depois de uma
+(2026), `data/raw2022` (2022) e `data/raw2018` (2018, só `votacao_secao` e `detalhe_votacao_secao`). O CDN do TSE às vezes entrega uma cópia antiga em cache depois de uma
 atualização: acrescente um parâmetro qualquer à URL (por exemplo `?v=1`) e confira a data de geração
 (`DT_GERACAO`) dentro de cada arquivo; os totais por município do 2º turno de 2026 foram gerados em
 27/10/2026.
@@ -93,6 +101,7 @@ Depois:
 ```sh
 python -I scripts/01_extract.py data/raw data/processed 2026
 python -I scripts/01_extract.py data/raw2022 data/processed2022 2022
+python -I scripts/01_extract.py data/raw2018 data/processed2018 2018
 python -I scripts/02_analyze.py data/processed results 2026
 python -I scripts/02_analyze.py data/processed2022 results 2022
 python -I scripts/03_consistency.py data/raw data/processed results 2026
@@ -102,10 +111,13 @@ python -I scripts/08_runoff_totals.py data/raw_t2 data/processed results
 python -I scripts/09_sim_data.py data/processed results
 python -I scripts/10_more_tests.py data/processed results 2026
 python -I scripts/10_more_tests.py data/processed2022 results 2022
+python -I scripts/10_more_tests.py data/processed2018 results 2018
 python -I scripts/11_urna_assinaturas.py data/processed data/urna_files results   # baixa ~350 MB do TSE
 python -I scripts/12_urna_bursts.py data/urna_logs results
 python -I scripts/13_mixture.py data/processed results 2026        # alguns minutos por ano
 python -I scripts/13_mixture.py data/processed2022 results 2022
+python -I scripts/13_mixture.py data/processed2018 results 2018
+python -I scripts/14_three_elections.py results data/processed data/processed2022 data/processed2018   # alguns minutos
 python -I scripts/04_export.py results data/processed data/processed2022 results/dash
 python -I scripts/05_site.py . site
 ```

@@ -35,6 +35,9 @@ PLACE = ["SG_UF", "CD_MUNICIPIO", "NR_ZONA", "NR_LOCAL_VOTACAO"]
 MOVE = 4_430_191 // 2 + 1
 
 w = pd.read_parquet(proc / "secao_wide.parquet")
+# the right-wing finalist is v22 below; in 2018 Jair Bolsonaro ran with 17 (and nobody had 22)
+if year == 2018:
+    w = w.rename(columns={"v17": "v22"})
 w = w[w.v13.notna() & (w.QT_VOTOS_NOMINAIS > 0)].copy()
 for c in ["v13", "v22", "QT_APTOS", "QT_COMPARECIMENTO", "QT_VOTOS_NOMINAIS"]:
     w[c] = w[c].fillna(0).astype(np.int64)
@@ -186,7 +189,7 @@ log("  ", {k: v for k, v in res["homogeneity"].items() if k != "p_hist"})
 T_EDGES = np.arange(0.5, 1.0001, 0.005)
 
 
-def shpilkin(g):
+def shpilkin(g, curve=False):
     t = g.QT_COMPARECIMENTO / g.QT_APTOS
     b = pd.cut(t, T_EDGES, labels=False, include_lowest=True)
     a = g.assign(b=b).groupby("b")[["v13", "v22", "n", "QT_COMPARECIMENTO"]].sum()
@@ -195,19 +198,24 @@ def shpilkin(g):
     peak = a.QT_COMPARECIMENTO.idxmax()
     sl, sr = a.v13[peak] / a.n[peak], a.v22[peak] / a.n[peak]
     above = a[a.index > peak]
-    return {"peak_turnout": float(T_EDGES[int(peak)]), "lula": float((above.v13 - sl * above.n).clip(lower=0).sum()),
-            "right": float((above.v22 - sr * above.n).clip(lower=0).sum())}
+    r = {"peak_turnout": float(T_EDGES[int(peak)]), "lula": float((above.v13 - sl * above.n).clip(lower=0).sum()),
+         "right": float((above.v22 - sr * above.n).clip(lower=0).sum())}
+    if curve:  # each candidate's share by turnout band, for the chart, and the shares at the peak
+        r["peak_lula"], r["peak_right"] = float(sl), float(sr)
+        r["curve"] = [{"turnout": float(T_EDGES[int(b)]), "lula": float(x.v13 / x.n), "right": float(x.v22 / x.n),
+                       "votes": int(x.n)} for b, x in a.iterrows() if x.n > 0]
+    return r
 
 
 log("D. Shpilkin")
 res["shpilkin"] = {}
 for t, g in w.groupby("NR_TURNO"):
-    nat = shpilkin(g)
+    nat = shpilkin(g, curve=True)
     per_uf = [shpilkin(gu) for _, gu in g.groupby("SG_UF")]
     res["shpilkin"][int(t)] = {"national": nat, "by_state": {"lula": float(sum(p["lula"] for p in per_uf if p)),
                                                              "right": float(sum(p["right"] for p in per_uf if p))},
                                "valid_votes": int(g.n.sum())}
-    log(f"  round {t}:", res["shpilkin"][int(t)])
+    log(f"  round {t}:", {k: v for k, v in res["shpilkin"][int(t)]["national"].items() if k != "curve"}, res["shpilkin"][int(t)]["by_state"])
 
 
 # ---------------------------------------------------------------------------------

@@ -303,8 +303,9 @@ dump("consistency", rows)
 
 # more tests: scripts/10_more_tests.py, 12_urna_bursts.py, 13_mixture.py --------------------------
 # one row per test and year (or planted fraud, or machine group), read by the "Mais testes" section
-MT = {y: json.loads((res_dir / f"more_tests_{y}.json").read_text(encoding="utf-8")) for y in (2026, 2022)}
-MX = {y: json.loads((res_dir / f"mixture_{y}.json").read_text(encoding="utf-8")) for y in (2026, 2022)}
+# 2018 (Jair Bolsonaro elected) is a second reference year for these tests
+MT = {y: json.loads((res_dir / f"more_tests_{y}.json").read_text(encoding="utf-8")) for y in (2026, 2022, 2018)}
+MX = {y: json.loads((res_dir / f"mixture_{y}.json").read_text(encoding="utf-8")) for y in (2026, 2022, 2018)}
 margin = R[2026]["totals"]["2"]["lula"] - R[2026]["totals"]["2"]["right"]
 rows, curve = [], []
 for y, m in MT.items():
@@ -343,6 +344,12 @@ g = pd.Series(m["prop_swing"]["by_state"]) - pd.Series(MT[2022]["prop_swing"]["b
 g = g.dropna()
 rows.append({"id": "prop|states", "units": len(g), "gap_min": g.min(), "gap_max": g.max(), "gap_sd": g.std(),
              "negative": int((g < 0).sum())})
+g18 = (pd.Series(m["prop_swing"]["by_state"]) - pd.Series(MT[2018]["prop_swing"]["by_state"])).dropna()
+rows.append({"id": "prop|states|2018", "units": len(g18), "gap_min": g18.min(), "gap_max": g18.max(), "gap_sd": g18.std(),
+             "negative": int((g18 < 0).sum())})
+# how far the slope moved between the two reference elections, with no program in either
+moved = MT[2018]["prop_swing"]["real"]["slope"] - MT[2022]["prop_swing"]["real"]["slope"]
+rows.append({"id": "prop|years", "moved_2018_2022": moved, "times_added": moved / (pl["slope"] - real)})
 rows.append({"id": "shpilkin|bound", "margin_after": margin - m["shpilkin"]["2"]["national"]["lula"]})
 # the national figure comes from differences between states: runoff turnout change 2022 -> 2026 in the states
 # where Lula had 60% or more in 2026, and in the others
@@ -351,7 +358,7 @@ chg = t2[2026].turnout_pct - t2[2022].turnout_pct
 strong = t2[2026].lula_pct >= 60
 rows.append({"id": "shpilkin|states", "lula60_states": int(strong.sum()), "lula60_change_pp": chg[strong].mean(),
              "other_change_pp": chg[~strong].mean(), "corr": float(np.corrcoef(chg, t2[2026].lula_pct.loc[chg.index])[0, 1])})
-for y in (2026, 2022):
+for y in MX:
     for p in MX[y]["planted"]:
         rows.append({"id": f"mixture|planted|{p['planted_sections']}|{y}", "planted_sections": p["planted_sections"],
                      "found_sections": p["sections_extreme"], "f_e": p["f_e"]})
@@ -362,6 +369,77 @@ for how in ("run", "mixed"):
     rows.append({"id": f"bursts|planted|{how}", "extra_votes": B["planted"]["extra_votes"], **B["planted"][how]})
 dump("more_tests", rows)
 dump("size_curve", curve)
+
+# three elections: scripts/14_three_elections.py ------------------------------------------------
+# one row per test and year (or planted fraud), read by the "Com 2018 também" section
+T = json.loads((res_dir / "three_elections.json").read_text(encoding="utf-8"))
+rows = []
+for y in map(str, T["years"]):
+    rows.append({"id": f"ref|{y}", "year": int(y), **T["reference"][y]})
+    q = T["quadrant"][y]
+    rows.append({"id": f"quad|{y}", "year": int(y), **q, "both_up_share": q["both_up"] / q["sections"]})
+    for t, c in T["concentration"][y].items():
+        rows.append({"id": f"conc|{y}|{t}", "year": int(y), "round": int(t), **{k: v for k, v in c.items() if k != "hist_lula"}})
+    e = {k: v for k, v in T["expected"][y].items() if k not in ("mun_top", "mun_hist")}
+    rows.append({"id": f"exp|{y}", "year": int(y), **e})
+    i = T["isolation"]["years"][y]
+    rows.append({"id": f"iso|{y}", "year": int(y), **{k: v for k, v in i.items() if k not in ("kinds", "score_hist", "drivers", "drivers_other")},
+                 **{f"kind_{k}": v for k, v in i["kinds"].items()}, **{f"driver_{k}": v for k, v in i["drivers"].items()},
+                 **{f"driver_other_{k}": v for k, v in i["drivers_other"].items()}})
+for p in T["expected_planted"]:
+    rows.append({"id": f"exp|planted|{'all' if p['all'] else p['municipalities']}|{p['flip_share']}",
+                 **{k: v for k, v in p.items() if k != "mun_hist"}})
+rows.append({"id": "exp|planted|refit", **T["expected_planted_refit"]})
+t5 = T["isolation"]["top50"]
+rows.append({"id": "iso|top50", **{k: v for k, v in t5.items() if k not in ("rows", "kinds")},
+             **{f"kind_{k}": v for k, v in t5["kinds"].items()}})
+for p in T["isolation_planted"]:
+    rows.append({"id": f"iso|planted|{p['how']}", **{k: v for k, v in p.items() if k != "score_hist"}})
+for p in T["quadrant_planted"]:
+    rows.append({"id": f"quad|planted|{p['how']}", **p})
+rows.append({"id": "meta", "move": T["move"], "cut": T["isolation"]["cut"]})
+dump("tres_eleicoes", rows)
+
+# chart series for the "Ver gráfico" panels of "Mais testes" and "Com 2018 também" -----------------
+# long format: one row per chart, series and point; charts whose numbers are already in more_tests or
+# tres_eleicoes read them there
+rows = []
+for y, m in MT.items():
+    for ref in (2022, 2018):
+        for uf, v in m["prop_swing"]["by_state"].items():
+            if uf in MT[ref]["prop_swing"]["by_state"] and y == 2026:
+                rows.append({"chart": "prop_states", "series": str(ref), "uf": uf, "y": v - MT[ref]["prop_swing"]["by_state"][uf]})
+    h = np.array(m["homogeneity"]["p_hist"], float)
+    rows += [{"chart": "homog_p", "series": str(y), "x": i * 0.05, "y": v} for i, v in enumerate(h / h.sum())]
+    sh = m["shpilkin"]["2"]["national"]
+    tot = sum(c["votes"] for c in sh["curve"])
+    rows += [{"chart": "shpilkin", "series": str(y), "x": c["turnout"], "lula": c["lula"], "right": c["right"],
+              "votes": c["votes"], "y": c["votes"] / tot} for c in sh["curve"]]
+    rows.append({"chart": "shpilkin_peak", "series": str(y), "x": sh["peak_turnout"], "lula": sh["peak_lula"], "right": sh["peak_right"]})
+    for t in ("2",):
+        for cand in ("lula", "right"):
+            rows += [{"chart": "benford2", "series": str(y), "cand": cand, "x": d, "y": f}
+                     for d, f in enumerate(m["benford2"][t][cand]["freq"])]
+rows += [{"chart": "benford2", "series": "expected", "x": d, "y": f} for d, f in enumerate(MT[2026]["benford2_expected"])]
+E3 = {k: np.array(v) for k, v in T["edges"].items()}
+for y in map(str, T["years"]):
+    h = np.array(T["concentration"][y]["2"]["hist_lula"], float)
+    rows += [{"chart": "conc_hist", "series": y, "x": float(E3["share"][i]), "y": v} for i, v in enumerate(h / h.sum())]
+    rows += [{"chart": "exp_mun", "series": y, "x": float(E3["mun"][i]), "y": int(v)}
+             for i, v in enumerate(T["expected"][y]["mun_hist"])]
+    h = np.array(T["isolation"]["years"][y]["score_hist"], float)
+    rows += [{"chart": "iso_score", "series": y, "x": float(E3["score"][i]), "y": v} for i, v in enumerate(h / h.sum())]
+# the chart shows the 10% case: with the model refitted, smaller flips barely move the distribution
+p5 = next(p for p in T["expected_planted"] if p["municipalities"] == 1000 and p["flip_share"] == 0.1)
+rows += [{"chart": "exp_mun", "series": "planted", "x": float(E3["mun"][i]), "y": int(v)} for i, v in enumerate(p5["mun_hist"])]
+rows.append({"chart": "exp_mun_sd", "series": "planted", "y": p5["mun_robust_sd_pp"]})
+for p in T["isolation_planted"]:
+    h = np.array(p["score_hist"], float)
+    rows += [{"chart": "iso_score", "series": f"planted_{p['how']}", "x": float(E3["score"][i]), "y": v} for i, v in enumerate(h / h.sum())]
+# long format: each row keeps only its own fields (dump would give every row every column)
+(out / "graficos.json").write_text(json.dumps([{k: v for k, v in r.items()} for r in rows], ensure_ascii=False,
+                                              separators=(",", ":")), encoding="utf-8")
+print(f"graficos: {len(rows)} rows, {(out / 'graficos.json').stat().st_size / 1024:.0f} KB")
 
 # digital signatures and RDV recount of the same sample (scripts/11_urna_assinaturas.py) -----------
 sp = res_dir / "urna_assinaturas.csv"

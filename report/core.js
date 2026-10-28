@@ -24,6 +24,9 @@ window.vf = (() => {
     hm: (v) => `${Math.floor(v)}h${String(Math.floor((v % 1) * 60 + 1e-9)).padStart(2, '0')}`,
     dec2: (v) => f('.2f')(v),
     dec3: (v) => f('.3f')(v),
+    ratio: (v) => `${f('.1f')(v)} para 1`,
+    dec1x: (v) => `${f('.1f')(v)} vezes`,
+    times2: (v) => `${f('.2f')(v)} ${v < 2 ? 'vez' : 'vezes'}`,
   };
   const format = (kind, v) => (v === null || v === undefined || Number.isNaN(v) ? '—' : (fmt[kind] ?? fmt.str)(v));
 
@@ -237,8 +240,11 @@ window.vf = (() => {
 
   // Charts register here so a tab switch can draw them at their real width.
   const charts = [];
-  function draw(fn) {
+  // chart box -> its draw function, for charts inside a "Ver gráfico" panel, drawn when the panel opens
+  const boxes = new Map();
+  function draw(fn, box) {
     charts.push(fn);
+    if (box) boxes.set(box, fn);
     dash.onData(fn);
   }
 
@@ -311,6 +317,141 @@ window.vf = (() => {
     segmented(tp, (v) => dash.setTheme(v));
     themeBox.hidden = false;
   }
+
+  // "pergunta 4" anywhere in the text, now or later (the "Tente fraudar!" text is rebuilt on every change),
+  // becomes a button that shows that question's title, with a way to jump to it: the questions are on the
+  // first tab, and most references to them are on the others.
+  const root = document.getElementById('dash-root');
+  const QUESTIONS = new Map([...root.querySelectorAll('.vf-q')].map((a) => [
+    a.querySelector('.vf-q-n').textContent.trim(), { id: a.id, title: a.querySelector('h3').textContent.trim() }]));
+  const QREF = /\b(perguntas?)(\s+)(\d+(?:\s*(?:,|e)\s*\d+)*)/gi;
+  const hasQref = new RegExp(QREF.source, 'i');
+  // a direct child of #dash-root, outside the .vf container, so position: fixed follows the viewport
+  const qpop = document.createElement('div');
+  qpop.className = 'vf-qpop';
+  qpop.id = 'vf-qpop';
+  qpop.hidden = true;
+  root.append(qpop);
+  let qOpen = null;
+  function qButton(n, text) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'vf-qref';
+    b.dataset.q = n;
+    b.textContent = text;
+    b.setAttribute('aria-label', `Pergunta ${n}: ${QUESTIONS.get(n).title}`);
+    b.setAttribute('aria-expanded', 'false');
+    b.setAttribute('aria-controls', 'vf-qpop');
+    return b;
+  }
+  function linkQuestions() {
+    const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => (hasQref.test(n.data) && !n.parentElement.closest('.vf-q-head, .vf-qref, .vf-qpop, button, a, script, style, svg, textarea')
+        ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+    });
+    const nodes = [];
+    while (walk.nextNode()) nodes.push(walk.currentNode);
+    for (const node of nodes) {
+      const frag = document.createDocumentFragment();
+      let at = 0;
+      for (const m of node.data.matchAll(QREF)) {
+        frag.append(node.data.slice(at, m.index));
+        const [, word, space, list] = m;
+        const parts = list.split(/(\s*(?:,|e)\s*)/);
+        if (parts.length === 1 && QUESTIONS.has(list)) frag.append(qButton(list, `${word}${space}${list}`));
+        else {
+          frag.append(word + space);
+          parts.forEach((p, i) => frag.append(i % 2 === 0 && QUESTIONS.has(p) ? qButton(p, p) : p));
+        }
+        at = m.index + m[0].length;
+      }
+      frag.append(node.data.slice(at));
+      node.replaceWith(frag);
+    }
+  }
+  function closeQuestion() {
+    if (!qOpen) return;
+    qOpen.setAttribute('aria-expanded', 'false');
+    qpop.hidden = true;
+    qOpen = null;
+  }
+  function openQuestion(b) {
+    const q = QUESTIONS.get(b.dataset.q);
+    const head = document.createElement('div');
+    head.className = 'vf-tip-h';
+    head.textContent = `Pergunta ${b.dataset.q}`;
+    const title = document.createElement('p');
+    title.textContent = q.title;
+    const go = document.createElement('button');
+    go.type = 'button';
+    go.className = 'vf-link';
+    go.dataset.goto = 'simples';
+    go.dataset.target = q.id;
+    go.textContent = 'Ir para a pergunta';
+    qpop.replaceChildren(head, title, go);
+    qpop.hidden = false;
+    qOpen = b;
+    b.setAttribute('aria-expanded', 'true');
+    // below the reference, or above it when there is no room; inside the viewport with a 16px gutter
+    const r = b.getBoundingClientRect();
+    const w = qpop.offsetWidth;
+    const h = qpop.offsetHeight;
+    qpop.style.left = `${Math.max(16, Math.min(r.left, innerWidth - 16 - w))}px`;
+    qpop.style.top = `${r.bottom + 6 + h > innerHeight - 8 ? r.top - 6 - h : r.bottom + 6}px`;
+  }
+  root.addEventListener('click', (ev) => {
+    const b = ev.target.closest('.vf-qref');
+    if (b) {
+      const same = b === qOpen;
+      closeQuestion();
+      if (!same) openQuestion(b);
+      return;
+    }
+    const go = ev.target.closest('.vf-qpop [data-goto]');
+    if (go) {
+      // the tab switch itself is the [data-goto] handler in tabs(); mark where the reader lands
+      const target = document.getElementById(go.dataset.target);
+      closeQuestion();
+      target.classList.remove('vf-flash');
+      // after the tab switch has shown the page: a hidden element cannot take focus
+      requestAnimationFrame(() => {
+        target.classList.add('vf-flash');
+        const h = target.querySelector('h3');
+        h.setAttribute('tabindex', '-1');
+        h.focus({ preventScroll: true });
+      });
+      return;
+    }
+    if (!ev.target.closest('.vf-qpop')) closeQuestion();
+  });
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && qOpen) {
+      const b = qOpen;
+      closeQuestion();
+      b.focus();
+    }
+  });
+  addEventListener('scroll', closeQuestion, { passive: true });
+  addEventListener('resize', closeQuestion);
+  // "Ver gráfico" under a test: opens its chart, which is drawn then, once its width can be measured
+  root.addEventListener('click', (ev) => {
+    const b = ev.target.closest('.vf-showchart');
+    if (!b) return;
+    const panel = document.getElementById(b.getAttribute('aria-controls'));
+    const open = b.getAttribute('aria-expanded') !== 'true';
+    b.setAttribute('aria-expanded', String(open));
+    b.textContent = open ? 'Esconder gráfico' : 'Ver gráfico';
+    panel.hidden = !open;
+    if (open) for (const [box, fn] of boxes) if (panel.contains(box)) fn();
+  });
+
+  linkQuestions();
+  let pending = false;
+  new MutationObserver(() => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => { pending = false; linkQuestions(); });
+  }).observe(root, { childList: true, subtree: true, characterData: true });
 
   dash.onData(fill);
   return { f, format, gate, table, sortable, tooltip, svg, panels, textWidth, axis, legend, resolve, segmented, draw, tabs, cands, cand };

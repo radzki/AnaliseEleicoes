@@ -201,7 +201,7 @@
       s.append('g').attr('transform', `translate(${ml},0)`)
         .call(d3.axisLeft(y).ticks(5).tickFormat((d) => `${d}%`).tickSize(0).tickPadding(6)).call(vf.axis);
       s.append('g').attr('transform', `translate(0,${h - 24})`)
-        .call(d3.axisBottom(x).ticks(5).tickFormat((d) => `${d}%`).tickSize(0).tickPadding(8)).call(vf.axis);
+        .call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((w - ml) / 70))).tickFormat((d) => `${d}%`).tickSize(0).tickPadding(8)).call(vf.axis);
       s.append('g').selectAll('rect').data(v.rows.filter((r) => r.turnout >= lo)).join('rect')
         .attr('x', (r) => x(r.turnout)).attr('width', x(lo + 1) - x(lo) + 0.4)
         .attr('y', (r) => y(r.share + 1)).attr('height', y(0) - y(1) + 0.4)
@@ -261,7 +261,7 @@
     s.append('g').attr('transform', `translate(${ml},0)`)
       .call(d3.axisLeft(y).ticks(5).tickFormat(pct0).tickSize(-(w - ml - mr))).call(vf.axis);
     s.append('g').attr('transform', `translate(0,${h - 24})`)
-      .call(d3.axisBottom(x).ticks(5).tickFormat(pct0).tickSize(0).tickPadding(8)).call(vf.axis);
+      .call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((w - ml) / 70))).tickFormat(pct0).tickSize(0).tickPadding(8)).call(vf.axis);
     s.append('line').attr('x1', ml).attr('x2', w - mr).attr('y1', y(0.5)).attr('y2', y(0.5))
       .style('stroke', REF).attr('stroke-dasharray', '4 3');
     for (const sr of series) {
@@ -299,7 +299,8 @@
     const series = [
       { key: '2026', label: '2026', color: FG, width: 2.5 },
       { key: '2022', label: '2022', color: MUTED, width: 1.75 },
-      { key: 'planted', label: 'Com fraude plantada acima de 250 votantes', color: 'var(--color-bad)', width: 1.75, dash: '5 4' },
+      { key: '2018', label: '2018', color: REF, width: 1.5, dash: '2 3' },
+      { key: 'planted', label: 'Se houvesse fraude acima de 250 votantes', color: 'var(--color-bad)', width: 1.75, dash: '5 4' },
     ].map((s) => ({ ...s, pts: rows.filter((r) => r.series === s.key).map((r) => ({ x: r.from + 12.5, v: r.mean_pp, n: r.sections })) }));
     sizeBox.replaceChildren();
     const tip = vf.tooltip(sizeBox);
@@ -312,7 +313,7 @@
     s.append('g').attr('transform', `translate(${ml},0)`)
       .call(d3.axisLeft(y).ticks(5).tickFormat(fmtY).tickSize(-(w - ml - 8))).call(vf.axis);
     s.append('g').attr('transform', `translate(0,${h - 24})`)
-      .call(d3.axisBottom(x).ticks(5).tickSize(0).tickPadding(8)).call(vf.axis);
+      .call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((w - ml) / 70))).tickSize(0).tickPadding(8)).call(vf.axis);
     s.append('line').attr('x1', ml).attr('x2', w - 8).attr('y1', y(0)).attr('y2', y(0))
       .style('stroke', REF).attr('stroke-dasharray', '4 3');
     for (const sr of series) {
@@ -334,4 +335,81 @@
       .on('pointerleave', tip.leave);
   }
   vf.draw(drawSize);
+
+  // 7. One finalist gained votes and the other lost them: ratio in the data and in the null, by year, and
+  // the data over the null for the three years and for planted vote flips ----------------------------------
+  const quadBox = document.getElementById('quad-chart');
+  function drawQuad() {
+    if (!quadBox || !vf.gate(quadBox, 'tres_eleicoes')) return;
+    const all = dash.data('tres_eleicoes').data;
+    const who = { 2026: ['Lula', 'Flávio'], 2022: ['Lula', 'Jair'], 2018: ['Haddad', 'Jair'] };
+    const rows = [2026, 2022, 2018].map((y) => {
+      const r = all.find((d) => d.id === `quad|${y}`);
+      return { y, obs: r.ratio, nul: r.null_ratio, lo: r.null_ratio_min, hi: r.null_ratio_max, left: r.leftover,
+        leader: who[y][r.leader === 'lula' ? 0 : 1], other: who[y][r.leader === 'lula' ? 1 : 0] };
+    });
+    const planted = ['fifth', 'all'].map((h) => all.find((d) => d.id === `quad|planted|${h}`));
+    const series = [
+      { key: 'obs', label: 'Dados', color: FG },
+      { key: 'nul', label: 'Modelo sem nada de anormal', color: MUTED },
+    ];
+    quadBox.replaceChildren();
+    const [c1, c2] = vf.panels(quadBox, ['Seções em que um ganhou e o outro perdeu, para cada uma ao contrário', 'Dados ÷ modelo (1 = o modelo explica tudo)'], 'vf-stack');
+    const tip = vf.tooltip(quadBox);
+    const fmt = (v) => vf.format('ratio', v);
+    {
+      const { s, w, h } = vf.svg(c1, 200);
+      const labels = rows.map((r) => `${r.y} (${r.leader})`);
+      const ml = vf.textWidth(s, labels) + 12;
+      const top = d3.max(rows, (r) => Math.max(r.obs, r.nul));
+      // room on the right for the value written after the longest bar
+      const x = d3.scaleLinear([0, top], [ml, w - 8 - vf.textWidth(s, [fmt(top)]) - 8]);
+      const band = d3.scaleBand(rows.map((r) => r.y), [8, h - 24]).paddingInner(0.3);
+      const sub = d3.scaleBand(series.map((sr) => sr.key), [0, band.bandwidth()]).padding(0.12);
+      s.append('g').attr('transform', `translate(0,${h - 24})`)
+        .call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((w - ml) / 70))).tickFormat((v) => `${v}`).tickSize(-(h - 32)).tickPadding(8)).call(vf.axis);
+      s.append('g').attr('transform', `translate(${ml - 6},0)`)
+        .call(d3.axisLeft(band).tickFormat((y, i) => labels[i]).tickSize(0)).call(vf.axis);
+      for (const r of rows) {
+        for (const sr of series) {
+          const y0 = band(r.y) + sub(sr.key);
+          s.append('rect').attr('x', x(0)).attr('y', y0).attr('width', x(r[sr.key]) - x(0)).attr('height', sub.bandwidth())
+            .attr('rx', 2).style('fill', sr.color);
+          s.append('text').attr('x', x(r[sr.key]) + 5).attr('y', y0 + sub.bandwidth() / 2).attr('dy', '0.35em')
+            .attr('class', 'vf-tick').style('fill', 'var(--color-fg)').text(fmt(r[sr.key]));
+        }
+        s.append('rect').attr('x', ml).attr('y', band(r.y)).attr('width', w - 8 - ml).attr('height', band.bandwidth())
+          .style('fill', 'transparent')
+          .on('pointermove pointerdown', (ev) => tip.show(ev, `${r.y}: seções em que ${r.leader} ganhou e ${r.other} perdeu, para cada uma ao contrário`, [
+            { label: 'Dados', value: fmt(r.obs), color: FG },
+            { label: 'Modelo sem nada de anormal', value: `${fmt(r.nul)} (${fmt(r.lo)} a ${fmt(r.hi)} em 20 sorteios)`, color: MUTED },
+          ]))
+          .on('pointerleave', tip.leave);
+      }
+    }
+    {
+      const items = [
+        ...rows.map((r) => ({ label: `${r.y}`, v: r.left, color: FG })),
+        { label: '2026, se houvesse fraude em 1 de cada 5 urnas', v: planted[0].leftover, color: 'var(--color-bad)' },
+        { label: '2026, se houvesse fraude em todas as urnas', v: planted[1].leftover, color: 'var(--color-bad)' },
+      ];
+      const { s, w, h } = vf.svg(c2, 30 + items.length * 26);
+      const ml = vf.textWidth(s, items.map((d) => d.label)) + 12;
+      const dfmt = vf.f('.2f');
+      const x = d3.scaleLinear([0, d3.max(items, (d) => d.v) * 1.05], [ml, w - 10 - vf.textWidth(s, ['0,00']) - 8]);
+      const band = d3.scaleBand(items.map((d) => d.label), [4, h - 24]).paddingInner(0.3);
+      s.append('g').attr('transform', `translate(0,${h - 24})`)
+        .call(d3.axisBottom(x).ticks(4).tickFormat(dfmt).tickSize(-(h - 28)).tickPadding(8)).call(vf.axis);
+      s.append('g').attr('transform', `translate(${ml - 6},0)`).call(d3.axisLeft(band).tickSize(0)).call(vf.axis);
+      for (const d of items) {
+        s.append('rect').attr('x', x(0)).attr('y', band(d.label)).attr('width', x(d.v) - x(0)).attr('height', band.bandwidth())
+          .attr('rx', 2).style('fill', d.color);
+        s.append('text').attr('x', x(d.v) + 5).attr('y', band(d.label) + band.bandwidth() / 2).attr('dy', '0.35em')
+          .attr('class', 'vf-tick').style('fill', 'var(--color-fg)').text(dfmt(d.v));
+      }
+      s.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', 0).attr('y2', h - 24).style('stroke', REF).attr('stroke-dasharray', '4 3');
+    }
+    vf.legend(quadBox, [...series.map((sr) => ({ label: sr.label, color: sr.color })), { label: 'Se houvesse fraude', color: 'var(--color-bad)' }]);
+  }
+  vf.draw(drawQuad);
 })();

@@ -29,8 +29,10 @@ SIMS, BINS = 10, 50
 F_I = np.round(np.arange(0, 0.1501, 0.01), 4)
 F_E = np.round(np.arange(0, 0.00401, 0.00025), 5)
 
+# the right-wing finalist is v22 below; in 2018 Jair Bolsonaro ran with 17 (and nobody had 22)
+RIGHT = "v17" if year == 2018 else "v22"
 w = pd.read_parquet(proc / "secao_wide.parquet", columns=["NR_TURNO", "SG_UF", "QT_APTOS", "QT_COMPARECIMENTO",
-                                                          "QT_VOTOS_NOMINAIS", "v13", "v22"])
+                                                          "QT_VOTOS_NOMINAIS", "v13", RIGHT]).rename(columns={RIGHT: "v22"})
 w = w[(w.NR_TURNO == 2) & w.v13.notna() & (w.SG_UF != "ZZ") & (w.QT_APTOS >= 50)].copy()
 w[["v13", "v22"]] = w[["v13", "v22"]].fillna(0)
 w = w[w.v13 + w.v22 > 0]
