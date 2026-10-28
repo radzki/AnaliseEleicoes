@@ -6,6 +6,7 @@ Wraps report/index.html in web/page.html, adds web/dash.js (a stand-in for the c
 runtime) and web/theme.css, and copies the report scripts, d3 and the datasets from results/dash.
 """
 import ast
+import hashlib
 import html
 import re
 import shutil
@@ -36,6 +37,23 @@ for i in DATASETS:
 # "Tente fraudar!" reads every runoff section from here (scripts/09_sim_data.py)
 shutil.copytree(repo / "results" / "sim", out / "data" / "sim")
 
+
+def fingerprint(text):
+    """Link each local stylesheet and script with a hash of its contents (theme.css?v=1a2b3c4d5e).
+
+    The host revalidates the HTML on every visit but lets browsers keep CSS and JS for hours, so
+    without this a deploy could run new HTML with yesterday's stylesheet or scripts.
+    """
+    def stamp(m):
+        f = out / m.group(2).lstrip("/")
+        if not f.is_file():
+            return m.group(0)
+        return f'{m.group(1)}="{m.group(2)}?v={hashlib.sha256(f.read_bytes()).hexdigest()[:10]}"'
+    return re.sub(r'(href|src)="(/?[\w./-]+\.(?:css|js))"', stamp, text)
+
+
+(out / "404.html").write_text(fingerprint((out / "404.html").read_text(encoding="utf-8")), encoding="utf-8")
+
 # The report page is a fragment: its leading <style> goes to <head>, the rest into #dash-root.
 frag = (rep / "index.html").read_text(encoding="utf-8")
 m = re.match(r"\s*<style>\n?(.*?)</style>\n?", frag, re.S)
@@ -45,7 +63,7 @@ items = "\n".join(f'    <li><a href="data/{i}.json" title="{html.escape(desc)}">
 page = (web / "page.html").read_text(encoding="utf-8")
 page = (page.replace("{{dataset_ids}}", " ".join(DATASETS)).replace("{{style}}", style.rstrip())
         .replace("{{datasets}}", items).replace("{{body}}", body.strip()))
-(out / "index.html").write_text(page, encoding="utf-8")
+(out / "index.html").write_text(fingerprint(page), encoding="utf-8")
 
 size = sum(p.stat().st_size for p in out.rglob("*") if p.is_file())
 print(f"site -> {out}: {sum(1 for p in out.rglob('*') if p.is_file())} files, {size / 1024:.0f} KB")
