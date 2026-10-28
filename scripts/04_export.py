@@ -276,12 +276,27 @@ dump("urna", rows)
 
 # consistency -------------------------------------------------------------------------
 names = {"QT_APTOS": "Eligible voters", "QT_COMPARECIMENTO": "Turnout", "QT_ABSTENCOES": "Abstentions",
-         "QT_VOTOS_BRANCOS": "Blank votes", "QT_VOTOS_NULOS": "Null votes", "QT_VOTOS_NOMINAIS": "Valid votes"}
+         "QT_VOTOS_BRANCOS": "Blank votes", "QT_VOTOS_NULOS": "Null votes", "QT_VOTOS_NOMINAIS": "Valid votes",
+         "13": "Lula votes", "22": "Flávio votes"}
+
+
+def cons_row(id_, y, rounds, field, units, v):
+    return {"id": id_, "year": y, "rounds": rounds, "field": names[field], "units": units,
+            "units_with_difference": v["units_with_difference"], "abs_difference": v["total_abs_difference"],
+            "section_sum": v["total_section_sum"], "official": v["total_aggregate"]}
+
+
+# 2026: one row per round and field, plus each finalist's votes per municipality-zone from
+# scripts/08_runoff_totals.py. 2022: both rounds together, as before.
+T2 = json.loads((res_dir / "consistency_2026_t2.json").read_text(encoding="utf-8"))
 rows = []
-for y, c in C.items():
-    rounds = "+".join(str(r) for r in c["rounds_available"])
-    for f, v in c["fields"].items():
-        rows.append({"id": f"{y}|{f}", "year": y, "rounds": rounds, "field": names[f], "units": c["units"],
-                     "units_with_difference": v["units_with_difference"], "abs_difference": v["total_abs_difference"],
-                     "section_sum": v["total_section_sum"], "official": v["total_aggregate"]})
+for t, b in C[2026]["by_round"].items():
+    for f, v in b["fields"].items():
+        rows.append(cons_row(f"2026|{t}|{f}", 2026, t, f, b["units"], v))
+    cand = T2["munzona_candidates"]["rounds"][t]
+    for c in ("13", "22"):
+        rows.append(cons_row(f"2026|{t}|{c}", 2026, t, c, cand["units"], cand["candidates"][c]))
+c22 = C[2022]
+for f, v in c22["fields"].items():
+    rows.append(cons_row(f"2022|{f}", 2022, "+".join(str(r) for r in c22["rounds_available"]), f, c22["units"], v))
 dump("consistency", rows)

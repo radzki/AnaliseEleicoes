@@ -30,7 +30,7 @@ resultado (veja a tabela abaixo).
 | Comparecimento × percentual (Klimek et al., 2012) | Urnas "engordadas": comparecimento ≥ 95% e candidato ≥ 90% | **Chamou atenção.** 92 seções para Lula (30 em 2022), com 18.280 eleitores, 0,4% da margem; 64 já davam 90% ou mais a Lula no 1º turno. Entre as seções com Lula ≥ 90%, a fatia com comparecimento ≥ 95% foi de 1,4%, contra 0,3% em 2022; nas mesmas seções, os eleitores aptos ficaram estáveis e os votantes subiram 5,1%. Nos redutos de Flávio/Jair a fatia ficou estável (1,4% e 1,5%). Os dados não dizem por quê; se o comparecimento nos redutos de Lula tivesse ficado no nível de 2022, seriam cerca de 62 mil votantes a menos, 1,4% da margem. Para Flávio, 5 seções (3 para Jair em 2022) |
 | Ordem de apuração e modelo de urna | Uma virada que dependesse da hora de chegada ou da máquina | Mesmo desenho de 2022; dentro da mesma zona, +0,24 p.p. por hora de atraso; entre modelos de urna no mesmo local, no máximo 0,06 p.p. No 2º turno de 2026, 99,6% dos votos chegaram ao TSE depois das 19h, quando o TSE começou a divulgar a apuração, depois da prorrogação da votação pelo STF |
 | Migração entre turnos | Mudanças concentradas em poucas urnas | Lula ganhou de 1,2 a 4,3 p.p. em todas as UFs; dentro do mesmo local, a correlação entre aumento de comparecimento e migração é 0,013 |
-| Soma das seções × totais oficiais | Votos que somem ou aparecem entre a urna e o total | 2022 bate nos dois turnos. 2026, 1º turno: bate, com exceção dos votos válidos em 2.148 das 6.292 unidades município-zona; em cada uma, a diferença é exatamente o número de votos de Leonardo Alves de Araújo (PRTB, 28), que desistiu da candidatura em 30 de setembro e cujos 5.246 votos o TSE conta como nulos técnicos. Como os totais saem da mesma apuração dos boletins, isso mostra que os arquivos do TSE batem entre si, não que cada boletim registrou corretamente a sua urna. 2026, 2º turno: o TSE ainda não publicou os totais por município |
+| Soma das seções × totais oficiais | Votos que somem ou aparecem entre a urna e o total | 2022 bate nos dois turnos. 2026, 1º turno: bate, com exceção dos votos válidos em 2.148 das 6.292 unidades município-zona; em cada uma, a diferença é exatamente o número de votos de Leonardo Alves de Araújo (PRTB, 28), que desistiu da candidatura em 30 de setembro e cujos 5.246 votos o TSE conta como nulos técnicos. Como os totais saem da mesma apuração dos boletins, isso mostra que os arquivos do TSE batem entre si, não que cada boletim registrou corretamente a sua urna. 2026, 2º turno (totais publicados pelo TSE em 27 de outubro): todos os campos e os votos de Lula e de Flávio batem nas 6.292 unidades município-zona, e os mesmos números batem com o relatório oficial de totalização, no país, em cada UF e no exterior |
 
 **O que estes testes não conseguem mostrar:** eles encontram números inventados à mão e urnas
 "engordadas". Não encontram uma mudança que alterasse todas as urnas na mesma proporção, porque ela
@@ -42,11 +42,12 @@ impresso de cada urna, que é público, e as auditorias e testes de urna do TSE.
 ```
 scripts/01_extract.py      zips do TSE -> parquet (só presidente, por seção, dois turnos)
 scripts/02_analyze.py      testes forenses -> results/results_<ano>.json, states_<ano>.csv
-scripts/03_consistency.py  soma das seções x totais oficiais por município e zona
+scripts/03_consistency.py  soma das seções x totais oficiais por município e zona, por turno
 scripts/04_export.py       results/*.json -> results/dash/*.json, as tabelas que o relatório lê
 scripts/05_site.py         monta o site estático em site/
 scripts/06_og_image.py     gera a imagem de compartilhamento (web/og.png)
 scripts/07_urna_logs.py    lê os registros (logs) de uma amostra de urnas no site de resultados do TSE
+scripts/08_runoff_totals.py  soma das seções x votos de cada candidato por município e zona e x relatório oficial do 2º turno
 report/                    a página do relatório (HTML + JavaScript com d3), em português
 web/                       o que o site estático acrescenta: dash.js (carrega os dados e roda os
                            cálculos da página), theme.css (cores, fontes, espaçamentos, claro e
@@ -69,7 +70,10 @@ pip install -r requirements.txt
 ```
 
 Baixe os arquivos do TSE (`https://cdn.tse.jus.br/estatistica/sead/odsele/`) para `data/raw`
-(2026) e `data/raw2022` (2022):
+(2026) e `data/raw2022` (2022). O CDN do TSE às vezes entrega uma cópia antiga em cache depois de uma
+atualização: acrescente um parâmetro qualquer à URL (por exemplo `?v=1`) e confira a data de geração
+(`DT_GERACAO`) dentro de cada arquivo; os totais por município do 2º turno de 2026 foram gerados em
+27/10/2026.
 
 | Arquivo | Caminho no CDN |
 |---|---|
@@ -87,6 +91,7 @@ python -I scripts/02_analyze.py data/processed2022 results 2022
 python -I scripts/03_consistency.py data/raw data/processed results 2026
 python -I scripts/03_consistency.py data/raw2022 data/processed2022 results 2022
 python -I scripts/07_urna_logs.py data/processed data/urna_logs results   # baixa ~250 MB do TSE
+python -I scripts/08_runoff_totals.py data/raw_t2 data/processed results
 python -I scripts/04_export.py results data/processed data/processed2022 results/dash
 python -I scripts/05_site.py . site
 ```
@@ -94,6 +99,13 @@ python -I scripts/05_site.py . site
 `results/totalizacao_T1_BR.txt` é o texto do relatório oficial de totalização do 1º turno de 2026
 (`relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip`), usado para
 conferir os votos nulos técnicos.
+
+Para o 2º turno de 2026, `scripts/08_runoff_totals.py` lê dois arquivos em `data/raw_t2`:
+`votacao_candidato_munzona/votacao_candidato_munzona_2026.zip` (votos de cada candidato por
+município e zona, os dois turnos) e o mesmo `Relatorio_Resultado_Totalizacao_2026_BR.zip`, que desde
+27 de outubro traz também o relatório do 2º turno. `results/totalizacao_T2_BR.txt` é o texto desse
+relatório (`6258_BR_BRASIL_2026_T2_PRESIDENTE.pdf`), extraído com `pypdf` (`PdfReader`, página a
+página); o mesmo método reproduz exatamente o texto do 1º turno.
 
 ## Publicar
 

@@ -1,0 +1,2689 @@
+Tribunal Superior Eleitoral
+Eleição Geral Federal 2026
+Relatório Resultado da Totalização
+23:28:44
+25 de outubro de 2026
+2º Turno
+Justiça Eleitoral
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral do Brasil
+Descrição Porcentagem Valor
+1.Seções eleitorais
+1.1 Total de seções agregadas 17.931
+1.2 Total de seções principais (mesas receptoras de votos) 499.207
+411.3 Total de seções não instaladas
+517.179
+2. Eleição Majoritária
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+499.207
+499.178
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 29
+2.1.4 Seções não apuradas 0
+2.2 Eleitorado apto a votar 158.745.502
+2.2.1 Total de eleitores aptos nas seções não instaladas 423
+2.2.2 Aptos nas seções que funcionaram 158.745.079
+2.2.2.1 Aptos nas seções apuradas 158.745.079
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 128.236.074
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+128.235.243
+831
+0
+2.3.4 Votantes nas seções não apuradas 0
+  80,78%
+2.1.3 Seções anuladas 0
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral do Brasil
+Descrição Porcentagem Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+c) Votos em branco
+b) Votos nulos
+128.236.074
+124.082.273
+1.430.496
+2.723.305
+Votos nulos na urna 2.723.305
+2.4 Abstenção   19,22% 30.509.005
+96,76%
+1,12%
+2,12%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 124.082.273
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+A votação das candidatas e dos candidatos a presidente, o resumo da votação nos estados, no Distrito Federal e no exterior
+estão descritos nos anexos que compõem este Relatório.
+Nada mais havendo a ser relatado, eu,  Júlio Valente da Costa Júnior, Secretário de Tecnologia da Informação, assino e
+encaminho à Secretaria Judiciária, para processamento no Sistema Processo Judicial Eletrônico - PJe.
+Secretário de Tecnologia da Informação
+Considerando a conclusão do processamento eletrônico da votação relativa ao  2º Turno da Eleição Geral Federal 2026
+desta circunscrição e de acordo com os registros constantes dos boletins de urna das seções eleitorais do Brasil, apresento
+o Relatório Resultado da Totalização, acompanhado dos respectivos anexos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+Situação da totalização
+64.256.232 51,79% Eleito*13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+59.826.041 48,21% Não eleito22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 23:26:38, sujeito a modificações.
+*Candidata ou candidato eleito(a) ou em 2º turno.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (EXTERIOR)
+Descrição Percentual Valor
+1.Seções eleitorais 2.715
+1.1 Total de seções agregadas 1.364
+1.2 Total de seções principais (mesas receptoras de votos) 1.310
+1.3 Total de seções não instaladas 41
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+1.310
+1.281
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 29
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 916.683
+2.2.1 Aptos nas seções não instaladas 423
+2.2.2 Aptos nas seções que funcionaram 916.260
+2.2.2.1 Aptos nas seções apuradas 916.260
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 381.443
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+380.612
+831
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+41,63%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 58,37% 534.817
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (EXTERIOR)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+381.443
+371.651
+4.675
+5.117
+Votos nulos na urna 5.117
+97,43%
+1,23%
+1,34%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 371.651
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+200.154 53,86%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+171.497 46,14%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 26/10/2026 - 09:05:23, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Justiça Eleitoral
+Grupo I
+Unidades da Federação de:
+Alagoas
+Amazonas
+São Paulo
+Tocantins
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (ALAGOAS)
+Descrição Percentual Valor
+1.Seções eleitorais 7.246
+1.1 Total de seções agregadas 145
+1.2 Total de seções principais (mesas receptoras de votos) 7.101
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+7.101
+7.101
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 2.442.081
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 2.442.081
+2.2.2.1 Aptos nas seções apuradas 2.442.081
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 1.951.632
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+1.951.632
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+79,92%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 20,08% 490.449
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (ALAGOAS)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+1.951.632
+1.896.761
+16.983
+37.888
+Votos nulos na urna 37.888
+97,19%
+0,87%
+1,94%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 1.896.761
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+1.152.621 60,77%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+744.140 39,23%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 21:27:22, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (AMAZONAS)
+Descrição Percentual Valor
+1.Seções eleitorais 8.577
+1.1 Total de seções agregadas 420
+1.2 Total de seções principais (mesas receptoras de votos) 8.157
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+8.157
+8.157
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 2.798.661
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 2.798.661
+2.2.2.1 Aptos nas seções apuradas 2.798.661
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 2.192.059
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+2.192.059
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+78,33%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 21,67% 606.602
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (AMAZONAS)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+2.192.059
+2.121.028
+18.324
+52.707
+Votos nulos na urna 52.707
+96,76%
+0,84%
+2,40%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 2.121.028
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+1.145.783 54,02%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+975.245 45,98%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 21:08:57, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (SÃO PAULO)
+Descrição Percentual Valor
+1.Seções eleitorais 103.904
+1.1 Total de seções agregadas 248
+1.2 Total de seções principais (mesas receptoras de votos) 103.656
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+103.656
+103.656
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 34.123.591
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 34.123.591
+2.2.2.1 Aptos nas seções apuradas 34.123.591
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 27.364.389
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+27.364.389
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+80,19%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 19,81% 6.759.202
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (SÃO PAULO)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+27.364.389
+26.258.452
+389.606
+716.331
+Votos nulos na urna 716.331
+95,96%
+1,42%
+2,62%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 26.258.452
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+14.139.178 53,85%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+12.119.274 46,15%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 21:48:00, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (TOCANTINS)
+Descrição Percentual Valor
+1.Seções eleitorais 4.490
+1.1 Total de seções agregadas 106
+1.2 Total de seções principais (mesas receptoras de votos) 4.384
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+4.384
+4.384
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 1.182.041
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 1.182.041
+2.2.2.1 Aptos nas seções apuradas 1.182.041
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 954.763
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+954.763
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+80,77%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 19,23% 227.278
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (TOCANTINS)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+954.763
+910.878
+8.059
+35.826
+Votos nulos na urna 35.826
+95,40%
+0,84%
+3,75%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 910.878
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+467.916 51,37%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+442.962 48,63%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 21:30:35, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Justiça Eleitoral
+Grupo II
+Unidades da Federação de:
+Espírito Santo
+Mato Grosso
+Mato Grosso do Sul
+Minas Gerais
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (ESPÍRITO SANTO)
+Descrição Percentual Valor
+1.Seções eleitorais 10.123
+1.1 Total de seções agregadas 279
+1.2 Total de seções principais (mesas receptoras de votos) 9.844
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+9.844
+9.844
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 2.991.515
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 2.991.515
+2.2.2.1 Aptos nas seções apuradas 2.991.515
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 2.409.214
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+2.409.214
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+80,53%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 19,47% 582.301
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (ESPÍRITO SANTO)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+2.409.214
+2.296.469
+33.080
+79.665
+Votos nulos na urna 79.665
+95,32%
+1,37%
+3,31%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 2.296.469
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+1.294.504 56,37%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+1.001.965 43,63%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 21:31:20, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (MATO GROSSO)
+Descrição Percentual Valor
+1.Seções eleitorais 8.975
+1.1 Total de seções agregadas 688
+1.2 Total de seções principais (mesas receptoras de votos) 8.287
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+8.287
+8.287
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 2.637.879
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 2.637.879
+2.2.2.1 Aptos nas seções apuradas 2.637.879
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 2.085.334
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+2.085.334
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+79,05%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 20,95% 552.545
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (MATO GROSSO)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+2.085.334
+2.045.266
+15.431
+24.637
+Votos nulos na urna 24.637
+98,08%
+0,74%
+1,18%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 2.045.266
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+1.351.099 66,06%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+694.167 33,94%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 20:50:37, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (MATO GROSSO DO SUL)
+Descrição Percentual Valor
+1.Seções eleitorais 7.284
+1.1 Total de seções agregadas 178
+1.2 Total de seções principais (mesas receptoras de votos) 7.106
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+7.106
+7.106
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 2.024.437
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 2.024.437
+2.2.2.1 Aptos nas seções apuradas 2.024.437
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 1.594.460
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+1.594.460
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+78,76%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 21,24% 429.977
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (MATO GROSSO DO SUL)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+1.594.460
+1.556.865
+14.958
+22.637
+Votos nulos na urna 22.637
+97,64%
+0,94%
+1,42%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 1.556.865
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+927.892 59,60%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+628.973 40,40%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 20:29:52, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (MINAS GERAIS)
+Descrição Percentual Valor
+1.Seções eleitorais 54.193
+1.1 Total de seções agregadas 2.131
+1.2 Total de seções principais (mesas receptoras de votos) 52.062
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+52.062
+52.062
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 16.372.144
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 16.372.144
+2.2.2.1 Aptos nas seções apuradas 16.372.144
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 13.044.203
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+13.044.203
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+79,67%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 20,33% 3.327.941
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (MINAS GERAIS)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+13.044.203
+12.592.885
+164.141
+287.177
+Votos nulos na urna 287.177
+96,54%
+1,26%
+2,20%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 12.592.885
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+6.351.099 50,43%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+6.241.786 49,57%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 23:08:43, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Justiça Eleitoral
+Grupo III
+Unidades da Federação de:
+Ceará
+Goiás
+Maranhão
+Sergipe
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (CEARÁ)
+Descrição Percentual Valor
+1.Seções eleitorais 25.650
+1.1 Total de seções agregadas 1.885
+1.2 Total de seções principais (mesas receptoras de votos) 23.765
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+23.765
+23.765
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 6.996.521
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 6.996.521
+2.2.2.1 Aptos nas seções apuradas 6.996.521
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 6.024.843
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+6.024.843
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+86,11%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 13,89% 971.678
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (CEARÁ)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+6.024.843
+5.855.602
+56.386
+112.855
+Votos nulos na urna 112.855
+97,19%
+0,94%
+1,87%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 5.855.602
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+4.036.124 68,93%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+1.819.478 31,07%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 21:45:50, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (GOIÁS)
+Descrição Percentual Valor
+1.Seções eleitorais 16.226
+1.1 Total de seções agregadas 540
+1.2 Total de seções principais (mesas receptoras de votos) 15.686
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+15.686
+15.686
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 5.080.385
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 5.080.385
+2.2.2.1 Aptos nas seções apuradas 5.080.385
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 4.047.280
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+4.047.280
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+79,66%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 20,34% 1.033.105
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (GOIÁS)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+4.047.280
+3.930.889
+43.214
+73.177
+Votos nulos na urna 73.177
+97,12%
+1,07%
+1,81%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 3.930.889
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+2.345.334 59,66%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+1.585.555 40,34%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 21:33:20, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (MARANHÃO)
+Descrição Percentual Valor
+1.Seções eleitorais 19.794
+1.1 Total de seções agregadas 1.701
+1.2 Total de seções principais (mesas receptoras de votos) 18.093
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+18.093
+18.093
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 5.183.049
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 5.183.049
+2.2.2.1 Aptos nas seções apuradas 5.183.049
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 4.127.771
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+4.127.771
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+79,64%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 20,36% 1.055.278
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (MARANHÃO)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+4.127.771
+4.038.202
+30.855
+58.714
+Votos nulos na urna 58.714
+97,83%
+0,75%
+1,42%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 4.038.202
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+2.808.231 69,54%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+1.229.971 30,46%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 22:45:18, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (SERGIPE)
+Descrição Percentual Valor
+1.Seções eleitorais 6.067
+1.1 Total de seções agregadas 144
+1.2 Total de seções principais (mesas receptoras de votos) 5.923
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+5.923
+5.923
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 1.740.093
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 1.740.093
+2.2.2.1 Aptos nas seções apuradas 1.740.093
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 1.466.659
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+1.466.659
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+84,29%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 15,71% 273.434
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (SERGIPE)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+1.466.659
+1.422.395
+13.135
+31.129
+Votos nulos na urna 31.129
+96,98%
+0,90%
+2,12%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 1.422.395
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+989.041 69,53%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+433.354 30,47%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 21:32:35, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Justiça Eleitoral
+Grupo IV
+Unidades da Federação de:
+Pará
+Paraná
+Piauí
+Rio de Janeiro
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PARÁ)
+Descrição Percentual Valor
+1.Seções eleitorais 22.082
+1.1 Total de seções agregadas 1.255
+1.2 Total de seções principais (mesas receptoras de votos) 20.827
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+20.827
+20.827
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 6.262.063
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 6.262.063
+2.2.2.1 Aptos nas seções apuradas 6.262.063
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 4.989.573
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+4.989.573
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+79,68%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 20,32% 1.272.490
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PARÁ)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+4.989.573
+4.890.389
+36.501
+62.683
+Votos nulos na urna 62.683
+98,01%
+0,73%
+1,26%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 4.890.389
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+2.690.449 55,02%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+2.199.940 44,98%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 22:24:37, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PARANÁ)
+Descrição Percentual Valor
+1.Seções eleitorais 27.336
+1.1 Total de seções agregadas 194
+1.2 Total de seções principais (mesas receptoras de votos) 27.142
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+27.142
+27.142
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 8.613.628
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 8.613.628
+2.2.2.1 Aptos nas seções apuradas 8.613.628
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 7.059.339
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+7.059.339
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+81,96%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 18,04% 1.554.289
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PARANÁ)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+7.059.339
+6.857.948
+82.572
+118.819
+Votos nulos na urna 118.819
+97,15%
+1,17%
+1,68%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 6.857.948
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+4.291.444 62,58%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+2.566.504 37,42%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 21:21:20, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PIAUÍ)
+Descrição Percentual Valor
+1.Seções eleitorais 11.261
+1.1 Total de seções agregadas 1.036
+1.2 Total de seções principais (mesas receptoras de votos) 10.225
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+10.225
+10.225
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 2.704.695
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 2.704.695
+2.2.2.1 Aptos nas seções apuradas 2.704.695
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 2.239.830
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+2.239.830
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+82,81%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 17,19% 464.865
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PIAUÍ)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+2.239.830
+2.179.848
+16.137
+43.845
+Votos nulos na urna 43.845
+97,32%
+0,72%
+1,96%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 2.179.848
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+1.653.989 75,88%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+525.859 24,12%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 21:25:00, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RIO DE JANEIRO)
+Descrição Percentual Valor
+1.Seções eleitorais 38.738
+1.1 Total de seções agregadas 1.063
+1.2 Total de seções principais (mesas receptoras de votos) 37.675
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+37.675
+37.675
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 12.857.526
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 12.857.526
+2.2.2.1 Aptos nas seções apuradas 12.857.526
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 10.077.449
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+10.077.449
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+78,38%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 21,62% 2.780.077
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RIO DE JANEIRO)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+10.077.449
+9.734.426
+111.682
+231.341
+Votos nulos na urna 231.341
+96,60%
+1,11%
+2,30%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 9.734.426
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+5.169.033 53,10%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+4.565.393 46,90%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 22:18:59, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Justiça Eleitoral
+Grupo V
+Unidades da Federação de:
+Bahia
+Paraíba
+Pernambuco
+Santa Catarina
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (BAHIA)
+Descrição Percentual Valor
+1.Seções eleitorais 37.950
+1.1 Total de seções agregadas 2.474
+1.2 Total de seções principais (mesas receptoras de votos) 35.476
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+35.476
+35.476
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 11.312.891
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 11.312.891
+2.2.2.1 Aptos nas seções apuradas 11.312.891
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 9.422.047
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+9.422.047
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+83,29%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 16,71% 1.890.844
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (BAHIA)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+9.422.047
+9.094.019
+92.721
+235.307
+Votos nulos na urna 235.307
+96,52%
+0,98%
+2,50%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 9.094.019
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+6.485.258 71,31%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+2.608.761 28,69%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 23:21:51, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PARAÍBA)
+Descrição Percentual Valor
+1.Seções eleitorais 10.845
+1.1 Total de seções agregadas 133
+1.2 Total de seções principais (mesas receptoras de votos) 10.712
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+10.712
+10.712
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 3.248.434
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 3.248.434
+2.2.2.1 Aptos nas seções apuradas 3.248.434
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 2.743.560
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+2.743.560
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+84,46%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 15,54% 504.874
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PARAÍBA)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+2.743.560
+2.659.269
+25.943
+58.348
+Votos nulos na urna 58.348
+96,93%
+0,95%
+2,13%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 2.659.269
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+1.794.059 67,46%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+865.210 32,54%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 21:59:57, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PERNAMBUCO)
+Descrição Percentual Valor
+1.Seções eleitorais 22.091
+1.1 Total de seções agregadas 673
+1.2 Total de seções principais (mesas receptoras de votos) 21.418
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+21.418
+21.418
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 7.223.227
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 7.223.227
+2.2.2.1 Aptos nas seções apuradas 7.223.227
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 6.126.467
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+6.126.467
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+84,82%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 15,18% 1.096.760
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (PERNAMBUCO)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+6.126.467
+5.950.067
+56.758
+119.642
+Votos nulos na urna 119.642
+97,12%
+0,93%
+1,95%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 5.950.067
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+4.117.513 69,20%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+1.832.554 30,80%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 22:02:26, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (SANTA CATARINA)
+Descrição Percentual Valor
+1.Seções eleitorais 17.558
+1.1 Total de seções agregadas 232
+1.2 Total de seções principais (mesas receptoras de votos) 17.326
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+17.326
+17.326
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 5.734.687
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 5.734.687
+2.2.2.1 Aptos nas seções apuradas 5.734.687
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 4.762.303
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+4.762.303
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+83,04%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 16,96% 972.384
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (SANTA CATARINA)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+4.762.303
+4.638.385
+48.674
+75.244
+Votos nulos na urna 75.244
+97,40%
+1,02%
+1,58%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 4.638.385
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+3.220.071 69,42%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+1.418.314 30,58%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 21:07:51, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Justiça Eleitoral
+Grupo VI
+Unidades da Federação de:
+ Acre
+Amapá
+Distrito Federal
+Rio Grande do Norte
+Rio Grande do Sul
+Rondônia
+Roraima
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (ACRE)
+Descrição Percentual Valor
+1.Seções eleitorais 2.411
+1.1 Total de seções agregadas 141
+1.2 Total de seções principais (mesas receptoras de votos) 2.270
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+2.270
+2.270
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 613.715
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 613.715
+2.2.2.1 Aptos nas seções apuradas 613.715
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 453.654
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+453.654
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+73,92%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 26,08% 160.061
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (ACRE)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+453.654
+432.228
+5.016
+16.410
+Votos nulos na urna 16.410
+95,28%
+1,11%
+3,62%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 432.228
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+287.715 66,57%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+144.513 33,43%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 19:18:03, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (AMAPÁ)
+Descrição Percentual Valor
+1.Seções eleitorais 1.971
+1.1 Total de seções agregadas 57
+1.2 Total de seções principais (mesas receptoras de votos) 1.914
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+1.914
+1.914
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 576.910
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 576.910
+2.2.2.1 Aptos nas seções apuradas 576.910
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 429.975
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+429.975
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+74,53%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 25,47% 146.935
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (AMAPÁ)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+429.975
+421.642
+3.320
+5.013
+Votos nulos na urna 5.013
+98,06%
+0,77%
+1,17%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 421.642
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+222.968 52,88%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+198.674 47,12%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 21:10:37, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (DISTRITO FEDERAL)
+Descrição Percentual Valor
+1.Seções eleitorais 7.050
+1.1 Total de seções agregadas 81
+1.2 Total de seções principais (mesas receptoras de votos) 6.969
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+6.969
+6.969
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 2.258.995
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 2.258.995
+2.2.2.1 Aptos nas seções apuradas 2.258.995
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 1.868.280
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+1.868.280
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+82,70%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 17,30% 390.715
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (DISTRITO FEDERAL)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+1.868.280
+1.804.766
+22.386
+41.128
+Votos nulos na urna 41.128
+96,60%
+1,20%
+2,20%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 1.804.766
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+979.542 54,28%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+825.224 45,72%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 21:23:12, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RIO GRANDE DO NORTE)
+Descrição Percentual Valor
+1.Seções eleitorais 8.336
+1.1 Total de seções agregadas 221
+1.2 Total de seções principais (mesas receptoras de votos) 8.115
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+8.115
+8.115
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 2.659.867
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 2.659.867
+2.2.2.1 Aptos nas seções apuradas 2.659.867
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 2.232.823
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+2.232.823
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+83,94%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 16,06% 427.044
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RIO GRANDE DO NORTE)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+2.232.823
+2.151.005
+19.939
+61.879
+Votos nulos na urna 61.879
+96,34%
+0,89%
+2,77%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 2.151.005
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+1.413.596 65,72%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+737.409 34,28%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+Resultado em 25/10/2026 - 21:19:43, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RIO GRANDE DO SUL)
+Descrição Percentual Valor
+1.Seções eleitorais 27.738
+1.1 Total de seções agregadas 191
+1.2 Total de seções principais (mesas receptoras de votos) 27.547
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+27.547
+27.547
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 8.522.318
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 8.522.318
+2.2.2.1 Aptos nas seções apuradas 8.522.318
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 6.889.638
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+6.889.638
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+80,84%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 19,16% 1.632.680
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RIO GRANDE DO SUL)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+6.889.638
+6.698.930
+89.463
+101.245
+Votos nulos na urna 101.245
+97,23%
+1,30%
+1,47%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 6.698.930
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+3.874.378 57,84%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+2.824.552 42,16%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 21:32:27, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RONDÔNIA)
+Descrição Percentual Valor
+1.Seções eleitorais 4.941
+1.1 Total de seções agregadas 243
+1.2 Total de seções principais (mesas receptoras de votos) 4.698
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+4.698
+4.698
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 1.265.926
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 1.265.926
+2.2.2.1 Aptos nas seções apuradas 1.265.926
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 988.489
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+988.489
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+78,08%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 21,92% 277.437
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RONDÔNIA)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+988.489
+968.828
+8.361
+11.300
+Votos nulos na urna 11.300
+98,01%
+0,85%
+1,14%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 968.828
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+674.382 69,61%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+294.446 30,39%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 20:09:56, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RORAIMA)
+Descrição Percentual Valor
+1.Seções eleitorais 1.627
+1.1 Total de seções agregadas 108
+1.2 Total de seções principais (mesas receptoras de votos) 1.519
+1.3 Total de seções não instaladas 0
+2.1 Seções que funcionaram
+2.1.1 Seções apuradas em urnas eletrônicas
+1.519
+1.519
+2.1.2 Seções apuradas pelo Sistema de Apuração (SA) 0
+2.1.5 Seções não apuradas 0
+2.1.4 Seções anuladas e apuradas em separado 0
+2.2 Eleitorado apto a votar 401.540
+2.2.1 Aptos nas seções não instaladas 0
+2.2.2 Aptos nas seções que funcionaram 401.540
+2.2.2.1 Aptos nas seções apuradas 401.540
+2.2.2.2 Aptos nas seções não apuradas 0
+2.3 Comparecimento 308.597
+2.3.1 Votantes nas urnas eletrônicas
+2.3.2 Votantes nas seções apuradas pelo Sistema de Apuração (SA)
+2.3.3 Votantes nas seções anuladas
+2.3.4 Votantes nas seções anuladas e apuradas em separado
+308.597
+0
+0
+0
+2.3.5 Votantes nas seções não apuradas 0
+76,85%
+2.1.3 Seções anuladas 0
+2.4 Abstenção 23,15% 92.943
+2. Eleição Majoritária
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Relatório Resultado da Totalização
+Resumo Geral (RORAIMA)
+Descrição Percentual Valor
+2.5 Totalização
+2.5.1 Total de votos - Presidente
+a) Votos a candidatos(as) concorrentes
+d) Votos em branco
+c) Votos nulos
+308.597
+303.180
+2.176
+3.241
+Votos nulos na urna 3.241
+98,24%
+0,71%
+1,05%
+100,00%
+Votos nulos técnico 0,00% 0
+Votos anulados 0,00% 0
+b) Votos anulados e apurados em separado 0,00% 0
+Votos anulados sub judice 0,00% 0
+Votos válidos 100,00% 303.180
+3. Recursos interpostos nas juntas eleitorais * 0
+4. Impugnações nas juntas eleitorais * 0
+(*) dados sujeitos a modificações em razão de impugnações ou recursos.
+Justiça Eleitoral/BR
+SISTOT - SISTEMA DE GERENCIAMENTO DA TOTALIZAÇÃO
+Eleição Geral Federal 2026 - 2º Turno
+Oficial
+25/10/2026
+23:28:44
+Eleições Gerais 2026 - 25/10/2026
+Resultado de votação
+Cargo: Presidente
+Destinação de votosCandidata ou candidato Votos computados % Votos
+computados **
+219.675 72,46%22 - FLAVIO NANTES BOLSONARO Válido
+ALFREDO GASPAR DE MENDONÇA NETO
+83.505 27,54%13 - LUIZ INÁCIO LULA DA SILVA Válido
+GERALDO JOSE RODRIGUES ALCKMIN FILHO
+Resultado em 25/10/2026 - 20:12:18, sujeito a modificações.
+**Percentual sobre a votação de todos(as) concorrentes.

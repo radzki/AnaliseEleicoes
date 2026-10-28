@@ -185,7 +185,7 @@
     title: 'Seções vs. totais oficiais, por campo',
     description: 'A conferência das seções contra os totais oficiais, com o nome de cada campo em português.',
     fn: (consistency) => {
-      const name = { 'Eligible voters': 'Eleitores aptos', Turnout: 'Comparecimento', Abstentions: 'Abstenções', 'Blank votes': 'Votos brancos', 'Null votes': 'Votos nulos', 'Valid votes': 'Votos válidos' };
+      const name = { 'Eligible voters': 'Eleitores aptos', Turnout: 'Comparecimento', Abstentions: 'Abstenções', 'Blank votes': 'Votos brancos', 'Null votes': 'Votos nulos', 'Valid votes': 'Votos válidos', 'Lula votes': 'Votos em Lula', 'Flávio votes': 'Votos em Flávio' };
       return consistency.map((r) => ({ ...r, campo: name[r.field] ?? r.field, turnos: r.rounds.replace('+', ' e ') }));
     },
   });

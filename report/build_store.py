@@ -22,11 +22,11 @@ DATASETS = {
     "corner": ("f626e357501a38d10fc42763841f768b", "Seções quase unânimes", "Seções do 2º turno de 2026 com comparecimento ≥ 95% e 90% ou mais dos votos para um candidato (Lula ou Flávio), com pelo menos 100 eleitores aptos, com os valores do 1º turno e o local de votação."),
     "timing": ("a6ffa75bed1ffacd6e5d9f8e5ebac9c4", "Progressão da apuração", "Fração dos votos recebidos e percentual de Lula entre os dois finalistas, em passos de 10 minutos a partir das 17h, por turno e ano."),
     "urna": ("be7704617c40d8c3469ee7afb8bfb098", "Resultados por modelo de urna", "Seções e percentual de Lula por modelo de urna, bruto e comparado com outras urnas do mesmo local de votação."),
-    "consistency": ("1243a9b36bf84e5e31307154ce8e1f24", "Seções vs. totais oficiais", "Boletins das seções somados por unidade município-zona, comparados aos totais publicados separadamente pelo TSE, campo a campo."),
+    "consistency": ("1243a9b36bf84e5e31307154ce8e1f24", "Seções vs. totais oficiais", "Boletins das seções somados por unidade município-zona, comparados aos totais publicados separadamente pelo TSE, campo a campo e, em 2026, turno a turno, incluindo os votos de cada finalista."),
     "strongholds": ("4383205ada88579925d457050b3709f2", "Redutos e comparecimento quase total", "Por ano e turno, seções com 100 ou mais eleitores aptos: todas, as com Lula ≥ 90% e as com o candidato Bolsonaro ≥ 90% (eleitores aptos, votantes, comparecimento e quantas chegaram a 95% ou mais de comparecimento); e as mesmas seções do 2º turno comparadas uma a uma entre 2022 e 2026 (variação mediana de aptos e de votantes)."),
     "urna_logs": ("PENDENTE", "Registros (logs) de uma amostra de urnas", "Amostra de urnas do 2º turno de 2026 lida no site de resultados do TSE: por grupo (urnas quase unânimes, redutos de Lula e de Flávio, urnas sorteadas no país) e turno, votos computados depois das 17h (horário de Brasília), horário de encerramento e como os eleitores foram identificados (digital ou liberação manual pelo mesário); estimativa nacional de votos depois das 17h; conferência do número de votos com o comparecimento oficial."),
 }
-UPDATED_AT = {"corner": "2026-10-27T02:22:38Z", "strongholds": "2026-10-27T05:59:06Z"}
+UPDATED_AT = {"corner": "2026-10-27T02:22:38Z", "strongholds": "2026-10-27T05:59:06Z", "consistency": "2026-10-28T01:00:28Z"}
 docs = [("dash", "meta", {"title": "Eleições 2026 - Estatística Forense"}), ("dash", "params", {"cand": "ambos"})]
 for i, (aid, title, desc) in DATASETS.items():
     docs.append(("datasets", i, {"title": title, "description": f"{desc} {SRC}",
