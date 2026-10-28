@@ -59,27 +59,42 @@
     if (!el) return;
     const pl = row('more_tests', 'prop|planted');
     const nat = [
-      { label: '2018', v: row('more_tests', 'prop|2018').slope, color: REF },
-      { label: '2022', v: row('more_tests', 'prop|2022').slope, color: MUTED },
-      { label: '2026', v: row('more_tests', 'prop|2026').slope, color: FG },
-      { label: 'Se houvesse fraude', v: pl.slope, color: BAD },
-    ].sort((a, b) => a.v - b.v);
+      { key: '2018', label: '2018', v: row('more_tests', 'prop|2018').slope, ...YEAR[2018] },
+      { key: '2022', label: '2022', v: row('more_tests', 'prop|2022').slope, ...YEAR[2022] },
+      { key: '2026', label: '2026', v: row('more_tests', 'prop|2026').slope, ...YEAR[2026] },
+      { key: 'planted', label: '2026, se houvesse fraude', v: pl.slope, color: BAD, width: 1.75, dash: '5 4' },
+    ].map((d) => ({ ...d, pts: series('prop_bins', d.key).sort((a, b) => a.x - b.x) }));
     const refs = [{ ref: '2022', title: 'contra 2022', color: MUTED }, { ref: '2018', title: 'contra 2018', color: REF }];
     const gaps = refs.map((r) => series('prop_states', r.ref).sort((a, b) => a.y - b.y));
     const tip = vf.tooltip(el);
-    const [c1, c2] = vf.panels(el, ['No país', 'Diferença de 2026 para cada eleição de referência, estado por estado'], 'vf-stack');
-    // national: the points on one line, labels alternately above and below (some slopes nearly coincide)
+    const [c1, c2] = vf.panels(el, ['No país: quanto o PT ganhou a mais no 2º turno, pela força da direita no 1º',
+      'Diferença de 2026 para cada eleição de referência, estado por estado'], 'vf-stack');
+    // national: the sections in 20 equal groups by the right's round-1 edge over the rest of their polling
+    // place; each line's slope is the test's number
     {
-      const { s, w } = vf.svg(c1, 84);
-      const pad = vf.textWidth(s, nat.map((d) => d.label)) / 2 + 8;
-      const x = d3.scaleLinear(d3.extent(nat, (d) => d.v), [pad, w - pad]);
-      s.append('g').attr('transform', 'translate(0,64)').call(d3.axisBottom(x).ticks(4).tickFormat(d3f).tickSize(0).tickPadding(8)).call(vf.axis);
-      s.append('line').attr('x1', pad).attr('x2', w - pad).attr('y1', 32).attr('y2', 32).style('stroke', 'var(--cds-chart-grid)');
-      nat.forEach((d, i) => {
-        s.append('circle').attr('cx', x(d.v)).attr('cy', 32).attr('r', 6).style('fill', d.color);
-        s.append('text').attr('class', 'vf-tick').attr('x', x(d.v)).attr('y', i % 2 ? 54 : 16).attr('dy', '0.35em')
-          .attr('text-anchor', 'middle').style('fill', 'var(--color-fg)').text(d.label);
-      });
+      const pp = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + d1(Math.abs(v * 100));
+      vf.legend(c1, nat.map((d) => ({ label: `${d.label}: inclinação ${d3f(d.v)}`, color: d.color, line: true, dash: d.dash })));
+      const all = nat.flatMap((d) => d.pts);
+      const f = frame(c1, 260, d3.extent(all, (p) => p.x), d3.extent(all, (p) => p.y), { yFmt: pp, xFmt: pp });
+      f.s.append('line').attr('x1', f.x(0)).attr('x2', f.x(0)).attr('y1', 8).attr('y2', f.h - 24).style('stroke', REF);
+      for (const d of nat) {
+        path(f, d.pts, d);
+        f.s.selectAll(null).data(d.pts).join('circle').attr('cx', (p) => f.x(p.x)).attr('cy', (p) => f.y(p.y))
+          .attr('r', 2.5).style('fill', d.color);
+      }
+      f.s.append('text').attr('class', 'vf-tick').attr('x', f.w - 10).attr('y', f.h - 30).attr('text-anchor', 'end')
+        .style('fill', 'var(--color-fg)').text('direita mais forte que o resto do local (pontos) →');
+      f.s.append('text').attr('class', 'vf-tick').attr('x', f.ml + 6).attr('y', 14)
+        .style('fill', 'var(--color-fg)').text('↑ PT ganhou mais que o resto do local (pontos)');
+      const ref = nat.find((d) => d.key === '2026').pts;
+      f.s.append('rect').attr('x', f.ml).attr('width', f.w - 10 - f.ml).attr('height', f.h).style('fill', 'transparent')
+        .on('pointermove pointerdown', (ev) => {
+          const at = f.x.invert(d3.pointer(ev)[0]);
+          const i = d3.minIndex(ref, (p) => Math.abs(p.x - at));
+          tip.show(ev, `${i + 1}º de 20 grupos de seções`,
+            nat.map((d) => ({ label: d.label, value: `direita ${pp(d.pts[i].x)}, PT ${pp(d.pts[i].y)}` })));
+        })
+        .on('pointerleave', tip.leave);
     }
     // states: one strip per reference, one dot per state, stacked where they would overlap; the planted
     // program adds pl.added in every state

@@ -114,7 +114,7 @@ s = s[(s.v13_1 + s.v22_1 > 0) & (s.v13_2 + s.v22_2 > 0)].reset_index(drop=True)
 s["place"] = s.groupby(PLACE, sort=False).ngroup()
 
 
-def prop_slope(L2, R2, rows=None):
+def prop_slope(L2, R2, rows=None, bins=False):
     """Within-place slope of Lula's two-party swing on the right candidate's round-1 two-party share,
     with the round-1 share of the other candidates as a control (rows: a subset of s, e.g. one state)."""
     p1 = s.v13_1 / (s.v13_1 + s.v22_1)
@@ -136,25 +136,34 @@ def prop_slope(L2, R2, rows=None):
     np.add.at(U, codes, X * e[:, None])
     bread = np.linalg.inv(X.T @ X)
     V = bread @ (U.T @ U) @ bread
-    return {"slope": float(beta[0]), "se": float(np.sqrt(V[0, 0])), "others_coef": float(beta[1]),
-            "sections": int(len(df))}
+    out = {"slope": float(beta[0]), "se": float(np.sqrt(V[0, 0])), "others_coef": float(beta[1]),
+           "sections": int(len(df))}
+    if bins:  # for the chart: sections in 20 equal groups by x, with the mean swing net of the control
+        b = pd.qcut(X[:, 0], 20, labels=False, duplicates="drop")
+        d = pd.DataFrame({"x": X[:, 0], "y": y - beta[1] * X[:, 1], "b": b}).groupby("b")
+        out["bins"] = [{"x": float(r.x), "y": float(r.y), "n": int(r.n)}
+                       for r in d.agg(x=("x", "mean"), y=("y", "mean"), n=("y", "size")).itertuples()]
+    return out
 
 
 log("B. proportional swing")
 L2, R2 = s.v13_2.values, s.v22_2.values
-res["prop_swing"] = {"real": prop_slope(L2, R2), "planted": [],
+res["prop_swing"] = {"real": prop_slope(L2, R2, bins=True), "planted": [],
                      # the same slope state by state: how much it moves between elections without a program,
                      # which would add the same amount in every state
-                     "by_state": {uf: prop_slope(L2, R2, (s.SG_UF == uf).values)["slope"] for uf in sorted(s.SG_UF.unique())}}
+                     "by_state": {uf: prop_slope(L2, R2, (s.SG_UF == uf).values)["slope"] for uf in sorted(s.SG_UF.unique())},
+                     # round-1 votes for neither finalist: those voters choose again in the runoff, which tilts the slope
+                     "others": float(1 - (r1.v13.sum() + r1.v22.sum()) / r1.n.sum()),
+                     "others_by_state": {uf: float(1 - (g.v13.sum() + g.v22.sum()) / g.n.sum()) for uf, g in r1.groupby("SG_UF")}}
 for who in ("right", "lula"):
     # a program flipping a fixed share of one candidate's runoff votes, in every machine, round 2 only
     src = R2 if who == "right" else L2
     q = MOVE / src.sum()
     k = rng.binomial(src, q)
     L2p, R2p = (L2 + k, R2 - k) if who == "right" else (L2 - k, R2 + k)
-    res["prop_swing"]["planted"].append({"from": who, "flip_share": float(q), **prop_slope(L2p, R2p)})
-    log(f"  planted, {q:.1%} of {who}'s runoff votes:", res["prop_swing"]["planted"][-1])
-log("  real:", res["prop_swing"]["real"])
+    res["prop_swing"]["planted"].append({"from": who, "flip_share": float(q), **prop_slope(L2p, R2p, bins=True)})
+    log(f"  planted, {q:.1%} of {who}'s runoff votes:", {k: v for k, v in res["prop_swing"]["planted"][-1].items() if k != "bins"})
+log("  real:", {k: v for k, v in res["prop_swing"]["real"].items() if k != "bins"})
 
 
 # ---------------------------------------------------------------------------------

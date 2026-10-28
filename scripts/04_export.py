@@ -350,6 +350,15 @@ rows.append({"id": "prop|states|2018", "units": len(g18), "gap_min": g18.min(), 
 # how far the slope moved between the two reference elections, with no program in either
 moved = MT[2018]["prop_swing"]["real"]["slope"] - MT[2022]["prop_swing"]["real"]["slope"]
 rows.append({"id": "prop|years", "moved_2018_2022": moved, "times_added": moved / (pl["slope"] - real)})
+# why 2018's slope is so much steeper: across states, it rises with the round-1 vote for neither finalist
+ps18 = MT[2018]["prop_swing"]
+o18 = pd.DataFrame({"others": ps18["others_by_state"], "slope": ps18["by_state"]}).dropna()
+top = o18.others.idxmax()
+assert top == "CE", top  # the text names Ceará (Ciro Gomes)
+rows.append({"id": "prop|others", **{f"others_{y}": MT[y]["prop_swing"]["others"] for y in MT},
+             "corr_2018": o18.corr().iloc[0, 1], "top_others": o18.others[top], "top_slope": o18.slope[top],
+             "top_rank": int((o18.slope >= o18.slope[top]).sum())})
+assert rows[-1]["top_rank"] == 1  # and calls its slope the steepest
 rows.append({"id": "shpilkin|bound", "margin_after": margin - m["shpilkin"]["2"]["national"]["lula"]})
 # the national figure comes from differences between states: runoff turnout change 2022 -> 2026 in the states
 # where Lula had 60% or more in 2026, and in the others
@@ -405,6 +414,11 @@ dump("tres_eleicoes", rows)
 # tres_eleicoes read them there
 rows = []
 for y, m in MT.items():
+    # the sections behind each national slope, in 20 groups; for 2026, also with the planted program
+    rows += [{"chart": "prop_bins", "series": str(y), "x": b["x"], "y": b["y"]} for b in m["prop_swing"]["real"]["bins"]]
+    if y == 2026:
+        pl = next(p for p in m["prop_swing"]["planted"] if p["from"] == "right")
+        rows += [{"chart": "prop_bins", "series": "planted", "x": b["x"], "y": b["y"]} for b in pl["bins"]]
     for ref in (2022, 2018):
         for uf, v in m["prop_swing"]["by_state"].items():
             if uf in MT[ref]["prop_swing"]["by_state"] and y == 2026:
