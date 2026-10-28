@@ -129,6 +129,9 @@
       L1: unzig('lula_1', 'lula'), F1: unzig('flavio_1', 'flavio'),
       C1: unzig('comparecimento_1', 'comparecimento'), A1: unzig('aptos_1', 'aptos'),
     };
+    // sections of each state: the integrity test draws its machines state by state
+    D.byUf = meta.ufs.map(() => []);
+    for (let i = 0; i < n; i++) D.byUf[col.uf[i]].push(i);
     // chance that a binomial redraw of each section lands on a whole percentage (expected value of
     // the integer-percentage test), for Lula's share and for turnout
     D.pL = new Float64Array(n); D.pT = new Float64Array(n);
@@ -524,16 +527,17 @@
     ui.score.innerHTML = !sim ? 'Sem fraude, não há o que aparecer: os números são os reais. Escolha uma fraude ao lado.'
       : bad ? `<b>A fraude aparece em ${bad} dos ${rows.length} testes.</b>`
         : `<b>A fraude não aparece em nenhum dos ${rows.length} testes.</b> ${state.type === 'software' ? `Uma troca igual em todas as urnas parece um eleitorado que mudou um pouco de ideia: nos números, as duas coisas são idênticas${forWinner ? `, e por isso os números sozinhos não descartam uma fraude assim a favor de ${NAME[state.ben]}` : ''}.` : 'Ela é pequena demais, ou espalhada demais, para deixar marca nos números.'}`;
-    if (sim && !bad && state.type === 'software') ui.score.innerHTML += ` <b>Mas o teste de integridade a pegaria:</b> com o programa em todas as urnas, as urnas sorteadas para o teste também estariam adulteradas, e ${swapped()}. Basta um voto trocado para o boletim não bater com as cédulas de papel.`;
-    else if (sim && !bad && state.type === 'flip') ui.score.innerHTML += ` Fora destes números, a chance de o teste de integridade sortear pelo menos uma das ${int(f.machines)} urnas adulteradas é de <b>${integrity(f.machines).chance}</b>.`;
+    const caught = integrity(f);
+    if (sim && !bad && state.type === 'software') ui.score.innerHTML += ` <b>Mas o teste de integridade a pegaria</b>, se o programa não souber distinguir o teste de uma votação real: com o programa em todas as urnas, as urnas sorteadas para o teste também estariam adulteradas, e ${swapped()}. Basta um voto trocado para o boletim não bater com as cédulas de papel.`;
+    else if (sim && !bad && state.type === 'flip') ui.score.innerHTML += ` Fora destes números, a chance de o teste de integridade sortear pelo menos uma das ${int(f.machines)} urnas adulteradas é de <b>${caught.chance}</b>.`;
     if (forWinner && bad) ui.score.innerHTML += ` Se a vitória de ${NAME[state.ben]} tivesse vindo de uma fraude assim, os números reais teriam essas marcas. Compare a coluna Real com 2022, anotado abaixo de cada número.`;
     let g = '';
     ui.tbody.innerHTML = rows.map((r) => {
       const head = r.g !== g ? `<tr class="vf-sim-group"><th colspan="4" scope="colgroup">${(g = r.g)}</th></tr>` : '';
       return `${head}<tr${r.bad ? ' class="vf-sim-hit"' : ''}><th scope="row">${r.label}${r.what ? `<small>${r.what}</small>` : ''}</th><td class="vf-n">${r.real}</td><td class="vf-n">${r.now}${r.note ? `<small>${r.note}</small>` : ''}</td><td><span class="vf-chip ${r.bad ? 'vf-bad' : 'vf-ok'}">${r.bad ? 'Sim' : 'Não'}</span></td></tr>`;
     }).join('');
-    renderOutside(f);
-    announce(sim ? `Simulação: vence ${NAME[win]}, por ${int(Math.abs(l - fl))} votos. A fraude aparece em ${bad} dos ${rows.length} testes${!bad && state.type === 'software' ? ', mas o teste de integridade a pegaria' : ''}.` : 'Resultado real, sem fraude.');
+    renderOutside(f, caught);
+    announce(sim ? `Simulação: vence ${NAME[win]}, por ${int(Math.abs(l - fl))} votos. A fraude aparece em ${bad} dos ${rows.length} testes${!bad && state.type === 'software' ? ', mas o teste de integridade a pegaria, se o programa não reconhecer o teste' : ''}.` : 'Resultado real, sem fraude.');
   }
   // one short summary for screen readers, once the controls stop moving
   let said = 0;
@@ -542,28 +546,36 @@
     said = setTimeout(() => { ui.status.textContent = text; }, 900);
   }
 
-  // chance that the integrity test draws at least one of M tampered machines (hypergeometric)
-  function integrity(M) {
-    const N = D.n, a = D.meta.integrity_test_machines;
+  // The integrity test draws its machines state by state. The national total is split evenly among
+  // the 27 states (20 each, the lowest number reported), and none are drawn abroad.
+  const perUf = () => D.meta.integrity_test_machines / D.meta.ufs.filter((u) => u !== 'ZZ').length;
+  // chance that at least one tampered machine is drawn: one minus the chance of missing them in
+  // every state (hypergeometric within each state)
+  function integrity(f) {
+    const a = perUf(), M = new Array(D.byUf.length).fill(0);
+    if (f.list) for (const i of f.list) M[D.uf[i]]++;
     let pMiss = 1;
-    for (let j = 0; j < a && pMiss > 1e-300; j++) pMiss *= (N - M - j) / (N - j);
-    const pHit = M ? 1 - Math.max(0, pMiss) : 0;
-    return { pHit, chance: pHit > 0.999999 ? 'praticamente 100%' : pHit < 0.0001 && M ? 'menos de 0,01%' : pct(pHit, pHit > 0.99 ? 2 : 1) };
+    D.byUf.forEach((idx, s) => {
+      if (D.meta.ufs[s] === 'ZZ') return;
+      const N = idx.length, m = f.list ? M[s] : N; // no list: the software is in every machine
+      for (let j = 0; j < a && pMiss > 1e-300; j++) pMiss *= Math.max(0, (N - m - j) / (N - j));
+    });
+    const pHit = f.machines ? 1 - pMiss : 0;
+    return { pHit, chance: pHit > 0.999999 ? 'praticamente 100%' : pHit === 0 ? '0%' : pHit < 0.0001 ? 'menos de 0,01%' : pct(pHit, pHit > 0.99 ? 2 : 1) };
   }
   // what a tampered machine does to the known votes typed in during the integrity test
   const swapped = () => `${Number.isInteger(state.intensity) ? state.intensity : dec(state.intensity)}% dos votos de ${NAME[state.ben === 'lula' ? 'flavio' : 'lula']} digitados no teste sairiam no boletim como votos de ${NAME[state.ben]}`;
 
-  function renderOutside(f) {
-    const N = D.n, a = D.meta.integrity_test_machines;
+  function renderOutside(f, { pHit, chance }) {
+    const N = D.n, a = D.meta.integrity_test_machines, per = perUf();
     const M = f.machines;
-    const { pHit, chance } = integrity(M);
     const sw = SOFTWARE(state.type);
     let html;
     if (!M) html = '<p>Sem fraude, não há nada para os controles de fora destes dados encontrarem.</p>';
     else if (sw) html = `<p class="vf-sim-verdict"><span class="vf-chip ${pHit > 0.99 ? 'vf-bad' : 'vf-warn'}">${M === N ? 'O teste de integridade pegaria' : `${chance} de chance de ser pega`}</span></p>
-      <p><b>Teste de integridade:</b> no dia da eleição, cerca de ${int(a)} urnas sorteadas (de 20 a 33 por estado) são trocadas por urnas reservas, e as originais recebem, em um local público e com filmagem, votos conhecidos de cédulas de papel. O boletim tem de bater com as cédulas. ${M === N ? `Com o programa em todas as urnas, todas as urnas do teste estariam adulteradas: ${swapped()}. Basta um voto trocado para o boletim não bater` : `Com ${int(M)} urnas adulteradas entre ${int(N)}, a chance de pelo menos uma ser sorteada é de <b>${chance}</b>; numa urna adulterada, ${swapped()}`}.</p>
-      <p class="vf-sim-actions"><button type="button" class="vf-btn" id="sim-draw">Sortear as ${int(a)} urnas do teste</button> <span id="sim-draw-out" aria-live="polite"></span></p>
-      <p class="vf-sim-note">Isso vale se o programa adulterado não souber distinguir o teste de uma votação real; por isso o teste é filmado e, desde 2022, usa a biometria de eleitores de verdade. O teste de autenticidade confere, em outras urnas sorteadas, a assinatura digital do programa instalado.</p>`;
+      <p><b>Teste de integridade:</b> no dia da eleição, pelo menos ${int(a)} urnas sorteadas (de 20 a 33 por estado) são trocadas por urnas reservas, e as originais recebem, em um local público e com filmagem, votos conhecidos de cédulas de papel. O boletim tem de bater com as cédulas. ${M === N ? `Com o programa em todas as urnas, todas as urnas do teste estariam adulteradas: ${swapped()}. Basta um voto trocado para o boletim não bater` : `Com ${int(M)} urnas adulteradas entre ${int(N)}, a chance de pelo menos uma ser sorteada é de <b>${chance}</b>; numa urna adulterada, ${swapped()}`}.</p>
+      <p class="vf-sim-actions"><button type="button" class="vf-btn" id="sim-draw">Sortear as urnas do teste (${int(per)} por estado)</button> <span id="sim-draw-out" aria-live="polite"></span></p>
+      <p class="vf-sim-note">Como o sorteio, a chance é calculada estado por estado, com ${int(per)} urnas por estado (o mínimo) e nenhuma no exterior; com mais urnas sorteadas, ela só aumenta. Isso vale se o programa adulterado não souber distinguir o teste de uma votação real; por isso o teste é filmado e, desde 2022, parte das urnas do teste é liberada com a biometria de eleitores de verdade. O teste de autenticidade confere, em outras urnas sorteadas, a assinatura digital do programa instalado.</p>`;
     else if (state.type === 'stuff') html = `<p><b>Encher urnas é feito por pessoas, não pelo programa</b>, então o teste de integridade não pega. Quem pega: os fiscais dos partidos dentro da seção, a identificação de cada eleitor (biometria ou liberação manual pelo mesário, registrada no registro de eventos da urna, que é público) e a pergunta 8 desta página, que olha esses registros. Votar no lugar de ${int(f.moved)} ausentes exigiria a cumplicidade dos mesários de ${int(M)} seções.</p>`;
     else html = `<p><b>Reescrever o boletim depois da votação</b> esbarra no boletim impresso: uma via fica afixada na seção ao fim da votação, com QR code, e os fiscais e qualquer eleitor podem fotografá-la. O arquivo publicado tem assinatura digital da urna. Um boletim com números diferentes dos impressos seria descoberto por comparação direta, sem estatística nenhuma.</p>`;
     ui.outside.innerHTML = html;
@@ -571,12 +583,16 @@
     if (btn) btn.addEventListener('click', () => {
       const r = mulberry32((Date.now() & 0xffffffff) ^ state.seed);
       const hit = f.list ? new Set(f.list) : null; // null: the software is in every machine
-      let found = 0;
-      const seen = new Set();
-      while (seen.size < a) { const i = Math.floor(r() * N); if (!seen.has(i)) { seen.add(i); if (!hit || hit.has(i)) found++; } }
+      let found = 0, drawn = 0;
+      D.byUf.forEach((idx, s) => {
+        if (D.meta.ufs[s] === 'ZZ') return;
+        const seen = new Set();
+        while (seen.size < Math.min(per, idx.length)) { const i = idx[Math.floor(r() * idx.length)]; if (!seen.has(i)) { seen.add(i); if (!hit || hit.has(i)) found++; } }
+        drawn += seen.size;
+      });
       document.getElementById('sim-draw-out').innerHTML = found
-        ? `<span class="vf-chip vf-bad">Descoberta</span> ${found === a ? `Todas as ${int(a)} urnas sorteadas` : `${int(found)} das ${int(a)} urnas sorteadas`} estavam adulteradas.`
-        : '<span class="vf-chip vf-ok">Passou</span> Nenhuma urna adulterada foi sorteada desta vez.';
+        ? `<span class="vf-chip vf-bad">Descoberta</span> ${found === drawn ? `Todas as ${int(drawn)} urnas sorteadas estavam adulteradas` : `${int(found)} das ${int(drawn)} urnas sorteadas ${found === 1 ? 'estava adulterada' : 'estavam adulteradas'}`}.`
+        : `<span class="vf-chip vf-ok">Passou</span> Nenhuma das ${int(drawn)} urnas sorteadas estava adulterada desta vez.`;
     });
   }
 
