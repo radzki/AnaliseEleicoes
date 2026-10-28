@@ -10,7 +10,9 @@ import hashlib
 import html
 import re
 import shutil
+import subprocess
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 repo, out = Path(sys.argv[1]), Path(sys.argv[2])
@@ -60,7 +62,18 @@ m = re.match(r"\s*<style>\n?(.*?)</style>\n?", frag, re.S)
 style, body = m.group(1), frag[m.end():]
 items = "\n".join(f'    <li><a href="data/{i}.json" title="{html.escape(desc)}">{html.escape(title)}</a></li>'
                   for i, (_, title, desc) in DATASETS.items())
+# "Última atualização" in the footer: the time of the last commit (what was published), or of this
+# build outside git. Brasília has had no daylight saving time since 2019, so UTC-3 all year.
+try:
+    stamp = subprocess.run(["git", "-C", str(repo), "log", "-1", "--format=%cI"], capture_output=True, text=True,
+                           check=True).stdout.strip()
+    updated = datetime.fromisoformat(stamp)
+except (OSError, subprocess.CalledProcessError, ValueError):
+    updated = datetime.now(timezone.utc)
+updated = updated.astimezone(timezone(timedelta(hours=-3)))
 page = (web / "page.html").read_text(encoding="utf-8")
+page = (page.replace("{{updated_iso}}", updated.isoformat(timespec="minutes"))
+        .replace("{{updated}}", f"{updated:%d/%m/%Y}, às {updated:%H}h{updated:%M}"))
 page = (page.replace("{{dataset_ids}}", " ".join(DATASETS)).replace("{{style}}", style.rstrip())
         .replace("{{datasets}}", items).replace("{{body}}", body.strip()))
 (out / "index.html").write_text(fingerprint(page), encoding="utf-8")
