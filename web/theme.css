@@ -165,3 +165,9 @@ div.dash-skeleton { min-height: 12rem; }
 .site-foot p { margin: 0 0 var(--cds-gap-sm); }
 .site-foot ul { margin: 0 0 var(--cds-gap-md); padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-lg); }
 .site-foot a:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; border-radius: 3px; }
+/* The repository opens the footer as its signature: the GitHub mark beside the name, at heading size. */
+.site-foot-repo { display: inline-flex; align-items: flex-start; gap: var(--cds-gap-md); margin: var(--cds-gap-sm) 0 var(--cds-gap-xl); color: var(--color-fg); text-decoration: none; }
+.site-foot-repo svg { width: 36px; height: 36px; flex: none; }
+.site-foot-name { display: block; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.site-foot-repo:hover .site-foot-name { text-decoration-thickness: 2px; }
+.site-foot-what { display: block; margin-top: 2px; color: var(--color-fg-muted); }
