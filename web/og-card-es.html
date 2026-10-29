@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tarjeta para compartir</title>
+<style>
+  @font-face { font-family: "Atkinson Hyperlegible Next"; src: url("fonts/AtkinsonHyperlegibleNext-latin.woff2") format("woff2"); font-weight: 200 800; }
+  html, body { margin: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #ffffff; color: #14171c;
+          font-family: "Atkinson Hyperlegible Next", system-ui, sans-serif; }
+  .card { box-sizing: border-box; height: 100%; padding: 64px 72px 56px; display: grid;
+           grid-template-columns: 1fr 400px; grid-template-rows: 1fr auto; column-gap: 64px; }
+  h1 { margin: 0; font-size: 58px; line-height: 1.08; font-weight: 750; letter-spacing: -0.015em; }
+  .answer { margin: 36px 0 0; padding-top: 28px; border-top: 3px solid #14171c; font-size: 31px; line-height: 1.3; font-weight: 500; }
+  .chart { align-self: center; }
+  .chart p { margin: 0 0 18px; font-size: 21px; line-height: 1.3; color: #4a515c; }
+  .ref { font-size: 18px; fill: #14171c; }
+  .who { font-size: 22px; font-weight: 650; fill: #14171c; }
+  .foot { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline;
+           font-size: 22px; color: #4a515c; }
+  .foot b { color: #14171c; font-weight: 650; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div>
+    <h1>¿Muestran señales de fraude los números de la elección de 2026?</h1>
+    <p class="answer">No se encontraron señales de fraude manual capaces de cambiar el resultado.</p>
+  </div>
+  <div class="chart">
+    <p>Último dígito de cada conteo de votos, segunda vuelta</p>
+    <svg viewBox="0 0 400 250" width="400" height="250" aria-hidden="true">
+  <line x1="0" x2="400" y1="202.0" y2="202.0" stroke="#b9bec6"/>
+  <rect x="2.0" y="43.2" width="12.8" height="158.8" rx="2" fill="#c62f2f"/><rect x="18.8" y="44.4" width="12.8" height="157.6" rx="2" fill="#c62f2f"/><rect x="35.6" y="43.9" width="12.8" height="158.1" rx="2" fill="#c62f2f"/><rect x="52.4" y="43.9" width="12.8" height="158.1" rx="2" fill="#c62f2f"/><rect x="69.2" y="43.7" width="12.8" height="158.3" rx="2" fill="#c62f2f"/><rect x="86.0" y="43.9" width="12.8" height="158.1" rx="2" fill="#c62f2f"/><rect x="102.8" y="43.6" width="12.8" height="158.4" rx="2" fill="#c62f2f"/><rect x="119.6" y="43.7" width="12.8" height="158.3" rx="2" fill="#c62f2f"/><rect x="136.4" y="43.9" width="12.8" height="158.1" rx="2" fill="#c62f2f"/><rect x="153.2" y="42.4" width="12.8" height="159.6" rx="2" fill="#c62f2f"/>
+  <rect x="234.0" y="43.4" width="12.8" height="158.6" rx="2" fill="#1d64c2"/><rect x="250.8" y="44.0" width="12.8" height="158.0" rx="2" fill="#1d64c2"/><rect x="267.6" y="43.8" width="12.8" height="158.2" rx="2" fill="#1d64c2"/><rect x="284.4" y="42.0" width="12.8" height="160.0" rx="2" fill="#1d64c2"/><rect x="301.2" y="44.0" width="12.8" height="158.0" rx="2" fill="#1d64c2"/><rect x="318.0" y="43.4" width="12.8" height="158.6" rx="2" fill="#1d64c2"/><rect x="334.8" y="43.3" width="12.8" height="158.7" rx="2" fill="#1d64c2"/><rect x="351.6" y="43.7" width="12.8" height="158.3" rx="2" fill="#1d64c2"/><rect x="368.4" y="43.8" width="12.8" height="158.2" rx="2" fill="#1d64c2"/><rect x="385.2" y="45.4" width="12.8" height="156.6" rx="2" fill="#1d64c2"/>
+  <line x1="0" x2="400" y1="43.7" y2="43.7" stroke="#14171c" stroke-dasharray="6 5" stroke-width="1.5"/>
+  <text x="400" y="33.7" text-anchor="end" class="ref">1 de cada 10</text>
+  <text x="0" y="232.0" class="who">Lula</text>
+  <text x="232" y="232.0" class="who">Flávio</text>
+</svg>
+  </div>
+  <div class="foot"><b>eleicoes.radzkitech.com</b><span>Estadística forense con los datos abiertos del TSE</span></div>
+</div>
+</body>
+</html>

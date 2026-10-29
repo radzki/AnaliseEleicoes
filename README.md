@@ -51,7 +51,7 @@ scripts/02_analyze.py      testes forenses -> results/results_<ano>.json, states
 scripts/03_consistency.py  soma das seções x totais oficiais por município e zona, por turno
 scripts/04_export.py       results/*.json -> results/dash/*.json, as tabelas que o relatório lê
 scripts/05_site.py         monta o site estático em site/
-scripts/06_og_image.py     gera a imagem de compartilhamento (web/og.png)
+scripts/06_og_image.py     gera a imagem de compartilhamento (web/og.png, e web/og-<idioma>.png para cada tradução)
 scripts/07_urna_logs.py    lê os registros (logs) de uma amostra de urnas no site de resultados do TSE
 scripts/08_runoff_totals.py  soma das seções x votos de cada candidato por município e zona e x relatório oficial do 2º turno
 scripts/09_sim_data.py     empacota as seções do 2º turno de 2026 para a aba "Tente fraudar!" (results/sim)

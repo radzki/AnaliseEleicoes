@@ -41,6 +41,8 @@ for name in ("dash.js", "theme.css", "_headers", "robots.txt", "404.html", "og.p
     shutil.copy2(web / name, out / name)
 for d in ("vendor", "fonts"):
     shutil.copytree(web / d, out / d)
+for f in web.glob("og-*.png"):  # the link-preview card of each translation (scripts/06_og_image.py)
+    shutil.copy2(f, out / f.name)
 scripts = re.findall(r'<script src="([^"/]+\.js)"></script>', (rep / "index.html").read_text(encoding="utf-8"))
 for name in scripts:
     if name != "i18n.js":  # written per language below
@@ -166,7 +168,9 @@ for lang in LANGS:
     items = "\n".join(f'    <li><a href="data/{i}.json" title="{html.escape(desc)}">{html.escape(title)}</a></li>'
                       for i, (_, title, desc) in DATASETS.items())
     page = fill(page_src, T, "web/page.html")
-    page = (page.replace("{{url}}", url[lang]).replace("{{alternates}}", alternates if len(LANGS) > 1 else "")
+    og = "og.png" if lang == "pt-BR" else f"og-{lang}.png"
+    assert (out / og).is_file(), f"no {og}: run scripts/06_og_image.py"
+    page = (page.replace("{{url}}", url[lang]).replace("{{og_image}}", SITE + og).replace("{{alternates}}", alternates if len(LANGS) > 1 else "")
             .replace("{{updated_iso}}", updated.isoformat(timespec="minutes"))
             .replace("{{updated}}", updated.strftime(T["shell.date_fmt"])))
     page = (page.replace("{{dataset_ids}}", " ".join(DATASETS)).replace("{{style}}", style.rstrip())

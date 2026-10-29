@@ -723,5 +723,11 @@
  "js.testcharts.iso.tip_head": "Escore {score} ou mais",
  "js.testcharts.iso.legend_cut": "Corte de 0,60",
  "shell.langs": "Idioma",
- "shell.pending": "Ainda não traduzido"
+ "shell.pending": "Ainda não traduzido",
+ "og.title": "Cartão de compartilhamento",
+ "og.h1": "Os números da eleição de 2026 mostram sinais de fraude?",
+ "og.answer": "Não foram encontrados sinais de fraude manual capazes de mudar o resultado.",
+ "og.chart": "Último algarismo de cada contagem de votos, 2º turno",
+ "og.ref": "1 em cada 10",
+ "og.foot": "Estatística forense com os dados abertos do TSE"
 }

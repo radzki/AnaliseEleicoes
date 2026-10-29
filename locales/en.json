@@ -2878,5 +2878,29 @@
  "shell.pending": {
   "text": "Not translated yet",
   "from": "07fecd6768"
+ },
+ "og.title": {
+  "text": "Share card",
+  "from": "1c2c962bb1"
+ },
+ "og.h1": {
+  "text": "Do the numbers from the 2026 election show signs of fraud?",
+  "from": "abd3cba9b4"
+ },
+ "og.answer": {
+  "text": "No signs of manual fraud capable of changing the result were found.",
+  "from": "9b6866d96c"
+ },
+ "og.chart": {
+  "text": "Last digit of each vote count, runoff",
+  "from": "afaa88f857"
+ },
+ "og.ref": {
+  "text": "1 in 10",
+  "from": "4a3c886bf9"
+ },
+ "og.foot": {
+  "text": "Election forensics with the TSE's open data",
+  "from": "a0a6cbb46b"
  }
 }
