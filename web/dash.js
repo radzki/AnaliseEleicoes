@@ -7,7 +7,13 @@ window.dash = (() => {
   const DATASETS = new Set((document.currentScript.dataset.datasets ?? '').split(' ').filter(Boolean));
   // Files resolve from the site root, where this script is, so a page in /en/ finds data/ there too.
   const ROOT = new URL('.', document.currentScript.src);
-  const url = (path) => new URL(path, ROOT).href;
+  // Data files carry the version of the whole data set (written by scripts/05_site.py into i18n.js), so a
+  // browser that kept yesterday's file for an hour can't mix it with today's scripts.
+  const url = (path) => {
+    const u = new URL(path, ROOT);
+    if (window.VF_DATA_VERSION) u.searchParams.set('v', window.VF_DATA_VERSION);
+    return u.href;
+  };
   const store = new Map();
   const calcs = new Map();
   const cache = new Map();

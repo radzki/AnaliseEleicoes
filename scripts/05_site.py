@@ -146,6 +146,13 @@ except (OSError, subprocess.CalledProcessError, ValueError):
 updated = updated.astimezone(timezone(timedelta(hours=-3)))
 
 url = {lang: SITE if lang == "pt-BR" else f"{SITE}{lang}/" for lang in LANGS}
+# one version for the whole data set, which the page's scripts add to every data request (dash.url): the
+# host lets browsers keep data/ for an hour, and a new script with yesterday's data can break
+h = hashlib.sha256()
+for f in sorted((out / "data").rglob("*")):
+    if f.is_file():
+        h.update(f.relative_to(out).as_posix().encode()); h.update(f.read_bytes())
+DATA_VERSION = h.hexdigest()[:10]
 alternates = "\n".join([f'<link rel="alternate" hreflang="{lang}" href="{url[lang]}">' for lang in LANGS]
                        + [f'<link rel="alternate" hreflang="x-default" href="{SITE}">'])
 frag_src, page_src = (rep / "index.html").read_text(encoding="utf-8"), (web / "page.html").read_text(encoding="utf-8")
@@ -157,7 +164,7 @@ for lang in LANGS:
     (page_dir / "i18n.js").write_text(
         f"// Written by scripts/05_site.py from locales/{lang}.json: the text of the report scripts.\n"
         "window.VF_I18N = " + json.dumps({k: v for k, v in T.items() if k.startswith("js.")}, ensure_ascii=False,
-                                         indent=0) + ";\n", encoding="utf-8")
+                                         indent=0) + ";\n" + f"window.VF_DATA_VERSION = {json.dumps(DATA_VERSION)};\n", encoding="utf-8")
     current = ' aria-current="page"'
     links = "".join(f'<a href="{url[l].removeprefix(SITE[:-1])}" hreflang="{l}" lang="{l}"{current if l == lang else ""}>'
                     f'{NAMES[l]}</a>' for l in LANGS)
