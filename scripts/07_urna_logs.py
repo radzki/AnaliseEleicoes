@@ -78,9 +78,11 @@ def fetch(r):
     if not aux:
         return None
     meta = json.loads(aux)
-    for h in meta.get("hashes", []):
+    # the tallied file set; a few sections' sets were relabelled "Recebido" on the site after the count
+    sets = sorted(meta.get("hashes", []), key=lambda h: h.get("st") != "Totalizado")
+    for h in sets:
         log = next((a["nm"] for a in h["arq"] if a["tp"] == "log"), None)
-        if log and h.get("st") == "Totalizado":
+        if log and h.get("st") in ("Totalizado", "Recebido"):
             data = get(f"{BASE}/{uf}/{mu}/{zn}/{se}/{h['hash']}/{log}")
             if data:
                 path.parent.mkdir(parents=True, exist_ok=True)
@@ -113,7 +115,10 @@ def parse(path, uf):
                 open_t = hhmmss(f[0][11:19])
             elif msg == "Tipo de habilitação do eleitor [biométrica]":
                 flag_bio = True
-            elif re.match(r"Mesário \d+ habilitou o eleitor", msg):
+            # a manual release always starts by asking the voter's personal data; the poll worker's own
+            # identification that follows is logged in several ways ("Mesário N habilitou o eleitor", or
+            # a fingerprint not tied to a registered poll worker), so the request is what counts it
+            elif msg == "Solicitação de dado pessoal do eleitor para habilitação manual" or re.match(r"Mesário \d+ habilitou o eleitor", msg):
                 flag_manual = True
             elif msg == "O voto do eleitor foi computado":
                 s = hhmmss(f[0][11:19])

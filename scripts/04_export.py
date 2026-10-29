@@ -470,3 +470,17 @@ if sp.exists():
         "bu_equals_published": int(bu_pub.sum()), "rdv_equals_bu": int(rdv_bu.sum()),
         "tamper_rejected": int((t.tamper_rejected == True).sum()), "votes": int(t.bu_comparecimento.sum()),
         "contingency": int((t.bu_tipo_urna == 4).sum()) if "bu_tipo_urna" in t else None}])
+
+# manual releases by the poll worker in every runoff section (scripts/16_biometria.py) ---------------
+bp = res_dir / "biometria.json"
+if bp.exists():
+    B = json.loads(bp.read_text(encoding="utf-8"))
+    rows = [{"id": "national", **{k: B[k] for k in ("sections", "turnout", "manual", "manual_share", "official_sections",
+                                                     "missing_sections", "missing_turnout_share", "logs_machines",
+                                                     "logs_equal", "logs_within_1")}},
+            {"id": "no_bio", **B["no_bio"]}]
+    rows += [{"id": f"group|{k}", **v} for k, v in B["groups"].items()]
+    rows += [{"id": f"lean|{k}", **v} for k, v in B["lean"].items()]
+    st = pd.Series(B["by_state"]).drop("ZZ", errors="ignore")  # no fingerprints are taken abroad
+    rows.append({"id": "states", "max_share": st.max(), "max_uf": st.idxmax(), "min_share": st.min(), "min_uf": st.idxmin()})
+    dump("biometria", rows)

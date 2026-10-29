@@ -47,7 +47,9 @@ def votes(path):
             m = f[4]
             if m.startswith("Tipo de habilita") and "[biom" in m:
                 kind = "bio"
-            elif re.match(r"Mes.rio \d+ habilitou o eleitor", m) or m.startswith("Digital coletada bate com uma digital gravada"):
+            # as in scripts/07_urna_logs.py: a manual release starts by asking the voter's personal data
+            elif (m.startswith("Solicita") and "habilita" in m and "manual" in m) or re.match(r"Mes.rio \d+ habilitou o eleitor", m) \
+                    or m.startswith("Digital coletada bate com uma digital gravada"):
                 kind = "poll_worker"
             elif m == "Eleitor foi habilitado":
                 hab = secs(f[0])

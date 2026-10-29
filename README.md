@@ -61,6 +61,8 @@ scripts/11_urna_assinaturas.py  na mesma amostra de urnas: assinaturas digitais 
                            registro, boletim x dados publicados e recontagem do RDV -> urna_assinaturas.csv
 scripts/12_urna_bursts.py  votos em rajada e liberações pelo mesário nos registros da amostra de urnas, com enchimento plantado
 scripts/13_mixture.py      modelo de mistura (Klimek et al., 2012), por estado, com fraude plantada -> mixture_<ano>.json
+scripts/16_biometria.py    eleitores liberados pelo mesário em todas as seções do 2º turno (boletins de urna), por grupo e
+                           como votaram, estimado entre seções do mesmo local -> biometria.json
 scripts/14_three_elections.py  2026, 2022 e 2018: testes de referência, um ganhou e o outro perdeu (com modelo nulo),
                            concentração, esperado × observado sem ver o município, Isolation Forest e LOF -> three_elections.json
 report/                    a página do relatório (HTML + JavaScript com d3); o texto fica em locales/
@@ -101,6 +103,13 @@ atualização: acrescente um parâmetro qualquer à URL (por exemplo `?v=1`) e c
 | `detalhe_votacao_secao_<ano>.zip` | `detalhe_votacao_secao/` |
 | `detalhe_votacao_munzona_<ano>.zip` | `detalhe_votacao_munzona/` |
 
+Os boletins de urna do 2º turno de 2026 (um arquivo por UF, com os eleitores liberados pelo mesário em cada
+seção) ficam em outro caminho do CDN, `https://cdn.tse.jus.br/estatistica/sead/eleicoes/eleicoes2026/buweb/`,
+como `bweb_2t_<UF>_261020260742.zip`, para `data/raw/bweb2026`: são 28 arquivos (26 UFs, DF e exterior, `ZZ`),
+cada um com um `.sha512` ao lado. A lista do portal de dados abertos (conjunto "Resultados - 2026 - Boletim
+de Urna") não traz o arquivo de Roraima, só o seu `.sha512`; o arquivo está no CDN no mesmo padrão e confere
+com ele.
+
 Depois:
 
 ```sh
@@ -119,6 +128,7 @@ python -I scripts/10_more_tests.py data/processed2022 results 2022
 python -I scripts/10_more_tests.py data/processed2018 results 2018
 python -I scripts/11_urna_assinaturas.py data/processed data/urna_files results   # baixa ~350 MB do TSE
 python -I scripts/12_urna_bursts.py data/urna_logs results
+python -I scripts/16_biometria.py data/raw/bweb2026 data/processed results   # depois do 07
 python -I scripts/13_mixture.py data/processed results 2026        # alguns minutos por ano
 python -I scripts/13_mixture.py data/processed2022 results 2022
 python -I scripts/13_mixture.py data/processed2018 results 2018
