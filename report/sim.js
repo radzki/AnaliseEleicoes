@@ -165,7 +165,7 @@
     const e = tot / 10;
     let chi = 0;
     for (const v of o) chi += ((v - e) * (v - e)) / e;
-    return { p: gammq(4.5, chi / 2), pct0: (100 * o[0]) / tot };
+    return { p: gammq(4.5, chi / 2), pct0: (100 * o[0]) / tot, freq: Array.from(o, (v) => v / tot) };
   }
   function heaping(x) {
     let mx = 0;
@@ -207,6 +207,9 @@
     }
     let m = 0, tot = 0, tot2 = 0;
     for (let v = 0; v <= maxS; v++) { m += cnt[v]; tot += s1[v]; tot2 += s2[v]; }
+    // for the chart: the mean gap in bands of 25 voters, the last one 500 and over (as on the page)
+    const curve = Array.from({ length: 21 }, (_, b) => ({ from: 25 * b, n: 0, sum: 0 }));
+    for (let v = 0; v <= maxS; v++) if (cnt[v]) { const c = curve[Math.min(20, Math.floor(v / 25))]; c.n += cnt[v]; c.sum += s1[v]; }
     let best = { t: 0, at: null, step: 0 }, k = 0, c1 = 0, c2 = 0, v = 0;
     for (let N = 50; N <= 450; N += 5) {
       for (; v <= Math.min(N, maxS); v++) { k += cnt[v]; c1 += s1[v]; c2 += s2[v]; }
@@ -216,6 +219,7 @@
       const tt = (ma - mb) / Math.sqrt(vb / k + va / (m - k));
       if (Math.abs(tt) > Math.abs(best.t)) best = { t: tt, at: N, step: 100 * (ma - mb) };
     }
+    best.curve = curve.map((c) => ({ from: c.from, n: c.n, pp: c.n ? (100 * c.sum) / c.n : NaN }));
     return best;
   }
   // Shpilkin, state by state: in turnout bands of 0.5 point, each candidate's votes above the most common
@@ -247,7 +251,10 @@
         lula += Math.max(0, aL[j] - sl * n); right += Math.max(0, aF[j] - sr * n);
       }
     }
-    return { lula, right };
+    // for the chart: the bands of the whole country (the test itself is state by state)
+    const nat = { C: new Float64Array(nb), L: new Float64Array(nb), F: new Float64Array(nb) };
+    for (let s = 0; s < ns; s++) for (let b = 0; b < nb; b++) { const j = s * nb + b; nat.C[b] += aC[j]; nat.L[b] += aL[j]; nat.F[b] += aF[j]; }
+    return { lula, right, nat };
   }
   // Proportional swing: within each polling place, Lula's swing between rounds against the right's round-1
   // share, controlling for the round-1 share of the other candidates; the slope
@@ -567,7 +574,10 @@
       : tr(jair ? 'sim.test.note.y2022_jair' : 'sim.test.note.y2022', { n: int(r22[key]) }));
     // a count stands out above the largest reference value
     const stands = (v, key) => { const m = Math.max(r22[key], r18[key] ?? 0); return v > 1.5 * m && v - m > 4 * Math.sqrt(m + 1); };
-    const count = (now, real, key) => (stands(real, key) ? 'already' : stands(now, key) ? 'yes' : 'no');
+    // when the real number already stands out, the fraud still shows if it multiplies it: 1.5 times the real
+    // number and beyond chance (the same rule, with the real number as the reference)
+    const grows = (now, real, sd = true) => now > 1.5 * real && (!sd || now - real > 4 * Math.sqrt(real + 1));
+    const count = (now, real, key) => (stands(real, key) ? (grows(now, real) ? 'yes' : 'already') : stands(now, key) ? 'yes' : 'no');
     const test = (failsNow, failsReal) => (failsReal ? 'already' : failsNow ? 'yes' : 'no');
     const corr = (v, pairs) => Math.abs(v) > 1.5 * Math.abs(r22.corr_dturn_swing) && (Math.abs(v) - Math.abs(r22.corr_dturn_swing)) * Math.sqrt(pairs) > 4;
     // g groups the rows (an identifier); its heading is tr(`sim.group.…`) via GROUP below
@@ -593,15 +603,19 @@
     // reference elections by more than that range is wide
     const M = D.meta.more, refs = (k) => [M['2022'][k], M['2018'][k]];
     const outside = (v, k) => { const a = refs(k), lo = Math.min(...a), hi = Math.max(...a), w = hi - lo; return v > hi + w || v < lo - w; };
-    const sizeOut = (s) => outside(s.step, 'size_step') && Math.abs(s.t) > 4;
+    // the section-size step: the same tolerance for a fraud for either side, the largest step of the reference
+    // elections (in either direction) plus their spread
+    const sizeLim = () => { const a = refs('size_step'); return Math.max(...a.map(Math.abs)) + Math.max(...a) - Math.min(...a); };
+    const sizeOut = (s) => Math.abs(s.step) > sizeLim() && Math.abs(s.t) > 4;
     const shpOut = (v, k) => v > 1.5 * Math.max(...refs(k));
-    const big = (v) => (v >= 1e6 ? tr('sim.unit.mi', { v: dec(v / 1e6, 2) }) : tr('sim.unit.mil', { v: int(v / 1e3) }));
+    const big = (v) => (v >= 1e6 ? tr('sim.unit.mi', { v: dec(v / 1e6, 2) }) : v >= 1e3 ? tr('sim.unit.mil', { v: int(v / 1e3) }) : int(v));
+    const shpV = (now, real, k) => (shpOut(real, k) ? (grows(now, real, false) ? 'yes' : 'already') : shpOut(now, k) ? 'yes' : 'no');
     const step = (s) => tr('sim.size.value', { v: dec(s.step, 2), n: s.at === null ? '—' : int(s.at) });
     rows.push(
       { g: 'more', label: tr('sim.test.size.label'), what: tr('sim.test.size.what'), real: step(b.size), now: step(t.size), v: sizeOut(b.size) ? 'already' : sizeOut(t.size) ? 'yes' : 'no', note: tr('sim.test.note.ref_pp', { y22: dec(M['2022'].size_step, 2), y18: dec(M['2018'].size_step, 2) }) },
-      { g: 'more', label: tr('sim.test.shp_lula.label'), what: tr('sim.test.shp_lula.what'), real: big(b.shp.lula), now: big(t.shp.lula), v: shpOut(b.shp.lula, 'shp_lula') ? 'already' : shpOut(t.shp.lula, 'shp_lula') ? 'yes' : 'no', note: tr('sim.test.note.ref_txt', { y22: big(M['2022'].shp_lula), y18: big(M['2018'].shp_lula) }) },
-      { g: 'more', label: tr('sim.test.shp_flavio.label'), real: big(b.shp.right), now: big(t.shp.right), v: shpOut(b.shp.right, 'shp_right') ? 'already' : shpOut(t.shp.right, 'shp_right') ? 'yes' : 'no', note: tr('sim.test.note.ref_txt_jair', { y22: big(M['2022'].shp_right), y18: big(M['2018'].shp_right) }) },
-      { g: 'more', label: tr('sim.test.slope.label'), what: tr('sim.test.slope.what'), real: dec(b.slope, 3), now: dec(t.slope, 3), v: outside(b.slope, 'slope') ? 'already' : outside(t.slope, 'slope') ? 'yes' : 'no', note: tr('sim.test.note.ref_txt', { y22: dec(M['2022'].slope, 3), y18: dec(M['2018'].slope, 3) }) },
+      { g: 'more', label: tr('sim.test.shp_lula.label'), what: tr('sim.test.shp_lula.what'), real: big(b.shp.lula), now: big(t.shp.lula), v: shpV(t.shp.lula, b.shp.lula, 'shp_lula'), note: tr('sim.test.note.ref_txt_haddad', { y22: big(M['2022'].shp_lula), y18: big(M['2018'].shp_lula) }) },
+      { g: 'more', label: tr('sim.test.shp_flavio.label'), what: tr('sim.test.shp_flavio.what'), real: big(b.shp.right), now: big(t.shp.right), v: shpV(t.shp.right, b.shp.right, 'shp_right'), note: tr('sim.test.note.ref_txt_jair', { y22: big(M['2022'].shp_right), y18: big(M['2018'].shp_right) }) },
+      { g: 'more', label: tr('sim.test.slope.label'), what: tr('sim.test.slope.what'), real: dec(b.slope, 3), now: dec(t.slope, 3), v: outside(b.slope, 'slope') ? 'already' : outside(t.slope, 'slope') ? 'yes' : 'undecided', note: tr('sim.test.note.ref_txt', { y22: dec(M['2022'].slope, 3), y18: dec(M['2018'].slope, 3) }) },
     );
     for (const r of rows) r.bad = r.v === 'yes';
     return rows;
@@ -643,6 +657,8 @@
     ui.where.value = state.where;
     ui.bothRow.hidden = !SOFTWARE(state.type); ui.roundNote.hidden = SOFTWARE(state.type);
     ui.roundRow.hidden = state.type !== 'invent';
+    const vk = `${state.type}|${state.where}|${state.round}`;
+    if (vk !== viewFor) { viewFor = vk; showView(viewOf()); }
     ui.round.checked = state.round;
     ui.minBtn.textContent = state.ben === winner() ? tr('sim.min.btn_winner', { name: NAME[state.ben] }) : tr('sim.min.btn');
     ui.both.checked = state.both;
@@ -706,7 +722,8 @@
     let g = '';
     ui.tbody.innerHTML = rows.map((r) => {
       const head = r.g !== g ? `<tr class="vf-sim-group"><th colspan="4" scope="colgroup">${GROUP[(g = r.g)]}</th></tr>` : '';
-      const chip = { yes: ['vf-bad', tr('sim.test.yes')], already: ['vf-warn', tr('sim.test.already')], no: ['vf-ok', tr('sim.test.no')] }[r.v];
+      const chip = { yes: ['vf-bad', tr('sim.test.yes')], already: ['vf-warn', tr('sim.test.already')], no: ['vf-ok', tr('sim.test.no')],
+        undecided: ['vf-sim-neutral', tr('sim.test.undecided')] }[r.v];
       return `${head}<tr${r.bad ? ' class="vf-sim-hit"' : ''}><th scope="row">${r.label}${r.what ? `<small>${r.what}</small>` : ''}</th><td class="vf-n">${r.real}</td><td class="vf-n">${r.now}${r.note ? `<small>${r.note}</small>` : ''}</td><td><span class="vf-chip ${chip[0]}">${chip[1]}</span></td></tr>`;
     }).join('');
     renderOutside(f, caught);
@@ -723,9 +740,22 @@
     return 0.5 * (1 + Math.sign(x) * e);
   };
   // the fingerprint opens as an analyst would see it; "diff" marks in red the cells that gained sections
-  let fpMode = 'plain', lastT = null;
+  let fpMode = 'plain', lastT = null, view = 'pair', viewFor = '';
+  // the chart that shows each kind of fraud best opens with it: the digits for hand-written numbers, the
+  // turnout bands for stuffing, the section size for a fraud only in the largest machines
+  const viewOf = () => (state.type === 'invent' && state.round ? 'digits' : state.type === 'stuff' ? 'shp' : state.where === 'big' && state.type !== 'software' ? 'size' : 'pair');
+  function showView(v) {
+    view = v;
+    for (const b of ui.view.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.v === v));
+    ui.fpMode.hidden = v !== 'pair'; ui.viewNotePair.hidden = v !== 'pair';
+    ui.viewNote.hidden = v === 'pair';
+    if (v !== 'pair') ui.viewNote.textContent = tr(`sim.view.${v}.note`, { name: NAME[state.ben] });
+    ui.pairAria ??= ui.charts.getAttribute('aria-label');
+    ui.charts.setAttribute('aria-label', v === 'pair' ? ui.pairAria : tr(`sim.view.${v}.aria`, { name: NAME[state.ben] }));
+  }
   function drawCharts(t) {
     lastT = t;
+    if (view !== 'pair') return drawView(t);
     const box = ui.charts;
     const flavio = state.ben === 'flavio', name = NAME[state.ben];
     const color = vf.cand[state.ben].color(), MUTED = 'var(--cds-chart-muted)', FG = 'var(--color-fg)', GAIN = 'var(--color-warn)';
@@ -830,6 +860,124 @@
     ]);
   }
 
+  // ---------------------------------------------------------------- the other charts
+  function drawView(t) {
+    const box = ui.charts, name = NAME[state.ben];
+    const color = vf.cand[state.ben].color(), MUTED = 'var(--cds-chart-muted)', FG = 'var(--color-fg)';
+    showView(view);
+    box.replaceChildren();
+    const tip = vf.tooltip(box);
+    const real = D.base;
+    const axes = (s, w, h, x, y, ml, xf, yf, xt, yt) => {
+      s.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(yt ?? 4).tickFormat(yf).tickSize(-(w - ml - 8))).call(vf.axis);
+      s.append('g').attr('transform', `translate(0,${h - 24})`).call(d3.axisBottom(x).ticks(xt ?? 5).tickFormat(xf).tickSize(0).tickPadding(8)).call(vf.axis);
+    };
+    const ppf = (v) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${dec(Math.abs(v), 1)}`;
+    if (view === 'digits') {
+      const cands = [['lula', 'ldL'], ['flavio', 'ldF']];
+      const cells = vf.panels(box, cands.map(([c]) => tr('sim.view.digits.title', { name: NAME[c] })));
+      cands.forEach(([c, k], idx) => {
+        const { s, w, h } = vf.svg(cells[idx], 200);
+        const now = t[k].freq, was = real[k].freq;
+        const top = Math.max(0.15, ...now, ...was) * 1.1;
+        const ml = vf.textWidth(s, ['20%']) + 8;
+        const x = d3.scaleBand(d3.range(10), [ml, w - 8]).padding(0.25), y = d3.scaleLinear([0, top], [h - 24, 8]);
+        s.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(4).tickFormat((v) => `${dec(100 * v, 0)}%`).tickSize(-(w - ml - 8))).call(vf.axis);
+        s.append('g').attr('transform', `translate(0,${h - 24})`).call(d3.axisBottom(x).tickSize(0).tickPadding(8)).call(vf.axis);
+        s.append('g').selectAll('rect').data(d3.range(10)).join('rect').attr('x', (d) => x(d)).attr('width', x.bandwidth())
+          .attr('y', (d) => y(now[d])).attr('height', (d) => y(0) - y(now[d])).attr('rx', 2).style('fill', vf.cand[c].color());
+        s.append('path').datum(d3.range(10)).attr('d', d3.line().x((d) => x(d) + x.bandwidth() / 2).y((d) => y(was[d])))
+          .style('fill', 'none').style('stroke', MUTED).attr('stroke-width', 2);
+        s.append('line').attr('x1', ml).attr('x2', w - 8).attr('y1', y(0.1)).attr('y2', y(0.1)).style('stroke', FG).attr('stroke-dasharray', '4 3');
+        s.append('rect').attr('x', ml).attr('width', w - 8 - ml).attr('height', h).style('fill', 'transparent')
+          .on('pointermove pointerdown', (ev) => {
+            const d = Math.max(0, Math.min(9, Math.floor((d3.pointer(ev)[0] - ml) / ((w - 8 - ml) / 10))));
+            tip.show(ev, tr('sim.view.digits.tip', { d }), [
+              { label: tr('sim.chart.with_fraud'), value: pct(now[d], 1), color: vf.cand[c].color() },
+              { label: tr('sim.chart.real'), value: pct(was[d], 1), color: MUTED, line: true }]);
+          }).on('pointerleave', tip.leave);
+      });
+      // each panel's bars are in its candidate's color, named in its title: no swatch for them here
+      vf.legend(box, [{ label: tr('sim.legend.real'), color: MUTED, line: true }, { label: tr('sim.view.digits.ref'), color: FG, line: true, dash: '4 3' }]);
+    } else if (view === 'shp') {
+      const [c1, c2] = vf.panels(box, [tr('sim.view.shp.title_votes'), tr('sim.view.shp.title_share', { name })]);
+      const B = state.ben === 'lula' ? 'L' : 'F';
+      const band = (b) => 50 + b * 0.5;
+      const bands = d3.range(100);
+      const share = (nat) => bands.map((b) => { const v = nat.L[b] + nat.F[b]; return v ? nat[B][b] / v : NaN; });
+      const votes = (nat) => bands.map((b) => nat.L[b] + nat.F[b]);
+      const vNow = votes(t.shp.nat), vWas = votes(real.shp.nat), sNow = share(t.shp.nat), sWas = share(real.shp.nat);
+      const lo = Math.max(0, bands.findIndex((b) => vWas[b] > 0 || vNow[b] > 0) - 2);
+      const peak = d3.maxIndex(bands, (b) => t.shp.nat.C[b]);
+      {
+        const { s, w, h } = vf.svg(c1, 220);
+        const top = Math.max(...vNow, ...vWas) * 1.08;
+        const ml = vf.textWidth(s, [tr('sim.unit.mi', { v: '0,0' })]) + 8;
+        const x = d3.scaleLinear([band(lo), 100], [ml, w - 8]), y = d3.scaleLinear([0, top], [h - 24, 8]);
+        axes(s, w, h, x, y, ml, (v) => `${v}%`, (v) => (v ? tr('sim.unit.mi', { v: dec(v / 1e6, 1) }) : '0'));
+        const bw = Math.max(1, x(band(1)) - x(band(0)) - 0.5);
+        // all votes, not one candidate's: a neutral color
+        s.append('g').selectAll('rect').data(bands.filter((b) => b >= lo && vNow[b] > 0)).join('rect')
+          .attr('x', (b) => x(band(b))).attr('width', bw).attr('y', (b) => y(vNow[b])).attr('height', (b) => y(0) - y(vNow[b])).style('fill', FG).style('opacity', 0.55);
+        s.append('path').datum(bands.filter((b) => b >= lo)).attr('d', d3.line().x((b) => x(band(b)) + bw / 2).y((b) => y(vWas[b])))
+          .style('fill', 'none').style('stroke', MUTED).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+        s.append('line').attr('x1', x(band(peak + 1))).attr('x2', x(band(peak + 1))).attr('y1', 8).attr('y2', h - 24).style('stroke', FG).attr('stroke-dasharray', '4 3');
+        s.append('rect').attr('x', ml).attr('width', w - 8 - ml).attr('height', h).style('fill', 'transparent')
+          .on('pointermove pointerdown', (ev) => {
+            const b = Math.max(lo, Math.min(99, Math.floor((x.invert(d3.pointer(ev)[0]) - 50) / 0.5)));
+            tip.show(ev, tr('sim.view.shp.tip', { t0: dec(band(b), 1), t1: dec(band(b + 1), 1) }), [
+              { label: tr('sim.chart.with_fraud'), value: int(vNow[b]), color: FG }, { label: tr('sim.chart.real'), value: int(vWas[b]), color: MUTED, line: true }]);
+          }).on('pointerleave', tip.leave);
+      }
+      {
+        const { s, w, h } = vf.svg(c2, 220);
+        const ok = (a) => bands.filter((b) => b >= lo && Number.isFinite(a[b]) && vWas[b] + vNow[b] > 2000);
+        const ml = vf.textWidth(s, ['100%']) + 8;
+        const x = d3.scaleLinear([band(lo), 100], [ml, w - 8]), y = d3.scaleLinear([0, 1], [h - 24, 8]);
+        axes(s, w, h, x, y, ml, (v) => `${v}%`, (v) => `${dec(100 * v, 0)}%`);
+        s.append('path').datum(ok(sWas)).attr('d', d3.line().x((b) => x(band(b) + 0.25)).y((b) => y(sWas[b])))
+          .style('fill', 'none').style('stroke', MUTED).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+        s.append('path').datum(ok(sNow)).attr('d', d3.line().x((b) => x(band(b) + 0.25)).y((b) => y(sNow[b])))
+          .style('fill', 'none').style('stroke', color).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+        s.append('line').attr('x1', x(band(peak + 1))).attr('x2', x(band(peak + 1))).attr('y1', 8).attr('y2', h - 24).style('stroke', FG).attr('stroke-dasharray', '4 3');
+        s.append('rect').attr('x', ml).attr('width', w - 8 - ml).attr('height', h).style('fill', 'transparent')
+          .on('pointermove pointerdown', (ev) => {
+            const b = Math.max(lo, Math.min(99, Math.floor((x.invert(d3.pointer(ev)[0]) - 50) / 0.5)));
+            tip.show(ev, tr('sim.view.shp.tip', { t0: dec(band(b), 1), t1: dec(band(b + 1), 1) }), [
+              { label: tr('sim.chart.with_fraud'), value: Number.isFinite(sNow[b]) ? pct(sNow[b], 1) : '—', color }, { label: tr('sim.chart.real'), value: Number.isFinite(sWas[b]) ? pct(sWas[b], 1) : '—', color: MUTED, line: true }]);
+          }).on('pointerleave', tip.leave);
+      }
+      vf.legend(box, [{ label: tr('sim.view.shp.legend_votes'), color: FG }, { label: tr('sim.view.shp.legend_share', { name }), color, line: true },
+        { label: tr('sim.legend.real'), color: MUTED, line: true }, { label: tr('sim.view.shp.peak'), color: FG, line: true, dash: '4 3' }]);
+    } else {
+      const [c1] = vf.panels(box, [tr('sim.view.size.title')]);
+      const { s, w, h } = vf.svg(c1, 220);
+      const color = vf.cand.lula.color(); // the curve is Lula's share, whoever the fraud favors
+      const now = t.size.curve, was = real.size.curve;
+      const all = [...now, ...was].filter((c) => c.n >= 200 && Number.isFinite(c.pp)).map((c) => c.pp);
+      const ext = Math.max(0.5, ...all.map(Math.abs)) * 1.15;
+      const ml = vf.textWidth(s, ['−0,0']) + 8;
+      const x = d3.scaleLinear([0, 525], [ml, w - 8]), y = d3.scaleLinear([-ext, ext], [h - 24, 8]);
+      axes(s, w, h, x, y, ml, (v) => (v >= 500 ? '500+' : `${v}`), ppf, 6, 5);
+      s.append('line').attr('x1', ml).attr('x2', w - 8).attr('y1', y(0)).attr('y2', y(0)).style('stroke', FG);
+      const pts = (cv) => cv.filter((c) => c.n >= 200 && Number.isFinite(c.pp));
+      s.append('path').datum(pts(was)).attr('d', d3.line().x((c) => x(c.from + 12.5)).y((c) => y(c.pp)))
+        .style('fill', 'none').style('stroke', MUTED).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+      s.append('path').datum(pts(now)).attr('d', d3.line().x((c) => x(c.from + 12.5)).y((c) => y(c.pp)))
+        .style('fill', 'none').style('stroke', color).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+      s.append('g').selectAll('circle').data(pts(now)).join('circle').attr('cx', (c) => x(c.from + 12.5)).attr('cy', (c) => y(c.pp)).attr('r', 2.5).style('fill', color);
+      s.append('rect').attr('x', ml).attr('width', w - 8 - ml).attr('height', h).style('fill', 'transparent')
+        .on('pointermove pointerdown', (ev) => {
+          const b = Math.max(0, Math.min(20, Math.floor(x.invert(d3.pointer(ev)[0]) / 25)));
+          tip.show(ev, b === 20 ? tr('sim.view.size.tip_last') : tr('sim.view.size.tip', { a: 25 * b, b: 25 * b + 24 }), [
+            { label: tr('sim.chart.with_fraud'), value: Number.isFinite(now[b].pp) ? tr('sim.unit.pp', { v: dec(now[b].pp, 2) }) : '—', color },
+            { label: tr('sim.chart.real'), value: Number.isFinite(was[b].pp) ? tr('sim.unit.pp', { v: dec(was[b].pp, 2) }) : '—', color: MUTED, line: true },
+            { label: tr('sim.view.size.sections'), value: int(now[b].n) }]);
+        }).on('pointerleave', tip.leave);
+      vf.legend(box, [{ label: tr('sim.chart.with_fraud'), color }, { label: tr('sim.legend.real'), color: MUTED, line: true }]);
+    }
+  }
+
   // one short summary for screen readers, once the controls stop moving
   let said = 0;
   function announce(text) {
@@ -910,8 +1058,10 @@
     ui.result = $('sim-result'); ui.score = $('sim-score'); ui.tbody = page.querySelector('#sim-tests tbody'); ui.outside = $('sim-outside');
     ui.minNote = $('sim-min-note'); ui.status = $('sim-status'); ui.minBtn = $('sim-min'); ui.charts = $('sim-charts');
     vf.segmented($('sim-fp-mode'), (v) => { fpMode = v; if (lastT) drawCharts(lastT); });
+    vf.segmented($('sim-chart-view'), (v) => { showView(v); if (lastT) drawCharts(lastT); });
     ui.both = $('sim-both'); ui.bothRow = $('sim-both-row'); ui.roundNote = $('sim-round-note');
     ui.round = $('sim-round'); ui.roundRow = $('sim-round-row');
+    ui.view = $('sim-chart-view'); ui.fpMode = $('sim-fp-mode'); ui.viewNote = $('sim-view-note'); ui.viewNotePair = $('sim-view-note-pair');
     page.querySelector('.vf-sim-controls').addEventListener('submit', (ev) => ev.preventDefault());
     ui.modelSel.innerHTML = D.meta.models.map((m, i) => `<option value="${i}">${m}</option>`).join('');
     ui.ufSel.innerHTML = D.meta.ufs.map((u, i) => `<option value="${i}">${u === 'ZZ' ? tr('sim.uf.abroad') : u}</option>`).join('');

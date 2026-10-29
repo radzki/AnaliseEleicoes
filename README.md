@@ -182,10 +182,18 @@ de todas as 499.205 urnas do 2º turno de 2026 e refaz os testes da página.
   eleição, pelo critério que a página usa nos números reais (quem analisa não conhece os números
   verdadeiros): nos testes contra o acaso, falhar (p < 0,001 no último dígito, mais de 4
   desvios-padrão nos outros); nas contagens, passar de 1,5 vez o maior valor de 2022 e 2018 e por
-  mais que o acaso; no salto por tamanho e na inclinação, sair da faixa de 2022 e 2018 por mais que a
-  largura dela; no Shpilkin, passar de 1,5 vez o maior valor de 2022 e 2018. "Já destoava sem
-  fraude" marca as linhas em que o número real já chama atenção (as urnas quase unânimes da pergunta
-  4 e o Shpilkin de Lula), que não contam como fraude pega.
+  mais que o acaso; no salto por tamanho, passar, para qualquer lado, do maior salto de 2022 e 2018
+  mais a diferença entre eles; no Shpilkin, passar de 1,5 vez o maior valor de 2022 e 2018. "Já
+  destoava sem fraude" marca as linhas em que o número real já chama atenção (as urnas quase
+  unânimes da pergunta 4 e o Shpilkin de Lula): só contam como fraude pega se ela multiplicar o
+  número real por 1,5 ou mais. A migração proporcional, que varia mais entre eleições do que uma
+  fraude a mudaria, responde "Não decide" em vez de "Não".
+- **Gráficos:** os da página refeitos com a fraude, em quatro vistas: urnas vizinhas e a grade
+  comparecimento × percentual, o último dígito, o Shpilkin (o país todo, em faixas de 0,5 ponto) e o
+  tamanho da seção. A vista que mostra melhor cada fraude abre com ela: o último dígito para números
+  inventados com números redondos, o Shpilkin para encher urnas (que mostra também o ponto cego do
+  método: o enchimento cria um pico novo, que passa a ser a faixa mais comum), o tamanho da seção
+  para "só as urnas maiores".
 - **Fraudador cuidadoso:** o programa troca votos pela posição de cada voto no dia, misturada à chave
   da urna: em cada turno, parece sorteado (os algarismos continuam naturais) e cai quase nas mesmas
   posições nos dois turnos. Os números inventados não são arredondados, a menos que o leitor marque

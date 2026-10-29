@@ -1020,16 +1020,16 @@
   "from": "11fe4ea909"
  },
  "mais-testes.dt.4": {
-  "text": "Votes above the most common turnout (Shpilkin's method) <span class=\"vf-chip vf-ok\">Normal</span>",
-  "from": "bbcfbf43eb"
+  "text": "Votes above the most common turnout (Shpilkin's method) <span class=\"vf-chip vf-warn\">Stood out</span>",
+  "from": "4f7160e419"
  },
  "mais-testes.p.10": {
   "text": "<b>What it looks for:</b> votes added in high-turnout sections. The method, used in Russian elections, assumes that a candidate's percentage does not rise with turnout and counts as “excess” the votes above the percentage the candidate has in the sections with the most common turnout.",
   "from": "e17a7cbe43"
  },
  "mais-testes.p.11": {
-  "text": "<b>The data:</b> state by state, the excess is <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Lula and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Flávio in 2026, <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Lula and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Bolsonaro in 2022, and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Haddad and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Bolsonaro in 2018: in all three years, larger for the right.",
-  "from": "aaae01eaa1"
+  "text": "<b>The data:</b> state by state, the excess is <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Lula and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Flávio in 2026, <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Lula and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Bolsonaro in 2022, and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Haddad and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Bolsonaro in 2018: in all three years, larger for the right. Lula's, however, grew a lot since 2022 and passed Haddad's in 2018: it is the same rise in turnout in Lula's strongholds as in question 4, seen by another method, not a new signal; even counted as entirely fake, Lula would win (below).",
+  "from": "b8d865ea2b"
  },
  "mais-testes.p.12": {
   "text": "<b>Nationwide:</b> without separating the states, the method attributes <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"national_lula\" data-fmt=\"compact\">—</span> to Lula in 2026 (<span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"national_lula\" data-fmt=\"compact0\">—</span> in 2022, and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"national_lula\" data-fmt=\"compact0\">—</span> to Haddad in 2018, who lost). This comes from the difference between states, not from within them: from 2022 to 2026, runoff turnout rose on average by <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"lula60_change_pp\" data-fmt=\"pp\">—</span> in the <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"lula60_states\" data-fmt=\"int\">—</span> states where Lula had 60% or more, and by <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"other_change_pp\" data-fmt=\"pp\">—</span> in the others, including abroad. Even if they were all fake votes, Lula would win by <span data-source=\"more_tests\" data-where=\"id=shpilkin|bound\" data-field=\"margin_after\" data-fmt=\"compact\">—</span>.",
@@ -1372,8 +1372,8 @@
   "from": "b6035d3d40"
  },
  "sim-loading.div.1": {
-  "text": "Loading the tally reports of the 499,205 machines (2.8 MB)…",
-  "from": "6795906506"
+  "text": "Loading the tally reports of the 499,205 machines (3.1 MB)…",
+  "from": "ea6dab70b9"
  },
  "sim-app.arialabel.1": {
   "text": "Your fraud",
@@ -1508,12 +1508,12 @@
   "from": "c03cc3b5ac"
  },
  "sim-app.p.1": {
-  "text": "“Yes” means that, looking only at the published numbers, as someone analyzing the election would, the fraud would stand out by the same standard the rest of the page applies to the real numbers: for tests against chance, failing them (last digit, p &lt; 0.001; the others, more than 4 standard deviations); for counts that change from one election to the next, passing 1.5 times the largest value of the reference elections (2022 and, where available, 2018), and by more than chance would explain; for measures whose level changes from one election to the next (the step by section size and the slope of the swing), falling outside the range of the reference elections by more than that range is wide; and, for the Shpilkin method, passing 1.5 times the largest value of the reference elections. “Already stood out without fraud” means the real number already stands out by that standard, so the test can't tell the fraud apart from whatever made the real number high: that is the case of the machines with turnout of 95% or more and 90% or more of the votes for Lula (question 4 of the Summary). The sum of the machines against the official totals isn't on the list: the totals come from the same tally reports, so it matches any fraud done inside the machine.",
-  "from": "7131b7ce55"
+  "text": "“Yes” means that, looking only at the published numbers, as someone analyzing the election would, the fraud would stand out by the same standard the rest of the page applies to the real numbers: for tests against chance, failing them (last digit, p &lt; 0.001; the others, more than 4 standard deviations); for counts that change from one election to the next, passing 1.5 times the largest value of the reference elections (2022 and, where available, 2018), and by more than chance would explain; for the step by section size, passing, in either direction, the largest step of the reference elections plus the difference between them; for the slope of the swing, falling outside the range of the reference elections by more than that range is wide; and, for the Shpilkin method, passing 1.5 times the largest value of the reference elections. “Already stood out without fraud” means the real number already stands out by that standard, so the test can't tell the fraud apart from whatever made the real number high: that is the case of the machines with turnout of 95% or more and 90% or more of the votes for Lula (question 4 of the Summary) and of Lula's excess in the Shpilkin method, which comes from the same rise in turnout. Even in those rows, the answer goes back to “Yes” if the fraud multiplies the real number by 1.5 or more. “Can't decide” marks the swing between rounds, which varies more from one election to the next than a fraud would change it. The sum of the machines against the official totals isn't on the list: the totals come from the same tally reports, so it matches any fraud done inside the machine.",
+  "from": "c88318f517"
  },
  "sim-charts-card.h3.1": {
-  "text": "Two of the page's charts, redrawn with the fraud",
-  "from": "32f864afb9"
+  "text": "The page's charts, redrawn with the fraud",
+  "from": "2aaa928f8e"
  },
  "sim-charts-card.p.1": {
   "text": "On the left, each section compared with the rest of its polling place (the normal curve from the Technical version): the bars are the simulation and the gray line, the real result; fraud in some machines shows up as sections beyond ±4. On the right, turnout × the favored candidate's share, one cell per point, as an analyst would see it; under “What the fraud changed”, the cells that gained sections are highlighted. Fraud that is the same in every machine raises the whole grid a little: without the real result beside it, it looks like a normal election.",
@@ -3170,5 +3170,101 @@
  "sim-where.option.6": {
   "text": "Only the largest machines",
   "from": "18167ff3ba"
+ },
+ "sim-chart-view.arialabel.1": {
+  "text": "Chart",
+  "from": "36d2a3672e"
+ },
+ "sim-chart-view.div.1": {
+  "text": "<button type=\"button\" data-v=\"pair\" aria-pressed=\"true\">Neighboring machines and grid</button><button type=\"button\" data-v=\"digits\" aria-pressed=\"false\">Last digit</button><button type=\"button\" data-v=\"shp\" aria-pressed=\"false\">Shpilkin</button><button type=\"button\" data-v=\"size\" aria-pressed=\"false\">Section size</button>",
+  "from": "baa3ebe8ef"
+ },
+ "js.sim.view.digits.note": {
+  "text": "Share of each candidate's counts ending in each digit, in machines with 10 votes or more: the bars are the simulation and the gray line, the real result. Without fraud, they all sit near 1 in 10 (the dashed line); numbers written by hand carelessly make 0 and 5 grow.",
+  "from": "278f449b01"
+ },
+ "js.sim.view.digits.title": {
+  "text": "Last digit of {name}'s votes",
+  "from": "39cd0bc1f3"
+ },
+ "js.sim.view.digits.tip": {
+  "text": "Votes ending in {d}",
+  "from": "62e5db5583"
+ },
+ "js.sim.view.digits.ref": {
+  "text": "1 in 10",
+  "from": "4a3c886bf9"
+ },
+ "js.sim.view.shp.note": {
+  "text": "For the whole country, in turnout bands of 0.5 point: on the left, how many votes each band has; on the right, {name}'s share in each. The method looks at the votes above the most common band (the dashed line) that that band's share doesn't explain; the chart pools the states, and the test is done state by state. Stuffing many machines up to the same turnout creates a new spike, which becomes the most common band.",
+  "from": "efe0ba41c3"
+ },
+ "js.sim.view.shp.title_votes": {
+  "text": "Votes by turnout band",
+  "from": "00538bf1c0"
+ },
+ "js.sim.view.shp.title_share": {
+  "text": "{name}'s share by turnout band",
+  "from": "43b547694a"
+ },
+ "js.sim.view.shp.tip": {
+  "text": "Turnout from {t0}% to {t1}%",
+  "from": "54792849a5"
+ },
+ "js.sim.view.shp.peak": {
+  "text": "Most common band, with the fraud",
+  "from": "12f5c6096c"
+ },
+ "js.sim.view.size.note": {
+  "text": "Difference between Lula's share in the section and in the rest of its polling place, in bands of 25 voters (leaving out bands with fewer than 200 sections): the red line is the simulation and the gray one, the real result. A fraud that only acts on large machines makes the line move away from the gray one from the size it targets.",
+  "from": "17c02fd344"
+ },
+ "js.sim.view.size.title": {
+  "text": "Lula against the rest of the polling place, by section size (percentage points)",
+  "from": "48946c5a1d"
+ },
+ "js.sim.view.size.tip": {
+  "text": "From {a} to {b} voters",
+  "from": "0b857e217a"
+ },
+ "js.sim.view.size.tip_last": {
+  "text": "500 voters or more",
+  "from": "369c89b696"
+ },
+ "js.sim.view.size.sections": {
+  "text": "Sections",
+  "from": "24c5e77004"
+ },
+ "js.sim.test.undecided": {
+  "text": "Can't decide",
+  "from": "5da8798139"
+ },
+ "js.sim.test.note.ref_txt_haddad": {
+  "text": "in 2022: {y22}; in 2018, Haddad: {y18}",
+  "from": "39d87bec83"
+ },
+ "js.sim.test.shp_flavio.what": {
+  "text": "The excess can show up for the other candidate: when stuffing captures a state's most common band, the method measures from it.",
+  "from": "938d6d632a"
+ },
+ "js.sim.view.shp.legend_votes": {
+  "text": "Votes, with the fraud",
+  "from": "ded58e624c"
+ },
+ "js.sim.view.shp.legend_share": {
+  "text": "{name}'s share, with the fraud",
+  "from": "67b878bbf4"
+ },
+ "js.sim.view.digits.aria": {
+  "text": "Bar chart: share of Lula's and Flávio's counts ending in each digit, with the fraud and in the real result.",
+  "from": "eca6c74d3c"
+ },
+ "js.sim.view.shp.aria": {
+  "text": "Charts: votes and {name}'s share by turnout band, with the fraud and in the real result, and the most common band.",
+  "from": "3510d6d1c4"
+ },
+ "js.sim.view.size.aria": {
+  "text": "Line chart: difference between Lula's share in the section and in the rest of the polling place, by section size, with the fraud and in the real result.",
+  "from": "5357177d3f"
  }
 }

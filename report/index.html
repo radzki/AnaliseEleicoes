@@ -39,6 +39,10 @@
   .vf-seg { display: inline-flex; border: 1px solid var(--vf-control, var(--color-border-line)); border-radius: var(--cds-radius); overflow: hidden; margin-bottom: var(--cds-gap-sm); }
   .vf-seg button { font: inherit; font-size: var(--cds-font-size-caption); min-height: 2.25rem; display: inline-flex; align-items: center; padding: 0 var(--cds-pad-md); border: 0; background: transparent; color: var(--color-fg-muted); cursor: pointer; }
   .vf-seg button[aria-pressed="true"] { background: var(--color-bg); color: var(--color-fg); }
+  /* the chart picker of the simulator wraps on a phone */
+  .vf-sim-views { flex-wrap: wrap; }
+  /* an answer that is neither yes nor no (a test that can't decide) */
+  .vf-chip.vf-sim-neutral { color: var(--color-fg-muted); border-color: var(--color-border-line); }
   .vf-scroll { max-height: 26rem; overflow: auto; }
   .vf-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
   .vf-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: bottom; }
@@ -799,7 +803,9 @@
         </div>
         <div class="vf-card" id="sim-charts-card">
           <h3>{{sim-charts-card.h3.1}}</h3>
-          <p class="vf-note">{{sim-charts-card.p.1}}</p>
+          <div class="vf-seg vf-sim-views" id="sim-chart-view" role="group" aria-label="{{sim-chart-view.arialabel.1}}">{{sim-chart-view.div.1}}</div>
+          <p class="vf-note" id="sim-view-note-pair">{{sim-charts-card.p.1}}</p>
+          <p class="vf-note" id="sim-view-note" hidden></p>
           <div class="vf-seg" id="sim-fp-mode" role="group" aria-label="{{sim-fp-mode.arialabel.1}}">{{sim-fp-mode.div.1}}</div>
           <div class="vf-chart" id="sim-charts" role="img" aria-label="{{sim-charts.arialabel.1}}"></div>
         </div>

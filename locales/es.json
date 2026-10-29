@@ -1020,16 +1020,16 @@
   "from": "11fe4ea909"
  },
  "mais-testes.dt.4": {
-  "text": "Votos por encima de la participación más común (método de Shpilkin) <span class=\"vf-chip vf-ok\">Normal</span>",
-  "from": "bbcfbf43eb"
+  "text": "Votos por encima de la participación más común (método de Shpilkin) <span class=\"vf-chip vf-warn\">Llamó la atención</span>",
+  "from": "4f7160e419"
  },
  "mais-testes.p.10": {
   "text": "<b>Qué busca:</b> votos añadidos en secciones de participación alta. El método, usado en las elecciones rusas, supone que el porcentaje de un candidato no sube con la participación y cuenta como “exceso” los votos por encima del porcentaje que tiene en las secciones de participación más común.",
   "from": "e17a7cbe43"
  },
  "mais-testes.p.11": {
-  "text": "<b>Los datos:</b> estado por estado, el exceso es de <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> para Lula y <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> para Flávio en 2026; de <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> para Lula y <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> para Bolsonaro en 2022, y de <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> para Haddad y <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> para Bolsonaro en 2018: en los tres años, mayor para la derecha.",
-  "from": "aaae01eaa1"
+  "text": "<b>Los datos:</b> estado por estado, el exceso es de <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> para Lula y <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> para Flávio en 2026; de <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> para Lula y <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> para Bolsonaro en 2022, y de <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> para Haddad y <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> para Bolsonaro en 2018: en los tres años, mayor para la derecha. El de Lula, sin embargo, creció mucho desde 2022 y superó al de Haddad en 2018: es el mismo aumento de participación en los bastiones de Lula de la pregunta 4, visto con otro método, y no una señal nueva; aun contado todo como falso, Lula ganaría (abajo).",
+  "from": "b8d865ea2b"
  },
  "mais-testes.p.12": {
   "text": "<b>En todo el país:</b> sin separar los estados, el método le atribuye <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"national_lula\" data-fmt=\"compact\">—</span> a Lula en 2026 (<span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"national_lula\" data-fmt=\"compact0\">—</span> en 2022, y <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"national_lula\" data-fmt=\"compact0\">—</span> a Haddad en 2018, que perdió). Eso viene de la diferencia entre estados, no de dentro de ellos: de 2022 a 2026, la participación de la segunda vuelta subió, en promedio, <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"lula60_change_pp\" data-fmt=\"pp\">—</span> en los <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"lula60_states\" data-fmt=\"int\">—</span> estados en los que Lula tuvo 60% o más, y <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"other_change_pp\" data-fmt=\"pp\">—</span> en los demás, incluido el exterior. Aunque todos fueran votos falsos, Lula ganaría por <span data-source=\"more_tests\" data-where=\"id=shpilkin|bound\" data-field=\"margin_after\" data-fmt=\"compact\">—</span>.",
@@ -1372,8 +1372,8 @@
   "from": "b6035d3d40"
  },
  "sim-loading.div.1": {
-  "text": "Cargando los boletines de las 499.205 urnas (2,8 MB)…",
-  "from": "6795906506"
+  "text": "Cargando los boletines de las 499.205 urnas (3,1 MB)…",
+  "from": "ea6dab70b9"
  },
  "sim-app.arialabel.1": {
   "text": "Tu fraude",
@@ -1508,12 +1508,12 @@
   "from": "c03cc3b5ac"
  },
  "sim-app.p.1": {
-  "text": "“Sí” quiere decir que, mirando solo los números publicados, como haría quien analiza la elección, el fraude llamaría la atención por el mismo criterio que el resto de la página usa con los números reales: en las pruebas contra el azar, fallar (en el último dígito, p &lt; 0,001; en las demás, más de 4 desviaciones estándar); en los conteos que cambian de una elección a otra, superar 1,5 veces el mayor valor de las elecciones de referencia (2022 y, cuando lo hay, 2018), y por más de lo que explicaría el azar; en las medidas cuyo nivel cambia de una elección a otra (el salto por tamaño de la sección y la pendiente de la migración), quedar fuera del rango de las elecciones de referencia por más que el ancho de ese rango; y, en el método de Shpilkin, superar 1,5 veces el mayor valor de las elecciones de referencia. “Ya desentonaba sin fraude” quiere decir que el número real ya llama la atención por ese criterio, y entonces la prueba no distingue el fraude de lo que haya dejado alto el número real: es el caso de las urnas con participación del 95% o más y el 90% o más de los votos para Lula (pregunta 4 del Resumen). La suma de las urnas frente a los totales oficiales no está en la lista: los totales salen de los mismos boletines, así que coincide con cualquier fraude hecho dentro de la urna.",
-  "from": "7131b7ce55"
+  "text": "“Sí” quiere decir que, mirando solo los números publicados, como haría quien analiza la elección, el fraude llamaría la atención por el mismo criterio que el resto de la página usa con los números reales: en las pruebas contra el azar, fallar (en el último dígito, p &lt; 0,001; en las demás, más de 4 desviaciones estándar); en los conteos que cambian de una elección a otra, superar 1,5 veces el mayor valor de las elecciones de referencia (2022 y, cuando lo hay, 2018), y por más de lo que explicaría el azar; en el salto por tamaño de la sección, superar, hacia cualquier lado, el mayor salto de las elecciones de referencia más la diferencia entre ellas; en la pendiente de la migración, quedar fuera del rango de las elecciones de referencia por más que el ancho de ese rango; y, en el método de Shpilkin, superar 1,5 veces el mayor valor de las elecciones de referencia. “Ya desentonaba sin fraude” quiere decir que el número real ya llama la atención por ese criterio, y entonces la prueba no distingue el fraude de lo que haya dejado alto el número real: es el caso de las urnas con participación del 95% o más y el 90% o más de los votos para Lula (pregunta 4 del Resumen) y del exceso de Lula en el método de Shpilkin, que viene del mismo aumento de participación. Aun en esas filas, la respuesta vuelve a ser “Sí” si el fraude multiplica el número real por 1,5 o más. “No decide” marca la migración entre vueltas, que varía más de una elección a otra de lo que un fraude la cambiaría. La suma de las urnas frente a los totales oficiales no está en la lista: los totales salen de los mismos boletines, así que coincide con cualquier fraude hecho dentro de la urna.",
+  "from": "c88318f517"
  },
  "sim-charts-card.h3.1": {
-  "text": "Dos gráficos de la página, rehechos con el fraude",
-  "from": "32f864afb9"
+  "text": "Los gráficos de la página, rehechos con el fraude",
+  "from": "2aaa928f8e"
  },
  "sim-charts-card.p.1": {
   "text": "A la izquierda, cada sección comparada con el resto de su local de votación (la curva normal de la Versión técnica): las barras son la simulación y la línea gris, el resultado real; un fraude en algunas urnas aparece como secciones más allá de ±4. A la derecha, participación × porcentaje del candidato favorecido, una celda por punto, como lo vería un analista; en “Lo que cambió el fraude”, las celdas que ganaron secciones quedan resaltadas. Un fraude igual en todas las urnas sube un poco toda la cuadrícula: sin el resultado real al lado, parece una elección normal.",
@@ -3170,5 +3170,101 @@
  "sim-where.option.6": {
   "text": "Solo las urnas más grandes",
   "from": "18167ff3ba"
+ },
+ "sim-chart-view.arialabel.1": {
+  "text": "Gráfico",
+  "from": "36d2a3672e"
+ },
+ "sim-chart-view.div.1": {
+  "text": "<button type=\"button\" data-v=\"pair\" aria-pressed=\"true\">Urnas vecinas y cuadrícula</button><button type=\"button\" data-v=\"digits\" aria-pressed=\"false\">Último dígito</button><button type=\"button\" data-v=\"shp\" aria-pressed=\"false\">Shpilkin</button><button type=\"button\" data-v=\"size\" aria-pressed=\"false\">Tamaño de la sección</button>",
+  "from": "baa3ebe8ef"
+ },
+ "js.sim.view.digits.note": {
+  "text": "Fracción de los conteos de cada candidato que termina en cada dígito, en las urnas con 10 votos o más: las barras son la simulación y la línea gris, el resultado real. Sin fraude, todos quedan cerca de 1 de cada 10 (la línea discontinua); los números escritos a mano sin cuidado hacen crecer el 0 y el 5.",
+  "from": "278f449b01"
+ },
+ "js.sim.view.digits.title": {
+  "text": "Último dígito de los votos de {name}",
+  "from": "39cd0bc1f3"
+ },
+ "js.sim.view.digits.tip": {
+  "text": "Votos terminados en {d}",
+  "from": "62e5db5583"
+ },
+ "js.sim.view.digits.ref": {
+  "text": "1 de cada 10",
+  "from": "4a3c886bf9"
+ },
+ "js.sim.view.shp.note": {
+  "text": "En todo el país, en franjas de 0,5 punto de participación: a la izquierda, cuántos votos hay en cada franja; a la derecha, el porcentaje de {name} en cada una. El método mira los votos por encima de la franja más común (la línea discontinua) que el porcentaje de esa franja no explica; el gráfico junta los estados, y la prueba se hace estado por estado. Rellenar muchas urnas hasta la misma participación crea un pico nuevo, que pasa a ser la franja más común.",
+  "from": "efe0ba41c3"
+ },
+ "js.sim.view.shp.title_votes": {
+  "text": "Votos por franja de participación",
+  "from": "00538bf1c0"
+ },
+ "js.sim.view.shp.title_share": {
+  "text": "% de {name} por franja de participación",
+  "from": "43b547694a"
+ },
+ "js.sim.view.shp.tip": {
+  "text": "Participación de {t0}% a {t1}%",
+  "from": "54792849a5"
+ },
+ "js.sim.view.shp.peak": {
+  "text": "Franja más común, con el fraude",
+  "from": "12f5c6096c"
+ },
+ "js.sim.view.size.note": {
+  "text": "Diferencia entre el porcentaje de Lula en la sección y en el resto de su local de votación, por franja de 25 votantes (sin las franjas con menos de 200 secciones): la línea roja es la simulación y la gris, el resultado real. Un fraude que solo actúa en las urnas grandes hace que la línea se aleje de la gris a partir del tamaño que elige.",
+  "from": "17c02fd344"
+ },
+ "js.sim.view.size.title": {
+  "text": "Lula frente al resto del local, por tamaño de la sección (puntos porcentuales)",
+  "from": "48946c5a1d"
+ },
+ "js.sim.view.size.tip": {
+  "text": "De {a} a {b} votantes",
+  "from": "0b857e217a"
+ },
+ "js.sim.view.size.tip_last": {
+  "text": "500 votantes o más",
+  "from": "369c89b696"
+ },
+ "js.sim.view.size.sections": {
+  "text": "Secciones",
+  "from": "24c5e77004"
+ },
+ "js.sim.test.undecided": {
+  "text": "No decide",
+  "from": "5da8798139"
+ },
+ "js.sim.test.note.ref_txt_haddad": {
+  "text": "en 2022: {y22}; en 2018, Haddad: {y18}",
+  "from": "39d87bec83"
+ },
+ "js.sim.test.shp_flavio.what": {
+  "text": "El exceso puede aparecer para el otro candidato: cuando el relleno captura la franja más común de un estado, el método mide a partir de ella.",
+  "from": "938d6d632a"
+ },
+ "js.sim.view.shp.legend_votes": {
+  "text": "Votos, con el fraude",
+  "from": "ded58e624c"
+ },
+ "js.sim.view.shp.legend_share": {
+  "text": "% de {name}, con el fraude",
+  "from": "67b878bbf4"
+ },
+ "js.sim.view.digits.aria": {
+  "text": "Gráfico de barras: fracción de los conteos de Lula y de Flávio terminados en cada dígito, con el fraude y en el resultado real.",
+  "from": "eca6c74d3c"
+ },
+ "js.sim.view.shp.aria": {
+  "text": "Gráficos: votos y porcentaje de {name} por franja de participación, con el fraude y en el resultado real, y la franja más común.",
+  "from": "3510d6d1c4"
+ },
+ "js.sim.view.size.aria": {
+  "text": "Gráfico de líneas: diferencia entre el porcentaje de Lula en la sección y en el resto del local, por tamaño de la sección, con el fraude y en el resultado real.",
+  "from": "5357177d3f"
  }
 }
