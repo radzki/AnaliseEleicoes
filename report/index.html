@@ -228,8 +228,8 @@
     #sim-tests th[scope="row"], #sim-tests .vf-sim-group th { grid-column: 1 / -1; border-bottom: 0; }
     #sim-tests .vf-n { text-align: left; white-space: normal; }
     #sim-tests td.vf-n::before { display: block; font-size: 0.85em; color: var(--color-fg-muted); }
-    #sim-tests td.vf-n:nth-of-type(1)::before { content: "Real"; }
-    #sim-tests td.vf-n:nth-of-type(2)::before { content: "Com a fraude"; }
+    #sim-tests td.vf-n:nth-of-type(1)::before { content: "{{sim-tests.th.2}}"; }
+    #sim-tests td.vf-n:nth-of-type(2)::before { content: "{{sim-tests.th.3}}"; }
     .vf-sim-cand b { font-size: var(--cds-font-size-heading); }
   }
   .vf-sim-busy .vf-sim-main { opacity: 0.6; transition: opacity 0.15s; }
