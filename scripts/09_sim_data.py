@@ -36,7 +36,7 @@ PLACE = ["SG_UF", "CD_MUNICIPIO", "NR_ZONA", "NR_LOCAL_VOTACAO"]
 w = pd.read_parquet(proc / "secao_wide.parquet")
 w = w[w.v13.notna() & (w.QT_VOTOS_NOMINAIS > 0)]
 r2 = w[w.NR_TURNO == 2].sort_values(PLACE + ["NR_SECAO"]).reset_index(drop=True)
-r1 = w[w.NR_TURNO == 1].set_index(SEC)[["v13", "v22", "QT_COMPARECIMENTO", "QT_APTOS"]].add_suffix("_1")
+r1 = w[w.NR_TURNO == 1].set_index(SEC)[["v13", "v22", "QT_COMPARECIMENTO", "QT_APTOS", "QT_VOTOS_NOMINAIS"]].add_suffix("_1")
 r2 = r2.join(r1, on=SEC)
 n = len(r2)
 assert r2.QT_APTOS_1.notna().all(), "every runoff section should exist in round 1"
@@ -62,6 +62,8 @@ cols = {
     "lula_1": (zigzag(i64(r2.v13_1) - lula), "lula"), "flavio_1": (zigzag(i64(r2.v22_1) - flavio), "flavio"),
     "comparecimento_1": (zigzag(i64(r2.QT_COMPARECIMENTO_1) - comp), "comparecimento"),
     "aptos_1": (zigzag(i64(r2.QT_APTOS_1) - aptos), "aptos"),
+    # round-1 votes for the other candidates, the control of the proportional-swing test (10_more_tests.py)
+    "outros_1": (i64(r2.QT_VOTOS_NOMINAIS_1 - r2.v13_1 - r2.v22_1), None),
     "model": (r2.DS_MODELO_URNA.map({m: i for i, m in enumerate(models)}).to_numpy(), None),
     "uf": (r2.SG_UF.map({u: i for i, u in enumerate(ufs)}).to_numpy(), None),
 }
@@ -85,6 +87,13 @@ def refs(r):
             "corr_dturn_swing": r["swing"]["corr_dturn_swing_within_place"]}
 
 
+def more(y):
+    m = json.loads((res / f"more_tests_{y}.json").read_text(encoding="utf-8"))
+    s, sh = m["size"]["real"]["max_step"], m["shpilkin"]["2"]["by_state"]
+    return {"size_step": s["step_pp"], "size_t": s["t"], "size_at": s["at"], "shp_lula": sh["lula"], "shp_right": sh["right"],
+            "slope": m["prop_swing"]["real"]["slope"]}
+
+
 T18 = json.loads((out.parent / "three_elections.json").read_text(encoding="utf-8"))["reference"]["2018"]
 meta = {
     "source": "TSE, votacao_secao e detalhe_votacao_secao 2026, 2º turno (scripts/09_sim_data.py)",
@@ -98,6 +107,9 @@ meta = {
                   "2018": {k: T18[k] for k in ("place_pos4", "place_neg4", "corner_lula", "corner_right")}},
     # TSE's integrity test (votação paralela): machines drawn by lot and replaced on election day.
     # News reports for the 2026 runoff give 20 to 33 per state; 540 is a conservative national total.
+    # three tests of "Mais testes" (10_more_tests.py), redone in the simulator: 2026 to check it reproduces
+    # them, 2022 and 2018 as the references
+    "more": {str(y): more(y) for y in (2026, 2022, 2018)},
     "integrity_test_machines": 540,
     # of them, the share voted on with real voters' fingerprints, which a program that recognised the test
     # could not tell from an election: 10% in 2026 (OAS observation mission, preliminary runoff report)

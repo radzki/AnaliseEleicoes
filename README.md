@@ -167,23 +167,33 @@ programa em todas as urnas, trocar votos em algumas urnas, encher urnas ou inven
 boletim), quantas urnas e com que intensidade. O navegador aplica a fraude a uma cópia dos boletins
 de todas as 499.205 urnas do 2º turno de 2026 e refaz os testes da página.
 
-- **Dados:** `scripts/09_sim_data.py` grava `results/sim/secoes_2026_t2.bin` (2,8 MB, colunas
+- **Dados:** `scripts/09_sim_data.py` grava `results/sim/secoes_2026_t2.bin` (3,1 MB, colunas
   compactadas com gzip e lidas com `DecompressionStream`) e `results/sim/meta.json`. Os dados só
   são baixados quando a aba é aberta.
 - **Testes:** `report/sim.js` refaz, com as mesmas definições de `scripts/02_analyze.py`, o último
   dígito, o excesso de números redondos, os percentuais inteiros, as urnas que destoam do seu local, o
-  canto comparecimento × percentual, a diferença entre modelos de urna e a mudança entre os turnos.
-  Sem fraude, ele reproduz exatamente os números da página. A única aproximação é o número de
+  canto comparecimento × percentual, a diferença entre modelos de urna e a mudança entre os turnos;
+  e, com as de `scripts/10_more_tests.py`, o salto por tamanho da seção, o método de Shpilkin estado
+  por estado (com as faixas de comparecimento exatamente como `numpy.arange` as monta) e a inclinação
+  da migração proporcional. Sem fraude, ele reproduz exatamente os números da página. A única aproximação é o número de
   percentuais inteiros esperado ao acaso: o simulador o calcula pela distribuição binomial, enquanto
   a página usa a média de 200 sorteios (10.232 contra 10.234).
-- **"A fraude aparece?":** "Sim" quando a fraude muda o número mais do que o acaso explica, em
-  comparação com o resultado real: p < 0,001 no último dígito, mais de 4 desvios-padrão nos outros.
-  A coluna não diz se o número real é normal (isso é o que a página avalia; nos números reais, a
-  pergunta 4 chamou atenção). A diferença entre modelos compara cada modelo com a média de todos, e
-  a correlação entre comparecimento e mudança entre turnos só conta quando se afasta de zero.
+- **"A fraude aparece?":** "Sim" quando o número publicado chamaria atenção de quem analisa a
+  eleição, pelo critério que a página usa nos números reais (quem analisa não conhece os números
+  verdadeiros): nos testes contra o acaso, falhar (p < 0,001 no último dígito, mais de 4
+  desvios-padrão nos outros); nas contagens, passar de 1,5 vez o maior valor de 2022 e 2018 e por
+  mais que o acaso; no salto por tamanho e na inclinação, sair da faixa de 2022 e 2018 por mais que a
+  largura dela; no Shpilkin, passar de 1,5 vez o maior valor de 2022 e 2018. "Já destoava sem
+  fraude" marca as linhas em que o número real já chama atenção (as urnas quase unânimes da pergunta
+  4 e o Shpilkin de Lula), que não contam como fraude pega.
+- **Fraudador cuidadoso:** o programa troca votos pela posição de cada voto no dia, misturada à chave
+  da urna: em cada turno, parece sorteado (os algarismos continuam naturais) e cai quase nas mesmas
+  posições nos dois turnos. Os números inventados não são arredondados, a menos que o leitor marque
+  "Com números redondos". O painel do teste de integridade dá também a chance contando só a parte
+  feita com biometria (10% das urnas sorteadas, segundo a missão da OEA).
 - **Turnos:** as fraudes feitas por programa (em todas as urnas ou em algumas) agem por padrão nos
   dois turnos, como agiria um programa instalado na urna; o leitor pode limitá-las ao 2º turno, o
-  que deixa uma marca a mais na mudança entre os turnos. Encher urnas e reescrever boletins são
+  que mexe na mudança entre os turnos quando a troca em cada urna é grande. Encher urnas e reescrever boletins são
   feitos só no 2º turno.
 - **Para não virar desinformação:** a aba abre no resultado real. Com qualquer fraude, o quadro
   do resultado diz "SIMULAÇÃO · não é o resultado real", o nome de cada candidato leva

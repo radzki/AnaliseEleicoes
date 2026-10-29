@@ -1368,8 +1368,8 @@
   "from": "d997166f95"
  },
  "fraude.p.1": {
-  "text": "Imagina que quieres cambiar el resultado de la segunda vuelta de 2026. Elige a quién favorecer y cómo hacer el fraude: 16 de las pruebas de esta página, de 8 tipos, se rehacen al instante (las de “Más pruebas” y “Con 2018 también” quedan fuera), sobre los boletines de todas las 499.205 urnas, y muestran si tu fraude dejaría marcas.",
-  "from": "962e0b0867"
+  "text": "Imagina que quieres cambiar el resultado de la segunda vuelta de 2026. Elige a quién favorecer y cómo hacer el fraude: 20 de las pruebas de esta página, de 11 tipos, se rehacen al instante (entran tres de las de “Más pruebas”; las demás, y las de “Con 2018 también”, quedan fuera), sobre los boletines de todas las 499.205 urnas, y muestran si tu fraude dejaría marcas.",
+  "from": "b6035d3d40"
  },
  "sim-loading.div.1": {
   "text": "Cargando los boletines de las 499.205 urnas (2,8 MB)…",
@@ -1508,8 +1508,8 @@
   "from": "c03cc3b5ac"
  },
  "sim-app.p.1": {
-  "text": "“Sí” quiere decir que, mirando solo los números publicados, como haría quien analiza la elección, el fraude llamaría la atención por el mismo criterio que el resto de la página usa con los números reales: en las pruebas contra el azar, fallar (en el último dígito, p &lt; 0,001; en las demás, más de 4 desviaciones estándar); en los conteos que cambian de una elección a otra, superar 1,5 veces el mayor valor de las elecciones de referencia (2022 y, cuando lo hay, 2018), y por más de lo que explicaría el azar. “Ya desentonaba sin fraude” quiere decir que el número real ya llama la atención por ese criterio, y entonces la prueba no distingue el fraude de lo que haya dejado alto el número real: es el caso de las urnas con participación del 95% o más y el 90% o más de los votos para Lula (pregunta 4 del Resumen). La suma de las urnas frente a los totales oficiales no está en la lista: los totales salen de los mismos boletines, así que coincide con cualquier fraude hecho dentro de la urna.",
-  "from": "d7a6bd39b8"
+  "text": "“Sí” quiere decir que, mirando solo los números publicados, como haría quien analiza la elección, el fraude llamaría la atención por el mismo criterio que el resto de la página usa con los números reales: en las pruebas contra el azar, fallar (en el último dígito, p &lt; 0,001; en las demás, más de 4 desviaciones estándar); en los conteos que cambian de una elección a otra, superar 1,5 veces el mayor valor de las elecciones de referencia (2022 y, cuando lo hay, 2018), y por más de lo que explicaría el azar; en las medidas cuyo nivel cambia de una elección a otra (el salto por tamaño de la sección y la pendiente de la migración), quedar fuera del rango de las elecciones de referencia por más que el ancho de ese rango; y, en el método de Shpilkin, superar 1,5 veces el mayor valor de las elecciones de referencia. “Ya desentonaba sin fraude” quiere decir que el número real ya llama la atención por ese criterio, y entonces la prueba no distingue el fraude de lo que haya dejado alto el número real: es el caso de las urnas con participación del 95% o más y el 90% o más de los votos para Lula (pregunta 4 del Resumen). La suma de las urnas frente a los totales oficiales no está en la lista: los totales salen de los mismos boletines, así que coincide con cualquier fraude hecho dentro de la urna.",
+  "from": "7131b7ce55"
  },
  "sim-charts-card.h3.1": {
   "text": "Dos gráficos de la página, rehechos con el fraude",
@@ -3110,5 +3110,65 @@
  "fraude.p.2": {
   "text": "<b>Para qué sirve:</b> no es una prueba de nada sobre la elección real. Es una forma de aprender haciendo: elige un fraude, mueve los controles y mira qué pruebas notan el cambio y cuáles no. Cada prueba ve un tipo de fraude; ninguna los ve todos.",
   "from": "5e0e3fd89c"
+ },
+ "js.sim.group.more": {
+  "text": "Otros métodos (sección “Más pruebas”)",
+  "from": "b3457feb17"
+ },
+ "js.sim.test.size.label": {
+  "text": "Diferencia de Lula entre urnas grandes y pequeñas, en el mismo local",
+  "from": "73c70382d1"
+ },
+ "js.sim.test.size.what": {
+  "text": "Un programa que solo actuara en las urnas grandes aparecería aquí: es el mayor salto a lo largo del tamaño de la sección.",
+  "from": "d8c5e37512"
+ },
+ "js.sim.size.value": {
+  "text": "{v} p.p. (desde {n})",
+  "from": "19cc83030c"
+ },
+ "js.sim.test.shp_lula.label": {
+  "text": "Votos de Lula por encima de la participación más común (Shpilkin)",
+  "from": "a6cd2817bd"
+ },
+ "js.sim.test.shp_lula.what": {
+  "text": "Votos agregados donde la participación es alta, estado por estado. Si el relleno empuja muchas urnas a la misma participación, esa pasa a ser la más común, y el método deja de ver los votos por encima de ella.",
+  "from": "26382fdf00"
+ },
+ "js.sim.test.shp_flavio.label": {
+  "text": "Votos de Flávio por encima de la participación más común (Shpilkin)",
+  "from": "41e754cfff"
+ },
+ "js.sim.test.slope.label": {
+  "text": "Migración proporcional entre vueltas (pendiente)",
+  "from": "36322be82f"
+ },
+ "js.sim.test.slope.what": {
+  "text": "Cambiar una parte fija de los votos en la segunda vuelta aumentaría la pendiente; pero varía mucho de una elección a otra.",
+  "from": "a65ac3d2d3"
+ },
+ "js.sim.test.note.ref_pp": {
+  "text": "en 2022: {y22} p.p.; en 2018: {y18} p.p.",
+  "from": "77a6d4579b"
+ },
+ "js.sim.test.note.ref_txt": {
+  "text": "en 2022: {y22}; en 2018: {y18}",
+  "from": "5d82370eea"
+ },
+ "js.sim.test.note.ref_txt_jair": {
+  "text": "en 2022, Jair: {y22}; en 2018, Jair: {y18}",
+  "from": "a7a4078370"
+ },
+ "js.sim.unit.mi": {
+  "text": "{v} M",
+  "from": "91c91aab19"
+ },
+ "js.sim.unit.mil": {
+  "text": "{v} mil",
+  "from": "bcdccd08a3"
+ },
+ "sim-where.option.6": {
+  "text": "Solo las urnas más grandes",
+  "from": "18167ff3ba"
  }
 }

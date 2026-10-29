@@ -2,8 +2,8 @@
  "source": "TSE, votacao_secao e detalhe_votacao_secao 2026, 2º turno (scripts/09_sim_data.py)",
  "sections": 499205,
  "places": 94215,
- "raw_bytes": 7083085,
- "packed_bytes": 2765417,
+ "raw_bytes": 7582290,
+ "packed_bytes": 3097290,
  "columns": [
   {
    "name": "place_size",
@@ -64,15 +64,21 @@
    "zigzag_from": "aptos"
   },
   {
-   "name": "model",
+   "name": "outros_1",
    "type": "u8",
    "offset": 6084675,
    "length": 499205
   },
   {
-   "name": "uf",
+   "name": "model",
    "type": "u8",
    "offset": 6583880,
+   "length": 499205
+  },
+  {
+   "name": "uf",
+   "type": "u8",
+   "offset": 7083085,
    "length": 499205
   }
  ],
@@ -142,6 +148,32 @@
    "place_neg4": 579,
    "corner_lula": 38,
    "corner_right": 29
+  }
+ },
+ "more": {
+  "2026": {
+   "size_step": -0.12122029103323136,
+   "size_t": -10.318502946598988,
+   "size_at": 270,
+   "shp_lula": 219261.4214176815,
+   "shp_right": 779228.1055833255,
+   "slope": 0.17231649177377317
+  },
+  "2022": {
+   "size_step": -0.13181185582141672,
+   "size_t": -10.860155410103186,
+   "size_at": 270,
+   "shp_lula": 119612.6787432347,
+   "shp_right": 640892.129444,
+   "slope": 0.15871116959932685
+  },
+  "2018": {
+   "size_step": -0.5421028158391769,
+   "size_t": -6.8337218967349616,
+   "size_at": 125,
+   "shp_lula": 132736.78304601402,
+   "shp_right": 576405.3004180625,
+   "slope": 0.33315940797743643
   }
  },
  "integrity_test_machines": 540,

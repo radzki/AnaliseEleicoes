@@ -132,7 +132,7 @@
     D = {
       meta, n, P, L, F, C, A, model: col.model, uf: col.uf, lf,
       L1: unzig('lula_1', 'lula'), F1: unzig('flavio_1', 'flavio'),
-      C1: unzig('comparecimento_1', 'comparecimento'), A1: unzig('aptos_1', 'aptos'),
+      C1: unzig('comparecimento_1', 'comparecimento'), A1: unzig('aptos_1', 'aptos'), O1: col.outros_1,
     };
     // sections of each state: the integrity test draws its machines state by state
     D.byUf = meta.ufs.map(() => []);
@@ -187,6 +187,95 @@
     const hc = Oc / Ec;
     return { ratio: E ? O / E / hc : NaN, z: k ? (O - E * hc) / Math.sqrt(O + (E / 2) * hc * hc) : NaN };
   }
+  // ---------------------------------------------------------------- tests of "Mais testes" (10_more_tests.py)
+  // Section size: each section's Lula share minus the rest of its polling place's, then, along the section
+  // size (turnout), the cut N with the largest step between the mean above and below it (t statistic)
+  function sizeStep(L, F, C) {
+    const { P } = D;
+    let maxS = 0;
+    for (let i = 0; i < C.length; i++) if (C[i] > maxS) maxS = C[i];
+    const cnt = new Float64Array(maxS + 1), s1 = new Float64Array(maxS + 1), s2 = new Float64Array(maxS + 1);
+    for (let k = 0; k + 1 < P.length; k++) {
+      let sl = 0, sn = 0;
+      for (let i = P[k]; i < P[k + 1]; i++) { sl += L[i]; sn += L[i] + F[i]; }
+      for (let i = P[k]; i < P[k + 1]; i++) {
+        const ni = L[i] + F[i], rn = sn - ni;
+        if (rn <= 0 || ni <= 0) continue;
+        const d = L[i] / ni - (sl - L[i]) / rn;
+        cnt[C[i]]++; s1[C[i]] += d; s2[C[i]] += d * d;
+      }
+    }
+    let m = 0, tot = 0, tot2 = 0;
+    for (let v = 0; v <= maxS; v++) { m += cnt[v]; tot += s1[v]; tot2 += s2[v]; }
+    let best = { t: 0, at: null, step: 0 }, k = 0, c1 = 0, c2 = 0, v = 0;
+    for (let N = 50; N <= 450; N += 5) {
+      for (; v <= Math.min(N, maxS); v++) { k += cnt[v]; c1 += s1[v]; c2 += s2[v]; }
+      if (k < 0.02 * m || m - k < 0.02 * m) continue;
+      const mb = c1 / k, ma = (tot - c1) / (m - k);
+      const vb = c2 / k - mb * mb, va = (tot2 - c2) / (m - k) - ma * ma;
+      const tt = (ma - mb) / Math.sqrt(vb / k + va / (m - k));
+      if (Math.abs(tt) > Math.abs(best.t)) best = { t: tt, at: N, step: 100 * (ma - mb) };
+    }
+    return best;
+  }
+  // Shpilkin, state by state: in turnout bands of 0.5 point, each candidate's votes above the most common
+  // band beyond what their share in that band predicts; summed over the states
+  // the band edges as numpy.arange(0.5, 1.0001, 0.005) makes them, with the step taken as the gap between its
+  // first two values (0.0050000000000000044): a turnout right on an edge falls in the same band as on the page
+  const T_STEP = (0.5 + 0.005) - 0.5, T_EDGES = Array.from({ length: 101 }, (_, i) => 0.5 + i * T_STEP);
+  function shpilkin(L, F, C) {
+    const { A, uf } = D, nb = 100, ns = D.meta.ufs.length;
+    const aL = new Float64Array(ns * nb), aF = new Float64Array(ns * nb), aC = new Float64Array(ns * nb), seen = new Uint8Array(ns * nb);
+    for (let i = 0; i < L.length; i++) {
+      const tv = C[i] / A[i];
+      if (!(tv >= T_EDGES[0] && tv <= T_EDGES[nb])) continue;
+      let lo = 0, hi = nb; // the band b with edge[b] < t <= edge[b+1] (the first band also takes t = 0.5)
+      while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (T_EDGES[mid] < tv) lo = mid; else hi = mid; }
+      const j = uf[i] * nb + lo;
+      aL[j] += L[i]; aF[j] += F[i]; aC[j] += C[i]; seen[j] = 1;
+    }
+    let lula = 0, right = 0;
+    for (let s = 0; s < ns; s++) {
+      let peak = -1;
+      for (let b = 0; b < nb; b++) if (seen[s * nb + b] && (peak < 0 || aC[s * nb + b] > aC[s * nb + peak])) peak = b;
+      if (peak < 0) continue;
+      const np = aL[s * nb + peak] + aF[s * nb + peak], sl = aL[s * nb + peak] / np, sr = aF[s * nb + peak] / np;
+      for (let b = peak + 1; b < nb; b++) {
+        const j = s * nb + b;
+        if (!seen[j]) continue;
+        const n = aL[j] + aF[j];
+        lula += Math.max(0, aL[j] - sl * n); right += Math.max(0, aF[j] - sr * n);
+      }
+    }
+    return { lula, right };
+  }
+  // Proportional swing: within each polling place, Lula's swing between rounds against the right's round-1
+  // share, controlling for the round-1 share of the other candidates; the slope
+  function propSlope(L, F, L1, F1) {
+    const { P, O1 } = D;
+    let sxx = 0, sxo = 0, soo = 0, sxy = 0, soy = 0;
+    const xs = [], os = [], ys = [];
+    for (let k = 0; k + 1 < P.length; k++) {
+      xs.length = 0; os.length = 0; ys.length = 0;
+      for (let i = P[k]; i < P[k + 1]; i++) {
+        const v1 = L1[i] + F1[i], v2 = L[i] + F[i];
+        if (v1 <= 0 || v2 <= 0) continue;
+        const p1 = L1[i] / v1;
+        xs.push(1 - p1); os.push(1 - v1 / (v1 + O1[i])); ys.push(L[i] / v2 - p1);
+      }
+      const m = xs.length;
+      if (m < 2) continue;
+      let mx = 0, mo = 0, my = 0;
+      for (let j = 0; j < m; j++) { mx += xs[j]; mo += os[j]; my += ys[j]; }
+      mx /= m; mo /= m; my /= m;
+      for (let j = 0; j < m; j++) {
+        const x = xs[j] - mx, o = os[j] - mo, y = ys[j] - my;
+        sxx += x * x; sxo += x * o; soo += o * o; sxy += x * y; soy += o * y;
+      }
+    }
+    return (sxy * soo - soy * sxo) / (sxx * soo - sxo * sxo);
+  }
+
   function tests(L, F, C, touched, L1 = D.L1, F1 = D.F1) {
     const { n, P, A, C1, A1, model } = D;
     const r = {};
@@ -303,6 +392,9 @@
       if (Math.abs(g / s) > Math.abs(t)) t = g / s;
     }
     r.model = { gap: 100 * gap, t };
+    r.size = sizeStep(L, F, C);
+    r.shp = shpilkin(L, F, C);
+    r.slope = propSlope(L, F, L1, F1);
 
     // swing residuals in robust-sd units; turnout rise vs swing within polling place
     const rs = [];
@@ -340,6 +432,11 @@
       const [kind, v] = key.split(':');
       if (kind === 'model') idx = idx.filter((i) => model[i] === Number(v));
       if (kind === 'uf') idx = idx.filter((i) => uf[i] === Number(v));
+    } else if (key === 'big') {
+      // the largest sections (most voters) first
+      idx = new Int32Array(n);
+      for (let i = 0; i < n; i++) idx[i] = i;
+      idx.sort((a, b) => D.C[b] - D.C[a] || a - b);
     } else {
       // strongholds: highest share first
       const share = new Float64Array(n);
@@ -354,7 +451,7 @@
   }
   function targets() {
     const victim = state.ben === 'lula' ? 'flavio' : 'lula';
-    const key = { random: `random:${state.seed}`, reduto_adv: victim, reduto_ben: state.ben, model: `model:${state.model}:${state.seed}`, uf: `uf:${state.uf}:${state.seed}` }[state.where];
+    const key = { random: `random:${state.seed}`, reduto_adv: victim, reduto_ben: state.ben, model: `model:${state.model}:${state.seed}`, uf: `uf:${state.uf}:${state.seed}`, big: 'big' }[state.where];
     return order(key);
   }
 
@@ -492,6 +589,20 @@
       { g: 'rounds', label: tr('sim.test.swing_flavio.label'), real: int(b.swing.neg), now: int(t.swing.neg), v: count(t.swing.neg, b.swing.neg, 'swing_neg4'), note: refNote('swing_neg4') },
       { g: 'rounds', label: tr('sim.test.swing_turnout.label'), what: tr('sim.test.swing_turnout.what'), real: dec(b.swing.corr, 3), now: dec(t.swing.corr, 3), v: corr(b.swing.corr, b.swing.pairs) ? 'already' : corr(t.swing.corr, t.swing.pairs) ? 'yes' : 'no', note: tr('sim.test.note.y2022_corr', { r: dec(r22.corr_dturn_swing, 3) }) },
     ];
+    // measures that move with each election, signed (section size, slope): outside the range of the
+    // reference elections by more than that range is wide
+    const M = D.meta.more, refs = (k) => [M['2022'][k], M['2018'][k]];
+    const outside = (v, k) => { const a = refs(k), lo = Math.min(...a), hi = Math.max(...a), w = hi - lo; return v > hi + w || v < lo - w; };
+    const sizeOut = (s) => outside(s.step, 'size_step') && Math.abs(s.t) > 4;
+    const shpOut = (v, k) => v > 1.5 * Math.max(...refs(k));
+    const big = (v) => (v >= 1e6 ? tr('sim.unit.mi', { v: dec(v / 1e6, 2) }) : tr('sim.unit.mil', { v: int(v / 1e3) }));
+    const step = (s) => tr('sim.size.value', { v: dec(s.step, 2), n: s.at === null ? '—' : int(s.at) });
+    rows.push(
+      { g: 'more', label: tr('sim.test.size.label'), what: tr('sim.test.size.what'), real: step(b.size), now: step(t.size), v: sizeOut(b.size) ? 'already' : sizeOut(t.size) ? 'yes' : 'no', note: tr('sim.test.note.ref_pp', { y22: dec(M['2022'].size_step, 2), y18: dec(M['2018'].size_step, 2) }) },
+      { g: 'more', label: tr('sim.test.shp_lula.label'), what: tr('sim.test.shp_lula.what'), real: big(b.shp.lula), now: big(t.shp.lula), v: shpOut(b.shp.lula, 'shp_lula') ? 'already' : shpOut(t.shp.lula, 'shp_lula') ? 'yes' : 'no', note: tr('sim.test.note.ref_txt', { y22: big(M['2022'].shp_lula), y18: big(M['2018'].shp_lula) }) },
+      { g: 'more', label: tr('sim.test.shp_flavio.label'), real: big(b.shp.right), now: big(t.shp.right), v: shpOut(b.shp.right, 'shp_right') ? 'already' : shpOut(t.shp.right, 'shp_right') ? 'yes' : 'no', note: tr('sim.test.note.ref_txt_jair', { y22: big(M['2022'].shp_right), y18: big(M['2018'].shp_right) }) },
+      { g: 'more', label: tr('sim.test.slope.label'), what: tr('sim.test.slope.what'), real: dec(b.slope, 3), now: dec(t.slope, 3), v: outside(b.slope, 'slope') ? 'already' : outside(t.slope, 'slope') ? 'yes' : 'no', note: tr('sim.test.note.ref_txt', { y22: dec(M['2022'].slope, 3), y18: dec(M['2018'].slope, 3) }) },
+    );
     for (const r of rows) r.bad = r.v === 'yes';
     return rows;
   }
@@ -507,7 +618,7 @@
     stuff: { label: tr('sim.intensity.stuff'), min: 80, max: 100, step: 1, unit: '%' },
     invent: { label: tr('sim.intensity.invent'), min: 1, max: 100, step: 1, unit: '%' },
   };
-  const GROUP = { round: tr('sim.group.round'), place: tr('sim.group.place'), rounds: tr('sim.group.rounds') };
+  const GROUP = { round: tr('sim.group.round'), place: tr('sim.group.place'), rounds: tr('sim.group.rounds'), more: tr('sim.group.more') };
 
   function syncControls() {
     for (const b of ui.ben.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.v === state.ben));

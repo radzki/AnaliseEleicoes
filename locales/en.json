@@ -1368,8 +1368,8 @@
   "from": "d997166f95"
  },
  "fraude.p.1": {
-  "text": "Pretend you want to change the result of the 2026 runoff. Choose whom to favor and how to rig it: 16 of the tests on this page, of 8 kinds, are rerun on the spot (those in “More tests” and “With 2018 too” are left out), on the tally reports of all 499,205 machines, and show whether your fraud would leave marks.",
-  "from": "962e0b0867"
+  "text": "Pretend you want to change the result of the 2026 runoff. Choose whom to favor and how to rig it: 20 of the tests on this page, of 11 kinds, are rerun on the spot (three of those in “More tests” are included; the others, and those in “With 2018 too”, are left out), on the tally reports of all 499,205 machines, and show whether your fraud would leave marks.",
+  "from": "b6035d3d40"
  },
  "sim-loading.div.1": {
   "text": "Loading the tally reports of the 499,205 machines (2.8 MB)…",
@@ -1508,8 +1508,8 @@
   "from": "c03cc3b5ac"
  },
  "sim-app.p.1": {
-  "text": "“Yes” means that, looking only at the published numbers, as someone analyzing the election would, the fraud would stand out by the same standard the rest of the page applies to the real numbers: for tests against chance, failing them (last digit, p &lt; 0.001; the others, more than 4 standard deviations); for counts that change from one election to the next, passing 1.5 times the largest value of the reference elections (2022 and, where available, 2018), and by more than chance would explain. “Already stood out without fraud” means the real number already stands out by that standard, so the test can't tell the fraud apart from whatever made the real number high: that is the case of the machines with turnout of 95% or more and 90% or more of the votes for Lula (question 4 of the Summary). The sum of the machines against the official totals isn't on the list: the totals come from the same tally reports, so it matches any fraud done inside the machine.",
-  "from": "d7a6bd39b8"
+  "text": "“Yes” means that, looking only at the published numbers, as someone analyzing the election would, the fraud would stand out by the same standard the rest of the page applies to the real numbers: for tests against chance, failing them (last digit, p &lt; 0.001; the others, more than 4 standard deviations); for counts that change from one election to the next, passing 1.5 times the largest value of the reference elections (2022 and, where available, 2018), and by more than chance would explain; for measures whose level changes from one election to the next (the step by section size and the slope of the swing), falling outside the range of the reference elections by more than that range is wide; and, for the Shpilkin method, passing 1.5 times the largest value of the reference elections. “Already stood out without fraud” means the real number already stands out by that standard, so the test can't tell the fraud apart from whatever made the real number high: that is the case of the machines with turnout of 95% or more and 90% or more of the votes for Lula (question 4 of the Summary). The sum of the machines against the official totals isn't on the list: the totals come from the same tally reports, so it matches any fraud done inside the machine.",
+  "from": "7131b7ce55"
  },
  "sim-charts-card.h3.1": {
   "text": "Two of the page's charts, redrawn with the fraud",
@@ -3110,5 +3110,65 @@
  "fraude.p.2": {
   "text": "<b>What it's for:</b> it isn't proof of anything about the real election. It's a way to learn by doing: pick a fraud, move the controls and see which tests notice the change and which don't. Each test sees one kind of fraud; none sees them all.",
   "from": "5e0e3fd89c"
+ },
+ "js.sim.group.more": {
+  "text": "Other methods (“More tests” section)",
+  "from": "b3457feb17"
+ },
+ "js.sim.test.size.label": {
+  "text": "Lula's gap between large and small machines, at the same polling place",
+  "from": "73c70382d1"
+ },
+ "js.sim.test.size.what": {
+  "text": "A program that only acted on large machines would show up here: it's the largest step along section size.",
+  "from": "d8c5e37512"
+ },
+ "js.sim.size.value": {
+  "text": "{v} pp (from {n} up)",
+  "from": "19cc83030c"
+ },
+ "js.sim.test.shp_lula.label": {
+  "text": "Lula's votes above the most common turnout (Shpilkin)",
+  "from": "a6cd2817bd"
+ },
+ "js.sim.test.shp_lula.what": {
+  "text": "Votes added where turnout is high, state by state. If stuffing pushes many machines to the same turnout, that becomes the most common one, and the method no longer sees the votes above it.",
+  "from": "26382fdf00"
+ },
+ "js.sim.test.shp_flavio.label": {
+  "text": "Flávio's votes above the most common turnout (Shpilkin)",
+  "from": "41e754cfff"
+ },
+ "js.sim.test.slope.label": {
+  "text": "Proportional swing between rounds (slope)",
+  "from": "36322be82f"
+ },
+ "js.sim.test.slope.what": {
+  "text": "Swapping a fixed share of the votes in the runoff would raise the slope; but it varies a lot from one election to the next.",
+  "from": "a65ac3d2d3"
+ },
+ "js.sim.test.note.ref_pp": {
+  "text": "in 2022: {y22} pp; in 2018: {y18} pp",
+  "from": "77a6d4579b"
+ },
+ "js.sim.test.note.ref_txt": {
+  "text": "in 2022: {y22}; in 2018: {y18}",
+  "from": "5d82370eea"
+ },
+ "js.sim.test.note.ref_txt_jair": {
+  "text": "in 2022, Jair: {y22}; in 2018, Jair: {y18}",
+  "from": "a7a4078370"
+ },
+ "js.sim.unit.mi": {
+  "text": "{v} M",
+  "from": "91c91aab19"
+ },
+ "js.sim.unit.mil": {
+  "text": "{v}k",
+  "from": "bcdccd08a3"
+ },
+ "sim-where.option.6": {
+  "text": "Only the largest machines",
+  "from": "18167ff3ba"
  }
 }
