@@ -29,7 +29,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 rep, web, loc = repo / "report", repo / "web", repo / "locales"
 SITE = "https://eleicoes.radzkitech.com/"
 
-# Dataset ids, titles and descriptions, read from report/build_store.py without running it.
+# Dataset ids, read from report/build_store.py without running it (names and descriptions: locales/, data.<id>.*).
 tree = ast.parse((rep / "build_store.py").read_text(encoding="utf-8"))
 DATASETS = next(ast.literal_eval(n.value) for n in tree.body
                 if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", None) == "DATASETS")
@@ -80,7 +80,7 @@ def pending(key, text, note):
     """Portuguese shown in a translated page: marked where it is element content, as is where it is
     an attribute, a <title> or <meta>, an <option> or a script string."""
     kind = key.split(".")[-2] if key.count(".") >= 2 else ""
-    if key.startswith(("js.", "shell.", "404.")) or kind in ("arialabel", "placeholder", "title", "alt", "option"):
+    if key.startswith(("js.", "shell.", "404.", "data.", "og.")) or kind in ("arialabel", "placeholder", "title", "alt", "option"):
         return text
     return f'<span class="vf-pending" lang="pt-BR" title="{html.escape(note)}">{text}</span>'
 
@@ -165,8 +165,8 @@ for lang in LANGS:
     frag = fill(frag_src, T, "report/index.html").replace("{{langs}}", langs)
     m = re.match(r"\s*<style>\n?(.*?)</style>\n?", frag, re.S)
     style, body = m.group(1), frag[m.end():]
-    items = "\n".join(f'    <li><a href="data/{i}.json" title="{html.escape(desc)}">{html.escape(title)}</a></li>'
-                      for i, (_, title, desc) in DATASETS.items())
+    items = "\n".join(f'    <li><a href="data/{i}.json" title="{html.escape(T[f"data.{i}.desc"])}">{html.escape(T[f"data.{i}.title"])}</a></li>'
+                      for i in DATASETS)
     page = fill(page_src, T, "web/page.html")
     og = "og.png" if lang == "pt-BR" else f"og-{lang}.png"
     assert (out / og).is_file(), f"no {og}: run scripts/06_og_image.py"

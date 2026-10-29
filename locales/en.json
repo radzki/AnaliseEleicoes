@@ -2902,5 +2902,149 @@
  "og.foot": {
   "text": "Election forensics with the TSE's open data",
   "from": "a0a6cbb46b"
+ },
+ "data.summary.title": {
+  "text": "National totals by round",
+  "from": "4a5ac5cbbf"
+ },
+ "data.summary.desc": {
+  "text": "Eligible voters, turnout, valid votes and each finalist's votes in both rounds of 2026 and 2022, summed from every section.",
+  "from": "c2aec85953"
+ },
+ "data.scorecard.title": {
+  "text": "Forensic test results",
+  "from": "9ecd882004"
+ },
+ "data.scorecard.desc": {
+  "text": "One row per test, measure, round and year: the observed value, what chance alone would give and the test statistic.",
+  "from": "f846488fe9"
+ },
+ "data.last_digit.title": {
+  "text": "Last-digit frequency",
+  "from": "ff1e62edc3"
+ },
+ "data.last_digit.desc": {
+  "text": "Share of section counts ending in each digit from 0 to 9, for Lula, the Bolsonaro candidate and turnout, by round and year.",
+  "from": "240bba93a9"
+ },
+ "data.pct_hist.title": {
+  "text": "Percentages in 0.1-point bins",
+  "from": "a00924c086"
+ },
+ "data.pct_hist.desc": {
+  "text": "Runoff sections per 0.1-point bin of Lula's share and of turnout, with the number expected by binomial resampling of the counts themselves.",
+  "from": "9b811eb163"
+ },
+ "data.z_hist.title": {
+  "text": "Section deviation from its polling place",
+  "from": "6409d6bf79"
+ },
+ "data.z_hist.desc": {
+  "text": "Histogram of each section's deviation from the rest of its polling place (z), for Lula's share, turnout and the change between rounds, with what the normal curve expects.",
+  "from": "ab7bf32784"
+ },
+ "data.states.title": {
+  "text": "Turnout and swing by state",
+  "from": "dc245b537d"
+ },
+ "data.states.desc": {
+  "text": "By state: sections, turnout in each round, Lula's share in the runoff and the change in Lula's share between rounds.",
+  "from": "4c37ce9e2e"
+ },
+ "data.fingerprint.title": {
+  "text": "Turnout × Lula's share grid",
+  "from": "a192c458db"
+ },
+ "data.fingerprint.desc": {
+  "text": "Runoff sections counted in cells of 1 point of turnout and of Lula's share, 2026 and 2022.",
+  "from": "88cb81670b"
+ },
+ "data.corner.title": {
+  "text": "Near-unanimous sections",
+  "from": "b7e44ee825"
+ },
+ "data.corner.desc": {
+  "text": "2026 runoff sections with turnout ≥ 95% and 90% or more of the votes for one candidate (Lula or Flávio), with at least 100 eligible voters, with the first-round values and the polling place.",
+  "from": "f6b8cf8072"
+ },
+ "data.timing.title": {
+  "text": "Progress of the count",
+  "from": "585d167ca6"
+ },
+ "data.timing.desc": {
+  "text": "Share of votes received and Lula's share between the two finalists, in 10-minute steps from 5 pm, by round and year.",
+  "from": "9ecb3a42ef"
+ },
+ "data.urna.title": {
+  "text": "Results by voting machine model",
+  "from": "f440d61154"
+ },
+ "data.urna.desc": {
+  "text": "Sections and Lula's share by voting machine model, raw and compared with other machines at the same polling place.",
+  "from": "a566513c47"
+ },
+ "data.consistency.title": {
+  "text": "Sections vs. official totals",
+  "from": "323f1d1ffc"
+ },
+ "data.consistency.desc": {
+  "text": "Section tally reports summed by municipality-zone unit and compared with the totals the TSE publishes separately, field by field and, in 2026, round by round, including each finalist's votes.",
+  "from": "9a6a271d1d"
+ },
+ "data.strongholds.title": {
+  "text": "Strongholds and near-total turnout",
+  "from": "33bec312ab"
+ },
+ "data.strongholds.desc": {
+  "text": "By year and round, sections with 100 or more eligible voters: all of them, those with Lula ≥ 90% and those with the Bolsonaro candidate ≥ 90% (eligible voters, voters, turnout and how many reached 95% turnout or more); and the same runoff sections compared one by one between 2022 and 2026 (median change in eligible voters and in voters).",
+  "from": "6aedc87889"
+ },
+ "data.more_tests.title": {
+  "text": "More tests",
+  "from": "a43c037de2"
+ },
+ "data.more_tests.desc": {
+  "text": "Tests from other methods, in 2026, 2022 and 2018: section size, proportional swing between rounds, homogeneity within the polling place, Shpilkin, Benford's second digit and the mixture model (Klimek), with what fraud planted in the data would show; and, in the logs of a sample of voting machines, bursts of votes and releases by the poll worker, by group.",
+  "from": "b0ff1c17b3"
+ },
+ "data.size_curve.title": {
+  "text": "Lula's share by section size",
+  "from": "c4dd2e1da2"
+ },
+ "data.size_curve.desc": {
+  "text": "Difference between Lula's share in the section and in the rest of its polling place, in bins of 25 voters, in the 2026, 2022 and 2018 runoffs, and with planted fraud that only acts on machines with more than 250 voters.",
+  "from": "290f360ce5"
+ },
+ "data.tres_eleicoes.title": {
+  "text": "Three elections: 2026, 2022 and 2018",
+  "from": "65cc1d5430"
+ },
+ "data.tres_eleicoes.desc": {
+  "text": "Tests with 2018 as a second reference: near-unanimous sections and sections that stand out from their polling place, sections where one candidate gained votes and the other lost (with a model with nothing abnormal), vote concentration, expected × observed without seeing the municipality and an automatic detector (Isolation Forest and LOF), with planted fraud.",
+  "from": "b342bbc034"
+ },
+ "data.graficos.title": {
+  "text": "Series for the test charts",
+  "from": "0cb4455ae0"
+ },
+ "data.graficos.desc": {
+  "text": "Series for the charts in “More tests” and “With 2018 too”: swing slope by state, chi-squared p-values by polling place, each candidate's share by turnout bin (Shpilkin), second-digit frequency, distribution of the PT's share by section, each municipality's deviation from the prediction and the automatic detector's score, with the planted fraud.",
+  "from": "bd1e2eb893"
+ },
+ "data.urna_assinaturas.title": {
+  "text": "Signatures and RDV of a sample of voting machines",
+  "from": "a08dbd809f"
+ },
+ "data.urna_assinaturas.desc": {
+  "text": "The same sample of 2026 runoff machines: digital signatures of the tally report, the digital vote record (RDV) and the log verified, the tally report compared with the published data and the RDV votes recounted.",
+  "from": "cd8ffcf08e"
+ },
+ "data.urna_logs.title": {
+  "text": "Logs of a sample of voting machines",
+  "from": "004a772cd4"
+ },
+ "data.urna_logs.desc": {
+  "text": "Sample of 2026 runoff machines read from the TSE's results site: by group (near-unanimous machines, Lula's and Flávio's strongholds, machines drawn nationwide) and round, votes cast after 5 pm (Brasília time), closing time and how voters were identified (fingerprint or manual release by the poll worker); national estimate of votes after 5 pm; check of the number of votes against official turnout.",
+  "from": "2f37368960"
  }
 }

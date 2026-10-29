@@ -2902,5 +2902,149 @@
  "og.foot": {
   "text": "Estadística forense con los datos abiertos del TSE",
   "from": "a0a6cbb46b"
+ },
+ "data.summary.title": {
+  "text": "Totales nacionales por vuelta",
+  "from": "4a5ac5cbbf"
+ },
+ "data.summary.desc": {
+  "text": "Electores habilitados, participación, votos válidos y votos de cada finalista en las dos vueltas de 2026 y 2022, sumados a partir de todas las secciones.",
+  "from": "c2aec85953"
+ },
+ "data.scorecard.title": {
+  "text": "Resultados de las pruebas forenses",
+  "from": "9ecd882004"
+ },
+ "data.scorecard.desc": {
+  "text": "Una fila por prueba, medida, vuelta y año: el valor observado, lo que daría solo el azar y el estadístico de la prueba.",
+  "from": "f846488fe9"
+ },
+ "data.last_digit.title": {
+  "text": "Frecuencia del último dígito",
+  "from": "ff1e62edc3"
+ },
+ "data.last_digit.desc": {
+  "text": "Fracción de los conteos por sección que terminan en cada dígito de 0 a 9, para Lula, el candidato Bolsonaro y la participación, por vuelta y año.",
+  "from": "240bba93a9"
+ },
+ "data.pct_hist.title": {
+  "text": "Porcentajes en franjas de 0,1 punto",
+  "from": "a00924c086"
+ },
+ "data.pct_hist.desc": {
+  "text": "Secciones de la segunda vuelta por franja de 0,1 punto del porcentaje de Lula y de la participación, con la cantidad esperada por remuestreo binomial de los propios conteos.",
+  "from": "9b811eb163"
+ },
+ "data.z_hist.title": {
+  "text": "Desvío de la sección frente a su local",
+  "from": "6409d6bf79"
+ },
+ "data.z_hist.desc": {
+  "text": "Histograma del desvío de cada sección respecto del resto de su local de votación (z), para el porcentaje de Lula, la participación y la variación entre vueltas, con lo esperado por la curva normal.",
+  "from": "ab7bf32784"
+ },
+ "data.states.title": {
+  "text": "Participación y migración por estado",
+  "from": "dc245b537d"
+ },
+ "data.states.desc": {
+  "text": "Por estado: secciones, participación en cada vuelta, porcentaje de Lula en la segunda vuelta y variación del porcentaje de Lula entre las vueltas.",
+  "from": "4c37ce9e2e"
+ },
+ "data.fingerprint.title": {
+  "text": "Cuadrícula participación × % de Lula",
+  "from": "a192c458db"
+ },
+ "data.fingerprint.desc": {
+  "text": "Secciones de la segunda vuelta contadas en celdas de 1 punto de participación y de porcentaje de Lula, 2026 y 2022.",
+  "from": "88cb81670b"
+ },
+ "data.corner.title": {
+  "text": "Secciones casi unánimes",
+  "from": "b7e44ee825"
+ },
+ "data.corner.desc": {
+  "text": "Secciones de la segunda vuelta de 2026 con participación ≥ 95% y el 90% o más de los votos para un candidato (Lula o Flávio), con al menos 100 electores habilitados, con los valores de la primera vuelta y el local de votación.",
+  "from": "f6b8cf8072"
+ },
+ "data.timing.title": {
+  "text": "Avance del escrutinio",
+  "from": "585d167ca6"
+ },
+ "data.timing.desc": {
+  "text": "Fracción de los votos recibidos y porcentaje de Lula entre los dos finalistas, en pasos de 10 minutos desde las 17:00, por vuelta y año.",
+  "from": "9ecb3a42ef"
+ },
+ "data.urna.title": {
+  "text": "Resultados por modelo de urna",
+  "from": "f440d61154"
+ },
+ "data.urna.desc": {
+  "text": "Secciones y porcentaje de Lula por modelo de urna, en bruto y comparado con otras urnas del mismo local de votación.",
+  "from": "a566513c47"
+ },
+ "data.consistency.title": {
+  "text": "Secciones vs. totales oficiales",
+  "from": "323f1d1ffc"
+ },
+ "data.consistency.desc": {
+  "text": "Boletines de las secciones sumados por unidad municipio-zona y comparados con los totales que el TSE publica por separado, campo por campo y, en 2026, vuelta por vuelta, incluidos los votos de cada finalista.",
+  "from": "9a6a271d1d"
+ },
+ "data.strongholds.title": {
+  "text": "Bastiones y participación casi total",
+  "from": "33bec312ab"
+ },
+ "data.strongholds.desc": {
+  "text": "Por año y vuelta, secciones con 100 o más electores habilitados: todas, las con Lula ≥ 90% y las con el candidato Bolsonaro ≥ 90% (electores habilitados, votantes, participación y cuántas llegaron al 95% o más de participación); y las mismas secciones de la segunda vuelta comparadas una a una entre 2022 y 2026 (variación mediana de habilitados y de votantes).",
+  "from": "6aedc87889"
+ },
+ "data.more_tests.title": {
+  "text": "Más pruebas",
+  "from": "a43c037de2"
+ },
+ "data.more_tests.desc": {
+  "text": "Pruebas de otros métodos, en 2026, 2022 y 2018: tamaño de la sección, migración proporcional entre vueltas, homogeneidad en el local de votación, Shpilkin, segundo dígito de Benford y modelo de mezcla (Klimek), con lo que mostrarían fraudes simulados en los datos; y, en los registros de una muestra de urnas, ráfagas de votos y habilitaciones por el mesario por grupo.",
+  "from": "b0ff1c17b3"
+ },
+ "data.size_curve.title": {
+  "text": "% de Lula por tamaño de la sección",
+  "from": "c4dd2e1da2"
+ },
+ "data.size_curve.desc": {
+  "text": "Diferencia entre el porcentaje de Lula en la sección y en el resto de su local de votación, por franja de 25 votantes, en la segunda vuelta de 2026, 2022 y 2018, y con un fraude simulado que solo actúa en urnas con más de 250 votantes.",
+  "from": "290f360ce5"
+ },
+ "data.tres_eleicoes.title": {
+  "text": "Tres elecciones: 2026, 2022 y 2018",
+  "from": "65cc1d5430"
+ },
+ "data.tres_eleicoes.desc": {
+  "text": "Pruebas con 2018 como segunda referencia: secciones casi unánimes y que desentonan con su local, secciones en las que un candidato ganó votos y el otro perdió (con un modelo sin nada anormal), concentración del voto, esperado × observado sin ver el municipio y un detector automático (Isolation Forest y LOF), con fraudes simulados.",
+  "from": "b342bbc034"
+ },
+ "data.graficos.title": {
+  "text": "Series de los gráficos de las pruebas",
+  "from": "0cb4455ae0"
+ },
+ "data.graficos.desc": {
+  "text": "Series de los gráficos de “Más pruebas” y “Con 2018 también”: pendiente de la migración por estado, valores p del chi cuadrado por local, porcentaje de cada candidato por franja de participación (Shpilkin), frecuencia del segundo dígito, distribución del porcentaje del PT por sección, desvío de cada municipio frente a la predicción y puntaje del detector automático, con los fraudes simulados.",
+  "from": "bd1e2eb893"
+ },
+ "data.urna_assinaturas.title": {
+  "text": "Firmas y RDV de una muestra de urnas",
+  "from": "a08dbd809f"
+ },
+ "data.urna_assinaturas.desc": {
+  "text": "La misma muestra de urnas de la segunda vuelta de 2026: firmas digitales del boletín de urna, del registro digital del voto (RDV) y del registro (log) verificadas, boletín comparado con los datos publicados y votos del RDV recontados.",
+  "from": "cd8ffcf08e"
+ },
+ "data.urna_logs.title": {
+  "text": "Registros (logs) de una muestra de urnas",
+  "from": "004a772cd4"
+ },
+ "data.urna_logs.desc": {
+  "text": "Muestra de urnas de la segunda vuelta de 2026 leída en el sitio de resultados del TSE: por grupo (urnas casi unánimes, bastiones de Lula y de Flávio, urnas sorteadas en el país) y vuelta, votos computados después de las 17:00 (hora de Brasilia), hora de cierre y cómo se identificó a los electores (huella digital o habilitación manual por el mesario); estimación nacional de votos después de las 17:00; comparación del número de votos con la participación oficial.",
+  "from": "2f37368960"
  }
 }
