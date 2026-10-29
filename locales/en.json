@@ -1332,8 +1332,8 @@
   "from": "0b0e728aaa"
  },
  "metodo.li.1": {
-  "text": "Data: TSE open data (dadosabertos.tse.jus.br, resultados-2026 and resultados-2022), files of votes by section and of details by section (turnout, time the tally report was received, machine model), downloaded on October 26, 2026; to check the runoff, the totals by municipality and zone, each candidate's vote by municipality and zone and the official tallying report, downloaded on October 27. President only.",
-  "from": "0c25e63570"
+  "text": "Data: TSE open data (dadosabertos.tse.jus.br, resultados-2026, resultados-2022 and resultados-2018), files of votes by section and of details by section (turnout, time the tally report was received, machine model), downloaded on October 26, 2026; to check the runoff, the totals by municipality and zone, each candidate's vote by municipality and zone and the official tallying report, downloaded on October 27; and the runoff tally reports, with the releases by the poll worker in each section, downloaded on October 29. President only.",
+  "from": "d30125a67b"
  },
  "metodo.li.2": {
   "text": "Unit: the electoral section, that is, one voting machine and its printed tally report.",
@@ -1368,8 +1368,8 @@
   "from": "d997166f95"
  },
  "fraude.p.1": {
-  "text": "Pretend you want to change the result of the 2026 runoff. Choose whom to favor and how to rig it: the tests on this page are rerun on the spot, on the tally reports of all 499,205 machines, and show whether your fraud would leave marks. It is a simulation in your browser; no real data is changed.",
-  "from": "c51f864378"
+  "text": "Pretend you want to change the result of the 2026 runoff. Choose whom to favor and how to rig it: 16 of the tests on this page, of 8 kinds, are rerun on the spot (those in “More tests” and “With 2018 too” are left out), on the tally reports of all 499,205 machines, and show whether your fraud would leave marks.",
+  "from": "962e0b0867"
  },
  "sim-loading.div.1": {
   "text": "Loading the tally reports of the 499,205 machines (2.8 MB)…",
@@ -1432,8 +1432,8 @@
   "from": "c411b37eab"
  },
  "sim-both-row.span.1": {
-  "text": "A tampered machine would run the same program in both rounds. Uncheck to rig only the runoff, which leaves one more mark: the change between rounds.",
-  "from": "cb3b8c9612"
+  "text": "A tampered machine would run the same program in both rounds. Untick to rig only the runoff: with a large swap in each tampered machine, the change between rounds also starts to stand out; with a small swap, not even that.",
+  "from": "1e4f0be2cf"
  },
  "sim-round-note.p.1": {
   "text": "This fraud is done only in the runoff; the first round stays as it was.",
@@ -1508,8 +1508,8 @@
   "from": "c03cc3b5ac"
  },
  "sim-app.p.1": {
-  "text": "“Yes” means the fraud changed the number more than chance would explain, compared with the real result (for the last digit, p &lt; 0.001; for the other tests, more than 4 standard deviations). The column does not say whether the real number is normal; that is what the rest of the page assesses, and in the real numbers one test already stood out: the machines with turnout of 95% or more and 90% or more of the votes for Lula (question 4 of the Summary). The sum of the machines against the official totals is not on the list: the totals come from the same tally reports, so it matches with any fraud done inside the machine.",
-  "from": "f7a85465dd"
+  "text": "“Yes” means that, looking only at the published numbers, as someone analyzing the election would, the fraud would stand out by the same standard the rest of the page applies to the real numbers: for tests against chance, failing them (last digit, p &lt; 0.001; the others, more than 4 standard deviations); for counts that change from one election to the next, passing 1.5 times the largest value of the reference elections (2022 and, where available, 2018), and by more than chance would explain. “Already stood out without fraud” means the real number already stands out by that standard, so the test can't tell the fraud apart from whatever made the real number high: that is the case of the machines with turnout of 95% or more and 90% or more of the votes for Lula (question 4 of the Summary). The sum of the machines against the official totals isn't on the list: the totals come from the same tally reports, so it matches any fraud done inside the machine.",
+  "from": "d7a6bd39b8"
  },
  "sim-charts-card.h3.1": {
   "text": "Two of the page's charts, redrawn with the fraud",
@@ -1544,8 +1544,8 @@
   "from": "cc8f981b85"
  },
  "referencias.li.1": {
-  "text": "Tribunal Superior Eleitoral. <a href=\"https://dadosabertos.tse.jus.br/\" target=\"_blank\" rel=\"noopener\">Portal de Dados Abertos</a>: votes by section, details by section and totals by municipality and zone, 2026 and 2022 elections.",
-  "from": "b4d9615910"
+  "text": "Tribunal Superior Eleitoral. <a href=\"https://dadosabertos.tse.jus.br/\" target=\"_blank\" rel=\"noopener\">Portal de Dados Abertos</a>: votes by section, details by section and totals by municipality and zone, 2026, 2022 and 2018 elections; and the tally reports of the 2026 runoff.",
+  "from": "6442781d30"
  },
  "referencias.li.2": {
   "text": "Tribunal Superior Eleitoral. <a href=\"https://resultados.tse.jus.br/oficial/app/index.html\" target=\"_blank\" rel=\"noopener\">Resultados: arquivos de urna por seção</a> (tally report, digital vote record and machine event log), 2026 runoff.",
@@ -1848,8 +1848,8 @@
   "from": "167d3602f0"
  },
  "js.sim.test.model.label": {
-  "text": "Largest gap between machine models at the same place",
-  "from": "baac72f279"
+  "text": "Largest gap between one voting-machine model and the average of the models, at the same polling place",
+  "from": "fb12327a3a"
  },
  "js.sim.test.model.what": {
   "text": "A program tampered with in only one model would show up here.",
@@ -2024,8 +2024,8 @@
   "from": "2961c02d8f"
  },
  "js.sim.score.integrity_flip": {
-  "text": "Outside these numbers, the chance that the integrity test draws at least one of the {machines} tampered machines is <b>{chance}</b>.",
-  "from": "36eeada2f5"
+  "text": "Outside these numbers, the chance that the integrity test draws at least one of the {machines} tampered machines is <b>{chance}</b>, or {chance_bio} counting only the test machines voted on with biometrics.",
+  "from": "26b37bf2f9"
  },
  "js.sim.score.winner_marks": {
   "text": "If {name}'s win had come from a fraud like this, the real numbers would have these marks. Compare the Real column with 2022, noted below each number.",
@@ -2100,16 +2100,16 @@
   "from": "b584068aaa"
  },
  "js.sim.outside.chip_all": {
-  "text": "The integrity test would catch it",
-  "from": "250f47b2f3"
+  "text": "The integrity test would catch it, if the program can't recognize the test",
+  "from": "8e7a197d30"
  },
  "js.sim.outside.chip_chance": {
-  "text": "{chance} chance of being caught",
-  "from": "20cc50e28c"
+  "text": "{chance} chance of being caught, if the program can't recognize the test",
+  "from": "3d4f2adc37"
  },
  "js.sim.outside.integrity": {
-  "text": "<b>Integrity test:</b> on election day, at least {a} randomly drawn machines (20 to 33 per state) are swapped for spare machines, and the originals receive, in a public place and on camera, known votes from paper ballots. The tally report has to match the ballots. {detail}.",
-  "from": "da02e4d49d"
+  "text": "<b>Integrity test:</b> on election day, at least {a} randomly drawn machines (20 to 33 per state, according to the press) are swapped for spare machines, and the originals receive, in a public place and on camera, known votes from paper ballots. The tally report has to match the ballots. {detail}.",
+  "from": "cf7cba75d5"
  },
  "js.sim.outside.integrity_all": {
   "text": "With the program in every machine, all the test machines would be tampered with: {swapped}. A single swapped vote is enough for the tally report not to match",
@@ -3078,5 +3078,37 @@
  "data.complementos.desc": {
   "text": "Numbers asked for by the adversarial review of 29/10/2026: sections with atypical turnout that lean to Lula against the share of all sections (and in round 1), the change in turnout from 2022 to 2026 by how strong Lula was in the section, the chi-squared median from chance alone, each voting-machine model against the others where a polling place has several, and Lula's share along the count.",
   "from": "e1f24fcb5d"
+ },
+ "js.sim.test.already": {
+  "text": "Already stood out without fraud",
+  "from": "eae4d7baa9"
+ },
+ "js.sim.test.note.ref": {
+  "text": "in 2022: {y22}; in 2018: {y18}",
+  "from": "5d82370eea"
+ },
+ "js.sim.test.note.ref_jair": {
+  "text": "in 2022, Jair: {y22}; in 2018, Jair: {y18}",
+  "from": "a7a4078370"
+ },
+ "js.sim.test.note.y2022_corr": {
+  "text": "in 2022: {r}",
+  "from": "c9865a4529"
+ },
+ "js.sim.outside.integrity_bio": {
+  "text": "Counting only the part of the test voted on with real voters' fingerprints, which not even a program able to recognize the test could fool (10% of the machines drawn, according to the OAS mission; here, {bio} per state), the chance would be <b>{chance}</b>.",
+  "from": "c6f1756c80"
+ },
+ "sim-round-row.b.1": {
+  "text": "With round numbers",
+  "from": "82d2ac3233"
+ },
+ "sim-round-row.span.1": {
+  "text": "People who write numbers by hand carelessly tend to end them in 0 or 5; tick it to see what the digit tests catch. A careful forger would write ordinary digits.",
+  "from": "76939babb8"
+ },
+ "fraude.p.2": {
+  "text": "<b>What it's for:</b> it isn't proof of anything about the real election. It's a way to learn by doing: pick a fraud, move the controls and see which tests notice the change and which don't. Each test sees one kind of fraud; none sees them all.",
+  "from": "5e0e3fd89c"
  }
 }

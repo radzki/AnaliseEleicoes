@@ -4,7 +4,7 @@ Usage: python -I scripts/09_sim_data.py <processed_dir> <results_dir>
 
 Writes <results_dir>/sim/secoes_2026_t2.bin (gzip-compressed columns, read in the browser with
 DecompressionStream) and <results_dir>/sim/meta.json (column layout, labels and the reference values
-from 2026 and 2022 that the simulator compares against).
+from 2026, 2022 and, where it exists, 2018 that the simulator compares against).
 
 Sections are the ones the forensic tests use (02_analyze.py: votes for Lula present, valid votes > 0),
 sorted by polling place, so a polling place is a run of `place_size` consecutive sections.
@@ -85,6 +85,7 @@ def refs(r):
             "corr_dturn_swing": r["swing"]["corr_dturn_swing_within_place"]}
 
 
+T18 = json.loads((out.parent / "three_elections.json").read_text(encoding="utf-8"))["reference"]["2018"]
 meta = {
     "source": "TSE, votacao_secao e detalhe_votacao_secao 2026, 2º turno (scripts/09_sim_data.py)",
     "sections": n, "places": int(len(place_size)), "raw_bytes": len(blob), "packed_bytes": len(packed),
@@ -92,10 +93,15 @@ meta = {
     "totals": {"lula": int(lula.sum()), "flavio": int(flavio.sum()), "aptos": int(aptos.sum()),
                "comparecimento": int(comp.sum())},
     # reference values computed by 02_analyze.py; the simulator must reproduce the 2026 ones untouched
-    "reference": {"2026": refs(R[2026]), "2022": refs(R[2022])},
+    # (2018, from 14_three_elections.py, has the polling-place and near-unanimous counts but not the swing ones)
+    "reference": {"2026": refs(R[2026]), "2022": refs(R[2022]),
+                  "2018": {k: T18[k] for k in ("place_pos4", "place_neg4", "corner_lula", "corner_right")}},
     # TSE's integrity test (votação paralela): machines drawn by lot and replaced on election day.
     # News reports for the 2026 runoff give 20 to 33 per state; 540 is a conservative national total.
     "integrity_test_machines": 540,
+    # of them, the share voted on with real voters' fingerprints, which a program that recognised the test
+    # could not tell from an election: 10% in 2026 (OAS observation mission, preliminary runoff report)
+    "integrity_biometric_share": 0.10,
 }
 (out / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
 print(f"{n} sections, {meta['places']} polling places; {len(blob) / 1e6:.1f} MB raw, {len(packed) / 1e6:.2f} MB packed")

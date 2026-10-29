@@ -131,9 +131,9 @@
   .vf a.vf-src, .vf-refs a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .vf-refs ol { margin: var(--cds-gap-md) 0 0; padding-left: 1.6em; display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   /* Candidate colors: Lula red, Flávio blue, stepped for light and dark backgrounds. */
-  #dash-root { --vf-lula: #c62f2f; --vf-flavio: #1d64c2; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #dash-root { --vf-lula: #f0716d; --vf-flavio: #5c9cf0; } }
-  :root[data-theme="dark"] #dash-root { --vf-lula: #f0716d; --vf-flavio: #5c9cf0; }
+  #dash-root { --vf-lula: #c62f2f; --vf-flavio: #1d64c2; --vf-info: #1b7f9e; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) #dash-root { --vf-lula: #f0716d; --vf-flavio: #5c9cf0; --vf-info: #5bbcd6; } }
+  :root[data-theme="dark"] #dash-root { --vf-lula: #f0716d; --vf-flavio: #5c9cf0; --vf-info: #5bbcd6; }
   /* Candidate filter: a dot in each candidate's color; the pressed option filled (deeper red and blue keep white text readable). */
   #cand-pick button::before { content: ""; display: inline-block; width: 0.6em; height: 0.6em; border-radius: 50%; margin-right: 0.4em; vertical-align: 0.02em; }
   #cand-pick button[data-v="lula"]::before { background: var(--vf-lula); }
@@ -214,6 +214,10 @@
   .vf-sim-scroll { overflow-x: auto; }
   .vf-sim [hidden] { display: none !important; }
   .vf-sim-flag { margin: 0 0 var(--cds-gap-sm); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-bad); border-radius: var(--cds-radius); color: var(--color-bad); font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); letter-spacing: 0.04em; }
+  /* a highlighted note (like a Notion callout): a lightly tinted panel with an accent bar, in both themes; the
+     blue leans to teal, away from the right-wing candidate's party blue */
+  .vf-callout { margin: 0 0 var(--cds-gap-md); padding: var(--cds-pad-sm) var(--cds-pad-md); border-radius: var(--cds-radius);
+                background: color-mix(in srgb, var(--vf-info) 11%, var(--color-panel)); border-left: 3px solid var(--vf-info); }
   .vf-sim-flag.vf-sim-real { border-color: var(--color-border-line); color: var(--color-fg-muted); letter-spacing: 0; }
   .vf-sim-realline { margin: var(--cds-gap-sm) 0 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   .vf-sim-check { display: grid; grid-template-columns: auto 1fr; column-gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); cursor: pointer; }
@@ -733,6 +737,7 @@
     <section>
       <h2>{{fraude.h2.1}}</h2>
       <p class="vf-intro">{{fraude.p.1}}</p>
+      <p class="vf-callout">{{fraude.p.2}}</p>
     </section>
     <div class="vf-card" id="sim-loading" role="status">{{sim-loading.div.1}}</div>
     <div class="vf-sim" id="sim-app" hidden>
@@ -750,6 +755,7 @@
           <label><input type="radio" name="sim-type" value="invent"><b>{{sim-app.b.4}}</b><span>{{sim-app.span.4}}</span></label>
         </fieldset>
         <label class="vf-sim-check" id="sim-both-row"><input type="checkbox" id="sim-both" checked><b>{{sim-both-row.b.1}}</b><span>{{sim-both-row.span.1}}</span></label>
+        <label class="vf-sim-check" id="sim-round-row" hidden><input type="checkbox" id="sim-round"><b>{{sim-round-row.b.1}}</b><span>{{sim-round-row.span.1}}</span></label>
         <p class="vf-sim-note" id="sim-round-note" hidden>{{sim-round-note.p.1}}</p>
         <div class="vf-sim-field" id="sim-where-row">
           <label for="sim-where">{{sim-where-row.label.1}}</label>

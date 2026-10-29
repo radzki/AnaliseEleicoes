@@ -1332,8 +1332,8 @@
   "from": "0b0e728aaa"
  },
  "metodo.li.1": {
-  "text": "Datos: datos abiertos del TSE (dadosabertos.tse.jus.br, resultados-2026 y resultados-2022), archivos de votación por sección y de detalles por sección (participación, hora de recepción del boletín, modelo de urna), descargados el 26 de octubre de 2026; para verificar la segunda vuelta, los totales por municipio y zona, la votación de cada candidato por municipio y zona y el informe oficial de totalización, descargados el 27 de octubre. Solo presidente.",
-  "from": "0c25e63570"
+  "text": "Datos: datos abiertos del TSE (dadosabertos.tse.jus.br, resultados-2026, resultados-2022 y resultados-2018), archivos de votación por sección y de detalles por sección (participación, hora de recepción del boletín, modelo de urna), descargados el 26 de octubre de 2026; para verificar la segunda vuelta, los totales por municipio y zona, la votación de cada candidato por municipio y zona y el informe oficial de totalización, descargados el 27 de octubre; y los boletines de urna de la segunda vuelta, con las habilitaciones por el mesario en cada sección, descargados el 29 de octubre. Solo presidente.",
+  "from": "d30125a67b"
  },
  "metodo.li.2": {
   "text": "Unidad: la sección electoral, es decir, una urna y su boletín de urna impreso.",
@@ -1368,8 +1368,8 @@
   "from": "d997166f95"
  },
  "fraude.p.1": {
-  "text": "Imagina que quieres cambiar el resultado de la segunda vuelta de 2026. Elige a quién favorecer y cómo hacer el fraude: las pruebas de esta página se rehacen al instante, sobre los boletines de todas las 499.205 urnas, y muestran si tu fraude dejaría marcas. Es una simulación en tu navegador; no se altera ningún dato real.",
-  "from": "c51f864378"
+  "text": "Imagina que quieres cambiar el resultado de la segunda vuelta de 2026. Elige a quién favorecer y cómo hacer el fraude: 16 de las pruebas de esta página, de 8 tipos, se rehacen al instante (las de “Más pruebas” y “Con 2018 también” quedan fuera), sobre los boletines de todas las 499.205 urnas, y muestran si tu fraude dejaría marcas.",
+  "from": "962e0b0867"
  },
  "sim-loading.div.1": {
   "text": "Cargando los boletines de las 499.205 urnas (2,8 MB)…",
@@ -1432,8 +1432,8 @@
   "from": "c411b37eab"
  },
  "sim-both-row.span.1": {
-  "text": "Una urna adulterada ejecutaría el mismo programa en las dos vueltas. Desmarca para hacer fraude solo en la segunda vuelta, lo que deja una marca más: el cambio entre vueltas.",
-  "from": "cb3b8c9612"
+  "text": "Una urna adulterada correría el mismo programa en las dos vueltas. Desmarca para hacer fraude solo en la segunda vuelta: con un cambio grande en cada urna adulterada, la variación entre las vueltas también pasa a desentonar; con un cambio pequeño, ni eso.",
+  "from": "1e4f0be2cf"
  },
  "sim-round-note.p.1": {
   "text": "Este fraude se hace solo en la segunda vuelta; la primera vuelta queda como fue.",
@@ -1508,8 +1508,8 @@
   "from": "c03cc3b5ac"
  },
  "sim-app.p.1": {
-  "text": "“Sí” quiere decir que el fraude cambió el número más de lo que el azar explicaría, en comparación con el resultado real (en el último dígito, p &lt; 0,001; en las otras pruebas, más de 4 desviaciones estándar). La columna no dice si el número real es normal; eso es lo que evalúa el resto de la página, y en los números reales una prueba ya llamó la atención: las urnas con participación del 95% o más y el 90% o más de los votos para Lula (pregunta 4 del Resumen). La suma de las urnas contra los totales oficiales no está en la lista: los totales salen de los mismos boletines, así que coincide con cualquier fraude hecho dentro de la urna.",
-  "from": "f7a85465dd"
+  "text": "“Sí” quiere decir que, mirando solo los números publicados, como haría quien analiza la elección, el fraude llamaría la atención por el mismo criterio que el resto de la página usa con los números reales: en las pruebas contra el azar, fallar (en el último dígito, p &lt; 0,001; en las demás, más de 4 desviaciones estándar); en los conteos que cambian de una elección a otra, superar 1,5 veces el mayor valor de las elecciones de referencia (2022 y, cuando lo hay, 2018), y por más de lo que explicaría el azar. “Ya desentonaba sin fraude” quiere decir que el número real ya llama la atención por ese criterio, y entonces la prueba no distingue el fraude de lo que haya dejado alto el número real: es el caso de las urnas con participación del 95% o más y el 90% o más de los votos para Lula (pregunta 4 del Resumen). La suma de las urnas frente a los totales oficiales no está en la lista: los totales salen de los mismos boletines, así que coincide con cualquier fraude hecho dentro de la urna.",
+  "from": "d7a6bd39b8"
  },
  "sim-charts-card.h3.1": {
   "text": "Dos gráficos de la página, rehechos con el fraude",
@@ -1544,8 +1544,8 @@
   "from": "cc8f981b85"
  },
  "referencias.li.1": {
-  "text": "Tribunal Superior Eleitoral. <a href=\"https://dadosabertos.tse.jus.br/\" target=\"_blank\" rel=\"noopener\">Portal de Dados Abertos</a>: votación por sección, detalles por sección y totales por municipio y zona, elecciones de 2026 y 2022.",
-  "from": "b4d9615910"
+  "text": "Tribunal Superior Eleitoral. <a href=\"https://dadosabertos.tse.jus.br/\" target=\"_blank\" rel=\"noopener\">Portal de Dados Abertos</a>: votación por sección, detalles por sección y totales por municipio y zona, elecciones de 2026, 2022 y 2018; y los boletines de urna de la segunda vuelta de 2026.",
+  "from": "6442781d30"
  },
  "referencias.li.2": {
   "text": "Tribunal Superior Eleitoral. <a href=\"https://resultados.tse.jus.br/oficial/app/index.html\" target=\"_blank\" rel=\"noopener\">Resultados: arquivos de urna por seção</a> (boletín de urna, registro digital del voto y registro de eventos de la urna), segunda vuelta de 2026.",
@@ -1848,8 +1848,8 @@
   "from": "167d3602f0"
  },
  "js.sim.test.model.label": {
-  "text": "Mayor diferencia entre modelos de urna en el mismo local",
-  "from": "baac72f279"
+  "text": "Mayor diferencia de un modelo de urna frente al promedio de los modelos, en el mismo local",
+  "from": "fb12327a3a"
  },
  "js.sim.test.model.what": {
   "text": "Un programa adulterado en un solo modelo aparecería aquí.",
@@ -2024,8 +2024,8 @@
   "from": "2961c02d8f"
  },
  "js.sim.score.integrity_flip": {
-  "text": "Fuera de estos números, la probabilidad de que la prueba de integridad sortee al menos una de las {machines} urnas adulteradas es de <b>{chance}</b>.",
-  "from": "36eeada2f5"
+  "text": "Fuera de estos números, la probabilidad de que la prueba de integridad sortee al menos una de las {machines} urnas adulteradas es de <b>{chance}</b>, o de {chance_bio} contando solo las urnas de la prueba votadas con biometría.",
+  "from": "26b37bf2f9"
  },
  "js.sim.score.winner_marks": {
   "text": "Si la victoria de {name} hubiera venido de un fraude así, los números reales tendrían estas marcas. Compara la columna Real con 2022, anotado debajo de cada número.",
@@ -2100,16 +2100,16 @@
   "from": "b584068aaa"
  },
  "js.sim.outside.chip_all": {
-  "text": "La prueba de integridad lo detectaría",
-  "from": "250f47b2f3"
+  "text": "La prueba de integridad lo detectaría, si el programa no reconoce la prueba",
+  "from": "8e7a197d30"
  },
  "js.sim.outside.chip_chance": {
-  "text": "{chance} de probabilidad de ser detectado",
-  "from": "20cc50e28c"
+  "text": "{chance} de probabilidad de ser detectado, si el programa no reconoce la prueba",
+  "from": "3d4f2adc37"
  },
  "js.sim.outside.integrity": {
-  "text": "<b>Prueba de integridad:</b> el día de la elección, al menos {a} urnas sorteadas (de 20 a 33 por estado) se reemplazan por urnas de reserva, y las originales reciben, en un lugar público y con filmación, votos conocidos de cédulas de papel. El boletín tiene que coincidir con las cédulas. {detail}.",
-  "from": "da02e4d49d"
+  "text": "<b>Prueba de integridad:</b> el día de la elección, al menos {a} urnas sorteadas (de 20 a 33 por estado, según la prensa) se reemplazan por urnas de reserva, y las originales reciben, en un lugar público y con filmación, votos conocidos de cédulas de papel. El boletín tiene que coincidir con las cédulas. {detail}.",
+  "from": "cf7cba75d5"
  },
  "js.sim.outside.integrity_all": {
   "text": "Con el programa en todas las urnas, todas las urnas de la prueba estarían adulteradas: {swapped}. Basta un voto cambiado para que el boletín no coincida",
@@ -3078,5 +3078,37 @@
  "data.complementos.desc": {
   "text": "Números pedidos por la revisión adversarial del 29/10/2026: secciones con participación atípica que se inclinan hacia Lula frente a la proporción de todas las secciones (y en la primera vuelta), la variación de la participación de 2022 a 2026 según la fuerza de Lula en la sección, la mediana del chi cuadrado solo por azar, cada modelo de urna frente a los demás donde un local tiene varios, y el porcentaje de Lula a lo largo del escrutinio.",
   "from": "e1f24fcb5d"
+ },
+ "js.sim.test.already": {
+  "text": "Ya desentonaba sin fraude",
+  "from": "eae4d7baa9"
+ },
+ "js.sim.test.note.ref": {
+  "text": "en 2022: {y22}; en 2018: {y18}",
+  "from": "5d82370eea"
+ },
+ "js.sim.test.note.ref_jair": {
+  "text": "en 2022, Jair: {y22}; en 2018, Jair: {y18}",
+  "from": "a7a4078370"
+ },
+ "js.sim.test.note.y2022_corr": {
+  "text": "en 2022: {r}",
+  "from": "c9865a4529"
+ },
+ "js.sim.outside.integrity_bio": {
+  "text": "Contando solo la parte de la prueba votada con la huella de electores reales, que ni un programa capaz de reconocer la prueba engañaría (10% de las urnas sorteadas, según la misión de la OEA; aquí, {bio} por estado), la probabilidad sería de <b>{chance}</b>.",
+  "from": "c6f1756c80"
+ },
+ "sim-round-row.b.1": {
+  "text": "Con números redondos",
+  "from": "82d2ac3233"
+ },
+ "sim-round-row.span.1": {
+  "text": "Quien escribe números a mano sin cuidado tiende a terminarlos en 0 o 5; márcalo para ver lo que detectan las pruebas de dígitos. Un falsificador cuidadoso escribiría dígitos comunes.",
+  "from": "76939babb8"
+ },
+ "fraude.p.2": {
+  "text": "<b>Para qué sirve:</b> no es una prueba de nada sobre la elección real. Es una forma de aprender haciendo: elige un fraude, mueve los controles y mira qué pruebas notan el cambio y cuáles no. Cada prueba ve un tipo de fraude; ninguna los ve todos.",
+  "from": "5e0e3fd89c"
  }
 }

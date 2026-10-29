@@ -136,7 +136,14 @@
    "swing_pos4": 213,
    "swing_neg4": 261,
    "corr_dturn_swing": 0.04313003430532441
+  },
+  "2018": {
+   "place_pos4": 1281,
+   "place_neg4": 579,
+   "corner_lula": 38,
+   "corner_right": 29
   }
  },
- "integrity_test_machines": 540
+ "integrity_test_machines": 540,
+ "integrity_biometric_share": 0.1
 }

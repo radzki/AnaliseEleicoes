@@ -78,6 +78,7 @@
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
   }
+
   function gauss(r) {
     let u = 0;
     while (u === 0) u = r();
@@ -323,7 +324,7 @@
 
   // ---------------------------------------------------------------- fraud
   // opens on the real result (no fraud); a tampered machine runs the same program in both rounds
-  const START = { ben: 'flavio', type: 'software', where: 'random', model: 0, machines: 2000, intensity: 0, both: true };
+  const START = { ben: 'flavio', type: 'software', where: 'random', model: 0, machines: 2000, intensity: 0, both: true, round: false };
   const state = { ...START, uf: 0, seed: 1 };
   const SOFTWARE = (type) => type === 'software' || type === 'flip';
 
@@ -358,11 +359,11 @@
   }
 
   // per-machine change in the margin for the "minimum to flip" helper: expected value and variance
-  // (each machine's flips are drawn at random; hand-written numbers are rounded to 5 or 10)
+  // (each machine's flips are drawn at random; hand-written round numbers move by up to 5 or 10)
   function gainOf(i, B, V, A, C) {
     const x = state.intensity / 100;
     if (state.type === 'stuff') return { mean: Math.max(0, Math.min(A[i], Math.ceil(x * A[i])) - C[i]), var: 0 };
-    if (state.type === 'invent') return { mean: 2 * x * V[i], var: 27 };
+    if (state.type === 'invent' && state.round) return { mean: 2 * x * V[i], var: 27 };
     return { mean: 2 * x * V[i], var: 4 * V[i] * x * (1 - x) };
   }
 
@@ -375,32 +376,47 @@
     let touched = [], moved = 0;
     const list = state.type === 'software' ? null : targets().subarray(0, Math.min(state.machines, targets().length));
     const each = (fn) => { if (list) for (const i of list) fn(i); else for (let i = 0; i < n; i++) fn(i); };
+    // The same program in the same machines also flips round-1 votes, unless the reader unticks it. A
+    // careful program flips the votes whose position in the day, mixed with the machine's own key, falls
+    // under the share: about that share of them, at random, so the digits stay as natural as real counts;
+    // and largely the same positions in both rounds, so the change between rounds hardly moves (flipping
+    // a fixed number would skew the last digits; flipping each vote at random in each round would add
+    // noise to the change between rounds). For each machine: the flips among the first votes of the
+    // smaller round, then the flips among the extra votes of the larger one.
+    let L1 = D.L1, F1 = D.F1, B1 = null, V1 = null;
+    if (x > 0 && state.both && SOFTWARE(state.type)) {
+      L1 = Uint16Array.from(D.L1); F1 = Uint16Array.from(D.F1);
+      [B1, V1] = state.ben === 'lula' ? [L1, F1] : [F1, L1];
+    }
     if (x > 0) each((i) => {
       if (state.type === 'software' || state.type === 'flip') {
-        const k = binom(V[i], x, r);
+        let k = 0;
+        if (V1) {
+          const lo = Math.min(V1[i], V[i]), kLo = binom(lo, x, r), kHi = kLo + binom(Math.max(V1[i], V[i]) - lo, x, r);
+          const k1 = V1[i] <= V[i] ? kLo : kHi;
+          k = V1[i] <= V[i] ? kHi : kLo;
+          B1[i] += k1; V1[i] -= k1;
+        } else k = binom(V[i], x, r);
         if (k) { V[i] -= k; B[i] += k; moved += k; touched.push(i); }
       } else if (state.type === 'stuff') {
         const add = Math.max(0, Math.min(A[i], Math.ceil(x * A[i])) - C[i]);
         if (add) { B[i] += add; C[i] += add; moved += add; touched.push(i); }
       } else {
-        // numbers rewritten by hand: move part of the victim's votes, then write round-looking numbers
+        // numbers rewritten by hand: move part of the victim's votes; a careless forger also writes
+        // round-looking numbers, which the reader can switch on
         const tot = B[i] + V[i];
-        let b = B[i] + Math.round(x * V[i]);
-        const u = r();
-        if (u < 0.55) b = Math.round(b / 10) * 10; else if (u < 0.8) b = Math.round(b / 5) * 5;
+        let b = B[i] + binom(V[i], x, r);
+        if (state.round) {
+          const u = r();
+          if (u < 0.55) b = Math.round(b / 10) * 10; else if (u < 0.8) b = Math.round(b / 5) * 5;
+        }
         b = Math.min(tot, Math.max(B[i], b));
         if (b !== B[i]) { moved += b - B[i]; B[i] = b; V[i] = tot - b; touched.push(i); }
       }
     });
-    // the same program in the same machines also flips round-1 votes, unless the reader unticks it
-    let L1 = D.L1, F1 = D.F1;
-    if (x > 0 && state.both && SOFTWARE(state.type)) {
-      L1 = Uint16Array.from(D.L1); F1 = Uint16Array.from(D.F1);
-      const [B1, V1] = state.ben === 'lula' ? [L1, F1] : [F1, L1];
-      each((i) => { const k = binom(V1[i], x, r); B1[i] += k; V1[i] -= k; });
-    }
-    // machines carrying the fraud: all of them for the software, the chosen ones otherwise
-    const machines = x > 0 ? (list ? list.length : n) : 0;
+    // machines carrying the fraud: all of them for the software, the chosen ones otherwise; for stuffing,
+    // only the ones that received votes (the others were already above the target turnout)
+    const machines = x > 0 ? (state.type === 'stuff' ? touched.length : list ? list.length : n) : 0;
     return { L, F, C, L1, F1, touched, moved, machines, list: x > 0 ? list : null };
   }
 
@@ -436,32 +452,47 @@
 
   // ---------------------------------------------------------------- verdicts
   const REF = () => D.meta.reference;
+  // An analyst never has the true 2026 numbers, only the published ones. So a row says the fraud shows
+  // ("yes") when the published number would stand out by the standard the rest of the page uses on the
+  // real data: for tests against chance, failing them (p < 0.001, or more than 4 standard deviations);
+  // for counts that change from one election to the next, passing 1.5 times the largest value of the
+  // reference elections (2022 and, where it was computed, 2018), and by more than chance (4 standard
+  // deviations). That standard flags the near-unanimous Lula sections and not the polling-place or swing
+  // outliers, as the page does. A row whose real number already stands out says so ("already"): there
+  // the test can't tell a fraud from whatever made the real number high.
   function verdicts(t) {
-    const b = D.base, r22 = REF()['2022'];
+    const b = D.base, R = REF(), r22 = R['2022'], r18 = R['2018'] || {};
     const pv = (p) => (p < 0.0001 ? tr('sim.p.tiny') : tr('sim.p.value', { p: dec(p, p < 0.01 ? 4 : 2) }));
     const pp = (v) => tr('sim.unit.pp', { v: dec(v, 2) });
     const chance = (n) => tr('sim.test.note.chance', { n: int(n) });
-    const y22 = (n) => tr('sim.test.note.y2022', { n: int(n) });
-    const count = (now, base) => now - base > 4 * Math.sqrt(base + 1);
+    const refNote = (key, jair) => (r18[key] !== undefined
+      ? tr(jair ? 'sim.test.note.ref_jair' : 'sim.test.note.ref', { y22: int(r22[key]), y18: int(r18[key]) })
+      : tr(jair ? 'sim.test.note.y2022_jair' : 'sim.test.note.y2022', { n: int(r22[key]) }));
+    // a count stands out above the largest reference value
+    const stands = (v, key) => { const m = Math.max(r22[key], r18[key] ?? 0); return v > 1.5 * m && v - m > 4 * Math.sqrt(m + 1); };
+    const count = (now, real, key) => (stands(real, key) ? 'already' : stands(now, key) ? 'yes' : 'no');
+    const test = (failsNow, failsReal) => (failsReal ? 'already' : failsNow ? 'yes' : 'no');
+    const corr = (v, pairs) => Math.abs(v) > 1.5 * Math.abs(r22.corr_dturn_swing) && (Math.abs(v) - Math.abs(r22.corr_dturn_swing)) * Math.sqrt(pairs) > 4;
     // g groups the rows (an identifier); its heading is tr(`sim.group.…`) via GROUP below
     const rows = [
-      { g: 'round', label: tr('sim.test.ld_lula.label'), what: tr('sim.test.ld_lula.what'), real: pv(b.ldL.p), now: pv(t.ldL.p), bad: t.ldL.p < 0.001 },
-      { g: 'round', label: tr('sim.test.ld_flavio.label'), real: pv(b.ldF.p), now: pv(t.ldF.p), bad: t.ldF.p < 0.001 },
-      { g: 'round', label: tr('sim.test.ld_turnout.label'), real: pv(b.ldC.p), now: pv(t.ldC.p), bad: t.ldC.p < 0.001 },
-      { g: 'round', label: tr('sim.test.heap_lula.label'), what: tr('sim.test.heap_lula.what'), real: `×${dec(b.hpL.ratio, 2)}`, now: `×${dec(t.hpL.ratio, 2)}`, bad: t.hpL.z > 4 },
-      { g: 'round', label: tr('sim.test.heap_flavio.label'), real: `×${dec(b.hpF.ratio, 2)}`, now: `×${dec(t.hpF.ratio, 2)}`, bad: t.hpF.z > 4 },
-      { g: 'round', label: tr('sim.test.heap_turnout.label'), real: `×${dec(b.hpC.ratio, 2)}`, now: `×${dec(t.hpC.ratio, 2)}`, bad: t.hpC.z > 4 },
-      { g: 'round', label: tr('sim.test.int_lula.label'), what: tr('sim.test.int_lula.what'), real: int(b.intL.obs), now: int(t.intL.obs), bad: t.intL.z > 4, note: chance(t.intL.exp) },
-      { g: 'round', label: tr('sim.test.int_turnout.label'), real: int(b.intT.obs), now: int(t.intT.obs), bad: t.intT.z > 4, note: chance(t.intT.exp) },
-      { g: 'place', label: tr('sim.test.place_lula.label'), what: tr('sim.test.place_lula.what'), real: int(b.place.pos), now: int(t.place.pos), bad: count(t.place.pos, b.place.pos), note: y22(r22.place_pos4) },
-      { g: 'place', label: tr('sim.test.place_flavio.label'), real: int(b.place.neg), now: int(t.place.neg), bad: count(t.place.neg, b.place.neg), note: y22(r22.place_neg4) },
-      { g: 'place', label: tr('sim.test.corner_lula.label'), what: tr('sim.test.corner_lula.what'), real: int(b.corner.lula), now: int(t.corner.lula), bad: count(t.corner.lula, b.corner.lula), note: y22(r22.corner_lula) },
-      { g: 'place', label: tr('sim.test.corner_flavio.label'), real: int(b.corner.flavio), now: int(t.corner.flavio), bad: count(t.corner.flavio, b.corner.flavio), note: tr('sim.test.note.y2022_jair', { n: int(r22.corner_right) }) },
-      { g: 'place', label: tr('sim.test.model.label'), what: tr('sim.test.model.what'), real: pp(b.model.gap), now: pp(t.model.gap), bad: Math.abs(t.model.t) > 4 },
-      { g: 'rounds', label: tr('sim.test.swing_lula.label'), what: tr('sim.test.swing_lula.what'), real: int(b.swing.pos), now: int(t.swing.pos), bad: count(t.swing.pos, b.swing.pos), note: y22(r22.swing_pos4) },
-      { g: 'rounds', label: tr('sim.test.swing_flavio.label'), real: int(b.swing.neg), now: int(t.swing.neg), bad: count(t.swing.neg, b.swing.neg), note: y22(r22.swing_neg4) },
-      { g: 'rounds', label: tr('sim.test.swing_turnout.label'), what: tr('sim.test.swing_turnout.what'), real: dec(b.swing.corr, 3), now: dec(t.swing.corr, 3), bad: (Math.abs(t.swing.corr) - Math.abs(b.swing.corr)) * Math.sqrt(t.swing.pairs) > 4 },
+      { g: 'round', label: tr('sim.test.ld_lula.label'), what: tr('sim.test.ld_lula.what'), real: pv(b.ldL.p), now: pv(t.ldL.p), v: test(t.ldL.p < 0.001, b.ldL.p < 0.001) },
+      { g: 'round', label: tr('sim.test.ld_flavio.label'), real: pv(b.ldF.p), now: pv(t.ldF.p), v: test(t.ldF.p < 0.001, b.ldF.p < 0.001) },
+      { g: 'round', label: tr('sim.test.ld_turnout.label'), real: pv(b.ldC.p), now: pv(t.ldC.p), v: test(t.ldC.p < 0.001, b.ldC.p < 0.001) },
+      { g: 'round', label: tr('sim.test.heap_lula.label'), what: tr('sim.test.heap_lula.what'), real: `×${dec(b.hpL.ratio, 2)}`, now: `×${dec(t.hpL.ratio, 2)}`, v: test(t.hpL.z > 4, b.hpL.z > 4) },
+      { g: 'round', label: tr('sim.test.heap_flavio.label'), real: `×${dec(b.hpF.ratio, 2)}`, now: `×${dec(t.hpF.ratio, 2)}`, v: test(t.hpF.z > 4, b.hpF.z > 4) },
+      { g: 'round', label: tr('sim.test.heap_turnout.label'), real: `×${dec(b.hpC.ratio, 2)}`, now: `×${dec(t.hpC.ratio, 2)}`, v: test(t.hpC.z > 4, b.hpC.z > 4) },
+      { g: 'round', label: tr('sim.test.int_lula.label'), what: tr('sim.test.int_lula.what'), real: int(b.intL.obs), now: int(t.intL.obs), v: test(t.intL.z > 4, b.intL.z > 4), note: chance(t.intL.exp) },
+      { g: 'round', label: tr('sim.test.int_turnout.label'), real: int(b.intT.obs), now: int(t.intT.obs), v: test(t.intT.z > 4, b.intT.z > 4), note: chance(t.intT.exp) },
+      { g: 'place', label: tr('sim.test.place_lula.label'), what: tr('sim.test.place_lula.what'), real: int(b.place.pos), now: int(t.place.pos), v: count(t.place.pos, b.place.pos, 'place_pos4'), note: refNote('place_pos4') },
+      { g: 'place', label: tr('sim.test.place_flavio.label'), real: int(b.place.neg), now: int(t.place.neg), v: count(t.place.neg, b.place.neg, 'place_neg4'), note: refNote('place_neg4') },
+      { g: 'place', label: tr('sim.test.corner_lula.label'), what: tr('sim.test.corner_lula.what'), real: int(b.corner.lula), now: int(t.corner.lula), v: count(t.corner.lula, b.corner.lula, 'corner_lula'), note: refNote('corner_lula') },
+      { g: 'place', label: tr('sim.test.corner_flavio.label'), real: int(b.corner.flavio), now: int(t.corner.flavio), v: count(t.corner.flavio, b.corner.flavio, 'corner_right'), note: refNote('corner_right', true) },
+      { g: 'place', label: tr('sim.test.model.label'), what: tr('sim.test.model.what'), real: pp(b.model.gap), now: pp(t.model.gap), v: test(Math.abs(t.model.t) > 4, Math.abs(b.model.t) > 4) },
+      { g: 'rounds', label: tr('sim.test.swing_lula.label'), what: tr('sim.test.swing_lula.what'), real: int(b.swing.pos), now: int(t.swing.pos), v: count(t.swing.pos, b.swing.pos, 'swing_pos4'), note: refNote('swing_pos4') },
+      { g: 'rounds', label: tr('sim.test.swing_flavio.label'), real: int(b.swing.neg), now: int(t.swing.neg), v: count(t.swing.neg, b.swing.neg, 'swing_neg4'), note: refNote('swing_neg4') },
+      { g: 'rounds', label: tr('sim.test.swing_turnout.label'), what: tr('sim.test.swing_turnout.what'), real: dec(b.swing.corr, 3), now: dec(t.swing.corr, 3), v: corr(b.swing.corr, b.swing.pairs) ? 'already' : corr(t.swing.corr, t.swing.pairs) ? 'yes' : 'no', note: tr('sim.test.note.y2022_corr', { r: dec(r22.corr_dturn_swing, 3) }) },
     ];
+    for (const r of rows) r.bad = r.v === 'yes';
     return rows;
   }
 
@@ -500,6 +531,8 @@
     }
     ui.where.value = state.where;
     ui.bothRow.hidden = !SOFTWARE(state.type); ui.roundNote.hidden = SOFTWARE(state.type);
+    ui.roundRow.hidden = state.type !== 'invent';
+    ui.round.checked = state.round;
     ui.minBtn.textContent = state.ben === winner() ? tr('sim.min.btn_winner', { name: NAME[state.ben] }) : tr('sim.min.btn');
     ui.both.checked = state.both;
   }
@@ -557,12 +590,13 @@
         : tr('sim.score.clean', { total: rows.length, why });
     const caught = integrity(f);
     if (sim && !bad && state.type === 'software') ui.score.innerHTML += ` ${tr('sim.score.integrity_software', { swapped: swapped() })}`;
-    else if (sim && !bad && state.type === 'flip') ui.score.innerHTML += ` ${tr('sim.score.integrity_flip', { machines: int(f.machines), chance: caught.chance })}`;
+    else if (sim && !bad && state.type === 'flip') ui.score.innerHTML += ` ${tr('sim.score.integrity_flip', { machines: int(f.machines), chance: caught.chance, chance_bio: caught.chanceBio })}`;
     if (forWinner && bad) ui.score.innerHTML += ` ${tr('sim.score.winner_marks', { name: NAME[state.ben] })}`;
     let g = '';
     ui.tbody.innerHTML = rows.map((r) => {
       const head = r.g !== g ? `<tr class="vf-sim-group"><th colspan="4" scope="colgroup">${GROUP[(g = r.g)]}</th></tr>` : '';
-      return `${head}<tr${r.bad ? ' class="vf-sim-hit"' : ''}><th scope="row">${r.label}${r.what ? `<small>${r.what}</small>` : ''}</th><td class="vf-n">${r.real}</td><td class="vf-n">${r.now}${r.note ? `<small>${r.note}</small>` : ''}</td><td><span class="vf-chip ${r.bad ? 'vf-bad' : 'vf-ok'}">${r.bad ? tr('sim.test.yes') : tr('sim.test.no')}</span></td></tr>`;
+      const chip = { yes: ['vf-bad', tr('sim.test.yes')], already: ['vf-warn', tr('sim.test.already')], no: ['vf-ok', tr('sim.test.no')] }[r.v];
+      return `${head}<tr${r.bad ? ' class="vf-sim-hit"' : ''}><th scope="row">${r.label}${r.what ? `<small>${r.what}</small>` : ''}</th><td class="vf-n">${r.real}</td><td class="vf-n">${r.now}${r.note ? `<small>${r.note}</small>` : ''}</td><td><span class="vf-chip ${chip[0]}">${chip[1]}</span></td></tr>`;
     }).join('');
     renderOutside(f, caught);
     drawCharts(t);
@@ -697,17 +731,24 @@
   const perUf = () => D.meta.integrity_test_machines / D.meta.ufs.filter((u) => u !== 'ZZ').length;
   // chance that at least one tampered machine is drawn: one minus the chance of missing them in
   // every state (hypergeometric within each state)
+  // Also for the biometric part of the test alone (a share of each state's machines, at least one): the
+  // only part a program that recognised the test could not tell from an election.
+  const bioPerUf = () => Math.max(1, Math.round(perUf() * D.meta.integrity_biometric_share));
   function integrity(f) {
-    const a = perUf(), M = new Array(D.byUf.length).fill(0);
+    const M = new Array(D.byUf.length).fill(0);
     if (f.list) for (const i of f.list) M[D.uf[i]]++;
-    let pMiss = 1;
-    D.byUf.forEach((idx, s) => {
-      if (D.meta.ufs[s] === 'ZZ') return;
-      const N = idx.length, m = f.list ? M[s] : N; // no list: the software is in every machine
-      for (let j = 0; j < a && pMiss > 1e-300; j++) pMiss *= Math.max(0, (N - m - j) / (N - j));
-    });
-    const pHit = f.machines ? 1 - pMiss : 0;
-    return { pHit, chance: pHit > 0.999999 ? tr('sim.chance.certain') : pHit === 0 ? '0%' : pHit < 0.0001 ? tr('sim.chance.tiny') : pct(pHit, pHit > 0.99 ? 2 : 1) };
+    const hit = (a) => {
+      let pMiss = 1;
+      D.byUf.forEach((idx, s) => {
+        if (D.meta.ufs[s] === 'ZZ') return;
+        const N = idx.length, m = f.list ? M[s] : N; // no list: the software is in every machine
+        for (let j = 0; j < a && pMiss > 1e-300; j++) pMiss *= Math.max(0, (N - m - j) / (N - j));
+      });
+      return f.machines ? 1 - pMiss : 0;
+    };
+    const say = (p) => (p > 0.999999 ? tr('sim.chance.certain') : p === 0 ? '0%' : p < 0.0001 ? tr('sim.chance.tiny') : pct(p, p > 0.99 ? 2 : 1));
+    const pHit = hit(perUf()), pBio = hit(bioPerUf());
+    return { pHit, chance: say(pHit), pBio, chanceBio: say(pBio) };
   }
   // what a tampered machine does to the known votes typed in during the integrity test
   const swapped = () => tr('sim.swapped', {
@@ -715,7 +756,7 @@
     victim: NAME[state.ben === 'lula' ? 'flavio' : 'lula'], name: NAME[state.ben],
   });
 
-  function renderOutside(f, { pHit, chance }) {
+  function renderOutside(f, { pHit, chance, chanceBio }) {
     const N = D.n, a = D.meta.integrity_test_machines, per = perUf();
     const M = f.machines;
     const sw = SOFTWARE(state.type);
@@ -724,7 +765,7 @@
     let html;
     if (!M) html = `<p>${tr('sim.outside.none')}</p>`;
     else if (sw) html = `<p class="vf-sim-verdict"><span class="vf-chip ${pHit > 0.99 ? 'vf-bad' : 'vf-warn'}">${M === N ? tr('sim.outside.chip_all') : tr('sim.outside.chip_chance', { chance })}</span></p>
-      <p>${tr('sim.outside.integrity', { a: int(a), detail })}</p>
+      <p>${tr('sim.outside.integrity', { a: int(a), detail })} ${tr('sim.outside.integrity_bio', { bio: int(bioPerUf()), chance: chanceBio })}</p>
       <p class="vf-sim-actions"><button type="button" class="vf-btn" id="sim-draw">${tr('sim.outside.draw_btn', { per: int(per) })}</button> <span id="sim-draw-out" aria-live="polite"></span></p>
       <p class="vf-sim-note">${tr('sim.outside.note', { per: int(per) })}</p>`;
     else if (state.type === 'stuff') html = `<p>${tr('sim.outside.stuff', { moved: int(f.moved), m: int(M) })}</p>`;
@@ -759,6 +800,7 @@
     ui.minNote = $('sim-min-note'); ui.status = $('sim-status'); ui.minBtn = $('sim-min'); ui.charts = $('sim-charts');
     vf.segmented($('sim-fp-mode'), (v) => { fpMode = v; if (lastT) drawCharts(lastT); });
     ui.both = $('sim-both'); ui.bothRow = $('sim-both-row'); ui.roundNote = $('sim-round-note');
+    ui.round = $('sim-round'); ui.roundRow = $('sim-round-row');
     page.querySelector('.vf-sim-controls').addEventListener('submit', (ev) => ev.preventDefault());
     ui.modelSel.innerHTML = D.meta.models.map((m, i) => `<option value="${i}">${m}</option>`).join('');
     ui.ufSel.innerHTML = D.meta.ufs.map((u, i) => `<option value="${i}">${u === 'ZZ' ? tr('sim.uf.abroad') : u}</option>`).join('');
@@ -774,6 +816,7 @@
     ui.machNum.addEventListener('change', () => { const v = Math.round(Number(ui.machNum.value)); if (v > 0) { state.machines = v; changed(); } });
     ui.intRange.addEventListener('input', () => { state.intensity = Number(ui.intRange.value); changed(); });
     ui.both.addEventListener('change', () => { state.both = ui.both.checked; changed(); });
+    ui.round.addEventListener('change', () => { state.round = ui.round.checked; changed(); });
     $('sim-reseed').addEventListener('click', () => { state.seed += 1; D.order = Object.fromEntries(Object.entries(D.order).filter(([k]) => !/random|model|uf/.test(k))); changed(); });
     $('sim-reset').addEventListener('click', () => { Object.assign(state, START); ui.minNote.textContent = ''; changed(); });
     $('sim-min').addEventListener('click', () => {
