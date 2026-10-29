@@ -7,6 +7,7 @@
   const BAD = 'var(--color-bad)';
   const LULA = 'var(--vf-lula)';
   const RIGHT = 'var(--vf-flavio)';
+  const tr = vf.t;
   const YEAR = { 2026: { color: FG, width: 2.25 }, 2022: { color: MUTED, width: 1.75 }, 2018: { color: REF, width: 1.75, dash: '2 3' } };
   const nf = vf.f(',.0f');
   const pct0 = vf.f('.0%');
@@ -62,18 +63,18 @@
       { key: '2018', label: '2018', v: row('more_tests', 'prop|2018').slope, ...YEAR[2018] },
       { key: '2022', label: '2022', v: row('more_tests', 'prop|2022').slope, ...YEAR[2022] },
       { key: '2026', label: '2026', v: row('more_tests', 'prop|2026').slope, ...YEAR[2026] },
-      { key: 'planted', label: '2026, se houvesse fraude', v: pl.slope, color: BAD, width: 1.75, dash: '5 4' },
+      { key: 'planted', label: tr('testcharts.prop.planted'), v: pl.slope, color: BAD, width: 1.75, dash: '5 4' },
     ].map((d) => ({ ...d, pts: series('prop_bins', d.key).sort((a, b) => a.x - b.x) }));
-    const refs = [{ ref: '2022', title: 'contra 2022', color: MUTED }, { ref: '2018', title: 'contra 2018', color: REF }];
+    const refs = [{ ref: '2022', title: tr('testcharts.prop.vs_ref', { ref: '2022' }), color: MUTED },
+      { ref: '2018', title: tr('testcharts.prop.vs_ref', { ref: '2018' }), color: REF }];
     const gaps = refs.map((r) => series('prop_states', r.ref).sort((a, b) => a.y - b.y));
     const tip = vf.tooltip(el);
-    const [c1, c2] = vf.panels(el, ['No país: quanto o PT ganhou a mais no 2º turno, pela força da direita no 1º',
-      'Diferença de 2026 para cada eleição de referência, estado por estado'], 'vf-stack');
+    const [c1, c2] = vf.panels(el, [tr('testcharts.prop.title_national'), tr('testcharts.prop.title_states')], 'vf-stack');
     // national: the sections in 20 equal groups by the right's round-1 edge over the rest of their polling
     // place; each line's slope is the test's number
     {
       const pp = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + d1(Math.abs(v * 100));
-      vf.legend(c1, nat.map((d) => ({ label: `${d.label}: inclinação ${d3f(d.v)}`, color: d.color, line: true, dash: d.dash })));
+      vf.legend(c1, nat.map((d) => ({ label: tr('testcharts.prop.slope_legend', { label: d.label, slope: d3f(d.v) }), color: d.color, line: true, dash: d.dash })));
       const all = nat.flatMap((d) => d.pts);
       const f = frame(c1, 260, d3.extent(all, (p) => p.x), d3.extent(all, (p) => p.y), { yFmt: pp, xFmt: pp });
       f.s.append('line').attr('x1', f.x(0)).attr('x2', f.x(0)).attr('y1', 8).attr('y2', f.h - 24).style('stroke', REF);
@@ -83,16 +84,16 @@
           .attr('r', 2.5).style('fill', d.color);
       }
       f.s.append('text').attr('class', 'vf-tick').attr('x', f.w - 10).attr('y', f.h - 30).attr('text-anchor', 'end')
-        .style('fill', 'var(--color-fg)').text('direita mais forte que o resto do local (pontos) →');
+        .style('fill', 'var(--color-fg)').text(tr('testcharts.prop.x_axis'));
       f.s.append('text').attr('class', 'vf-tick').attr('x', f.ml + 6).attr('y', 14)
-        .style('fill', 'var(--color-fg)').text('↑ PT ganhou mais que o resto do local (pontos)');
+        .style('fill', 'var(--color-fg)').text(tr('testcharts.prop.y_axis'));
       const ref = nat.find((d) => d.key === '2026').pts;
       f.s.append('rect').attr('x', f.ml).attr('width', f.w - 10 - f.ml).attr('height', f.h).style('fill', 'transparent')
         .on('pointermove pointerdown', (ev) => {
           const at = f.x.invert(d3.pointer(ev)[0]);
           const i = d3.minIndex(ref, (p) => Math.abs(p.x - at));
-          tip.show(ev, `${i + 1}º de 20 grupos de seções`,
-            nat.map((d) => ({ label: d.label, value: `direita ${pp(d.pts[i].x)}, PT ${pp(d.pts[i].y)}` })));
+          tip.show(ev, tr('testcharts.prop.tip_head', { n: i + 1 }),
+            nat.map((d) => ({ label: d.label, value: tr('testcharts.prop.tip_value', { right: pp(d.pts[i].x), pt: pp(d.pts[i].y) }) })));
         })
         .on('pointerleave', tip.leave);
     }
@@ -112,7 +113,7 @@
       s.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 14).attr('y2', yb(refs.length - 1)).style('stroke', REF);
       s.append('line').attr('x1', x(pl.added)).attr('x2', x(pl.added)).attr('y1', 14).attr('y2', yb(refs.length - 1)).style('stroke', BAD).attr('stroke-dasharray', '5 4');
       s.append('text').attr('class', 'vf-tick').attr('x', x(pl.added) - 4).attr('y', 8).attr('text-anchor', 'end')
-        .style('fill', 'var(--color-fg)').text('o que um programa somaria');
+        .style('fill', 'var(--color-fg)').text(tr('testcharts.prop.program_adds'));
       const r = 4.5;
       refs.forEach((ref, k) => {
         s.append('text').attr('class', 'vf-tick').attr('x', 0).attr('y', yb(k) - 4).style('fill', 'var(--color-fg)').text(ref.title);
@@ -124,7 +125,7 @@
         }
         for (const p of placed) {
           s.append('circle').attr('cx', p.cx).attr('cy', yb(k) - 4 - p.n * (2 * r + 1)).attr('r', r).style('fill', k ? REF : FG)
-            .on('pointermove pointerdown', (ev) => tip.show(ev, p.d.uf, [{ label: `2026 − ${ref.ref}`, value: (p.d.y > 0 ? '+' : '') + d3f(p.d.y) }]))
+            .on('pointermove pointerdown', (ev) => tip.show(ev, p.d.uf, [{ label: tr('testcharts.prop.gap_label', { ref: ref.ref }), value: (p.d.y > 0 ? '+' : '') + d3f(p.d.y) }]))
             .on('pointerleave', tip.leave);
         }
       });
@@ -148,9 +149,9 @@
       }
     });
     f.s.append('line').attr('x1', f.x(0)).attr('x2', f.x(1)).attr('y1', f.y(0.05)).attr('y2', f.y(0.05)).style('stroke', BAD).attr('stroke-dasharray', '5 4');
-    hover(f, tip, data[0].map((d) => d.x + 0.025), (v) => `p-valor de ${vf.f('.2f')(v - 0.025)} a ${vf.f('.2f')(v + 0.025)}`,
+    hover(f, tip, data[0].map((d) => d.x + 0.025), (v) => tr('testcharts.homog.tip_head', { from: vf.f('.2f')(v - 0.025), to: vf.f('.2f')(v + 0.025) }),
       (v) => yrs.map((y, k) => ({ label: y, value: pct1(data[k].find((d) => Math.abs(d.x + 0.025 - v) < 1e-9).y), color: YEAR[y].color })));
-    vf.legend(el, [...yrs.map((y) => ({ label: y, color: YEAR[y].color })), { label: 'Só o acaso (5% por faixa)', color: BAD, line: true, dash: '5 4' }]);
+    vf.legend(el, [...yrs.map((y) => ({ label: y, color: YEAR[y].color })), { label: tr('testcharts.homog.legend_chance'), color: BAD, line: true, dash: '5 4' }]);
   }, homogBox);
 
   // Shpilkin: Lula's share by turnout band, the flat line the method assumes, and votes per band -------
@@ -163,7 +164,7 @@
     const data = yrs.map((y) => series('shpilkin', y).filter((d) => d.y >= 0.0005));
     const peaks = yrs.map((y) => series('shpilkin_peak', y)[0]);
     const tip = vf.tooltip(el);
-    const [c1, c2] = vf.panels(el, ['% do candidato do PT por faixa de comparecimento', 'Parte dos votos em cada faixa'], 'vf-stack');
+    const [c1, c2] = vf.panels(el, [tr('testcharts.shp.title_share'), tr('testcharts.shp.title_votes')], 'vf-stack');
     const xd = d3.extent(data.flat(), (d) => d.x);
     const f1 = frame(c1, 200, xd, d3.extent(data.flat(), (d) => d.lula), { xFmt: pct0 });
     yrs.forEach((y, k) => {
@@ -178,11 +179,12 @@
     const xs = data[0].map((d) => d.x);
     const lines = (v) => yrs.map((y, k) => {
       const d = data[k].find((e) => Math.abs(e.x - v) < 1e-9);
-      return { label: y, value: d ? `PT ${pct1(d.lula)}, ${pct1(d.y)} dos votos` : '—', color: YEAR[y].color, line: true, dash: YEAR[y].dash };
+      return { label: y, value: d ? tr('testcharts.shp.tip_value', { pt: pct1(d.lula), votes: pct1(d.y) }) : '—',
+        color: YEAR[y].color, line: true, dash: YEAR[y].dash };
     });
-    for (const f of [f1, f2]) hover(f, tip, xs, (v) => `Comparecimento de ${pct1(v)} a ${pct1(v + 0.005)}`, lines);
+    for (const f of [f1, f2]) hover(f, tip, xs, (v) => tr('testcharts.shp.tip_head', { from: pct1(v), to: pct1(v + 0.005) }), lines);
     vf.legend(el, [...yrs.map((y) => ({ label: y, color: YEAR[y].color, line: true, dash: YEAR[y].dash })),
-      { label: 'O que o método supõe acima do comparecimento mais comum', color: FG, line: true, dash: '5 4' }]);
+      { label: tr('testcharts.shp.legend_flat'), color: FG, line: true, dash: '5 4' }]);
   }, shpBox);
 
   // Second digit: frequency per digit, 2026 bars, 2022 line, Benford dashed ---------------------------
@@ -192,7 +194,8 @@
     if (!el) return;
     const exp = series('benford2', 'expected');
     const tip = vf.tooltip(el);
-    const cands = [{ key: 'lula', title: 'Votos do PT (Lula; em 2018, Haddad)', color: LULA }, { key: 'right', title: 'Votos de Flávio (em 2022 e 2018, Jair)', color: RIGHT }];
+    const cands = [{ key: 'lula', title: tr('testcharts.benford.title_pt'), color: LULA },
+      { key: 'right', title: tr('testcharts.benford.title_right'), color: RIGHT }];
     const cells = vf.panels(el, cands.map((c) => c.title));
     const all = rows('graficos').filter((r) => r.chart === 'benford2');
     const top = d3.max(all, (d) => d.y) * 1.1;
@@ -208,14 +211,15 @@
       path(f, r22.map((d) => ({ x: d.x, y: d.y })), { color: MUTED, width: 2 });
       path(f, r18.map((d) => ({ x: d.x, y: d.y })), { color: REF, width: 1.75, dash: '2 3' });
       path(f, exp.map((d) => ({ x: d.x, y: d.y })), { color: FG, width: 1.5, dash: '5 4' });
-      hover(f, tip, d3.range(10), (v) => `Segundo algarismo ${v}`, (v) => [
+      hover(f, tip, d3.range(10), (v) => tr('testcharts.benford.tip_head', { digit: v }), (v) => [
         { label: '2026', value: pct1(r26[v].y), color: c.color },
         { label: '2022', value: pct1(r22[v].y), color: MUTED, line: true },
         { label: '2018', value: pct1(r18[v].y), color: REF, line: true, dash: '2 3' },
-        { label: 'Benford', value: pct1(exp[v].y), color: FG, line: true, dash: '5 4' },
+        { label: tr('testcharts.benford.tip_benford'), value: pct1(exp[v].y), color: FG, line: true, dash: '5 4' },
       ]);
     });
-    vf.legend(el, [{ label: '2026 (na cor de cada candidato)', color: FG }, { label: '2022', color: MUTED, line: true }, { label: '2018', color: REF, line: true, dash: '2 3' }, { label: 'Lei de Benford', color: FG, line: true, dash: '5 4' }]);
+    vf.legend(el, [{ label: tr('testcharts.benford.legend_2026'), color: FG }, { label: '2022', color: MUTED, line: true },
+      { label: '2018', color: REF, line: true, dash: '2 3' }, { label: tr('testcharts.benford.legend_law'), color: FG, line: true, dash: '5 4' }]);
   }, benBox);
 
   // Horizontal grouped bars, shared by the mixture and the reference-tests charts --------------------
@@ -252,12 +256,13 @@
     const el = box('mix-chart', 'more_tests');
     if (!el) return;
     const groups = [
-      { label: 'Dados reais, 2026', planted: 0, found: row('more_tests', 'mixture|2026').sections_extreme },
-      { label: 'Dados reais, 2022', planted: 0, found: row('more_tests', 'mixture|2022').sections_extreme },
-      { label: 'Dados reais, 2018', planted: 0, found: row('more_tests', 'mixture|2018').sections_extreme },
-      ...[92, 250, 1000].map((n) => ({ label: `2026, se ${nf(n)} tivessem fraude`, planted: n, found: row('more_tests', `mixture|planted|${n}|2026`).found_sections })),
+      ...['2026', '2022', '2018'].map((y) => ({ label: tr('testcharts.mix.real', { year: y }), planted: 0,
+        found: row('more_tests', `mixture|${y}`).sections_extreme })),
+      ...[92, 250, 1000].map((n) => ({ label: tr('testcharts.mix.planted_label', { n: nf(n) }), planted: n,
+        found: row('more_tests', `mixture|planted|${n}|2026`).found_sections })),
     ];
-    const keys = [{ key: 'planted', label: 'Seções com fraude, no cenário hipotético', color: BAD }, { key: 'found', label: 'Estimadas pelo modelo', color: FG }];
+    const keys = [{ key: 'planted', label: tr('testcharts.mix.key_planted'), color: BAD },
+      { key: 'found', label: tr('testcharts.mix.key_found'), color: FG }];
     hbars(el, groups, keys);
     vf.legend(el, keys.map((k) => ({ label: k.label, color: k.color })));
   }, mixBox);
@@ -267,17 +272,17 @@
   vf.draw(function drawBursts() {
     const el = box('bursts-chart', 'more_tests');
     if (!el) return;
-    const G = [['corner_lula', 'Quase unânimes de Lula'], ['lula90', 'Redutos de Lula'], ['right90', 'Redutos de Flávio'],
-      ['corner_right', 'Quase unânimes de Flávio'], ['random', 'Sorteadas no país']];
-    const groups = G.map(([k, label]) => {
+    const G = [['corner_lula', 'testcharts.bursts.corner_lula'], ['lula90', 'testcharts.bursts.lula90'], ['right90', 'testcharts.bursts.right90'],
+      ['corner_right', 'testcharts.bursts.corner_right'], ['random', 'testcharts.bursts.random']];
+    const groups = G.map(([k, key]) => {
       const r = row('more_tests', `bursts|${k}|2`);
-      return r && { label: `${label} (${nf(r.machines)})`, fast: r.fast_gap_share, worker: r.poll_worker_share };
+      return r && { label: tr(key, { n: nf(r.machines) }), fast: r.fast_gap_share, worker: r.poll_worker_share };
     }).filter(Boolean);
     const mixed = row('more_tests', 'bursts|planted|mixed');
-    const cells = vf.panels(el, ['Votos até 30 s depois do anterior', 'Eleitores liberados pelo mesário']);
-    hbars(cells[0], groups, [{ key: 'fast', label: 'Votos rápidos', color: FG }], { fmt: pct1 });
-    hbars(cells[1], [...groups, { label: 'Quase unânimes, se houvesse fraude', worker: mixed.poll_worker_share, color: BAD }],
-      [{ key: 'worker', label: 'Liberados pelo mesário', color: FG }], { fmt: pct1 });
+    const cells = vf.panels(el, [tr('testcharts.bursts.title_fast'), tr('testcharts.bursts.title_worker')]);
+    hbars(cells[0], groups, [{ key: 'fast', label: tr('testcharts.bursts.key_fast'), color: FG }], { fmt: pct1 });
+    hbars(cells[1], [...groups, { label: tr('testcharts.bursts.planted'), worker: mixed.poll_worker_share, color: BAD }],
+      [{ key: 'worker', label: tr('testcharts.bursts.key_worker'), color: FG }], { fmt: pct1 });
   }, burstsBox);
 
   // Questions 3 and 4 with 2018 ----------------------------------------------------------------------
@@ -287,8 +292,8 @@
     if (!el) return;
     const who = { 2026: ['Lula', 'Flávio'], 2022: ['Lula', 'Jair'], 2018: ['Haddad', 'Jair'] };
     const yrs = [2026, 2022, 2018];
-    const cells = vf.panels(el, ['Seções quase unânimes (pergunta 4)', 'Seções que destoam do local (pergunta 3)']);
-    const keys = [{ key: 'pt', label: 'A favor do PT', color: LULA }, { key: 'right', label: 'A favor do adversário', color: RIGHT }];
+    const cells = vf.panels(el, [tr('testcharts.ref.title_corner'), tr('testcharts.ref.title_place')]);
+    const keys = [{ key: 'pt', label: tr('testcharts.ref.key_pt'), color: LULA }, { key: 'right', label: tr('testcharts.ref.key_right'), color: RIGHT }];
     hbars(cells[0], yrs.map((y) => { const r = row('tres_eleicoes', `ref|${y}`); return { label: `${y} (${who[y].join(' × ')})`, pt: r.corner_lula, right: r.corner_right }; }), keys);
     hbars(cells[1], yrs.map((y) => { const r = row('tres_eleicoes', `ref|${y}`); return { label: `${y} (${who[y].join(' × ')})`, pt: r.place_pos4, right: r.place_neg4 }; }), keys);
     vf.legend(el, keys.map((k) => ({ label: k.label, color: k.color })));
@@ -302,11 +307,11 @@
     if (!el) return;
     const yrs = ['2026', '2022', '2018'];
     const won = { 2026: 'Lula', 2022: 'Lula', 2018: 'Jair' };
-    const [c1, c2] = vf.panels(el, ['Seções com 90% ou mais para cada lado', 'Seções por percentual do candidato do PT'], 'vf-stack');
-    const keys = [{ key: 'pt', label: 'Candidato do PT (Lula; em 2018, Haddad)', color: LULA }, { key: 'right', label: 'Adversário (Flávio; em 2022 e 2018, Jair)', color: RIGHT }];
+    const [c1, c2] = vf.panels(el, [tr('testcharts.conc.title_90'), tr('testcharts.conc.title_hist')], 'vf-stack');
+    const keys = [{ key: 'pt', label: tr('testcharts.conc.key_pt'), color: LULA }, { key: 'right', label: tr('testcharts.conc.key_right'), color: RIGHT }];
     hbars(c1, yrs.map((y) => {
       const r = row('tres_eleicoes', `conc|${y}|2`);
-      return { label: `${y} (venceu ${won[y]})`, pt: r.lula_90, right: r.right_90 };
+      return { label: tr('testcharts.conc.year_label', { year: y, who: won[y] }), pt: r.lula_90, right: r.right_90 };
     }), keys);
     const data = yrs.map((y) => series('conc_hist', y).map((d) => ({ x: d.x + 0.01, y: d.y })));
     const tip = vf.tooltip(c2);
@@ -317,8 +322,9 @@
         .style('fill', color).style('opacity', 0.16);
     }
     yrs.forEach((y, k) => path(f, data[k], YEAR[y]));
-    hover(f, tip, data[0].map((d) => d.x), (v) => `PT com ${pct0(v - 0.01)} a ${pct0(v + 0.01)} dos votos`,
-      (v) => yrs.map((y, k) => ({ label: y, value: `${pct1(data[k].find((d) => Math.abs(d.x - v) < 1e-9).y)} das seções`, color: YEAR[y].color, line: true, dash: YEAR[y].dash })));
+    hover(f, tip, data[0].map((d) => d.x), (v) => tr('testcharts.conc.tip_head', { from: pct0(v - 0.01), to: pct0(v + 0.01) }),
+      (v) => yrs.map((y, k) => ({ label: y, value: tr('testcharts.conc.tip_value', { pct: pct1(data[k].find((d) => Math.abs(d.x - v) < 1e-9).y) }),
+        color: YEAR[y].color, line: true, dash: YEAR[y].dash })));
     vf.legend(el, [...keys.map((k) => ({ label: k.label, color: k.color })),
       ...yrs.map((y) => ({ label: y, color: YEAR[y].color, line: true, dash: YEAR[y].dash }))]);
   }, concBox);
@@ -336,12 +342,13 @@
       { yLog: true, yFmt: nf, xFmt: (v) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v)}` });
     for (const at of [-4 * sd, 4 * sd]) vline(f, at, REF, '4 3');
     ss.forEach(([, st], k) => path(f, data[k].filter((d) => d.x >= -8 && d.x <= 8).map((d) => ({ x: d.x, y: Math.max(d.y, 0.8) })), st));
-    const label = { 2026: '2026', 2022: '2022', 2018: '2018', planted: '2026, se houvesse fraude' };
+    const label = { 2026: '2026', 2022: '2022', 2018: '2018', planted: tr('testcharts.exp.planted') };
     hover(f, tip, data[0].filter((d) => d.x >= -8 && d.x <= 8).map((d) => d.x),
-      (v) => `Desvio de ${vf.f('.2f')(v - 0.125)} a ${vf.f('.2f')(v + 0.125)} p.p.`,
-      (v) => ss.map(([k, st], i) => ({ label: label[k], value: `${nf(data[i].find((d) => Math.abs(d.x - v) < 1e-9).y)} municípios`, color: st.color, line: true, dash: st.dash })));
+      (v) => tr('testcharts.exp.tip_head', { from: vf.f('.2f')(v - 0.125), to: vf.f('.2f')(v + 0.125) }),
+      (v) => ss.map(([k, st], i) => ({ label: label[k], value: tr('testcharts.exp.tip_value', { n: nf(data[i].find((d) => Math.abs(d.x - v) < 1e-9).y) }),
+        color: st.color, line: true, dash: st.dash })));
     vf.legend(el, [...ss.map(([k, st]) => ({ label: label[k], color: st.color, line: true, dash: st.dash })),
-      { label: '4 vezes o erro típico de 2026', color: REF, line: true, dash: '4 3' }]);
+      { label: tr('testcharts.exp.legend_sd'), color: REF, line: true, dash: '4 3' }]);
   }, expBox);
 
   // Isolation Forest: share of sections scoring above each value, per year and for the planted sections ---
@@ -351,8 +358,8 @@
     const el = box('iso-chart', 'graficos', 'tres_eleicoes');
     if (!el) return;
     const ss = [['2026', YEAR[2026], '2026'], ['2022', YEAR[2022], '2022'], ['2018', YEAR[2018], '2018'],
-      ['planted_extreme', { color: BAD, width: 1.75, dash: '5 4' }, 'Se houvesse enchimento extremo'],
-      ['planted_incremental', { color: BAD, width: 1.25, dash: '2 3' }, 'Se houvesse enchimento de 10%']];
+      ['planted_extreme', { color: BAD, width: 1.75, dash: '5 4' }, tr('testcharts.iso.planted_extreme')],
+      ['planted_incremental', { color: BAD, width: 1.25, dash: '2 3' }, tr('testcharts.iso.planted_incremental')]];
     const lo = 1e-5;
     const data = ss.map(([k]) => {
       const h = series('iso_score', k);
@@ -365,8 +372,8 @@
     const f = frame(el, 240, [0.4, 0.75], [lo, 1], { yLog: true, yFmt: (v) => vf.f('~%')(v), xFmt: vf.f('.2f') });
     vline(f, cut, FG, '4 3');
     ss.forEach(([, st], k) => path(f, data[k].filter((d) => d.x >= 0.4 && d.x <= 0.75).map((d) => ({ x: d.x, y: Math.max(d.y, lo) })), st));
-    hover(f, tip, data[0].filter((d) => d.x >= 0.4 && d.x <= 0.75).map((d) => d.x), (v) => `Escore ${vf.f('.3f')(v)} ou mais`,
+    hover(f, tip, data[0].filter((d) => d.x >= 0.4 && d.x <= 0.75).map((d) => d.x), (v) => tr('testcharts.iso.tip_head', { score: vf.f('.3f')(v) }),
       (v) => ss.map(([, st, label], i) => ({ label, value: pct1(data[i].find((d) => Math.abs(d.x - v) < 1e-9).y), color: st.color, line: true, dash: st.dash })));
-    vf.legend(el, [...ss.map(([, st, label]) => ({ label, color: st.color, line: true, dash: st.dash })), { label: 'Corte de 0,60', color: FG, line: true, dash: '4 3' }]);
+    vf.legend(el, [...ss.map(([, st, label]) => ({ label, color: st.color, line: true, dash: st.dash })), { label: tr('testcharts.iso.legend_cut'), color: FG, line: true, dash: '4 3' }]);
   }, isoBox);
 })();

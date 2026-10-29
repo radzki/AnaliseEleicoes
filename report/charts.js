@@ -5,6 +5,7 @@
   const MUTED = 'var(--cds-chart-muted)';
   const REF = 'var(--cds-chart-reference)';
   const FG = 'var(--color-fg)';
+  const tr = vf.t;
   const pct0 = vf.f('.0%');
   const pct1 = vf.f('.1%');
   const pct2 = vf.f('.2%');
@@ -18,8 +19,9 @@
     const rows = dash.data('last_digit').data.filter((r) => r.round === 2);
     const half = Math.max(0.004, d3.max(rows, (r) => Math.abs(r.share - 0.1)) * 1.25);
     const shown = [
-      ...vf.cands().map((c) => ({ v: c === 'lula' ? 'Lula' : 'Right candidate', title: c === 'lula' ? 'Votos de Lula' : 'Votos de Flávio (em 2022, Jair)', color: vf.cand[c].color() })),
-      { v: 'Turnout', title: 'Comparecimento', color: FG },
+      ...vf.cands().map((c) => ({ v: c === 'lula' ? 'Lula' : 'Right candidate',
+        title: c === 'lula' ? tr('charts.ld.lula_title') : tr('charts.ld.right_title'), color: vf.cand[c].color() })),
+      { v: 'Turnout', title: tr('charts.ld.turnout_title'), color: FG },
     ];
     ldBox.replaceChildren();
     const tip = vf.tooltip(ldBox);
@@ -48,17 +50,19 @@
       }
       s.append('g').selectAll('rect').data(d3.range(10)).join('rect')
         .attr('x', (d) => x(d)).attr('width', x.bandwidth()).attr('y', 0).attr('height', h).style('fill', 'transparent')
-        .on('pointermove pointerdown', (ev, d) => tip.show(ev, `${title} · contagem termina em ${d}`, [
+        .on('pointermove pointerdown', (ev, d) => tip.show(ev, tr('charts.ld.tip_head', { title, digit: d }), [
           { label: '2026', value: pct2(pick(2026, d).share), color },
           { label: '2022', value: pct2(pick(2022, d).share), color: MUTED },
         ]))
         .on('pointerleave', tip.leave);
       const p = document.createElement('div');
       p.className = 'vf-mnote';
-      p.textContent = `Uniformidade: p = ${vf.f('.2f')(pick(2026, 0).p_uniform)} (2026) · ${vf.f('.3f')(pick(2022, 0).p_uniform)} (2022)`;
+      p.textContent = tr('charts.ld.uniformity', {
+        p26: vf.f('.2f')(pick(2026, 0).p_uniform), p22: vf.f('.3f')(pick(2022, 0).p_uniform) });
       cell.append(p);
     });
-    vf.legend(ldBox, [{ label: '2026 (na cor de cada painel)', color: FG }, { label: '2022', color: MUTED }, { label: 'Variação do acaso', color: 'var(--cds-chart-grid)' }]);
+    vf.legend(ldBox, [{ label: tr('charts.ld.legend_2026'), color: FG }, { label: '2022', color: MUTED },
+      { label: tr('charts.ld.legend_chance'), color: 'var(--cds-chart-grid)' }]);
   }
   vf.draw(drawLastDigits);
 
@@ -76,9 +80,9 @@
     const hi = all[cut.findIndex((c) => c >= 0.997)].pct + 0.1;
     const kept = all.filter((r) => r.pct >= lo && r.pct < hi);
     const views = pctVar === 'Turnout'
-      ? [{ title: 'Comparecimento', color: FG, rows: kept.map((r) => ({ ...r, x: r.pct + 0.05, a: r.pct })), dom: [lo, hi] }]
+      ? [{ title: tr('charts.pct.turnout_title'), color: FG, rows: kept.map((r) => ({ ...r, x: r.pct + 0.05, a: r.pct })), dom: [lo, hi] }]
       : vf.cands().map((c) => ({
-        title: `% de ${vf.cand[c].name}`, color: vf.cand[c].color(),
+        title: tr('charts.pct.share_title', { name: vf.cand[c].name }), color: vf.cand[c].color(),
         rows: c === 'lula' ? kept.map((r) => ({ ...r, x: r.pct + 0.05, a: r.pct }))
           : kept.map((r) => ({ ...r, x: 99.95 - r.pct, a: 99.9 - r.pct })).reverse(),
         dom: c === 'lula' ? [lo, hi] : [100 - hi, 100 - lo],
@@ -104,14 +108,15 @@
         .on('pointermove pointerdown', (ev) => {
           const r = v.rows[bis(v.rows, x.invert(d3.pointer(ev)[0]))];
           dot.style('display', null).attr('cx', x(r.x)).attr('cy', y(r.observed));
-          tip.show(ev, `${v.title} ${d1(r.a)}–${d1(r.a + 0.1)}%`, [
-            { label: 'Seções', value: nf(r.observed), color: v.color },
-            { label: 'Esperado', value: nf(Math.round(r.expected)), color: FG },
+          tip.show(ev, tr('charts.pct.tip_head', { title: v.title, from: d1(r.a), to: d1(r.a + 0.1) }), [
+            { label: tr('charts.pct.tip_sections'), value: nf(r.observed), color: v.color },
+            { label: tr('charts.pct.tip_expected'), value: nf(Math.round(r.expected)), color: FG },
           ]);
         })
         .on('pointerleave', (ev) => { if (ev.pointerType === 'touch') return; dot.style('display', 'none'); tip.hide(); });
     });
-    vf.legend(pctBox, [{ label: 'Seções, 2º turno de 2026', color: views[0].color, line: true }, { label: 'Esperado só pelas contagens', color: FG, line: true }]);
+    vf.legend(pctBox, [{ label: tr('charts.pct.legend_sections'), color: views[0].color, line: true },
+      { label: tr('charts.pct.legend_expected'), color: FG, line: true }]);
   }
   vf.draw(drawPct);
 
@@ -127,9 +132,9 @@
     const mirror = (rs) => rs.map((r) => ({ ...r, z: -r.z - step })).reverse();
     const byYear = (year) => rows.filter((r) => r.year === year);
     const views = zVar === 'Turnout'
-      ? [{ title: 'Comparecimento', color: FG, r26: byYear(2026), r22: byYear(2022) }]
+      ? [{ title: tr('charts.z.turnout_title'), color: FG, r26: byYear(2026), r22: byYear(2022) }]
       : vf.cands().map((c) => ({
-        title: zVar === 'Swing' ? `Variação a favor de ${vf.cand[c].name}` : `% de ${vf.cand[c].name}`, color: vf.cand[c].color(),
+        title: tr(zVar === 'Swing' ? 'charts.z.swing_title' : 'charts.z.share_title', { name: vf.cand[c].name }), color: vf.cand[c].color(),
         r26: c === 'lula' ? byYear(2026) : mirror(byYear(2026)), r22: c === 'lula' ? byYear(2022) : mirror(byYear(2022)),
       }));
     zBox.replaceChildren();
@@ -160,15 +165,17 @@
         .on('pointermove pointerdown', (ev) => {
           const i = Math.max(0, Math.min(v.r26.length - 1, Math.floor((x.invert(d3.pointer(ev)[0]) + 10) / step)));
           const a = v.r26[i];
-          tip.show(ev, `${v.title}: z de ${vf.f('+.2f')(a.z)} a ${vf.f('+.2f')(a.z + step)}`, [
+          tip.show(ev, tr('charts.z.tip_head', { title: v.title, from: vf.f('+.2f')(a.z), to: vf.f('+.2f')(a.z + step) }), [
             { label: '2026', value: nf(a.count), color: v.color },
-            { label: 'Curva normal', value: nf(Math.round(a.normal)), color: FG },
+            { label: tr('charts.z.tip_normal'), value: nf(Math.round(a.normal)), color: FG },
             { label: '2022', value: nf(v.r22[i]?.count ?? 0), color: MUTED },
           ]);
         })
         .on('pointerleave', tip.leave);
     });
-    vf.legend(zBox, [{ label: 'Seções, 2º turno de 2026', color: views[0].color }, { label: 'Curva normal perfeita', color: FG, line: true }, { label: '2º turno de 2022', color: MUTED, line: true }, { label: 'Além de ±4', color: 'var(--cds-chart-grid)' }]);
+    vf.legend(zBox, [{ label: tr('charts.z.legend_sections'), color: views[0].color },
+      { label: tr('charts.z.legend_normal'), color: FG, line: true }, { label: tr('charts.z.legend_2022'), color: MUTED, line: true },
+      { label: tr('charts.z.legend_beyond'), color: 'var(--cds-chart-grid)' }]);
   }
   vf.draw(drawZ);
 
@@ -184,7 +191,7 @@
     const lo = d3.sort(byT.keys()).find((k) => (cum += byT.get(k)) / total >= 0.002);
     const bg = vf.resolve('var(--color-panel)');
     const views = vf.cands().flatMap((c) => [2026, 2022].map((year) => ({
-      title: `${year === 2026 ? vf.cand[c].name : vf.cand[c].name22}, 2º turno de ${year}`,
+      title: tr('charts.fp.panel_title', { who: year === 2026 ? vf.cand[c].name : vf.cand[c].name22, year }),
       ramp: d3.interpolateRgb(bg, vf.resolve(vf.cand[c].color())),
       rows: all.filter((r) => r.year === year).map((r) => (c === 'lula' ? r : { ...r, share: 99 - r.share })),
       who: year === 2026 ? vf.cand[c].name : vf.cand[c].name22,
@@ -213,8 +220,8 @@
           const [px, py] = d3.pointer(ev);
           const i = Math.floor(x.invert(px));
           const j = Math.floor(y.invert(py));
-          tip.show(ev, `${v.title} · comparecimento ${i}–${i + 1}% · ${v.who} ${j}–${j + 1}%`, [
-            { label: 'Seções', value: nf(cellOf.get(`${i}|${j}`)?.sections ?? 0) },
+          tip.show(ev, tr('charts.fp.tip_head', { title: v.title, t0: i, t1: i + 1, who: v.who, s0: j, s1: j + 1 }), [
+            { label: tr('charts.fp.tip_sections'), value: nf(cellOf.get(`${i}|${j}`)?.sections ?? 0) },
           ]);
         })
         .on('pointerleave', tip.leave);
@@ -224,8 +231,8 @@
     const corner = document.createElement('i');
     corner.className = 'vf-sw vf-sw-box';
     const c = document.createElement('span');
-    c.append(corner, 'Comparecimento ≥ 95% e candidato ≥ 90%');
-    key.append(`Mais escuro = mais seções (escala log, de 1 a ${nf(d3.max(all, (r) => r.sections))})`, c);
+    c.append(corner, tr('charts.fp.legend_corner'));
+    key.append(tr('charts.fp.legend_scale', { max: nf(d3.max(all, (r) => r.sections)) }), c);
     fpBox.append(key);
   }
   vf.draw(drawFp);
@@ -239,7 +246,7 @@
       const [year, round] = k.split('|').map(Number);
       const who = year === 2026 ? vf.cand[c].name : vf.cand[c].name22;
       return {
-        label: `${who} ${year}${round === 1 ? ', 1º turno' : ''}`,
+        label: tr(round === 1 ? 'charts.timing.series_r1' : 'charts.timing.series', { who, year }),
         color: year === 2026 ? vf.cand[c].color() : MUTED,
         width: round === 2 && year === 2026 ? 2.5 : 1.75, dash: round === 1 ? '5 4' : null,
         pts: rows.filter((r) => r.year === year && r.round === round)
@@ -277,13 +284,14 @@
         .style('fill', e.sr.color === MUTED ? 'var(--color-fg-muted)' : e.sr.color);
     }
     if (narrow) vf.legend(tBox, ends.map((e) => ({ label: e.text, color: e.sr.color, line: true, dash: e.sr.dash })));
-    const clock = (m) => `${17 + Math.floor(m / 60)}h${String(m % 60).padStart(2, '0')}`;
+    const clock = (m) => tr('charts.timing.clock', { h: 17 + Math.floor(m / 60), m: String(m % 60).padStart(2, '0') });
     s.append('rect').attr('x', ml).attr('width', w - mr - ml).attr('height', h).style('fill', 'transparent')
       .on('pointermove pointerdown', (ev) => {
         const at = x.invert(d3.pointer(ev)[0]);
-        tip.show(ev, `${pct1(Math.max(0, Math.min(1, at)))} dos votos apurados`, series.map((sr) => {
+        tip.show(ev, tr('charts.timing.tip_head', { pct: pct1(Math.max(0, Math.min(1, at))) }), series.map((sr) => {
           const p = sr.pts.reduce((a, b) => (Math.abs(b.pct_counted - at) < Math.abs(a.pct_counted - at) ? b : a));
-          return { label: `${sr.label} (até ${clock(p.minutes)})`, value: pct1(p.v), color: sr.color, line: true, dash: sr.dash };
+          return { label: tr('charts.timing.tip_line', { label: sr.label, time: clock(p.minutes) }), value: pct1(p.v),
+            color: sr.color, line: true, dash: sr.dash };
         }));
       })
       .on('pointerleave', tip.leave);
@@ -300,7 +308,7 @@
       { key: '2026', label: '2026', color: FG, width: 2.5 },
       { key: '2022', label: '2022', color: MUTED, width: 1.75 },
       { key: '2018', label: '2018', color: REF, width: 1.5, dash: '2 3' },
-      { key: 'planted', label: 'Se houvesse fraude acima de 250 votantes', color: 'var(--color-bad)', width: 1.75, dash: '5 4' },
+      { key: 'planted', label: tr('charts.size.planted'), color: 'var(--color-bad)', width: 1.75, dash: '5 4' },
     ].map((s) => ({ ...s, pts: rows.filter((r) => r.series === s.key).map((r) => ({ x: r.from + 12.5, v: r.mean_pp, n: r.sections })) }));
     sizeBox.replaceChildren();
     const tip = vf.tooltip(sizeBox);
@@ -327,9 +335,9 @@
         const at = x.invert(d3.pointer(ev)[0]);
         const near = (pts) => pts.reduce((a, b) => (Math.abs(b.x - at) < Math.abs(a.x - at) ? b : a));
         const p0 = near(series[0].pts);
-        tip.show(ev, `Seções com ${p0.x - 12.5} a ${p0.x + 12.5} votantes`, series.map((sr) => {
+        tip.show(ev, tr('charts.size.tip_head', { from: p0.x - 12.5, to: p0.x + 12.5 }), series.map((sr) => {
           const p = near(sr.pts);
-          return { label: sr.label, value: `${fmtY(p.v)} p.p.`, color: sr.color, line: true, dash: sr.dash };
+          return { label: sr.label, value: tr('charts.size.tip_value', { v: fmtY(p.v) }), color: sr.color, line: true, dash: sr.dash };
         }));
       })
       .on('pointerleave', tip.leave);
@@ -350,11 +358,11 @@
     });
     const planted = ['fifth', 'all'].map((h) => all.find((d) => d.id === `quad|planted|${h}`));
     const series = [
-      { key: 'obs', label: 'Dados', color: FG },
-      { key: 'nul', label: 'Modelo sem nada de anormal', color: MUTED },
+      { key: 'obs', label: tr('charts.quad.data'), color: FG },
+      { key: 'nul', label: tr('charts.quad.null'), color: MUTED },
     ];
     quadBox.replaceChildren();
-    const [c1, c2] = vf.panels(quadBox, ['Seções em que um ganhou e o outro perdeu, para cada uma ao contrário', 'Dados ÷ modelo (1 = o modelo explica tudo)'], 'vf-stack');
+    const [c1, c2] = vf.panels(quadBox, [tr('charts.quad.title_ratio'), tr('charts.quad.title_leftover')], 'vf-stack');
     const tip = vf.tooltip(quadBox);
     const fmt = (v) => vf.format('ratio', v);
     {
@@ -380,9 +388,9 @@
         }
         s.append('rect').attr('x', ml).attr('y', band(r.y)).attr('width', w - 8 - ml).attr('height', band.bandwidth())
           .style('fill', 'transparent')
-          .on('pointermove pointerdown', (ev) => tip.show(ev, `${r.y}: seções em que ${r.leader} ganhou e ${r.other} perdeu, para cada uma ao contrário`, [
-            { label: 'Dados', value: fmt(r.obs), color: FG },
-            { label: 'Modelo sem nada de anormal', value: `${fmt(r.nul)} (${fmt(r.lo)} a ${fmt(r.hi)} em 20 sorteios)`, color: MUTED },
+          .on('pointermove pointerdown', (ev) => tip.show(ev, tr('charts.quad.tip_head', { year: r.y, leader: r.leader, other: r.other }), [
+            { label: tr('charts.quad.data'), value: fmt(r.obs), color: FG },
+            { label: tr('charts.quad.null'), value: tr('charts.quad.tip_null', { v: fmt(r.nul), lo: fmt(r.lo), hi: fmt(r.hi) }), color: MUTED },
           ]))
           .on('pointerleave', tip.leave);
       }
@@ -390,8 +398,8 @@
     {
       const items = [
         ...rows.map((r) => ({ label: `${r.y}`, v: r.left, color: FG })),
-        { label: '2026, se houvesse fraude em 1 de cada 5 urnas', v: planted[0].leftover, color: 'var(--color-bad)' },
-        { label: '2026, se houvesse fraude em todas as urnas', v: planted[1].leftover, color: 'var(--color-bad)' },
+        { label: tr('charts.quad.planted_fifth'), v: planted[0].leftover, color: 'var(--color-bad)' },
+        { label: tr('charts.quad.planted_all'), v: planted[1].leftover, color: 'var(--color-bad)' },
       ];
       const { s, w, h } = vf.svg(c2, 30 + items.length * 26);
       const ml = vf.textWidth(s, items.map((d) => d.label)) + 12;
@@ -409,7 +417,7 @@
       }
       s.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', 0).attr('y2', h - 24).style('stroke', REF).attr('stroke-dasharray', '4 3');
     }
-    vf.legend(quadBox, [...series.map((sr) => ({ label: sr.label, color: sr.color })), { label: 'Se houvesse fraude', color: 'var(--color-bad)' }]);
+    vf.legend(quadBox, [...series.map((sr) => ({ label: sr.label, color: sr.color })), { label: tr('charts.quad.legend_planted'), color: 'var(--color-bad)' }]);
   }
   vf.draw(drawQuad);
 })();

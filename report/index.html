@@ -103,6 +103,12 @@
   .vf-filter { display: flex; align-items: center; flex-wrap: wrap; gap: var(--cds-gap-sm); margin-top: var(--cds-gap-md); }
   .vf-filter .vf-seg { margin-bottom: 0; }
   .vf-filter-lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  /* language links, top right; the current one is plain text */
+  .vf-langs { display: flex; justify-content: flex-end; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); margin-bottom: var(--cds-gap-sm); }
+  .vf-langs a { color: var(--color-fg-muted); text-underline-offset: 3px; }
+  .vf-langs a[aria-current] { color: var(--color-fg); font-weight: var(--cds-font-weight-medium); text-decoration: none; }
+  /* text not yet translated, shown in Portuguese */
+  .vf-pending { text-decoration: underline dotted var(--color-fg-muted); text-underline-offset: 3px; }
   .vf[data-show="lula"] [data-cand="flavio"], .vf[data-show="flavio"] [data-cand="lula"] { display: none !important; }
   .vf-single { display: block; }
   .vf-gloss a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
@@ -230,278 +236,275 @@
   @media (prefers-reduced-motion: reduce) { .vf-sim-busy .vf-sim-main { transition: none; } }
 </style>
 
-<div class="vf" lang="pt-BR">
+<div class="vf" lang="{{shell.lang}}">
   <header class="vf-head" id="topo">
-    <h1>Eleição presidencial de 2026: os números mostram sinais de fraude?</h1>
-    <div class="vf-filter"><span class="vf-filter-lbl" id="cand-lbl">Mostrar:</span><div class="vf-seg" id="cand-pick" role="group" aria-labelledby="cand-lbl"><button type="button" data-v="lula" aria-pressed="false">Lula</button><button type="button" data-v="flavio" aria-pressed="false">Flávio</button><button type="button" data-v="ambos" aria-pressed="true">Ambos</button></div><div class="vf-theme" hidden><span class="vf-filter-lbl" id="theme-lbl">Tema:</span><div class="vf-seg" id="theme-pick" role="group" aria-labelledby="theme-lbl"><button type="button" data-v="auto" aria-pressed="true">Automático</button><button type="button" data-v="claro" aria-pressed="false">Claro</button><button type="button" data-v="escuro" aria-pressed="false">Escuro</button></div></div></div>
-    <div class="vf-tabs" id="vf-tabs" role="tablist" aria-label="Versão do relatório">
-      <button type="button" role="tab" id="tab-simples" data-tab="simples" aria-controls="simples" aria-selected="true">Resumo para todos</button>
-      <button type="button" role="tab" id="tab-tecnico" data-tab="tecnico" aria-controls="tecnico" aria-selected="false">Versão técnica</button>
-      <button type="button" role="tab" id="tab-fraude" data-tab="fraude" aria-controls="fraude" aria-selected="false">Tente fraudar!</button>
-    </div>
+    {{langs}}
+    <h1>{{topo.h1.1}}</h1>
+    <div class="vf-filter"><span class="vf-filter-lbl" id="cand-lbl">{{cand-lbl.span.1}}</span><div class="vf-seg" id="cand-pick" role="group" aria-labelledby="cand-lbl">{{cand-pick.div.1}}</div><div class="vf-theme" hidden><span class="vf-filter-lbl" id="theme-lbl">{{theme-lbl.span.1}}</span><div class="vf-seg" id="theme-pick" role="group" aria-labelledby="theme-lbl">{{theme-pick.div.1}}</div></div></div>
+    <div class="vf-tabs" id="vf-tabs" role="tablist" aria-label="{{vf-tabs.arialabel.1}}">{{vf-tabs.div.1}}</div>
   </header>
 
   <div class="vf-page" id="simples" data-page role="tabpanel" aria-labelledby="tab-simples">
     <div class="vf-answer">
-      <div class="vf-answer-label">Resposta curta</div>
-      <p class="vf-answer-big">Não foram encontrados sinais de fraude manual capazes de mudar o resultado.</p>
-      <p>Foram analisados os <b data-source="summary" data-where="year=2026&amp;round=2" data-field="sections" data-fmt="int">—</b> boletins de urna do 2º turno (o resultado que cada urna imprime ao fim da votação) com testes publicados em revistas científicas e já usados em eleições da Suécia, do Senegal, da Nigéria e da Rússia para descobrir números inventados ou urnas “engordadas” (<a class="vf-src" href="#referencias">referências no fim da página</a>). Em quase todos, 2026 se comporta como uma eleição normal, do mesmo jeito que 2022. A principal exceção são urnas em que quase todo mundo votou, e quase todos em Lula: ficaram mais comuns do que em 2022, e estes dados não explicam por quê. Mas são poucas demais para mudar o resultado (pergunta 4).</p>
+      <div class="vf-answer-label">{{simples.div.1}}</div>
+      <p class="vf-answer-big">{{simples.p.1}}</p>
+      <p>{{simples.p.2}}</p>
     </div>
 
     <div class="vf-kpis">
       <div class="vf-kpi" data-cand="lula">
-        <div class="vf-lbl">Lula</div>
+        <div class="vf-lbl">{{simples.div.2}}</div>
         <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="lula_share" data-fmt="pct">—</span>
-        <div class="vf-sub">dos votos válidos no 2º turno · no 1º turno, <span data-source="summary" data-where="year=2026&amp;round=1" data-field="lula_share" data-fmt="pct">—</span></div>
+        <div class="vf-sub">{{simples.div.3}}</div>
       </div>
       <div class="vf-kpi" data-cand="flavio">
-        <div class="vf-lbl">Flávio</div>
+        <div class="vf-lbl">{{simples.div.4}}</div>
         <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="right_share" data-fmt="pct">—</span>
-        <div class="vf-sub">dos votos válidos no 2º turno · no 1º turno, <span data-source="summary" data-where="year=2026&amp;round=1" data-field="right_share" data-fmt="pct">—</span></div>
+        <div class="vf-sub">{{simples.div.5}}</div>
       </div>
       <div class="vf-kpi">
-        <div class="vf-lbl">Diferença final</div>
+        <div class="vf-lbl">{{simples.div.6}}</div>
         <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="absCompact">—</span>
-        <div class="vf-sub">de votos a favor de Lula · no 1º turno, Flávio estava <span data-source="summary" data-where="year=2026&amp;round=1" data-field="margin" data-fmt="absCompact">—</span> à frente</div>
+        <div class="vf-sub">{{simples.div.7}}</div>
       </div>
     </div>
 
     <div class="vf-card vf-explain" id="como-checamos">
-      <h2>Como os dados foram checados, em 1 minuto</h2>
-      <p>Pessoas são péssimas em inventar números que pareçam aleatórios: em experimentos, mesmo quem é pago para sortear algarismos usa alguns mais que outros (<a class="vf-src" href="https://doi.org/10.1093/pan/mps003" target="_blank" rel="noopener">Beber e Scacco, 2012</a>). Quem altera resultados à mão deixa rastros sem perceber: algarismos repetidos demais, percentuais redondos demais (<a class="vf-src" href="https://doi.org/10.1214/16-AOAS904" target="_blank" rel="noopener">Kobak, Shpilkin e Pshenichnikov, 2016</a>), urnas com quase todo mundo votando no mesmo candidato (<a class="vf-src" href="https://doi.org/10.1073/pnas.1210722109" target="_blank" rel="noopener">Klimek et al., 2012</a>). Esses rastros foram procurados nos dados oficiais do TSE, urna por urna.</p>
-      <p>Para saber o que é “normal”, foram usadas duas réguas: o que o puro acaso produz e a eleição de 2022, com o mesmo tipo de urna eletrônica, os mesmos arquivos do TSE e exatamente o mesmo método. Se 2026 fica dentro das duas réguas, não há nada fora do comum.</p>
+      <h2>{{como-checamos.h2.1}}</h2>
+      <p>{{como-checamos.p.1}}</p>
+      <p>{{como-checamos.p.2}}</p>
     </div>
 
     <div class="vf-qs">
       <article class="vf-card vf-q" id="numeros-inventados">
-        <div class="vf-q-head"><span class="vf-q-n">1</span><h3>Os números parecem inventados?</h3><span class="vf-chip vf-ok">Normal</span></div>
-        <p>Olhe para o último algarismo de cada contagem de votos: 1.234 termina em 4; 870 termina em 0. Em votos de verdade, esse último algarismo é como um sorteio: cada número de 0 a 9 aparece em mais ou menos 1 de cada 10 urnas. Quem inventa números tende a usar alguns algarismos mais que outros (<a class="vf-src" href="https://doi.org/10.1093/pan/mps003" target="_blank" rel="noopener">Beber e Scacco, 2012</a>), e isso apareceria como barras mais altas.</p>
-        <div class="vf-chart vf-h210 dash-skeleton" id="s-digits" role="img" aria-label="Gráfico de barras: fração das contagens de votos terminadas em cada algarismo, de 0 a 9, para cada candidato no 2º turno de 2026. O resultado está no texto abaixo do gráfico." data-source="last_digit"></div>
-        <p class="vf-q-sum"><b>Resultado:</b> em 2026, cada algarismo aparece no fim de <span data-source="digit_range" data-row="0" data-field="min" data-fmt="pct">—</span> a <span data-source="digit_range" data-row="0" data-field="max" data-fmt="pct">—</span> das contagens, para os dois candidatos (foram contadas as urnas em que o candidato teve 10 votos ou mais). É exatamente o que um sorteio daria.</p>
+        <div class="vf-q-head"><span class="vf-q-n">1</span><h3>{{numeros-inventados.h3.1}}</h3><span class="vf-chip vf-ok">{{numeros-inventados.span.1}}</span></div>
+        <p>{{numeros-inventados.p.1}}</p>
+        <div class="vf-chart vf-h210 dash-skeleton" id="s-digits" role="img" aria-label="{{s-digits.arialabel.1}}" data-source="last_digit"></div>
+        <p class="vf-q-sum">{{numeros-inventados.p.2}}</p>
       </article>
 
       <article class="vf-card vf-q" id="resultados-redondos">
-        <div class="vf-q-head"><span class="vf-q-n">2</span><h3>Há urnas com resultados “redondos” demais?</h3><span class="vf-chip vf-ok">Normal</span></div>
-        <p>Se alguém ajustasse resultados à mão, sobrariam urnas com percentuais certinhos, como Lula com exatamente 50%, 60% ou 70% dos votos: foi o que se viu em eleições da Rússia (<a class="vf-src" href="https://doi.org/10.1214/16-AOAS904" target="_blank" rel="noopener">Kobak, Shpilkin e Pshenichnikov, 2016</a>). Algumas urnas sempre caem em números redondos por pura aritmética (numa urna pequena, 100 votos divididos 50 a 50 dão 50% cravado), então o resultado foi comparado com o que o acaso produz sozinho.</p>
-        <p>No 2º turno só há dois candidatos, então, quando Lula tem um percentual redondo, Flávio também tem (50% e 50%, 60% e 40%). O teste vale para os dois ao mesmo tempo.</p>
-        <p class="vf-q-sum"><b>Resultado:</b> <span data-source="scorecard" data-where="id=int|Lula share|2|2026" data-field="observed" data-fmt="int">—</span> urnas deram a Lula um percentual inteiro exato. O acaso, sozinho, daria cerca de <span data-source="scorecard" data-where="id=int|Lula share|2|2026" data-field="expected" data-fmt="int">—</span>. Praticamente o mesmo número.</p>
+        <div class="vf-q-head"><span class="vf-q-n">2</span><h3>{{resultados-redondos.h3.1}}</h3><span class="vf-chip vf-ok">{{resultados-redondos.span.1}}</span></div>
+        <p>{{resultados-redondos.p.1}}</p>
+        <p>{{resultados-redondos.p.2}}</p>
+        <p class="vf-q-sum">{{resultados-redondos.p.3}}</p>
       </article>
 
       <article class="vf-card vf-q" id="urnas-que-destoam">
-        <div class="vf-q-head"><span class="vf-q-n">3</span><h3>Alguma urna destoa demais das vizinhas?</h3><span class="vf-chip vf-ok">Normal</span></div>
-        <p>Numa mesma escola costuma haver várias urnas, com eleitores do mesmo bairro; por isso os resultados delas costumam ser parecidos: nos dados, a diferença típica entre uma urna e as vizinhas é só <span data-source="scorecard" data-where="id=pz|pos|2|2026" data-field="stat" data-fmt="dec2">—</span> vez a que o puro acaso daria. Uma urna adulterada ficaria muito diferente das vizinhas. Ainda assim, algumas urnas destoam naturalmente: em 2022, <span data-source="scorecard" data-where="id=pz|pos|2|2022" data-field="observed" data-fmt="int">—</span> ficaram muito acima das vizinhas e <span data-source="scorecard" data-where="id=pz|neg|2|2022" data-field="observed" data-fmt="int">—</span> muito abaixo, quando o puro acaso daria cerca de <span data-source="scorecard" data-where="id=pz|pos|2|2022" data-field="expected" data-fmt="int">—</span> de cada lado. Por isso o que importa é comparar com 2022. Abaixo, quantas urnas ficaram muito diferentes das vizinhas, para cada lado:</p>
-        <div class="vf-chart vf-h170 dash-skeleton" id="s-outliers" role="img" aria-label="Gráfico de barras: quantas urnas ficaram muito diferentes das vizinhas, a favor de cada candidato, em 2026 e em 2022." data-source="scorecard"></div>
-        <p class="vf-q-sum"><b>Resultado:</b> são praticamente as mesmas quantidades de 2022, para os dois lados, numa fração mínima das quase 500 mil urnas. <span data-cand="lula">E <span data-source="scorecard" data-where="id=persist|2026" data-field="observed" data-fmt="pctv">—</span> das que destoaram a favor de Lula no 2º turno já ficavam acima das vizinhas no 1º turno, por uma régua um pouco mais folgada (em 2022, <span data-source="scorecard" data-where="id=persist|2022" data-field="observed" data-fmt="pctv">—</span>): são lugares que já votavam diferente, não urnas que mudaram de repente.</span></p>
+        <div class="vf-q-head"><span class="vf-q-n">3</span><h3>{{urnas-que-destoam.h3.1}}</h3><span class="vf-chip vf-ok">{{urnas-que-destoam.span.1}}</span></div>
+        <p>{{urnas-que-destoam.p.1}}</p>
+        <div class="vf-chart vf-h170 dash-skeleton" id="s-outliers" role="img" aria-label="{{s-outliers.arialabel.1}}" data-source="scorecard"></div>
+        <p class="vf-q-sum">{{urnas-que-destoam.p.2}}</p>
       </article>
 
       <article class="vf-card vf-q" id="urnas-quase-unanimes">
-        <div class="vf-q-head"><span class="vf-q-n">4</span><h3>E as urnas em que quase todos votaram no mesmo candidato?</h3><span class="vf-chip vf-warn">Chamou atenção</span></div>
-        <p>Uma urna em que quase todo mundo votou, e quase todos no mesmo candidato, é o sinal clássico de urna “engordada”: foi assim que se mediu o enchimento de urnas em eleições da Rússia (<a class="vf-src" href="https://doi.org/10.1073/pnas.1210722109" target="_blank" rel="noopener">Klimek et al., 2012</a>). Por isso foram contadas as urnas do 2º turno com 95% ou mais de comparecimento e 90% ou mais dos votos para um só candidato.</p>
-        <p data-cand="lula"><b>Lula:</b> foram <span data-source="corner_summary" data-where="candidate=lula" data-field="sections" data-fmt="int">—</span> urnas; em 2022 foram <span data-source="scorecard" data-where="id=corner|2|2022" data-field="observed" data-fmt="int">—</span>. <span data-source="corner_summary" data-where="candidate=lula" data-field="strong_r1" data-fmt="int">—</span> delas já davam 90% ou mais a Lula no 1º turno. O que mudou foi o comparecimento: entre as urnas em que Lula teve 90% ou mais, a fatia com 95% ou mais de comparecimento passou de <span data-source="strongholds" data-where="id=2022|2|lula90" data-field="t95_share" data-fmt="pct">—</span> em 2022 para <span data-source="strongholds" data-where="id=2026|2|lula90" data-field="t95_share" data-fmt="pct">—</span> em 2026. Comparando as mesmas urnas uma a uma, o número de eleitores inscritos quase não mudou (<span data-source="strongholds" data-where="id=matched|lula90" data-field="eligible_change" data-fmt="pct">—</span>), mas o de votantes subiu <span data-source="strongholds" data-where="id=matched|lula90" data-field="voters_change" data-fmt="pct">—</span>; nas urnas equilibradas, o de votantes variou <span data-source="strongholds" data-where="id=matched|mid" data-field="voters_change" data-fmt="pct">—</span>.</p>
-        <p data-cand="lula">Nos redutos de Flávio, isso não aconteceu (<span data-source="strongholds" data-where="id=2022|2|right90" data-field="t95_share" data-fmt="pct">—</span> em 2022, <span data-source="strongholds" data-where="id=2026|2|right90" data-field="t95_share" data-fmt="pct">—</span> em 2026), e o padrão já aparecia no 1º turno, que Flávio venceu. Os dados mostram que mais gente votou nesses lugares; não mostram por quê. O tamanho, porém, é pequeno: as <span data-source="corner_summary" data-where="candidate=lula" data-field="sections" data-fmt="int">—</span> urnas têm <span data-source="corner_vs_margin" data-row="0" data-field="eligible" data-fmt="int">—</span> eleitores, <span data-source="corner_vs_margin" data-row="0" data-field="share" data-fmt="pct">—</span> da diferença final. E se o comparecimento em todos os redutos de Lula tivesse ficado no nível de 2022, seriam cerca de <span data-source="stronghold_excess" data-row="0" data-field="excess" data-fmt="int">—</span> votantes a menos, <span data-source="stronghold_excess" data-row="0" data-field="share" data-fmt="pct">—</span> da diferença.</p>
-        <p data-cand="flavio"><b>Flávio:</b> foram <span data-source="corner_summary" data-where="candidate=flavio" data-field="sections" data-fmt="int">—</span> urnas; em 2022, Jair Bolsonaro teve <span data-source="scorecard" data-where="id=corner|2|2022" data-field="stat" data-fmt="int">—</span>. São lugares pequenos do interior, quatro deles no Sul, que já votavam em peso nele no 1º turno. Juntas, têm <span data-source="corner_summary" data-where="candidate=flavio" data-field="eligible" data-fmt="int">—</span> eleitores.</p>
-        <p class="vf-q-sum"><b>Resultado:</b> é o teste em que 2026 mais se afasta de 2022, e estes dados não explicam por quê. Mas o efeito é pequeno demais para mudar o resultado.</p>
-        <button type="button" class="vf-link" data-goto="tecnico" data-target="secoes-quadro-vermelho">Ver a lista completa dessas urnas</button>
+        <div class="vf-q-head"><span class="vf-q-n">4</span><h3>{{urnas-quase-unanimes.h3.1}}</h3><span class="vf-chip vf-warn">{{urnas-quase-unanimes.span.1}}</span></div>
+        <p>{{urnas-quase-unanimes.p.1}}</p>
+        <p data-cand="lula">{{urnas-quase-unanimes.p.2}}</p>
+        <p data-cand="lula">{{urnas-quase-unanimes.p.3}}</p>
+        <p data-cand="flavio">{{urnas-quase-unanimes.p.4}}</p>
+        <p class="vf-q-sum">{{urnas-quase-unanimes.p.5}}</p>
+        <button type="button" class="vf-link" data-goto="tecnico" data-target="secoes-quadro-vermelho">{{urnas-quase-unanimes.button.1}}</button>
       </article>
 
       <article class="vf-card vf-q" id="virada-na-apuracao">
-        <div class="vf-q-head"><span class="vf-q-n">5</span><h3>A virada durante a apuração é suspeita?</h3><span class="vf-chip vf-ok">Normal</span></div>
-        <p>Na noite da eleição, a liderança trocou de mãos duas vezes. Lula abriu a apuração na frente; às 19h45, com 13% das urnas apuradas, Flávio passou a liderar; às 20h25, com 47%, Lula voltou à frente e não perdeu mais a liderança (<a class="vf-src" href="https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html" target="_blank" rel="noopener">Terra</a>). Os boletins não chegam em ordem aleatória: cada lugar termina a votação e a transmissão num horário, e os que chegaram por último votaram mais em Lula. Em 2022 foi parecido: Bolsonaro liderou o começo e Lula passou à frente com cerca de dois terços dos votos apurados (gráfico abaixo).</p>
-        <p>Em 2026 houve um detalhe a mais. Por volta das 17h, o ministro Cristiano Zanin, do STF, prorrogou a votação até as 19h, por causa da falta de ônibus em cidades de vários estados; o horário exato varia entre as fontes (16h32 segundo a Rádio Senado, pouco depois das 17h segundo a <a class="vf-src" href="https://www.gazetadopovo.com.br/eleicoes/2026/tse-responde-flavio-e-diz-que-fiscais-nao-foram-retirados-da-sala-cofre/" target="_blank" rel="noopener">Gazeta do Povo</a>). A imprensa divergiu sobre o alcance: segundo a <a class="vf-src" href="https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026" target="_blank" rel="noopener">Rádio Senado</a>, valeu para o país todo, mas seções que já tinham encerrado não reabriram, e no Distrito Federal não chegou a ser aplicada; segundo a <a class="vf-src" href="https://exame.com/brasil/o-horario-da-votacao-sera-estendido/" target="_blank" rel="noopener">Exame</a>, valeu só para as seções afetadas. O TSE só começou a divulgar a apuração às 19h (<a class="vf-src" href="https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html" target="_blank" rel="noopener">Terra</a>), e <span data-source="late_share" data-row="0" data-field="share" data-fmt="pct">—</span> dos votos chegaram ao TSE depois desse horário. Nos registros de <span data-source="urna_logs" data-where="id=random|2" data-field="machines" data-fmt="int">—</span> urnas sorteadas, metade fechou até as <span data-source="urna_logs" data-where="id=random|2" data-field="close_median" data-fmt="hm">—</span>: o horário de chegada mostra quando o boletim foi recebido pelo TSE, não quando a urna fechou (pergunta 8).</p>
-        <p class="vf-caption">Cada linha mostra o percentual de um candidato entre os dois à medida que os votos eram apurados. O eixo de baixo é quanto da apuração já tinha sido feito.</p>
-        <div class="vf-chart vf-h280 dash-skeleton" id="s-progress" role="img" aria-label="Gráfico de linhas: percentual de cada candidato entre os dois à medida que os votos eram apurados, nos 2º turnos de 2022 e de 2026." data-source="timing"></div>
-        <p class="vf-q-sum"><b>Resultado:</b> as duas eleições têm o mesmo desenho. E, comparando urnas da mesma zona eleitoral, as que chegaram tarde quase não diferem das que chegaram cedo: a virada vem de quais lugares terminam a contagem por último, não da hora em que os votos chegaram.</p>
+        <div class="vf-q-head"><span class="vf-q-n">5</span><h3>{{virada-na-apuracao.h3.1}}</h3><span class="vf-chip vf-ok">{{virada-na-apuracao.span.1}}</span></div>
+        <p>{{virada-na-apuracao.p.1}}</p>
+        <p>{{virada-na-apuracao.p.2}}</p>
+        <p class="vf-caption">{{virada-na-apuracao.p.3}}</p>
+        <div class="vf-chart vf-h280 dash-skeleton" id="s-progress" role="img" aria-label="{{s-progress.arialabel.1}}" data-source="timing"></div>
+        <p class="vf-q-sum">{{virada-na-apuracao.p.4}}</p>
       </article>
 
       <article class="vf-card vf-q" id="de-onde-veio-a-virada">
-        <div class="vf-q-head"><span class="vf-q-n">6</span><h3>De onde veio a virada?</h3><span class="vf-chip vf-ok">As contas fecham</span></div>
-        <p>No 1º turno, Flávio teve <span data-source="summary" data-where="year=2026&amp;round=1" data-field="margin" data-fmt="absCompact">—</span> de votos a mais que Lula. No 2º, Lula terminou com <span data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="absCompact">—</span> a mais. Como? Os <span data-source="between_rounds" data-where="id=others" data-field="r1" data-fmt="compact">—</span> de votos dos candidatos que saíram da disputa ficaram livres, o comparecimento subiu <span data-source="between_rounds" data-where="id=turnout" data-field="change" data-fmt="absCompact">—</span> e os brancos e nulos caíram <span data-source="between_rounds" data-where="id=blank_null" data-field="change" data-fmt="absCompact">—</span>. Esses votos foram divididos: Lula ganhou <span data-source="between_rounds" data-where="id=lula" data-field="change" data-fmt="absCompact">—</span> e Flávio <span data-source="between_rounds" data-where="id=flavio" data-field="change" data-fmt="absCompact">—</span>.</p>
-        <p class="vf-caption">Quanto cada grupo ganhou (à direita) ou perdeu (à esquerda) do 1º para o 2º turno.</p>
-        <div class="vf-chart vf-h180 dash-skeleton" id="s-balance" role="img" aria-label="Gráfico de barras: quanto cada grupo ganhou ou perdeu do 1º para o 2º turno de 2026: Lula, Flávio, candidatos que saíram, abstenções, brancos e nulos." data-source="between_rounds"></div>
-        <p class="vf-q-sum"><b>Resultado:</b> o voto é secreto, então ninguém sabe em quem cada eleitor votou. Mas as contas fecham: tudo o que saiu de um lado entrou do outro.</p>
+        <div class="vf-q-head"><span class="vf-q-n">6</span><h3>{{de-onde-veio-a-virada.h3.1}}</h3><span class="vf-chip vf-ok">{{de-onde-veio-a-virada.span.1}}</span></div>
+        <p>{{de-onde-veio-a-virada.p.1}}</p>
+        <p class="vf-caption">{{de-onde-veio-a-virada.p.2}}</p>
+        <div class="vf-chart vf-h180 dash-skeleton" id="s-balance" role="img" aria-label="{{s-balance.arialabel.1}}" data-source="between_rounds"></div>
+        <p class="vf-q-sum">{{de-onde-veio-a-virada.p.3}}</p>
       </article>
 
       <article class="vf-card vf-q" id="soma-oficial">
-        <div class="vf-q-head"><span class="vf-q-n">7</span><h3>A soma das urnas bate com o resultado oficial?</h3><span class="vf-chip vf-ok">Normal</span></div>
-        <p>Os boletins foram somados urna por urna e comparados com os totais que o TSE divulga por município e zona eleitoral, nos <span data-source="consistency" data-where="id=2026|1|QT_APTOS" data-field="units" data-fmt="int">—</span> recortes do 1º turno. Eleitores aptos, comparecimento, abstenções, brancos e nulos bateram exatamente em todos.</p>
-        <p>Os votos válidos diferem em <span data-source="consistency" data-where="id=2026|1|QT_VOTOS_NOMINAIS" data-field="units_with_difference" data-fmt="int">—</span> recortes, e em cada um deles a diferença é exatamente o número de votos dados a Leonardo Alves de Araújo (Leonardo Avalanche, do PRTB, número 28), <span data-source="consistency" data-where="id=2026|1|QT_VOTOS_NOMINAIS" data-field="abs_difference" data-fmt="int">—</span> no total. Ele desistiu da candidatura a presidente em 30 de setembro, quatro dias antes do 1º turno (<a class="vf-src" href="https://www.cnnbrasil.com.br/eleicoes/leonardo-avalanche-do-prtb-desiste-de-candidatura-a-presidencia/" target="_blank" rel="noopener">CNN Brasil</a>), quando seu número já estava na urna. Nos arquivos por urna, esses votos aparecem como votos nele; no total oficial, o TSE os conta como “votos nulos técnicos”, e o relatório oficial do 1º turno mostra exatamente esse número (<a class="vf-src" href="https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip" target="_blank" rel="noopener">TSE</a>). Nada disso tem relação com a disputa entre Lula e Flávio.</p>
-        <p>Os totais do 2º turno por município e zona foram publicados pelo TSE em 27 de outubro. Nos <span data-source="consistency" data-where="id=2026|2|QT_APTOS" data-field="units" data-fmt="int">—</span> recortes, a soma das urnas bateu exatamente em todos os campos: eleitores aptos, comparecimento, abstenções, brancos, nulos e os votos de cada candidato, <span data-source="consistency" data-where="id=2026|2|13" data-field="official" data-fmt="int">—</span> para Lula e <span data-source="consistency" data-where="id=2026|2|22" data-field="official" data-fmt="int">—</span> para Flávio. Os mesmos números foram conferidos também com o relatório oficial de totalização do 2º turno (<a class="vf-src" href="https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip" target="_blank" rel="noopener">TSE</a>), no total do país e em cada uma das 27 UFs e no exterior, sem nenhuma diferença.</p>
-        <p>O que esta conferência mostra, e o que não mostra: os totais por município saem da mesma apuração dos boletins, então ela confirma que os arquivos do TSE batem entre si, não que cada boletim registrou corretamente os votos da sua urna. Isso se confere com o boletim impresso de cada urna, que é público, e com as auditorias do TSE. Em 2022, a fiscalização das Forças Armadas, enviada ao TSE pelo Ministério da Defesa, comparou boletins de urna com os números do TSE e não encontrou divergência (<a class="vf-src" href="https://jovempan.com.br/noticias/politica/relatorio-da-defesa-sobre-urnas-nao-aponta-fraude-nas-eleicoes.html" target="_blank" rel="noopener">Jovem Pan</a>); o ministério ressalvou que o trabalho também não excluía a possibilidade de fraude, citando, entre outros pontos, restrições ao acesso dos técnicos ao código-fonte das urnas (<a class="vf-src" href="https://www.gov.br/defesa/pt-br/centrais-de-conteudo/relatorio-das-forcas-armadas-nao-excluiu-a-possibilidade-de-fraude-ou-inconsistencia-nas-urnas-eletronicas" target="_blank" rel="noopener">Ministério da Defesa</a>).</p>
-        <p class="vf-q-sum"><b>Resultado:</b> nos dois turnos, a soma das urnas reproduz os totais oficiais. A única diferença, no 1º turno, são os votos de um candidato que desistiu, contados como nulos.</p>
+        <div class="vf-q-head"><span class="vf-q-n">7</span><h3>{{soma-oficial.h3.1}}</h3><span class="vf-chip vf-ok">{{soma-oficial.span.1}}</span></div>
+        <p>{{soma-oficial.p.1}}</p>
+        <p>{{soma-oficial.p.2}}</p>
+        <p>{{soma-oficial.p.3}}</p>
+        <p>{{soma-oficial.p.4}}</p>
+        <p class="vf-q-sum">{{soma-oficial.p.5}}</p>
       </article>
       <article class="vf-card vf-q" id="alegacoes">
-        <div class="vf-q-head"><span class="vf-q-n">8</span><h3>E as alegações de fraude feitas depois do 2º turno?</h3></div>
-        <p>Na noite do 2º turno, Flávio Bolsonaro disse que não reconhecia a eleição e que pediria ao TSE a anulação, citando a prorrogação da votação e o que disse ter sido a retirada de fiscais do PL da sala-cofre (<a class="vf-src" href="https://www.infomoney.com.br/politica/flavio-nao-reconhece-resultado-da-eleicao-e-diz-que-pedira-anulacao-ao-tse/" target="_blank" rel="noopener">InfoMoney</a>, <a class="vf-src" href="https://www.gazetadopovo.com.br/eleicoes/2026/flavio-bolsonaro-pronunciamento-anulacao-eleicao/" target="_blank" rel="noopener">Gazeta do Povo</a>). No dia seguinte, o PL, partido de Flávio, divulgou nota em que diz reconhecer “o resultado presidencial, proclamado pelo Tribunal Superior Eleitoral”, mas que os questionamentos levantados precisam ser esclarecidos; Flávio disse então que não pediria mais a anulação, e sinalizou apoio a um pedido de cassação da chapa de Lula (<a class="vf-src" href="https://diariodonordeste.verdesmares.com.br/pontopoder/pl-reconhece-resultado-das-eleicoes-2026-mas-cobras-esclarecimentos-apos-derrota-de-flavio-1.3801638" target="_blank" rel="noopener">Diário do Nordeste</a>). Eduardo Bolsonaro e Nikolas Ferreira também falaram em fraude, sem apresentar provas (<a class="vf-src" href="https://www.diariodepernambuco.com.br/politica/2026/10/11727686-sem-provas-eduardo-bolsonaro-acusa-fraude-e-pede-que-comunidade-internacional-nao-reconheca-vitoria-de-lula.html" target="_blank" rel="noopener">Diario de Pernambuco</a>, <a class="vf-src" href="https://www.em.com.br/politica/2026/10/7527778-nikolas-sugere-que-houve-fraude-na-eleicao.html" target="_blank" rel="noopener">Estado de Minas</a>). Cada argumento está abaixo, com o que os dados mostram.</p>
+        <div class="vf-q-head"><span class="vf-q-n">8</span><h3>{{alegacoes.h3.1}}</h3></div>
+        <p>{{alegacoes.p.1}}</p>
         <dl class="vf-claims">
           <div>
-            <dt>“A virada de Lula é estatisticamente impossível”</dt>
-            <dd><p><b>O argumento:</b> os candidatos eliminados tinham cerca de 9 milhões de votos e Lula ganhou mais de 10 milhões, então todos eles teriam de ter ido para Lula.</p>
-              <p><b>Os dados:</b> a conta deixa de fora duas fontes de votos. Do 1º para o 2º turno, o comparecimento subiu <span data-source="net_available" data-row="0" data-field="turnout_up" data-fmt="absCompact">—</span> e os brancos e nulos caíram <span data-source="net_available" data-row="0" data-field="blank_null_down" data-fmt="absCompact">—</span>. Somados aos <span data-source="net_available" data-row="0" data-field="eliminated" data-fmt="absCompact">—</span> de todos os candidatos eliminados, ficaram <span data-source="net_available" data-row="0" data-field="available" data-fmt="absCompact">—</span> de votos para os dois finalistas. Lula ganhou <span data-source="net_available" data-row="0" data-field="lula_gain" data-fmt="absCompact">—</span> deles (<span data-source="net_available" data-row="0" data-field="lula_share" data-fmt="pct">—</span>) e Flávio, <span data-source="net_available" data-row="0" data-field="flavio_gain" data-fmt="absCompact">—</span>: não era preciso que todos fossem para Lula. Como o voto é secreto, esses números são saldos, não a escolha de cada eleitor (pergunta 6).</p></dd>
+            <dt>{{alegacoes.dt.1}}</dt>
+            <dd><p>{{alegacoes.p.2}}</p>
+              <p>{{alegacoes.p.3}}</p></dd>
           </div>
           <div>
-            <dt>“Lula cresceu em todos os estados”</dt>
-            <dd><p><b>Os dados:</b> em 2022 aconteceu o mesmo, na direção contrária. Do 1º para o 2º turno de 2022, a fatia de Bolsonaro entre os dois candidatos subiu em <span data-source="swing_years" data-where="year=2022" data-field="right_up" data-fmt="int">—</span> das <span data-source="swing_years" data-where="year=2022" data-field="units" data-fmt="int">—</span> unidades (os 27 estados e o exterior), entre <span data-source="swing_years" data-where="year=2022" data-field="min" data-fmt="pp">—</span> e <span data-source="swing_years" data-where="year=2022" data-field="max" data-fmt="pp">—</span>; em 2026, a de Lula subiu em <span data-source="swing_years" data-where="year=2026" data-field="lula_up" data-fmt="int">—</span> das <span data-source="swing_years" data-where="year=2026" data-field="units" data-fmt="int">—</span>, entre <span data-source="swing_years" data-where="year=2026" data-field="min" data-fmt="pp">—</span> e <span data-source="swing_years" data-where="year=2026" data-field="max" data-fmt="pp">—</span> Nas duas eleições, quem cresceu entre os turnos cresceu em todo o país.</p></dd>
+            <dt>{{alegacoes.dt.2}}</dt>
+            <dd><p>{{alegacoes.p.4}}</p></dd>
           </div>
           <div>
-            <dt>“A prorrogação até as 19h mudou a regra no meio do jogo”</dt>
-            <dd><p><b>Os fatos:</b> o ministro Cristiano Zanin, do STF, prorrogou a votação a pedido da campanha de Lula, por causa da falta de ônibus; a campanha de Flávio também tinha pedido prorrogação em municípios de São Paulo, do Paraná e de Santa Catarina, por causa da chuva (<a class="vf-src" href="https://www.infomoney.com.br/politica/flavio-nao-reconhece-resultado-da-eleicao-e-diz-que-pedira-anulacao-ao-tse/" target="_blank" rel="noopener">InfoMoney</a>). O horário da decisão varia entre as fontes: 16h32 segundo a <a class="vf-src" href="https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026" target="_blank" rel="noopener">Rádio Senado</a>, pouco depois das 17h segundo a <a class="vf-src" href="https://www.gazetadopovo.com.br/eleicoes/2026/tse-responde-flavio-e-diz-que-fiscais-nao-foram-retirados-da-sala-cofre/" target="_blank" rel="noopener">Gazeta do Povo</a>. Seções que já tinham encerrado não reabriram. A alegação de que fiscais do PL foram retirados da sala de totalização foi classificada como falsa pelo TSE, que diz ter vídeos mostrando o acesso dos fiscais até o fim da apuração (<a class="vf-src" href="https://www.gazetadopovo.com.br/eleicoes/2026/tse-responde-flavio-e-diz-que-fiscais-nao-foram-retirados-da-sala-cofre/" target="_blank" rel="noopener">Gazeta do Povo</a>).</p>
-              <p><b>Os dados:</b> os registros (logs) das urnas, publicados pelo TSE no <a class="vf-src" href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener">site de resultados</a>, mostram a que horas cada urna fechou e quando cada voto foi computado. Foram lidos os registros de <span data-source="urna_logs" data-where="id=random|2" data-field="machines" data-fmt="int">—</span> urnas sorteadas no país. No 2º turno, metade delas fechou até as <span data-source="urna_logs" data-where="id=random|2" data-field="close_median" data-fmt="hm">—</span>, e só <span data-source="urna_logs" data-where="id=random|2" data-field="late_pct" data-fmt="pctv">—</span> dos votos foram computados depois das 17h, no horário de Brasília; no 1º turno, sem prorrogação, foram <span data-source="urna_logs" data-where="id=random|1" data-field="late_pct" data-fmt="pctv">—</span>, de eleitores que já estavam na fila às 17h. Só <span data-source="urna_logs" data-where="id=random|2" data-field="open_after_18" data-fmt="pct">—</span> das urnas ficaram abertas depois das 18h, mas as <span data-source="urna_logs" data-where="id=open_late" data-field="machines" data-fmt="int">—</span> que ficaram até perto das 19h receberam, juntas, <span data-source="urna_logs" data-where="id=open_late" data-field="late" data-fmt="int">—</span> eleitores depois das 17h. Projetado para o país, seriam cerca de <span data-source="urna_logs" data-where="id=national" data-field="votes_est" data-fmt="compact0">—</span> votos depois das 17h (entre <span data-source="urna_logs" data-where="id=national" data-field="est_low" data-fmt="compact0">—</span> e <span data-source="urna_logs" data-where="id=national" data-field="est_high" data-fmt="compact0">—</span>), <span data-source="urna_logs" data-where="id=national" data-field="margin_share" data-fmt="pct">—</span> da diferença final: mesmo que todos fossem para Lula, o resultado seria o mesmo.</p></dd>
+            <dt>{{alegacoes.dt.3}}</dt>
+            <dd><p>{{alegacoes.p.5}}</p>
+              <p>{{alegacoes.p.6}}</p></dd>
           </div>
           <div>
-            <dt>“Mesários votaram no lugar de eleitores ausentes” (o chamado “voto espírita”)</dt>
-            <dd><p><b>Os fatos:</b> o TSE classificou a alegação como falsa: o eleitor precisa mostrar documento com foto, e a identificação fica registrada (<a class="vf-src" href="https://fastcompanybrasil.com/news/eleicoes-2026-verdade-mentira-sobre-2-turno/" target="_blank" rel="noopener">Fast Company Brasil</a>).</p>
-              <p><b>Os dados:</b> há um ponto relacionado, mostrado na pergunta 4: nas urnas em que Lula teve 90% ou mais, mais gente votou do que em 2022, com o mesmo número de eleitores inscritos. Se mesários votassem no lugar de ausentes, essas urnas teriam mais eleitores identificados sem a digital, e votos depois das 17h. Os registros das urnas mostram o contrário. Nas <span data-source="urna_logs" data-where="id=corner_lula|2" data-field="machines" data-fmt="int">—</span> urnas quase unânimes de Lula, <span data-source="urna_logs" data-where="id=corner_lula|2" data-field="nofp_share" data-fmt="pct">—</span> dos votos do 2º turno vieram de eleitores identificados sem a digital, menos que nas urnas sorteadas do país (<span data-source="urna_logs" data-where="id=random|2" data-field="nofp_share" data-fmt="pct">—</span>) e nos redutos de Flávio (<span data-source="urna_logs" data-where="id=right90|2" data-field="nofp_share" data-fmt="pct">—</span>); a liberação manual pelo mesário, usada quando a digital não é reconhecida, foi de <span data-source="urna_logs" data-where="id=corner_lula|2" data-field="manual_share" data-fmt="pct">—</span>, contra <span data-source="urna_logs" data-where="id=random|2" data-field="manual_share" data-fmt="pct">—</span> no país e <span data-source="urna_logs" data-where="id=right90|2" data-field="manual_share" data-fmt="pct">—</span> nos redutos de Flávio. Dos <span data-source="urna_logs" data-where="id=corner_change" data-field="added" data-fmt="int">—</span> eleitores a mais do 1º para o 2º turno nessas urnas, <span data-source="urna_logs" data-where="id=corner_change" data-field="added_fp" data-fmt="int">—</span> foram identificados pela digital, e só <span data-source="urna_logs" data-where="id=corner_lula|2" data-field="late_pct" data-fmt="pctv">—</span> dos votos delas vieram depois das 17h. O aumento de comparecimento em relação a 2022 continua sem explicação nestes dados, mas, mesmo que todo ele fosse falso, seriam cerca de <span data-source="stronghold_excess" data-row="0" data-field="excess" data-fmt="int">—</span> votantes, <span data-source="stronghold_excess" data-row="0" data-field="share" data-fmt="pct">—</span> da diferença final.</p></dd>
+            <dt>{{alegacoes.dt.4}}</dt>
+            <dd><p>{{alegacoes.p.7}}</p>
+              <p>{{alegacoes.p.8}}</p></dd>
           </div>
           <div>
-            <dt>“As pesquisas davam Flávio na frente”</dt>
-            <dd><p><b>Os fatos:</b> a última pesquisa Quaest, na véspera, tinha Flávio com 51% e Lula com 49% dos votos válidos, empate técnico na margem de erro de 2 pontos (<a class="vf-src" href="https://exame.com/brasil/pesquisa-quaest-na-vespera-do-2o-turno-flavio-bolsonaro-tem-51-e-lula-49/" target="_blank" rel="noopener">Exame</a>). Pesquisas erram para os dois lados: em 2022, o Datafolha da véspera dava 52% dos votos válidos a Lula (<a class="vf-src" href="https://www.opovo.com.br/eleicoes-2022/2022/10/29/pesquisa-datafolha-lula-52-bolsonaro-48-no-2-turno.html" target="_blank" rel="noopener">O Povo</a>), que terminou com <span data-source="summary" data-where="year=2022&amp;round=2" data-field="lula_share" data-fmt="pct">—</span>. Pesquisas não fazem parte destes dados, e uma diferença entre pesquisa e urna não é, sozinha, sinal de fraude.</p></dd>
+            <dt>{{alegacoes.dt.5}}</dt>
+            <dd><p>{{alegacoes.p.9}}</p></dd>
           </div>
         </dl>
-        <p class="vf-q-sum"><b>Resultado:</b> as duas contas mais repetidas, a da virada e a dos estados, não se sustentam nos números oficiais. E os registros de uma amostra de urnas mostram que a prorrogação trouxe poucos votos e que as urnas quase unânimes de Lula não tiveram mais eleitores identificados sem a digital do que o resto do país.</p>
+        <p class="vf-q-sum">{{alegacoes.p.10}}</p>
       </article>
       <article class="vf-card vf-q" id="outros-metodos">
-        <div class="vf-q-head"><span class="vf-q-n">9</span><h3>E outros métodos, e as assinaturas das urnas?</h3><span class="vf-chip vf-ok">Normal</span></div>
-        <p>Foram aplicados mais testes, de outros métodos, cada um feito para um tipo de fraude: um programa que só agisse nas urnas grandes, um que trocasse uma porcentagem fixa dos votos no 2º turno, urnas destoando do resto do local, votos acrescentados em seções de comparecimento alto, um modelo que estima quantas seções teriam sido fraudadas e votos em rajada nos registros das urnas. No teste do tamanho da seção e no modelo de mistura, a fraude que cada um procura foi plantada nos dados reais, e o teste a encontrou. Nos dados reais, nenhum mostrou fraude capaz de mudar o resultado. O da troca proporcional não consegue decidir, mas mesmo no pior caso Lula continuaria vencendo, por cerca de <span data-source="more_tests" data-where="id=prop|planted" data-field="margin_without" data-fmt="compact">—</span> de votos. O de votos acrescentados em comparecimento alto, aplicado ao país inteiro, dá um “excesso” para Lula porque o comparecimento subiu mais nos estados em que ele é mais forte; estado por estado, o excesso é maior para Flávio, como foi para Bolsonaro em 2022. Mesmo contado todo como falso, Lula venceria por <span data-source="more_tests" data-where="id=shpilkin|bound" data-field="margin_after" data-fmt="compact">—</span>. E o teste do segundo algarismo “reprova” 2022 e 2026 igualmente: ele não serve para contagens de seções.</p>
-        <p>Além disso, em <span data-source="urna_assinaturas" data-where="id=summary" data-field="checked" data-fmt="int">—</span> urnas da amostra, as assinaturas digitais dos arquivos foram verificadas: nada foi alterado depois de sair da urna, o boletim tem os números publicados e os votos do registro digital do voto, recontados, batem com o boletim.</p>
-        <p class="vf-q-sum"><b>Resultado:</b> os outros métodos chegam à mesma conclusão que os anteriores, e os arquivos conferidos são os que as urnas assinaram. Os detalhes estão na Versão técnica, em “Mais testes”.</p>
+        <div class="vf-q-head"><span class="vf-q-n">9</span><h3>{{outros-metodos.h3.1}}</h3><span class="vf-chip vf-ok">{{outros-metodos.span.1}}</span></div>
+        <p>{{outros-metodos.p.1}}</p>
+        <p>{{outros-metodos.p.2}}</p>
+        <p class="vf-q-sum">{{outros-metodos.p.3}}</p>
       </article>
       <article class="vf-card vf-q" id="com-2018">
-        <div class="vf-q-head"><span class="vf-q-n">10</span><h3>E comparando com 2018?</h3><span class="vf-chip vf-ok">Normal</span></div>
-        <p>A eleição de 2018 (Haddad × Jair Bolsonaro) entrou como segunda referência, para ver quanto os números variam de uma eleição para outra sem fraude. Um número que circulou depois do 2º turno: em <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="lula_up_right_down" data-fmt="int">—</span> seções Lula ganhou votos e Flávio perdeu, contra <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="right_up_lula_down" data-fmt="int">—</span> ao contrário, <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="ratio" data-fmt="ratio">—</span>. A mesma conta dá <span data-source="tres_eleicoes" data-where="id=quad|2022" data-field="ratio" data-fmt="ratio">—</span> a favor de Jair Bolsonaro em 2022 e <span data-source="tres_eleicoes" data-where="id=quad|2018" data-field="ratio" data-fmt="ratio">—</span> a favor de Haddad em 2018, e os dois perderam. Um modelo em que nada de anormal aconteceu, só com o ganho de cada candidato em cada município, já dá <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="null_ratio" data-fmt="ratio">—</span> em 2026: a razão cresce muito depressa com o tamanho da virada.</p>
-        <p>Também foram feitos um modelo que prevê o 2º turno de cada seção sem ver o seu município e um detector automático de seções estranhas. No modelo, 2026 fica entre 2022 e 2018 ou abaixo dos dois; no detector, 2026 fica perto de 2022 (2018 tem mais seções apontadas por ter outros níveis de brancos, nulos e tamanho de seção). Os dois só pegam fraudes grandes ou concentradas. As seções mais estranhas para o detector são, nos três anos, as do exterior, as pequenas, as de presídios e as de aldeias.</p>
-        <p class="vf-q-sum"><b>Resultado:</b> com duas eleições de referência, 2026 não destoa. A exceção é a da pergunta 4: as seções quase unânimes para Lula (<span data-source="tres_eleicoes" data-where="id=ref|2026" data-field="corner_lula" data-fmt="int">—</span>) são mais que as de 2022 e as de 2018 (<span data-source="tres_eleicoes" data-where="id=ref|2022" data-field="corner_lula" data-fmt="int">—</span> e <span data-source="tres_eleicoes" data-where="id=ref|2018" data-field="corner_lula" data-fmt="int">—</span>). Os detalhes estão na Versão técnica, em “Com 2018 também”.</p>
+        <div class="vf-q-head"><span class="vf-q-n">10</span><h3>{{com-2018.h3.1}}</h3><span class="vf-chip vf-ok">{{com-2018.span.1}}</span></div>
+        <p>{{com-2018.p.1}}</p>
+        <p>{{com-2018.p.2}}</p>
+        <p class="vf-q-sum">{{com-2018.p.3}}</p>
       </article>
     </div>
 
     <div class="vf-card vf-explain" id="limites">
-      <h2>O que estes testes não conseguem mostrar</h2>
-      <p>Eles encontram números inventados à mão e urnas “engordadas”. Não encontram uma mudança que alterasse todas as urnas na mesma proporção: todos esses testes comparam cada urna com as vizinhas, com o acaso ou com 2022, e uma mudança igual em todas as urnas deixaria os algarismos aleatórios e cada urna parecida com as vizinhas. Para isso existem outros controles, que estão fora destes dados: o boletim impresso de cada urna, que fica público, e as auditorias e testes de urna do TSE.</p>
+      <h2>{{limites.h2.1}}</h2>
+      <p>{{limites.p.1}}</p>
     </div>
 
     <div class="vf-card vf-explain" id="glossario">
-      <h2>Palavras usadas nesta página</h2>
+      <h2>{{glossario.h2.1}}</h2>
       <dl class="vf-gloss">
-        <div><dt>Urna ou seção</dt><dd>Cada seção eleitoral tem uma urna. Aqui, as duas palavras são usadas como sinônimos.</dd></div>
-        <div><dt>Boletim de urna</dt><dd>O resultado que cada urna imprime ao fim da votação, com os votos de cada candidato. O TSE publica todos.</dd></div>
-        <div><dt>Comparecimento</dt><dd>A parte dos eleitores aptos que foi votar.</dd></div>
-        <div><dt>Votos válidos</dt><dd>Os votos dados a candidatos, sem contar brancos e nulos.</dd></div>
-        <div><dt>Régua (2022)</dt><dd>A eleição anterior, que mostra como uma eleição normal se sai nos mesmos testes.</dd></div>
+        <div><dt>{{glossario.dt.1}}</dt><dd>{{glossario.dd.1}}</dd></div>
+        <div><dt>{{glossario.dt.2}}</dt><dd>{{glossario.dd.2}}</dd></div>
+        <div><dt>{{glossario.dt.3}}</dt><dd>{{glossario.dd.3}}</dd></div>
+        <div><dt>{{glossario.dt.4}}</dt><dd>{{glossario.dd.4}}</dd></div>
+        <div><dt>{{glossario.dt.5}}</dt><dd>{{glossario.dd.5}}</dd></div>
       </dl>
-      <button type="button" class="vf-link" data-goto="tecnico">Ver todos os testes na versão técnica</button>
+      <button type="button" class="vf-link" data-goto="tecnico">{{glossario.button.1}}</button>
     </div>
   </div>
 
   <div class="vf-page" id="tecnico" data-page role="tabpanel" aria-labelledby="tab-tecnico" hidden>
-    <p class="vf-take">Em <b data-source="summary" data-where="year=2026&amp;round=2" data-field="sections" data-fmt="int">—</b> boletins de urna, nem os testes de números redondos nem os de curva normal mostram votos inventados ou adicionados em quantidade capaz de mudar a vitória de Lula no 2º turno, por uma margem de <b data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="signedCompact">—</b> votos. O padrão que mais se afasta de 2022, usada aqui como referência, são seções com comparecimento quase total e quase todos os votos em Lula: ficaram mais comuns, estes dados não explicam por quê, e mesmo um limite folgado para o seu efeito fica em <b data-source="stronghold_excess" data-row="0" data-field="share" data-fmt="pct">—</b> da margem.</p>
+    <p class="vf-take">{{tecnico.p.1}}</p>
 
     <div class="vf-card vf-explain" id="como-ler">
-      <h2>Como ler esta versão</h2>
-      <p>Aqui estão todos os testes, com os valores e as estatísticas de cada um. Para uma explicação sem jargão, veja o <button type="button" class="vf-inline" data-goto="simples">Resumo para todos</button>.</p>
+      <h2>{{como-ler.h2.1}}</h2>
+      <p>{{como-ler.p.1}}</p>
       <dl class="vf-gloss">
-        <div><dt>p-valor (p)</dt><dd>A chance de um resultado tão fora do esperado aparecer só por acaso. Abaixo de 0,05 (5%) costuma valer um olhar de perto; mas, com muitos testes, alguns ficam abaixo disso por puro acaso. <a href="https://filipezabala.com/fs/th-class#p-value" target="_blank" rel="noopener">Saiba mais</a></dd></div>
-        <div><dt>z</dt><dd>Quantos desvios-padrão um valor está longe do esperado. Numa curva normal, 95% dos valores ficam entre −2 e +2, e só 6 em cada 100 mil passam de ±4.</dd></div>
-        <div><dt>Curva normal</dt><dd>A curva em forma de sino que descreve como os valores se espalham em torno da média quando muitas pequenas variações independentes se somam. <a href="https://filipezabala.com/fs/scd#normal" target="_blank" rel="noopener">Saiba mais</a></dd></div>
-        <div><dt>Desvio-padrão (dp)</dt><dd>A distância típica entre os valores e a média. Numa curva normal, 95% dos casos ficam a menos de 2 desvios-padrão da média. <a href="https://filipezabala.com/fs/measures-of-dispersion#standard-deviation" target="_blank" rel="noopener">Saiba mais</a></dd></div>
-        <div><dt>Escala logarítmica</dt><dd>Cada linha do eixo vale 10 vezes a anterior. Serve para mostrar no mesmo gráfico números muito grandes e muito pequenos.</dd></div>
-        <div><dt>p.p. (pontos percentuais)</dt><dd>A diferença entre dois percentuais: de 50% para 52% são 2 p.p.</dd></div>
-        <div><dt>Correlação (r)</dt><dd>Mede se duas coisas sobem juntas: 0 é nenhuma relação, 1 é relação perfeita. <a href="https://filipezabala.com/fs/correlation#pearson" target="_blank" rel="noopener">Saiba mais</a></dd></div>
-        <div><dt>Espelho (Flávio)</dt><dd>No 2º turno só há dois candidatos, então o percentual de Flávio é exatamente 100% menos o de Lula. Os gráficos de percentual de Flávio são o espelho dos de Lula, calculados a partir dos mesmos dados. Já as contagens de votos (último dígito, números redondos) são independentes para cada um.</dd></div>
+        <div><dt>{{como-ler.dt.1}}</dt><dd>{{como-ler.dd.1}}</dd></div>
+        <div><dt>{{como-ler.dt.2}}</dt><dd>{{como-ler.dd.2}}</dd></div>
+        <div><dt>{{como-ler.dt.3}}</dt><dd>{{como-ler.dd.3}}</dd></div>
+        <div><dt>{{como-ler.dt.4}}</dt><dd>{{como-ler.dd.4}}</dd></div>
+        <div><dt>{{como-ler.dt.5}}</dt><dd>{{como-ler.dd.5}}</dd></div>
+        <div><dt>{{como-ler.dt.6}}</dt><dd>{{como-ler.dd.6}}</dd></div>
+        <div><dt>{{como-ler.dt.7}}</dt><dd>{{como-ler.dd.7}}</dd></div>
+        <div><dt>{{como-ler.dt.8}}</dt><dd>{{como-ler.dd.8}}</dd></div>
       </dl>
-      <p class="vf-caption">Os links “Saiba mais” levam ao livro <i>Fundamentals of Statistics</i>, de Filipe J. Zabala (em inglês).</p>
+      <p class="vf-caption">{{como-ler.p.2}}</p>
     </div>
 
 
     <div class="vf-kpis" id="destaques">
       <div class="vf-kpi" data-cand="lula">
-        <div class="vf-lbl">Lula, 2º turno</div>
+        <div class="vf-lbl">{{destaques.div.1}}</div>
         <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="lula_share" data-fmt="pct">—</span>
-        <div class="vf-sub">dos votos válidos · 1º turno <span data-source="summary" data-where="year=2026&amp;round=1" data-field="lula_share" data-fmt="pct">—</span></div>
+        <div class="vf-sub">{{destaques.div.2}}</div>
       </div>
       <div class="vf-kpi" data-cand="flavio">
-        <div class="vf-lbl">Flávio, 2º turno</div>
+        <div class="vf-lbl">{{destaques.div.3}}</div>
         <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="right_share" data-fmt="pct">—</span>
-        <div class="vf-sub">dos votos válidos · 1º turno <span data-source="summary" data-where="year=2026&amp;round=1" data-field="right_share" data-fmt="pct">—</span></div>
+        <div class="vf-sub">{{destaques.div.4}}</div>
       </div>
       <div class="vf-kpi">
-        <div class="vf-lbl">Margem de Lula, 2º turno</div>
+        <div class="vf-lbl">{{destaques.div.5}}</div>
         <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="margin" data-fmt="signedCompact">—</span>
-        <div class="vf-sub">1º turno <span data-source="summary" data-where="year=2026&amp;round=1" data-field="margin" data-fmt="signedCompact">—</span>, Flávio à frente</div>
+        <div class="vf-sub">{{destaques.div.6}}</div>
       </div>
       <div class="vf-kpi">
-        <div class="vf-lbl">Comparecimento, 2º turno</div>
+        <div class="vf-lbl">{{destaques.div.7}}</div>
         <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="turnout" data-fmt="pct">—</span>
-        <div class="vf-sub">1º turno <span data-source="summary" data-where="year=2026&amp;round=1" data-field="turnout" data-fmt="pct">—</span></div>
+        <div class="vf-sub">{{destaques.div.8}}</div>
       </div>
       <div class="vf-kpi">
-        <div class="vf-lbl">Seções analisadas, 2º turno</div>
+        <div class="vf-lbl">{{destaques.div.9}}</div>
         <span class="vf-num" data-source="summary" data-where="year=2026&amp;round=2" data-field="sections" data-fmt="int">—</span>
-        <div class="vf-sub">cada uma com uma urna e um boletim impresso</div>
+        <div class="vf-sub">{{destaques.div.10}}</div>
       </div>
     </div>
 
     <section id="numeros-redondos">
-      <h2>Números redondos</h2>
-      <p class="vf-intro">Quando alguém inventa ou altera resultados à mão, os algarismos deixam de ser aleatórios, porque as pessoas usam alguns mais que outros (<a class="vf-src" href="https://doi.org/10.1093/pan/mps003" target="_blank" rel="noopener">Beber e Scacco, 2012</a>), e seções demais caem em percentuais redondos, pela atração por números redondos (<a class="vf-src" href="https://doi.org/10.1214/16-AOAS904" target="_blank" rel="noopener">Kobak, Shpilkin e Pshenichnikov, 2016</a>). Foram testadas as contagens de cada seção e também as somas por zona e por município.</p>
+      <h2>{{numeros-redondos.h2.1}}</h2>
+      <p class="vf-intro">{{numeros-redondos.p.1}}</p>
       <div class="vf-grid">
         <div class="vf-card" id="ultimo-digito">
-          <h3>Último dígito de cada contagem, 2º turno</h3>
-          <p class="vf-note">Cada dígito deveria encerrar cerca de 10% das contagens. A faixa sombreada é a variação que o acaso produz em 95% das vezes.</p>
-          <div class="vf-chart dash-skeleton" id="ld-chart" role="img" aria-label="Gráfico de pontos: fração das contagens terminadas em cada algarismo no 2º turno, em 2026 e em 2022, com a faixa de variação que o acaso produz." data-source="last_digit"></div>
+          <h3>{{ultimo-digito.h3.1}}</h3>
+          <p class="vf-note">{{ultimo-digito.p.1}}</p>
+          <div class="vf-chart dash-skeleton" id="ld-chart" role="img" aria-label="{{ld-chart.arialabel.1}}" data-source="last_digit"></div>
         </div>
         <div class="vf-card" id="percentuais-inteiros">
-          <h3>Seções por percentual, em passos de 0,1 ponto (2º turno de 2026)</h3>
-          <p class="vf-note">Resultados inventados se acumulam em percentuais inteiros, o que apareceria como um pico a cada ponto (<a class="vf-src" href="https://doi.org/10.1214/16-AOAS904" target="_blank" rel="noopener">Kobak, Shpilkin e Pshenichnikov, 2016</a>). Os únicos picos estão em frações simples, como 50% e 66,7%: muitas combinações de votos dão exatamente o mesmo valor (100 de 200, 101 de 202, 150 de 300…), enquanto um valor como 50,37% quase não tem combinações. A linha esperada, calculada a partir das próprias contagens, tem os mesmos picos.</p>
-          <div class="vf-seg" id="pct-pick" role="group" aria-label="Medida"><button type="button" data-v="share" aria-pressed="true">% do candidato</button><button type="button" data-v="Turnout" aria-pressed="false">Comparecimento</button></div>
-          <div class="vf-chart dash-skeleton" id="pct-chart" role="img" aria-label="Histograma: número de seções em cada faixa de 0,1 ponto percentual no 2º turno de 2026, com a linha esperada só pelas contagens." data-source="pct_hist"></div>
+          <h3>{{percentuais-inteiros.h3.1}}</h3>
+          <p class="vf-note">{{percentuais-inteiros.p.1}}</p>
+          <div class="vf-seg" id="pct-pick" role="group" aria-label="{{pct-pick.arialabel.1}}">{{pct-pick.div.1}}</div>
+          <div class="vf-chart dash-skeleton" id="pct-chart" role="img" aria-label="{{pct-chart.arialabel.1}}" data-source="pct_hist"></div>
         </div>
         <div class="vf-card vf-wide" id="testes-numeros-redondos">
-          <h3>Testes de números redondos, 2026 ao lado de 2022</h3>
-          <p class="vf-note">“Só o acaso” é o que uma apuração limpa produz em média. Um p abaixo de 0,05, ou um z além de ±2, mereceria um olhar mais atento.</p>
+          <h3>{{testes-numeros-redondos.h3.1}}</h3>
+          <p class="vf-note">{{testes-numeros-redondos.p.1}}</p>
           <div class="vf-scroll">
             <table class="vf-table vf-stack" id="tests-rn" data-source="tests" data-row-key="key">
-              <thead><tr><th data-field="test">Teste</th><th data-field="variable">Contagem</th><th data-field="round">Turno</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">Só o acaso</th></tr></thead>
+              <thead><tr><th data-field="test">{{tests-rn.th.1}}</th><th data-field="variable">{{tests-rn.th.2}}</th><th data-field="round">{{tests-rn.th.3}}</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">{{tests-rn.th.4}}</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
-          <p class="vf-after">2026 passa em todos. A referência de 2022 “reprova” em dois: o último dígito de Bolsonaro no 1º turno (p = <span data-source="scorecard" data-where="id=ld|Right candidate|1|2022" data-field="stat" data-fmt="dec3">—</span>) e no 2º (p = <span data-source="scorecard" data-where="id=ld|Right candidate|2|2022" data-field="stat" data-fmt="dec3">—</span>). Com o limite de 5%, cerca de 1 em cada 20 testes “reprova” por puro acaso, e esta tabela tem dezenas de testes; é por isso que a referência importa. Brancos e nulos têm um pouco menos de contagens redondas do que o esperado, nos dois anos e na mesma medida; números inventados produziriam o contrário, um excesso de números redondos.</p>
+          <p class="vf-after">{{testes-numeros-redondos.p.2}}</p>
         </div>
       </div>
     </section>
 
     <section id="curva-normal">
-      <h2>Curva normal</h2>
-      <p class="vf-intro">Seções do mesmo local de votação, em geral uma escola, compartilham a vizinhança; por isso, o resultado de cada seção deveria ficar perto da média do local, espalhado mais ou menos como uma curva normal, que é o que o acaso produz quando se somam muitos votos independentes. Uma urna adulterada ou “engordada” ficaria longe das vizinhas.</p>
+      <h2>{{curva-normal.h2.1}}</h2>
+      <p class="vf-intro">{{curva-normal.p.1}}</p>
       <div class="vf-grid">
         <div class="vf-card" id="secao-vs-local">
-          <h3>Distância de cada seção em relação ao seu local de votação, 2º turno</h3>
-          <p class="vf-note">Distância em desvios-padrão; contagens em escala logarítmica. Na prática, há mais seções longe do seu local do que a curva normal perfeita prevê: no 2º turno de 2022, <span data-source="scorecard" data-where="id=pz|pos|2|2022" data-field="observed" data-fmt="int">—</span> seções ficaram mais de 4 desvios-padrão acima do seu local e <span data-source="scorecard" data-where="id=pz|neg|2|2022" data-field="observed" data-fmt="int">—</span> abaixo, quando a curva daria cerca de <span data-source="scorecard" data-where="id=pz|pos|2|2022" data-field="expected" data-fmt="int">—</span> de cada lado. Por isso a régua é a linha de 2022, não a curva de livro.</p>
-          <div class="vf-seg" id="z-pick" role="group" aria-label="Medida"><button type="button" data-v="share" aria-pressed="true">% do candidato</button><button type="button" data-v="Turnout" aria-pressed="false">Comparecimento</button><button type="button" data-v="Swing" aria-pressed="false">Variação entre turnos</button></div>
-          <div class="vf-chart dash-skeleton" id="z-chart" role="img" aria-label="Histograma em escala logarítmica: distância de cada seção em relação ao seu local de votação, com a curva normal perfeita e a linha de 2022." data-source="z_hist"></div>
+          <h3>{{secao-vs-local.h3.1}}</h3>
+          <p class="vf-note">{{secao-vs-local.p.1}}</p>
+          <div class="vf-seg" id="z-pick" role="group" aria-label="{{z-pick.arialabel.1}}">{{z-pick.div.1}}</div>
+          <div class="vf-chart dash-skeleton" id="z-chart" role="img" aria-label="{{z-chart.arialabel.1}}" data-source="z_hist"></div>
         </div>
         <div class="vf-card" id="impressao-digital">
-          <h3>Comparecimento × % do candidato, todas as seções, 2º turno</h3>
-          <p class="vf-note">Quanto mais escuro, mais seções. O enchimento de urnas espalha os resultados em direção ao quadro destacado: comparecimento quase total, com quase todos os votos para um candidato (<a class="vf-src" href="https://doi.org/10.1073/pnas.1210722109" target="_blank" rel="noopener">Klimek et al., 2012</a>). Nenhum dos dois anos mostra esse espalhamento em massa, para nenhum dos candidatos; as poucas seções dentro do quadro estão listadas mais abaixo.</p>
-          <div class="vf-chart vf-tall dash-skeleton" id="fp-chart" role="img" aria-label="Mapas de calor: seções por comparecimento e percentual do candidato no 2º turno, em 2026 e em 2022, com um quadro tracejado no canto de comparecimento de 95% ou mais e candidato com 90% ou mais." data-source="fingerprint"></div>
+          <h3>{{impressao-digital.h3.1}}</h3>
+          <p class="vf-note">{{impressao-digital.p.1}}</p>
+          <div class="vf-chart vf-tall dash-skeleton" id="fp-chart" role="img" aria-label="{{fp-chart.arialabel.1}}" data-source="fingerprint"></div>
         </div>
         <div class="vf-card vf-wide" id="testes-curva-normal">
-          <h3>Testes de curva normal, 2026 ao lado de 2022</h3>
-          <p class="vf-note">Seções atípicas são as que ficam a mais de 4 desvios-padrão do seu local de votação; “só o acaso” é a quantidade que uma curva normal perfeita daria.</p>
+          <h3>{{testes-curva-normal.h3.1}}</h3>
+          <p class="vf-note">{{testes-curva-normal.p.1}}</p>
           <div class="vf-scroll">
             <table class="vf-table vf-stack" id="tests-dist" data-source="tests" data-row-key="key">
-              <thead><tr><th data-field="test">Teste</th><th data-field="variable">Medida</th><th data-field="round">Turno</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">Só o acaso</th></tr></thead>
+              <thead><tr><th data-field="test">{{tests-dist.th.1}}</th><th data-field="variable">{{tests-dist.th.2}}</th><th data-field="round">{{tests-dist.th.3}}</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">{{tests-dist.th.4}}</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
-          <p class="vf-after">Seções fortemente pró-Lula são quase tão comuns quanto em 2022, e <span data-source="scorecard" data-where="id=persist|2026" data-field="observed" data-fmt="pctv">—</span> das do 2º turno já ficavam mais de 2 desvios-padrão acima do seu local no 1º turno (em 2022, <span data-source="scorecard" data-where="id=persist|2022" data-field="observed" data-fmt="pctv">—</span>): os mesmos lugares, não lugares novos. Uma inclinação: entre as <span data-source="scorecard" data-where="id=hiT|2|2026" data-field="stat" data-fmt="int">—</span> seções com comparecimento atipicamente alto para o seu local de votação, <span data-source="scorecard" data-where="id=hiT|2|2026" data-field="observed" data-fmt="pctv">—</span> também pendem para Lula, contra <span data-source="scorecard" data-where="id=hiT|2|2022" data-field="observed" data-fmt="pctv">—</span> em 2022.</p>
+          <p class="vf-after">{{testes-curva-normal.p.2}}</p>
         </div>
         <div class="vf-card vf-wide" id="secoes-quadro-vermelho">
-          <h3>Seções do quadro destacado no 2º turno</h3>
-          <p class="vf-note" data-cand="lula"><b>Lula:</b> <span data-source="corner_summary" data-where="candidate=lula" data-field="sections" data-fmt="int">—</span> seções (em 2022, <span data-source="scorecard" data-where="id=corner|2|2022" data-field="observed" data-fmt="int">—</span>), com <span data-source="corner_summary" data-where="candidate=lula" data-field="eligible" data-fmt="int">—</span> eleitores aptos; <span data-source="corner_summary" data-where="candidate=lula" data-field="strong_r1" data-fmt="int">—</span> já davam 90% ou mais a Lula no 1º turno, e <span data-source="corner_summary" data-where="candidate=lula" data-field="community" data-fmt="int">—</span> votam em locais cujo nome indica aldeia, povoado, quilombo, fazenda, assentamento ou comunidade. O aumento vem do comparecimento: entre as seções com Lula ≥ 90%, a fatia com comparecimento ≥ 95% foi de <span data-source="strongholds" data-where="id=2026|2|lula90" data-field="t95_share" data-fmt="pct">—</span> no 2º turno de 2026, contra <span data-source="strongholds" data-where="id=2022|2|lula90" data-field="t95_share" data-fmt="pct">—</span> em 2022 (no 1º turno, <span data-source="strongholds" data-where="id=2026|1|lula90" data-field="t95_share" data-fmt="pct">—</span> contra <span data-source="strongholds" data-where="id=2022|1|lula90" data-field="t95_share" data-fmt="pct">—</span>). Comparadas uma a uma com 2022, essas seções tiveram variação mediana de <span data-source="strongholds" data-where="id=matched|lula90" data-field="eligible_change" data-fmt="pct">—</span> nos eleitores aptos e de <span data-source="strongholds" data-where="id=matched|lula90" data-field="voters_change" data-fmt="pct">—</span> nos votantes; nas seções equilibradas (Lula entre 40% e 60% nos dois anos), os votantes variaram <span data-source="strongholds" data-where="id=matched|mid" data-field="voters_change" data-fmt="pct">—</span>. Nos redutos do candidato Bolsonaro (≥ 90%), a fatia ficou estável: <span data-source="strongholds" data-where="id=2026|2|right90" data-field="t95_share" data-fmt="pct">—</span> em 2026, <span data-source="strongholds" data-where="id=2022|2|right90" data-field="t95_share" data-fmt="pct">—</span> em 2022. Estes dados não mostram por que mais gente votou nos redutos de Lula. Se o comparecimento nessas seções tivesse ficado no nível de 2022, seriam <span data-source="stronghold_excess" data-row="0" data-field="excess" data-fmt="int">—</span> votantes a menos, <span data-source="stronghold_excess" data-row="0" data-field="share" data-fmt="pct">—</span> da margem.</p>
-        <p class="vf-note" data-cand="flavio"><b>Flávio:</b> <span data-source="corner_summary" data-where="candidate=flavio" data-field="sections" data-fmt="int">—</span> seções (em 2022, Jair Bolsonaro teve <span data-source="scorecard" data-where="id=corner|2|2022" data-field="stat" data-fmt="int">—</span>), com <span data-source="corner_summary" data-where="candidate=flavio" data-field="eligible" data-fmt="int">—</span> eleitores aptos, em lugares pequenos do interior, quatro deles no Sul, que já votavam em peso nele no 1º turno.</p>
-          <input class="vf-search" id="corner-search" type="search" placeholder="Buscar candidato, UF, município ou local" aria-label="Buscar seções">
+          <h3>{{secoes-quadro-vermelho.h3.1}}</h3>
+          <p class="vf-note" data-cand="lula">{{secoes-quadro-vermelho.p.1}}</p>
+        <p class="vf-note" data-cand="flavio">{{secoes-quadro-vermelho.p.2}}</p>
+          <input class="vf-search" id="corner-search" type="search" placeholder="{{corner-search.placeholder.1}}" aria-label="{{corner-search.arialabel.1}}">
           <div class="vf-scroll">
             <table class="vf-table vf-stack" id="corner-table" data-source="corner_view" data-row-key="section_id">
-              <thead><tr><th data-field="nome">Candidato</th><th data-field="uf">UF</th><th data-field="municipality">Município</th><th data-field="place">Local de votação</th><th data-field="eligible" data-fmt="int" class="vf-n">Aptos</th><th data-field="turnout_1" data-fmt="pct" class="vf-n">Comparec., 1º</th><th data-field="turnout_2" data-fmt="pct" class="vf-n">Comparec., 2º</th><th data-field="share_1" data-fmt="pct" class="vf-n">Candidato, 1º</th><th data-field="share_2" data-fmt="pct" class="vf-n">Candidato, 2º</th></tr></thead>
+              <thead><tr><th data-field="nome">{{corner-table.th.1}}</th><th data-field="uf">{{corner-table.th.2}}</th><th data-field="municipality">{{corner-table.th.3}}</th><th data-field="place">{{corner-table.th.4}}</th><th data-field="eligible" data-fmt="int" class="vf-n">{{corner-table.th.5}}</th><th data-field="turnout_1" data-fmt="pct" class="vf-n">{{corner-table.th.6}}</th><th data-field="turnout_2" data-fmt="pct" class="vf-n">{{corner-table.th.7}}</th><th data-field="share_1" data-fmt="pct" class="vf-n">{{corner-table.th.8}}</th><th data-field="share_2" data-fmt="pct" class="vf-n">{{corner-table.th.9}}</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
@@ -510,50 +513,50 @@
     </section>
 
     <section id="outros-testes">
-      <h2>Ordem de apuração, mudança entre turnos e urnas</h2>
-      <p class="vf-intro">Mais três lugares onde uma fraude poderia se esconder: nos boletins que chegam tarde, nas seções que mudam de forma diferente das vizinhas e em um modelo específico de urna.</p>
+      <h2>{{outros-testes.h2.1}}</h2>
+      <p class="vf-intro">{{outros-testes.p.1}}</p>
       <div class="vf-grid">
         <div class="vf-card vf-wide" id="progressao-apuracao">
-          <h3>% de cada candidato nos votos apurados até cada momento</h3>
-          <p class="vf-note">Os boletins não chegam em ordem aleatória, e os lugares que terminaram a transmissão por último votaram mais em Lula; por isso o percentual dele sobe ao longo da apuração, em 2022 como em 2026. No 2º turno de 2026, o STF prorrogou a votação até as 19h (<a class="vf-src" href="https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026" target="_blank" rel="noopener">Rádio Senado</a>), o TSE só começou a divulgar a apuração nesse horário (<a class="vf-src" href="https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html" target="_blank" rel="noopener">Terra</a>) e <span data-source="late_share" data-row="0" data-field="share" data-fmt="pct">—</span> dos votos chegaram depois das 19h, inclusive de seções que já tinham fechado; por isso o eixo mostra a fração dos votos apurados, não o horário. Dentro da mesma zona, as seções que chegaram mais tarde no 2º turno pendem para Lula em apenas <span data-source="scorecard" data-where="id=time|2|2026" data-field="observed" data-fmt="pph">—</span>.</p>
-          <div class="vf-chart dash-skeleton" id="time-chart" role="img" aria-label="Gráfico de linhas: percentual de cada candidato à medida que os votos eram apurados, nos dois turnos de 2026 e no 2º turno de 2022." data-source="timing"></div>
+          <h3>{{progressao-apuracao.h3.1}}</h3>
+          <p class="vf-note">{{progressao-apuracao.p.1}}</p>
+          <div class="vf-chart dash-skeleton" id="time-chart" role="img" aria-label="{{time-chart.arialabel.1}}" data-source="timing"></div>
         </div>
         <div class="vf-card" id="entre-turnos">
-          <h3>Do 1º para o 2º turno, 2026</h3>
-          <p class="vf-note">O voto é secreto: não há como saber em quem cada eleitor de Cury, Renan Santos ou Caiado votou no 2º turno. O que os dados mostram são os saldos: <span data-source="between_rounds" data-where="id=others" data-field="r1" data-fmt="compact">—</span> de votos em candidatos eliminados, comparecimento variando <span data-source="between_rounds" data-where="id=turnout" data-field="change" data-fmt="signedCompact">—</span> e brancos e nulos variando <span data-source="between_rounds" data-where="id=blank_null" data-field="change" data-fmt="signedCompact">—</span>. Lula ganhou <span data-source="between_rounds" data-where="id=lula" data-field="change" data-fmt="signedCompact">—</span> e Flávio <span data-source="between_rounds" data-where="id=flavio" data-field="change" data-fmt="signedCompact">—</span>, e as contas fecham.</p>
+          <h3>{{entre-turnos.h3.1}}</h3>
+          <p class="vf-note">{{entre-turnos.p.1}}</p>
           <div class="vf-scroll">
             <table class="vf-table" id="between-table" data-source="between_rounds" data-row-key="id">
-              <thead><tr><th data-field="item">Votos</th><th data-field="r1" data-fmt="int" class="vf-n">1º turno</th><th data-field="r2" data-fmt="int" class="vf-n">2º turno</th><th data-field="change" data-fmt="sint" class="vf-n">Variação</th></tr></thead>
+              <thead><tr><th data-field="item">{{between-table.th.1}}</th><th data-field="r1" data-fmt="int" class="vf-n">{{between-table.th.2}}</th><th data-field="r2" data-fmt="int" class="vf-n">{{between-table.th.3}}</th><th data-field="change" data-fmt="sint" class="vf-n">{{between-table.th.4}}</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
         </div>
         <div class="vf-card" id="estados">
-          <h3>Estado por estado, 2026</h3>
-          <p class="vf-note">Do 1º para o 2º turno, a fatia de Lula entre os dois candidatos subiu em todos os estados e no exterior (ZZ), de <span data-source="swing_range" data-row="0" data-field="min" data-fmt="pp">—</span> a <span data-source="swing_range" data-row="0" data-field="max" data-fmt="pp">—</span>, e a de Flávio caiu na mesma medida. Dentro dos locais de votação, as seções onde o comparecimento subiu mais não migraram mais para Lula (correlação de <span data-source="scorecard" data-where="id=swing|dturn|2026" data-field="observed" data-fmt="dec3">—</span>); ou seja, os eleitores a mais do 2º turno não se concentraram onde Lula cresceu.</p>
+          <h3>{{estados.h3.1}}</h3>
+          <p class="vf-note">{{estados.p.1}}</p>
           <div class="vf-scroll">
             <table class="vf-table" id="states-table" data-source="states_view" data-row-key="year,uf">
-              <thead><tr><th data-field="uf">UF</th><th data-field="sections" data-fmt="int" class="vf-n">Seções</th><th data-field="turnout_1" data-fmt="pct" class="vf-n">Comparec., 1º</th><th data-field="turnout_2" data-fmt="pct" class="vf-n">Comparec., 2º</th><th data-field="lula_share_2" data-fmt="pct" class="vf-n" data-cand="lula">Lula, 2º</th><th data-field="flavio_share_2" data-fmt="pct" class="vf-n" data-cand="flavio">Flávio, 2º</th><th data-field="swing_pp" data-fmt="pp" class="vf-n" data-cand="lula">Variação de Lula</th><th data-field="flavio_swing_pp" data-fmt="pp" class="vf-n" data-cand="flavio">Variação de Flávio</th></tr></thead>
+              <thead><tr><th data-field="uf">{{states-table.th.1}}</th><th data-field="sections" data-fmt="int" class="vf-n">{{states-table.th.2}}</th><th data-field="turnout_1" data-fmt="pct" class="vf-n">{{states-table.th.3}}</th><th data-field="turnout_2" data-fmt="pct" class="vf-n">{{states-table.th.4}}</th><th data-field="lula_share_2" data-fmt="pct" class="vf-n" data-cand="lula">{{states-table.th.5}}</th><th data-field="flavio_share_2" data-fmt="pct" class="vf-n" data-cand="flavio">{{states-table.th.6}}</th><th data-field="swing_pp" data-fmt="pp" class="vf-n" data-cand="lula">{{states-table.th.7}}</th><th data-field="flavio_swing_pp" data-fmt="pp" class="vf-n" data-cand="flavio">{{states-table.th.8}}</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
         </div>
         <div class="vf-card" id="urnas">
-          <h3>Modelo de urna, 2º turno de 2026</h3>
-          <p class="vf-note">Os percentuais brutos variam por modelo porque os modelos não estão espalhados por igual pelo país: o mais antigo, UE 2013, está concentrado no Nordeste, no Sul e no exterior (arquivos de detalhe por seção do TSE). Comparado com outras urnas do mesmo local de votação, nenhum modelo difere mais de <span data-source="scorecard" data-where="id=urna|2|2026" data-field="observed" data-fmt="pp2">—</span>.</p>
+          <h3>{{urnas.h3.1}}</h3>
+          <p class="vf-note">{{urnas.p.1}}</p>
           <div class="vf-scroll">
             <table class="vf-table" id="urna-table" data-source="urna_view" data-row-key="id">
-              <thead><tr><th data-field="model">Modelo</th><th data-field="sections" data-fmt="int" class="vf-n">Seções</th><th data-field="raw_share" data-fmt="pct" class="vf-n" data-cand="lula">Lula, bruto</th><th data-field="flavio_raw" data-fmt="pct" class="vf-n" data-cand="flavio">Flávio, bruto</th><th data-field="vs_place_pp" data-fmt="spp2" class="vf-n" data-cand="lula">Lula vs. mesmo local</th><th data-field="flavio_vs_place_pp" data-fmt="spp2" class="vf-n" data-cand="flavio">Flávio vs. mesmo local</th></tr></thead>
+              <thead><tr><th data-field="model">{{urna-table.th.1}}</th><th data-field="sections" data-fmt="int" class="vf-n">{{urna-table.th.2}}</th><th data-field="raw_share" data-fmt="pct" class="vf-n" data-cand="lula">{{urna-table.th.3}}</th><th data-field="flavio_raw" data-fmt="pct" class="vf-n" data-cand="flavio">{{urna-table.th.4}}</th><th data-field="vs_place_pp" data-fmt="spp2" class="vf-n" data-cand="lula">{{urna-table.th.5}}</th><th data-field="flavio_vs_place_pp" data-fmt="spp2" class="vf-n" data-cand="flavio">{{urna-table.th.6}}</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
         </div>
         <div class="vf-card" id="testes-outros">
-          <h3>Testes de mudança entre turnos, horário e urnas, 2026 ao lado de 2022</h3>
-          <p class="vf-note">Seções de mudança atípica são as que se afastaram mais de 4 desvios-padrão do seu local de votação entre os turnos.</p>
+          <h3>{{testes-outros.h3.1}}</h3>
+          <p class="vf-note">{{testes-outros.p.1}}</p>
           <div class="vf-scroll">
             <table class="vf-table vf-stack" id="tests-other" data-source="tests" data-row-key="key">
-              <thead><tr><th data-field="test">Teste</th><th data-field="round">Turno</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">Só o acaso</th></tr></thead>
+              <thead><tr><th data-field="test">{{tests-other.th.1}}</th><th data-field="round">{{tests-other.th.2}}</th><th data-field="y2026" class="vf-n">2026</th><th data-field="y2022" class="vf-n">2022</th><th data-field="chance" class="vf-n">{{tests-other.th.3}}</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
@@ -562,241 +565,237 @@
     </section>
 
     <section id="conferencia">
-      <h2>A conta fecha?</h2>
-      <p class="vf-intro">O TSE publica o boletim de cada seção e, separadamente, os totais por município e zona. Somadas, as seções reproduzem os totais oficiais em todos os campos das <span data-source="consistency" data-where="id=2022|QT_APTOS" data-field="units" data-fmt="int">—</span> unidades município-zona dos dois turnos de 2022. No 1º turno de 2026, das <span data-source="consistency" data-where="id=2026|1|QT_APTOS" data-field="units" data-fmt="int">—</span> unidades, todos os campos batem, menos os votos válidos em <span data-source="consistency" data-where="id=2026|1|QT_VOTOS_NOMINAIS" data-field="units_with_difference" data-fmt="int">—</span> delas. No 2º turno de 2026, todos os campos batem nas <span data-source="consistency" data-where="id=2026|2|QT_APTOS" data-field="units" data-fmt="int">—</span> unidades.</p>
+      <h2>{{conferencia.h2.1}}</h2>
+      <p class="vf-intro">{{conferencia.p.1}}</p>
       <div class="vf-card">
         <div class="vf-scroll">
           <table class="vf-table vf-stack" id="cons-table" data-source="consistency_pt" data-row-key="id">
-            <thead><tr><th data-field="year">Ano</th><th data-field="turnos">Turnos</th><th data-field="campo">Campo</th><th data-field="units" data-fmt="int" class="vf-n">Unidades</th><th data-field="units_with_difference" data-fmt="int" class="vf-n">Unidades com diferença</th><th data-field="abs_difference" data-fmt="int" class="vf-n">Diferença</th><th data-field="section_sum" data-fmt="int" class="vf-n">Soma das seções</th><th data-field="official" data-fmt="int" class="vf-n">Total oficial</th></tr></thead>
+            <thead><tr><th data-field="year">{{cons-table.th.1}}</th><th data-field="turnos">{{cons-table.th.2}}</th><th data-field="campo">{{cons-table.th.3}}</th><th data-field="units" data-fmt="int" class="vf-n">{{cons-table.th.4}}</th><th data-field="units_with_difference" data-fmt="int" class="vf-n">{{cons-table.th.5}}</th><th data-field="abs_difference" data-fmt="int" class="vf-n">{{cons-table.th.6}}</th><th data-field="section_sum" data-fmt="int" class="vf-n">{{cons-table.th.7}}</th><th data-field="official" data-fmt="int" class="vf-n">{{cons-table.th.8}}</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
-        <p class="vf-after">Em cada uma dessas unidades, a diferença é exatamente o número de votos de Leonardo Alves de Araújo (Leonardo Avalanche, PRTB, 28), <span data-source="consistency" data-where="id=2026|1|QT_VOTOS_NOMINAIS" data-field="abs_difference" data-fmt="int">—</span> no total: ele desistiu da candidatura em 30 de setembro, quatro dias antes do 1º turno (<a class="vf-src" href="https://www.cnnbrasil.com.br/eleicoes/leonardo-avalanche-do-prtb-desiste-de-candidatura-a-presidencia/" target="_blank" rel="noopener">CNN Brasil</a>), com o número já na urna, e o TSE conta esses votos como votos nulos técnicos; o relatório oficial do 1º turno lista exatamente esse número (<a class="vf-src" href="https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip" target="_blank" rel="noopener">TSE</a>). Os totais por município e zona saem da mesma totalização dos boletins: a conferência mostra que os arquivos do TSE são coerentes entre si, não que cada boletim registrou corretamente a sua urna. Os números do 2º turno batem também com o relatório oficial de totalização, no total do país, em cada UF e no exterior.</p>
+        <p class="vf-after">{{conferencia.p.2}}</p>
       </div>
     </section>
 
     <section id="mais-testes">
-      <h2>Mais testes</h2>
-      <p class="vf-intro">Outros métodos da estatística eleitoral, cada um feito para um tipo de fraude, foram aplicados do mesmo jeito em 2026, em 2022 e em 2018. A eleição de 2018 entra como segunda referência: nela, Jair Bolsonaro venceu, então ninguém a usaria para dizer que houve fraude a favor do PT. Os dois últimos testes, que usam os registros e as assinaturas das urnas, ficam só em 2026. Para os que procuram uma fraude específica, essa fraude foi plantada nos dados reais, do tamanho necessário para virar o resultado de 2026 (trocar <span data-source="more_tests" data-where="id=prop|planted" data-field="move" data-fmt="int">—</span> votos de um candidato para o outro), para mostrar o que o teste teria visto.</p>
+      <h2>{{mais-testes.h2.1}}</h2>
+      <p class="vf-intro">{{mais-testes.p.1}}</p>
       <div class="vf-grid">
         <div class="vf-card vf-wide">
           <dl class="vf-claims">
             <div>
-              <dt>Tamanho da seção <span class="vf-chip vf-ok">Normal</span></dt>
-              <dd><p><b>O que procura:</b> um programa que só troca votos em urnas com mais de um certo número de votantes. O percentual de Lula, comparado com o resto do mesmo local de votação, daria um salto nesse número.</p>
-                <p><b>Os dados:</b> procurando o número de votantes que mais separa as seções acima das abaixo dele, a maior diferença em 2026 é de <span data-source="more_tests" data-where="id=size|2026" data-field="step_pp" data-fmt="spp2">—</span> (<span data-source="more_tests" data-where="id=size|2026" data-field="at" data-fmt="int">—</span> votantes), em 2022, de <span data-source="more_tests" data-where="id=size|2022" data-field="step_pp" data-fmt="spp2">—</span> (<span data-source="more_tests" data-where="id=size|2022" data-field="at" data-fmt="int">—</span> votantes), e em 2018, de <span data-source="more_tests" data-where="id=size|2018" data-field="step_pp" data-fmt="spp2">—</span> (<span data-source="more_tests" data-where="id=size|2018" data-field="at" data-fmt="int">—</span> votantes). Não há salto: nos três anos, as seções menores de um local votam um pouco mais no candidato do PT que as maiores (gráfico abaixo). A maior diferença de 2018 é maior porque a curva dobra em 125 votantes, e não em 270; o desenho é o mesmo.</p>
-                <p><b>Com a fraude plantada:</b> trocar votos só acima de 250 votantes, o bastante para virar o resultado, exigiria trocar <span data-source="more_tests" data-where="id=size|planted|250" data-field="flip_share" data-fmt="pct">—</span> dos votos de Flávio nessas urnas e daria uma diferença de <span data-source="more_tests" data-where="id=size|planted|250" data-field="step_pp" data-fmt="spp2">—</span>, com um salto bem visível em 250 (linha tracejada); só acima de 150 votantes, <span data-source="more_tests" data-where="id=size|planted|150" data-field="step_pp" data-fmt="spp2">—</span>; e só acima de 350 votantes não daria para virar o resultado, porque essas urnas não têm votos suficientes.</p></dd>
+              <dt>{{mais-testes.dt.1}}</dt>
+              <dd><p>{{mais-testes.p.2}}</p>
+                <p>{{mais-testes.p.3}}</p>
+                <p>{{mais-testes.p.4}}</p></dd>
             </div>
             <div>
-              <dt>Migração proporcional entre turnos <span class="vf-chip vf-warn">Inconclusivo</span></dt>
-              <dd><p><b>O que procura:</b> um programa que troca, no 2º turno, uma porcentagem fixa dos votos de um candidato. Ele tiraria mais votos onde esse candidato é forte, então a migração entre os turnos cresceria com a força local do adversário, comparando seções do mesmo local.</p>
-                <p><b>Os dados:</b> a inclinação diz quantos pontos o PT ganha a mais do 1º para o 2º turno, numa seção, para cada ponto a mais que a direita teve nela no 1º turno, comparando com o resto do seu local de votação. Ela é <span data-source="more_tests" data-where="id=prop|2026" data-field="slope" data-fmt="dec3">—</span> em 2026, <span data-source="more_tests" data-where="id=prop|2022" data-field="slope" data-fmt="dec3">—</span> em 2022 e <span data-source="more_tests" data-where="id=prop|2018" data-field="slope" data-fmt="dec3">—</span> em 2018. Uma fraude que virasse o resultado a levaria a <span data-source="more_tests" data-where="id=prop|planted" data-field="slope" data-fmt="dec3">—</span>.</p>
-                <p><b>Leitura:</b> 2026 fica entre 2022 e 2018. A inclinação muda muito de uma eleição para outra por motivos que não são fraude, como o modo como os eleitores dos candidatos eliminados votaram no 2º turno: de 2018 para 2022 ela mudou <span data-source="more_tests" data-where="id=prop|years" data-field="moved_2018_2022" data-fmt="dec3">—</span>, cerca de <span data-source="more_tests" data-where="id=prop|years" data-field="times_added" data-fmt="dec1x">—</span> o que um programa que virasse o resultado somaria. 2018 é tão mais inclinado porque, naquele 1º turno, <span data-source="more_tests" data-where="id=prop|others" data-field="others_2018" data-fmt="pct">—</span> dos votos foram para outros candidatos, contra <span data-source="more_tests" data-where="id=prop|others" data-field="others_2022" data-fmt="pct">—</span> em 2022 e <span data-source="more_tests" data-where="id=prop|others" data-field="others_2026" data-fmt="pct">—</span> em 2026. Esses eleitores escolhem de novo no 2º turno sem seguir a divisão do seu local entre os finalistas, o que puxa as seções para uma mistura parecida e inclina a linha. Em 2018, quanto mais votos um estado deu a outros candidatos, mais inclinada a sua linha (correlação de <span data-source="more_tests" data-where="id=prop|others" data-field="corr_2018" data-fmt="dec2">—</span>): no Ceará, estado de Ciro Gomes, foram <span data-source="more_tests" data-where="id=prop|others" data-field="top_others" data-fmt="pct">—</span>, e a inclinação foi <span data-source="more_tests" data-where="id=prop|others" data-field="top_slope" data-fmt="dec2">—</span>, a maior do país. Estado por estado, a diferença entre 2026 e 2022 vai de <span data-source="more_tests" data-where="id=prop|states" data-field="gap_min" data-fmt="dec3">—</span> a <span data-source="more_tests" data-where="id=prop|states" data-field="gap_max" data-fmt="dec3">—</span> e é negativa em <span data-source="more_tests" data-where="id=prop|states" data-field="negative" data-fmt="int">—</span> das <span data-source="more_tests" data-where="id=prop|states" data-field="units" data-fmt="int">—</span> unidades (contra 2018, vai de <span data-source="more_tests" data-where="id=prop|states|2018" data-field="gap_min" data-fmt="dec3">—</span> a <span data-source="more_tests" data-where="id=prop|states|2018" data-field="gap_max" data-fmt="dec3">—</span>), enquanto um programa em todas as urnas somaria <span data-source="more_tests" data-where="id=prop|planted" data-field="added" data-fmt="dec3">—</span> em todas elas. Com uma variação tão maior que o efeito procurado, o teste não decide. Ele dá um limite: mesmo que toda a diferença para 2022 viesse de um programa assim, ele teria trocado cerca de <span data-source="more_tests" data-where="id=prop|planted" data-field="gap_votes" data-fmt="compact0">—</span> votos, e Lula ainda venceria por cerca de <span data-source="more_tests" data-where="id=prop|planted" data-field="margin_without" data-fmt="compact">—</span>. Um programa que agisse igual nos dois turnos não muda a migração; esse caso só o teste de integridade pega (aba “Tente fraudar!”).</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-prop">Ver gráfico</button>
-                <div class="vf-testchart" id="g-prop" hidden><p class="vf-note">Em cima, as seções do país em 20 grupos do mesmo tamanho, pela vantagem da direita no 1º turno sobre o resto do seu local de votação; cada ponto é a média do grupo, e a inclinação de cada linha é o número do teste. A linha vermelha é 2026 com a fraude plantada, no nosso cenário hipotético. A de 2018 é a mais inclinada porque <span data-source="more_tests" data-where="id=prop|others" data-field="others_2018" data-fmt="pct">—</span> dos votos daquele 1º turno foram para outros candidatos, não por fraude (veja a leitura acima). Embaixo, a diferença entre 2026 e cada eleição de referência, estado por estado: um programa em todas as urnas somaria o valor da linha tracejada em todos eles.</p><div class="vf-chart dash-skeleton" id="prop-chart" role="img" aria-label="Gráfico de linhas: quanto o PT ganhou a mais no 2º turno pela força da direita no 1º, em 2018, 2022, 2026 e com fraude plantada; a linha de 2018 é a mais inclinada, as de 2022 e 2026 quase coincidem. Depois, gráfico de pontos com a diferença entre 2026 e cada eleição de referência em cada estado."></div></div></dd>
+              <dt>{{mais-testes.dt.2}}</dt>
+              <dd><p>{{mais-testes.p.5}}</p>
+                <p>{{mais-testes.p.6}}</p>
+                <p>{{mais-testes.p.7}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-prop">{{mais-testes.button.1}}</button>
+                <div class="vf-testchart" id="g-prop" hidden><p class="vf-note">{{g-prop.p.1}}</p><div class="vf-chart dash-skeleton" id="prop-chart" role="img" aria-label="{{prop-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Urnas de um mesmo local, todas juntas <span class="vf-chip vf-ok">Normal</span></dt>
-              <dd><p><b>O que procura:</b> urnas de um local de votação diferentes demais entre si, como na pergunta 3, mas com um único teste (qui-quadrado) para cada local inteiro.</p>
-                <p><b>Os dados:</b> o teste dá p &lt; 0,001 em <span data-source="more_tests" data-where="id=homog|2026" data-field="p001" data-fmt="pct">—</span> dos <span data-source="more_tests" data-where="id=homog|2026" data-field="places" data-fmt="int">—</span> locais de 2026, em <span data-source="more_tests" data-where="id=homog|2022" data-field="p001" data-fmt="pct">—</span> dos de 2022 e em <span data-source="more_tests" data-where="id=homog|2018" data-field="p001" data-fmt="pct">—</span> dos de 2018. A dispersão mediana é de <span data-source="more_tests" data-where="id=homog|2026" data-field="phi_median" data-fmt="dec2">—</span> em 2026, <span data-source="more_tests" data-where="id=homog|2022" data-field="phi_median" data-fmt="dec2">—</span> em 2022 e <span data-source="more_tests" data-where="id=homog|2018" data-field="phi_median" data-fmt="dec2">—</span> em 2018 (1 seria só o acaso): nos três anos, as urnas de um local variam um pouco mais do que o acaso, porque os eleitores de cada seção não são sorteados.</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-homog">Ver gráfico</button>
-                <div class="vf-testchart" id="g-homog" hidden><p class="vf-note">Fração dos locais de votação em cada faixa do p-valor do teste. Se as urnas de cada local diferissem só por acaso, cada faixa teria 5% dos locais (linha tracejada); a pilha perto de zero mostra os locais cujas urnas variam mais que o acaso, parecida nos três anos.</p><div class="vf-chart dash-skeleton" id="homog-chart" role="img" aria-label="Gráfico de barras: distribuição do p-valor do qui-quadrado por local de votação, 2026, 2022 e 2018, quase iguais, com mais locais perto de zero do que o acaso daria."></div></div></dd>
+              <dt>{{mais-testes.dt.3}}</dt>
+              <dd><p>{{mais-testes.p.8}}</p>
+                <p>{{mais-testes.p.9}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-homog">{{mais-testes.button.2}}</button>
+                <div class="vf-testchart" id="g-homog" hidden><p class="vf-note">{{g-homog.p.1}}</p><div class="vf-chart dash-skeleton" id="homog-chart" role="img" aria-label="{{homog-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Votos acima do comparecimento mais comum (método de Shpilkin) <span class="vf-chip vf-ok">Normal</span></dt>
-              <dd><p><b>O que procura:</b> votos acrescentados em seções de comparecimento alto. O método, usado nas eleições russas, supõe que o percentual de um candidato não sobe com o comparecimento e conta como “excesso” os votos acima do percentual que ele tem nas seções de comparecimento mais comum.</p>
-                <p><b>Os dados:</b> estado por estado, o excesso é de <span data-source="more_tests" data-where="id=shpilkin|2026" data-field="state_lula" data-fmt="compact0">—</span> para Lula e <span data-source="more_tests" data-where="id=shpilkin|2026" data-field="state_right" data-fmt="compact0">—</span> para Flávio em 2026, e de <span data-source="more_tests" data-where="id=shpilkin|2022" data-field="state_lula" data-fmt="compact0">—</span> para Lula e <span data-source="more_tests" data-where="id=shpilkin|2022" data-field="state_right" data-fmt="compact0">—</span> para Bolsonaro em 2022, e de <span data-source="more_tests" data-where="id=shpilkin|2018" data-field="state_lula" data-fmt="compact0">—</span> para Haddad e <span data-source="more_tests" data-where="id=shpilkin|2018" data-field="state_right" data-fmt="compact0">—</span> para Bolsonaro em 2018: nos três anos, maior para a direita.</p>
-                <p><b>No país todo:</b> sem separar os estados, o método atribui <span data-source="more_tests" data-where="id=shpilkin|2026" data-field="national_lula" data-fmt="compact">—</span> a Lula em 2026 (<span data-source="more_tests" data-where="id=shpilkin|2022" data-field="national_lula" data-fmt="compact0">—</span> em 2022, e <span data-source="more_tests" data-where="id=shpilkin|2018" data-field="national_lula" data-fmt="compact0">—</span> a Haddad em 2018, que perdeu). Isso vem da diferença entre estados, não de dentro deles: de 2022 para 2026, o comparecimento do 2º turno subiu, em média, <span data-source="more_tests" data-where="id=shpilkin|states" data-field="lula60_change_pp" data-fmt="pp">—</span> nos <span data-source="more_tests" data-where="id=shpilkin|states" data-field="lula60_states" data-fmt="int">—</span> estados em que Lula teve 60% ou mais, e <span data-source="more_tests" data-where="id=shpilkin|states" data-field="other_change_pp" data-fmt="pp">—</span> nos outros. Mesmo que fossem todos votos falsos, Lula venceria por <span data-source="more_tests" data-where="id=shpilkin|bound" data-field="margin_after" data-fmt="compact">—</span>.</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-shp">Ver gráfico</button>
-                <div class="vf-testchart" id="g-shp" hidden><p class="vf-note">Em cima, o percentual do candidato do PT por faixa de 0,5 ponto de comparecimento, no 2º turno; embaixo, quantos votos há em cada faixa. O método supõe que, acima do comparecimento mais comum (a faixa com mais votos), o percentual ficaria na altura da linha tracejada, e conta o que passa dela como excesso.</p><div class="vf-chart dash-skeleton" id="shp-chart" role="img" aria-label="Gráfico de linhas: percentual do candidato do PT por faixa de comparecimento em 2026, 2022 e 2018, e a distribuição dos votos por faixa, com a linha horizontal que o método de Shpilkin supõe acima do comparecimento mais comum."></div></div></dd>
+              <dt>{{mais-testes.dt.4}}</dt>
+              <dd><p>{{mais-testes.p.10}}</p>
+                <p>{{mais-testes.p.11}}</p>
+                <p>{{mais-testes.p.12}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-shp">{{mais-testes.button.3}}</button>
+                <div class="vf-testchart" id="g-shp" hidden><p class="vf-note">{{g-shp.p.1}}</p><div class="vf-chart dash-skeleton" id="shp-chart" role="img" aria-label="{{shp-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Segundo algarismo (lei de Benford) <span class="vf-chip">Não serve aqui</span></dt>
-              <dd><p><b>O que procura:</b> o segundo algarismo das contagens deveria seguir a lei de Benford, e desvios são usados como sinal de fraude (<a class="vf-src" href="https://public.websites.umich.edu/~wmebane/fraud06.pdf" target="_blank" rel="noopener">Mebane, 2006</a>).</p>
-                <p><b>Os dados:</b> no 2º turno, a média do segundo algarismo é <span data-source="more_tests" data-where="id=benford2|2026" data-field="lula_mean" data-fmt="dec2">—</span> para Lula e <span data-source="more_tests" data-where="id=benford2|2026" data-field="right_mean" data-fmt="dec2">—</span> para Flávio em 2026, <span data-source="more_tests" data-where="id=benford2|2022" data-field="lula_mean" data-fmt="dec2">—</span> e <span data-source="more_tests" data-where="id=benford2|2022" data-field="right_mean" data-fmt="dec2">—</span> em 2022, e <span data-source="more_tests" data-where="id=benford2|2018" data-field="lula_mean" data-fmt="dec2">—</span> e <span data-source="more_tests" data-where="id=benford2|2018" data-field="right_mean" data-fmt="dec2">—</span> em 2018, contra <span data-source="more_tests" data-where="id=benford2|2026" data-field="expected" data-fmt="dec2">—</span> pela lei de Benford. O teste “reprova” nos três anos e para os dois candidatos: contagens de seções, que têm poucas centenas de votos, não seguem a lei de Benford. Por isso ele não entra na conclusão.</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-benford">Ver gráfico</button>
-                <div class="vf-testchart" id="g-benford" hidden><p class="vf-note">Frequência de cada segundo algarismo nas contagens por seção do 2º turno, em 2026 (barras), 2022 (linha) e 2018 (pontilhada), contra a lei de Benford (tracejada). Os três anos se afastam da lei.</p><div class="vf-chart dash-skeleton" id="benford-chart" role="img" aria-label="Gráfico de barras: frequência do segundo algarismo dos votos de cada candidato por seção, 2026, 2022 e 2018, que se afastam da lei de Benford nos três anos."></div></div></dd>
+              <dt>{{mais-testes.dt.5}}</dt>
+              <dd><p>{{mais-testes.p.13}}</p>
+                <p>{{mais-testes.p.14}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-benford">{{mais-testes.button.4}}</button>
+                <div class="vf-testchart" id="g-benford" hidden><p class="vf-note">{{g-benford.p.1}}</p><div class="vf-chart dash-skeleton" id="benford-chart" role="img" aria-label="{{benford-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Modelo de mistura (Klimek et al., 2012) <span class="vf-chip vf-ok">Normal</span></dt>
-              <dd><p><b>O que procura:</b> o modelo supõe uma distribuição limpa de comparecimento × percentual do vencedor e estima que parte das seções recebeu fraude “incremental” (alguns votos a mais) ou “extrema” (comparecimento e percentual perto de 100%) (<a class="vf-src" href="https://doi.org/10.1073/pnas.1210722109" target="_blank" rel="noopener">Klimek et al., 2012</a>). Como o voto em Lula muda muito de uma região para outra, a distribuição limpa foi ajustada estado por estado.</p>
-                <p><b>Os dados:</b> a fraude extrema estimada é de <span data-source="more_tests" data-where="id=mixture|2026" data-field="sections_extreme" data-fmt="int">—</span> seções em 2026, <span data-source="more_tests" data-where="id=mixture|2022" data-field="sections_extreme" data-fmt="int">—</span> em 2022 e <span data-source="more_tests" data-where="id=mixture|2018" data-field="sections_extreme" data-fmt="int">—</span> em 2018. A incremental sai em <span data-source="more_tests" data-where="id=mixture|2026" data-field="f_i" data-fmt="pct">—</span> das seções em 2026, <span data-source="more_tests" data-where="id=mixture|2022" data-field="f_i" data-fmt="pct">—</span> em 2022 e <span data-source="more_tests" data-where="id=mixture|2018" data-field="f_i" data-fmt="pct">—</span> em 2018 e melhora pouco o ajuste (<span data-source="more_tests" data-where="id=mixture|2026" data-field="fit_gain" data-fmt="pct">—</span>): é a distribuição limpa que não encaixa perfeitamente, igual nos três anos.</p>
-                <p><b>Com a fraude plantada:</b> com fraude extrema plantada em 92 seções sorteadas, o mesmo número de seções quase unânimes da pergunta 4, o modelo estima cerca de <span data-source="more_tests" data-where="id=mixture|planted|92|2026" data-field="found_sections" data-fmt="int">—</span>; em 250, cerca de <span data-source="more_tests" data-where="id=mixture|planted|250|2026" data-field="found_sections" data-fmt="int">—</span>; em 1.000, cerca de <span data-source="more_tests" data-where="id=mixture|planted|1000|2026" data-field="found_sections" data-fmt="int">—</span> (ele estima em passos de cerca de 125 seções). Nos dados reais, estima zero, nos três anos: para o modelo, as <span data-source="scorecard" data-where="id=corner|2|2026" data-field="observed" data-fmt="int">—</span> seções quase unânimes cabem na distribuição limpa dos seus estados.</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-mix">Ver gráfico</button>
-                <div class="vf-testchart" id="g-mix" hidden><p class="vf-note">Seções com fraude extrema plantadas nos dados de 2026, no nosso cenário hipotético, e quantas o modelo estima, ao lado do que ele estima nos dados reais de 2026, 2022 e 2018.</p><div class="vf-chart dash-skeleton" id="mix-chart" role="img" aria-label="Gráfico de barras: seções com fraude plantada e seções estimadas pelo modelo de mistura; nos dados reais de 2026, 2022 e 2018, o modelo estima zero."></div></div></dd>
+              <dt>{{mais-testes.dt.6}}</dt>
+              <dd><p>{{mais-testes.p.15}}</p>
+                <p>{{mais-testes.p.16}}</p>
+                <p>{{mais-testes.p.17}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-mix">{{mais-testes.button.5}}</button>
+                <div class="vf-testchart" id="g-mix" hidden><p class="vf-note">{{g-mix.p.1}}</p><div class="vf-chart dash-skeleton" id="mix-chart" role="img" aria-label="{{mix-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Votos em rajada nos registros das urnas <span class="vf-chip vf-ok">Normal</span></dt>
-              <dd><p><b>O que procura:</b> mesários votando no lugar de eleitores ausentes deixariam, no registro da urna, votos mais próximos uns dos outros do que eleitores de verdade conseguem (cada um é identificado, liberado e vota), em sequência e liberados pelo mesário em vez da digital. Só existem registros da amostra de 2026, então a comparação é entre grupos de urnas.</p>
-                <p><b>Os dados:</b> nas <span data-source="more_tests" data-where="id=bursts|corner_lula|2" data-field="machines" data-fmt="int">—</span> urnas quase unânimes de Lula, <span data-source="more_tests" data-where="id=bursts|corner_lula|2" data-field="fast_gap_share" data-fmt="pct">—</span> dos votos do 2º turno vieram até 30 segundos depois do anterior, contra <span data-source="more_tests" data-where="id=bursts|random|2" data-field="fast_gap_share" data-fmt="pct">—</span> nas urnas sorteadas e <span data-source="more_tests" data-where="id=bursts|right90|2" data-field="fast_gap_share" data-fmt="pct">—</span> nos redutos de Flávio; <span data-source="more_tests" data-where="id=bursts|corner_lula|2" data-field="machines_with_fast_run_5" data-fmt="pct">—</span> delas tiveram 5 votos seguidos assim, contra <span data-source="more_tests" data-where="id=bursts|random|2" data-field="machines_with_fast_run_5" data-fmt="pct">—</span> das sorteadas. A maior sequência de eleitores liberados pelo mesário foi de <span data-source="more_tests" data-where="id=bursts|corner_lula|2" data-field="longest_poll_worker_run_max" data-fmt="int">—</span> nas quase unânimes e de <span data-source="more_tests" data-where="id=bursts|random|2" data-field="longest_poll_worker_run_max" data-fmt="int">—</span> nas sorteadas. Em nenhum grupo houve uma urna com 5 votos seguidos rápidos sem digital.</p>
-                <p><b>Com a fraude plantada:</b> com <span data-source="more_tests" data-where="id=bursts|planted|run" data-field="extra_votes" data-fmt="int">—</span> votos a mais, liberados pelo mesário, em sequência no fim do dia, em cada urna quase unânime, as <span data-source="more_tests" data-where="id=bursts|planted|run" data-field="caught" data-fmt="int">—</span> seriam apontadas. Misturados aos eleitores de verdade, os mesmos votos não formam sequência e o teste não os vê (<span data-source="more_tests" data-where="id=bursts|planted|mixed" data-field="caught" data-fmt="int">—</span> apontadas), mas a parcela de eleitores liberados pelo mesário nessas urnas subiria de <span data-source="more_tests" data-where="id=bursts|corner_lula|2" data-field="poll_worker_share" data-fmt="pct">—</span> para <span data-source="more_tests" data-where="id=bursts|planted|mixed" data-field="poll_worker_share" data-fmt="pct">—</span>, o que a comparação da pergunta 8 veria.</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-bursts">Ver gráfico</button>
-                <div class="vf-testchart" id="g-bursts" hidden><p class="vf-note">Por grupo de urnas da amostra, no 2º turno: a parte dos votos que veio até 30 segundos depois do anterior, e a parte dos eleitores liberados pelo mesário em vez da digital, com a fraude plantada misturada aos eleitores de verdade, no nosso cenário hipotético.</p><div class="vf-chart dash-skeleton" id="bursts-chart" role="img" aria-label="Gráfico de barras: votos rápidos e eleitores liberados pelo mesário por grupo de urnas, parecidos entre os grupos, e mais liberações com a fraude plantada."></div></div></dd>
+              <dt>{{mais-testes.dt.7}}</dt>
+              <dd><p>{{mais-testes.p.18}}</p>
+                <p>{{mais-testes.p.19}}</p>
+                <p>{{mais-testes.p.20}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-bursts">{{mais-testes.button.6}}</button>
+                <div class="vf-testchart" id="g-bursts" hidden><p class="vf-note">{{g-bursts.p.1}}</p><div class="vf-chart dash-skeleton" id="bursts-chart" role="img" aria-label="{{bursts-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Assinaturas digitais e recontagem do voto <span class="vf-chip vf-ok">Confere</span></dt>
-              <dd><p><b>O que procura:</b> arquivos alterados depois de sair da urna, no caminho até a totalização, o que nenhum teste estatístico pega. Cada urna assina com a sua chave o boletim, o registro digital do voto (RDV, a lista dos votos, embaralhada para manter o sigilo) e o registro de eventos, e o TSE publica os arquivos e as assinaturas no site de resultados. A verificação seguiu a documentação técnica do TSE (<a class="vf-src" href="https://www.tse.jus.br/eleicoes/eleicoes-2022/documentacao-tecnica-do-software-da-urna-eletronica" target="_blank" rel="noopener">TSE</a>).</p>
-                <p><b>Os dados:</b> das <span data-source="urna_assinaturas" data-where="id=summary" data-field="sampled" data-fmt="int">—</span> urnas da amostra dos registros, <span data-source="urna_assinaturas" data-where="id=summary" data-field="checked" data-fmt="int">—</span> têm os arquivos marcados como totalizados pelo TSE. Em todas elas, as assinaturas são válidas (<span data-source="urna_assinaturas" data-where="id=summary" data-field="signatures_valid" data-fmt="int">—</span>), o certificado da urna foi emitido pela autoridade certificadora de urnas do TSE (<span data-source="urna_assinaturas" data-where="id=summary" data-field="certificates_ok" data-fmt="int">—</span>), o boletim tem os mesmos números dos dados abertos (<span data-source="urna_assinaturas" data-where="id=summary" data-field="bu_equals_published" data-fmt="int">—</span>) e os votos recontados no RDV batem com o boletim, candidato por candidato (<span data-source="urna_assinaturas" data-where="id=summary" data-field="rdv_equals_bu" data-fmt="int">—</span>), somando <span data-source="urna_assinaturas" data-where="id=summary" data-field="votes" data-fmt="int">—</span> votos. Em cada urna, foi conferido que um único bit alterado faz a assinatura falhar. As outras <span data-source="urna_assinaturas" data-where="id=summary" data-field="not_totalized" data-fmt="int">—</span> só tinham arquivos marcados como recebidos e ficaram de fora.</p>
-                <p><b>O que isso não mostra:</b> a urna assina o que o seu programa produziu, e o boletim e o RDV saem do mesmo programa; a verificação mostra que nada mudou depois da urna, não que o programa contou certo, que é o papel do teste de integridade. As chaves das autoridades certificadoras vêm do pacote de documentação técnica do TSE, obtido de cópias públicas que conferem entre si, porque o site do TSE bloqueia downloads automáticos; os certificados raiz não estão disponíveis para download e não foram conferidos, e o certificado publicado da autoridade que emite os das urnas mais antigas (modelos 2013 e 2015) venceu em julho de 2026, embora a sua chave confira as assinaturas. A assinatura do programa usa um algoritmo do governo sem especificação pública (CEPESC) e não pôde ser verificada.</p></dd>
+              <dt>{{mais-testes.dt.8}}</dt>
+              <dd><p>{{mais-testes.p.21}}</p>
+                <p>{{mais-testes.p.22}}</p>
+                <p>{{mais-testes.p.23}}</p></dd>
             </div>
           </dl>
         </div>
         <div class="vf-card vf-wide" id="tamanho-secao">
-          <h3>% do candidato do PT frente ao resto do local, por número de votantes da seção (2º turno)</h3>
-          <p class="vf-note">Diferença, em pontos percentuais, entre o percentual do candidato do PT (Lula; em 2018, Haddad) em cada seção e no restante do seu local de votação, em média, por faixa de 25 votantes; faixas com pelo menos 500 seções. Um programa que só agisse acima de certo número de votantes faria a linha saltar nesse ponto, como a tracejada.</p>
-          <div class="vf-chart dash-skeleton" id="size-chart" role="img" aria-label="Gráfico de linhas: diferença entre o percentual de Lula na seção e no restante do local de votação, por número de votantes, em 2026, em 2022, em 2018 e com uma fraude plantada acima de 250 votantes, que faz a linha saltar." data-source="size_curve"></div>
+          <h3>{{tamanho-secao.h3.1}}</h3>
+          <p class="vf-note">{{tamanho-secao.p.1}}</p>
+          <div class="vf-chart dash-skeleton" id="size-chart" role="img" aria-label="{{size-chart.arialabel.1}}" data-source="size_curve"></div>
         </div>
       </div>
     </section>
 
     <section id="tres-eleicoes">
-      <h2>Com 2018 também</h2>
-      <p class="vf-intro">Os testes desta seção usam também a eleição de 2018 (Haddad × Jair Bolsonaro) como segunda referência. Com duas eleições de referência, dá para ver quanto um número varia de uma eleição para outra sem fraude. Os dados de 2018 são do mesmo portal do TSE, no mesmo formato, processados pelo mesmo código; nos dois testes que já estavam na página, os números de 2026 e 2022 são os mesmos das perguntas 3 e 4.</p>
+      <h2>{{tres-eleicoes.h2.1}}</h2>
+      <p class="vf-intro">{{tres-eleicoes.p.1}}</p>
       <div class="vf-grid">
         <div class="vf-card vf-wide">
           <dl class="vf-claims">
             <div>
-              <dt>Os testes das perguntas 3 e 4, com 2018 <span class="vf-chip vf-warn">Chamou atenção</span></dt>
-              <dd><p><b>Seções quase unânimes</b> (comparecimento de 95% ou mais e 90% ou mais dos votos para um candidato, com 100 eleitores aptos ou mais, no 2º turno): para o candidato do PT, <span data-source="tres_eleicoes" data-where="id=ref|2026" data-field="corner_lula" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=ref|2022" data-field="corner_lula" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=ref|2018" data-field="corner_lula" data-fmt="int">—</span> em 2018; para o candidato Bolsonaro, <span data-source="tres_eleicoes" data-where="id=ref|2026" data-field="corner_right" data-fmt="int">—</span>, <span data-source="tres_eleicoes" data-where="id=ref|2022" data-field="corner_right" data-fmt="int">—</span> e <span data-source="tres_eleicoes" data-where="id=ref|2018" data-field="corner_right" data-fmt="int">—</span>. O número de 2026 a favor de Lula é o maior dos três anos, como diz a pergunta 4; em 2018, o lado de Bolsonaro teve <span data-source="tres_eleicoes" data-where="id=ref|2018" data-field="corner_right" data-fmt="int">—</span>.</p>
-                <p><b>Seções que destoam do resto do local</b> (desvio maior que 4): a favor do candidato do PT, <span data-source="tres_eleicoes" data-where="id=ref|2026" data-field="place_pos4" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=ref|2022" data-field="place_pos4" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=ref|2018" data-field="place_pos4" data-fmt="int">—</span> em 2018; a favor do adversário, <span data-source="tres_eleicoes" data-where="id=ref|2026" data-field="place_neg4" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=ref|2022" data-field="place_neg4" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=ref|2018" data-field="place_neg4" data-fmt="int">—</span> em 2018. 2026 tem menos que as duas eleições anteriores.</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-ref">Ver gráfico</button>
-                <div class="vf-testchart" id="g-ref" hidden><p class="vf-note">Seções do 2º turno de cada ano, para o candidato do PT (vermelho) e o adversário (azul).</p><div class="vf-chart dash-skeleton" id="ref-chart" role="img" aria-label="Gráfico de barras: seções quase unânimes e seções que destoam do local, a favor do PT e do adversário, em 2026, 2022 e 2018."></div></div></dd>
+              <dt>{{tres-eleicoes.dt.1}}</dt>
+              <dd><p>{{tres-eleicoes.p.2}}</p>
+                <p>{{tres-eleicoes.p.3}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-ref">{{tres-eleicoes.button.1}}</button>
+                <div class="vf-testchart" id="g-ref" hidden><p class="vf-note">{{g-ref.p.1}}</p><div class="vf-chart dash-skeleton" id="ref-chart" role="img" aria-label="{{ref-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Seções em que um candidato ganhou votos e o outro perdeu <span class="vf-chip vf-ok">Normal</span></dt>
-              <dd><p><b>O que procura:</b> do 1º para o 2º turno, na maioria das seções os dois candidatos ganham votos, herdados dos eliminados. Nas outras, um ganha e o outro perde. Em 2026, a conta deu <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="lula_up_right_down" data-fmt="int">—</span> seções em que Lula ganhou e Flávio perdeu, contra <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="right_up_lula_down" data-fmt="int">—</span> ao contrário, <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="ratio" data-fmt="ratio">—</span>, número que circulou como sinal de fraude.</p>
-                <p><b>Os dados:</b> a mesma conta dá <span data-source="tres_eleicoes" data-where="id=quad|2022" data-field="ratio" data-fmt="ratio">—</span> a favor de Jair Bolsonaro em 2022, que perdeu, e <span data-source="tres_eleicoes" data-where="id=quad|2018" data-field="ratio" data-fmt="ratio">—</span> a favor de Haddad em 2018, que também perdeu. Para saber quanto disso vem só do tamanho da virada, o teste refaz a conta com um modelo em que nada de anormal aconteceu: cada seção recebe o ganho médio do seu município para cada candidato, mais o desvio de outra seção, sorteada entre as do mesmo estado cujos municípios tiveram ganhos médios parecidos, ajustado ao seu tamanho. O modelo dá <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="null_ratio" data-fmt="ratio">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=quad|2022" data-field="null_ratio" data-fmt="ratio">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=quad|2018" data-field="null_ratio" data-fmt="ratio">—</span> em 2018 (gráfico abaixo).</p>
-                <p><b>Leitura:</b> a razão compara duas caudas pequenas, então cresce muito depressa com a diferença entre os ganhos: Lula somou <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="gain_lula" data-fmt="compact">—</span> de votos e Flávio <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="gain_right" data-fmt="compact">—</span>; em 2022, Jair somou <span data-source="tres_eleicoes" data-where="id=quad|2022" data-field="gain_right" data-fmt="compact">—</span> e Lula <span data-source="tres_eleicoes" data-where="id=quad|2022" data-field="gain_lula" data-fmt="compact">—</span>. Os dados são <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="leftover" data-fmt="times2">—</span> o modelo em 2026, <span data-source="tres_eleicoes" data-where="id=quad|2022" data-field="leftover" data-fmt="times2">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=quad|2018" data-field="leftover" data-fmt="times2">—</span> em 2018: o 21 para 1 é o que uma virada desse tamanho dá sem nada de anormal.</p>
-                <p><b>Com a fraude plantada:</b> trocando, no 2º turno, votos de Flávio para Lula em uma de cada cinco seções, o bastante para virar o resultado (<span data-source="tres_eleicoes" data-where="id=quad|planted|fifth" data-field="flip_share" data-fmt="pct">—</span> dos votos dele nessas seções), a razão iria a <span data-source="tres_eleicoes" data-where="id=quad|planted|fifth" data-field="ratio" data-fmt="ratio">—</span>, e os dados ficariam em <span data-source="tres_eleicoes" data-where="id=quad|planted|fifth" data-field="leftover" data-fmt="times2">—</span> o modelo, no nosso cenário hipotético.</p>
-                <p><b>O que isso não mostra:</b> os mesmos votos trocados em todas as seções levariam a razão a <span data-source="tres_eleicoes" data-where="id=quad|planted|all" data-field="ratio" data-fmt="ratio">—</span>, mas o modelo acompanharia (dados em <span data-source="tres_eleicoes" data-where="id=quad|planted|all" data-field="leftover" data-fmt="times2">—</span> o modelo), porque a troca mudaria também o ganho médio de cada município, que o modelo toma como dado. Esse caso só o teste de integridade pega (aba “Tente fraudar!”).</p>
-                <p><b>Uma correção:</b> uma versão anterior do modelo sorteava o desvio entre todas as seções do estado e dava <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="null_state_ratio" data-fmt="ratio">—</span> em 2026. Ela errava na mesma direção nos três anos: previa seções demais em que o segundo colocado ganhou e o primeiro perdeu, nos municípios em que o segundo colocado ganhou muitos votos, porque o desvio das seções muda com o tamanho do ganho médio. Com ela, os dados ficavam em <span data-source="tres_eleicoes" data-where="id=quad|2026" data-field="leftover_state" data-fmt="times2">—</span> o modelo em 2026 e <span data-source="tres_eleicoes" data-where="id=quad|2022" data-field="leftover_state" data-fmt="times2">—</span> em 2022, uma sobra que vinha do modelo, não da eleição.</p></dd>
+              <dt>{{tres-eleicoes.dt.2}}</dt>
+              <dd><p>{{tres-eleicoes.p.4}}</p>
+                <p>{{tres-eleicoes.p.5}}</p>
+                <p>{{tres-eleicoes.p.6}}</p>
+                <p>{{tres-eleicoes.p.7}}</p>
+                <p>{{tres-eleicoes.p.8}}</p>
+                <p>{{tres-eleicoes.p.9}}</p></dd>
             </div>
             <div>
-              <dt>Concentração do voto <span class="vf-chip vf-ok">Normal</span></dt>
-              <dd><p><b>O que procura:</b> votos acrescentados em redutos fariam crescer o número de seções com votação muito concentrada num candidato.</p>
-                <p><b>Os dados:</b> no 2º turno, seções com 90% ou mais para o candidato do PT: <span data-source="tres_eleicoes" data-where="id=conc|2026|2" data-field="lula_90" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=conc|2022|2" data-field="lula_90" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=conc|2018|2" data-field="lula_90" data-fmt="int">—</span> em 2018 (Haddad, que perdeu); para o adversário: <span data-source="tres_eleicoes" data-where="id=conc|2026|2" data-field="right_90" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=conc|2022|2" data-field="right_90" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=conc|2018|2" data-field="right_90" data-fmt="int">—</span> em 2018 (Jair Bolsonaro, que venceu). Com 80% ou mais, para o PT, <span data-source="tres_eleicoes" data-where="id=conc|2026|2" data-field="lula_80" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=conc|2022|2" data-field="lula_80" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=conc|2018|2" data-field="lula_80" data-fmt="int">—</span> em 2018; para o adversário, <span data-source="tres_eleicoes" data-where="id=conc|2026|2" data-field="right_80" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=conc|2022|2" data-field="right_80" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=conc|2018|2" data-field="right_80" data-fmt="int">—</span> em 2018. Os dois lados têm o máximo em 2018, o 2º turno com o voto mais dividido entre lugares (em <span data-source="tres_eleicoes" data-where="id=conc|2018|2" data-field="one_sided_80" data-fmt="pct">—</span> das seções, um dos dois teve 80% ou mais, contra <span data-source="tres_eleicoes" data-where="id=conc|2022|2" data-field="one_sided_80" data-fmt="pct">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=conc|2026|2" data-field="one_sided_80" data-fmt="pct">—</span> em 2026), e um deles perdeu: o número de seções extremas não acompanha quem vence. Em 2026, o lado do PT tem o menor número dos três anos.</p>
-                <p><b>Por que cada lado contra ele mesmo:</b> comparar só os vencedores (Jair em 2018, Lula em 2022 e 2026) faria as vitórias de Lula parecerem cheias de seções extremas. Isso vem do mapa do voto, não da vitória: entre 80% e 87% das seções com 90% ou mais para o PT ficam no Nordeste, onde o voto é muito mais unânime que nos redutos da direita, sobretudo no Sul, ganhe ou perca o PT. A comparação justa é cada lado contra os seus próprios números. E na eleição que a direita venceu, em 2018, Jair teve <span data-source="tres_eleicoes" data-where="id=conc|2018|2" data-field="right_90" data-fmt="int">—</span> seções com 90% ou mais para ele, contra <span data-source="tres_eleicoes" data-where="id=conc|2022|2" data-field="right_90" data-fmt="int">—</span> em 2022.</p>
-                <p>As seções com comparecimento de 90% ou mais e 90% ou mais para o PT foram <span data-source="tres_eleicoes" data-where="id=conc|2026|2" data-field="turnout_90_lula_90" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=conc|2022|2" data-field="turnout_90_lula_90" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=conc|2018|2" data-field="turnout_90_lula_90" data-fmt="int">—</span> em 2018. O aumento desde 2022 não vem de mais seções com 90% para Lula, que diminuíram, e sim de mais dessas seções chegando a 90% de comparecimento. É o mesmo sinal da pergunta 4: o comparecimento subiu mais nos redutos de Lula do que no resto do país, onde foi de <span data-source="tres_eleicoes" data-where="id=conc|2022|2" data-field="turnout" data-fmt="pct">—</span> para <span data-source="tres_eleicoes" data-where="id=conc|2026|2" data-field="turnout" data-fmt="pct">—</span> no total.</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-conc">Ver gráfico</button>
-                <div class="vf-testchart" id="g-conc" hidden><p class="vf-note">Em cima, as seções do 2º turno com 90% ou mais para cada lado, em vermelho o candidato do PT e em azul o adversário. Embaixo, a fração das seções por faixa de 2 pontos do percentual do PT, em cada ano: à direita, em vermelho, os redutos do PT (90% ou mais); à esquerda, em azul, os do adversário (o PT com 10% ou menos).</p><div class="vf-chart dash-skeleton" id="conc-chart" role="img" aria-label="Gráfico de barras e de linhas: seções com 90% ou mais para o PT e para o adversário em 2026, 2022 e 2018, as duas maiores em 2018, e a distribuição do percentual do PT por seção nos três anos."></div></div></dd>
+              <dt>{{tres-eleicoes.dt.3}}</dt>
+              <dd><p>{{tres-eleicoes.p.10}}</p>
+                <p>{{tres-eleicoes.p.11}}</p>
+                <p>{{tres-eleicoes.p.12}}</p>
+                <p>{{tres-eleicoes.p.13}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-conc">{{tres-eleicoes.button.2}}</button>
+                <div class="vf-testchart" id="g-conc" hidden><p class="vf-note">{{g-conc.p.1}}</p><div class="vf-chart dash-skeleton" id="conc-chart" role="img" aria-label="{{conc-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Esperado × observado, sem ver o município <span class="vf-chip vf-ok">Normal, mas fraco</span></dt>
-              <dd><p><b>O que procura:</b> uma mudança aplicada a um município inteiro. Um modelo aprende, com as seções de outros municípios, como o 1º turno de cada seção (votos de cada candidato, brancos e nulos, comparecimento, tamanho, estado) prevê o seu 2º turno, e então prevê as seções do município que ele não viu. Se um município inteiro tivesse votos trocados, ele ficaria longe da previsão.</p>
-                <p><b>Os dados:</b> o erro típico da previsão de uma seção é de <span data-source="tres_eleicoes" data-where="id=exp|2026" data-field="robust_sd_pp" data-fmt="pp2">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=exp|2022" data-field="robust_sd_pp" data-fmt="pp2">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=exp|2018" data-field="robust_sd_pp" data-fmt="pp2">—</span> em 2018. Seções a mais de 4 vezes esse erro, a favor do candidato do PT: <span data-source="tres_eleicoes" data-where="id=exp|2026" data-field="pos_4sd" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=exp|2022" data-field="pos_4sd" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=exp|2018" data-field="pos_4sd" data-fmt="int">—</span> em 2018; a favor do adversário: <span data-source="tres_eleicoes" data-where="id=exp|2026" data-field="neg_4sd" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=exp|2022" data-field="neg_4sd" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=exp|2018" data-field="neg_4sd" data-fmt="int">—</span> em 2018. Municípios inteiros a mais de 4 vezes o erro típico de um município: a favor do PT, <span data-source="tres_eleicoes" data-where="id=exp|2026" data-field="mun_pos_4sd" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=exp|2022" data-field="mun_pos_4sd" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=exp|2018" data-field="mun_pos_4sd" data-fmt="int">—</span> em 2018; a favor do adversário, <span data-source="tres_eleicoes" data-where="id=exp|2026" data-field="mun_neg_4sd" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=exp|2022" data-field="mun_neg_4sd" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=exp|2018" data-field="mun_neg_4sd" data-fmt="int">—</span> em 2018. Nos quatro números, 2026 fica entre 2022 e 2018 ou abaixo dos dois.</p>
-                <p><b>Com a fraude plantada:</b> trocando, no 2º turno, 5% dos votos de Flávio para Lula em 1.000 municípios sorteados (<span data-source="tres_eleicoes" data-where="id=exp|planted|1000|0.05" data-field="votes" data-fmt="compact0">—</span> de votos), o teste aponta <span data-source="tres_eleicoes" data-where="id=exp|planted|1000|0.05" data-field="caught" data-fmt="int">—</span> deles; com 10% (<span data-source="tres_eleicoes" data-where="id=exp|planted|1000|0.1" data-field="votes" data-fmt="compact0">—</span> de votos), <span data-source="tres_eleicoes" data-where="id=exp|planted|1000|0.1" data-field="caught" data-fmt="int">—</span>, no nosso cenário hipotético. Em cada caso o modelo foi treinado de novo com os dados alterados, como seria com uma fraude de verdade: ele aprende também com os municípios alterados dos outros grupos e passa a esperar parte da troca. Por isso o teste só pega trocas grandes; com 2%, aponta <span data-source="tres_eleicoes" data-where="id=exp|planted|1000|0.02" data-field="caught" data-fmt="int">—</span>.</p>
-                <p><b>O que isso não mostra:</b> os mesmos 5% em todos os municípios (<span data-source="tres_eleicoes" data-where="id=exp|planted|refit" data-field="votes" data-fmt="compact0">—</span> de votos, o bastante para virar o resultado) não aparecem: o modelo aprende com municípios que mudaram do mesmo jeito, e aponta <span data-source="tres_eleicoes" data-where="id=exp|planted|refit" data-field="flagged" data-fmt="int">—</span> municípios a favor de Lula, menos que os <span data-source="tres_eleicoes" data-where="id=exp|2026" data-field="mun_pos_4sd" data-fmt="int">—</span> dos dados reais. Esse caso só o teste de integridade pega (aba “Tente fraudar!”).</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-exp">Ver gráfico</button>
-                <div class="vf-testchart" id="g-exp" hidden><p class="vf-note">Quantos municípios ficaram a cada distância da previsão (em pontos do percentual de Lula entre os dois), em escala logarítmica. As linhas verticais marcam 4 vezes o erro típico de 2026; a tracejada vermelha é 2026 com 10% dos votos de Flávio trocados em 1.000 municípios, no nosso cenário hipotético, com o modelo treinado de novo.</p><div class="vf-chart dash-skeleton" id="exp-chart" role="img" aria-label="Histograma: desvio de cada município frente à previsão em 2026, 2022 e 2018, centrado em zero, e com 10% dos votos de Flávio trocados em 1.000 municípios, que desloca parte deles para a direita, além da linha de 4 erros típicos."></div></div></dd>
+              <dt>{{tres-eleicoes.dt.4}}</dt>
+              <dd><p>{{tres-eleicoes.p.14}}</p>
+                <p>{{tres-eleicoes.p.15}}</p>
+                <p>{{tres-eleicoes.p.16}}</p>
+                <p>{{tres-eleicoes.p.17}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-exp">{{tres-eleicoes.button.3}}</button>
+                <div class="vf-testchart" id="g-exp" hidden><p class="vf-note">{{g-exp.p.1}}</p><div class="vf-chart dash-skeleton" id="exp-chart" role="img" aria-label="{{exp-chart.arialabel.1}}"></div></div></dd>
             </div>
             <div>
-              <dt>Detector automático (Isolation Forest e LOF) <span class="vf-chip vf-ok">Normal</span></dt>
-              <dd><p><b>O que procura:</b> seções estranhas em vários números ao mesmo tempo, mesmo que nenhum deles chame atenção sozinho. O Isolation Forest (<a class="vf-src" href="https://doi.org/10.1109/ICDM.2008.17" target="_blank" rel="noopener">Liu, Ting e Zhou, 2008</a>) olha 12 medidas de cada seção nos dois turnos: o voto de cada candidato, brancos e nulos, comparecimento, mudanças entre turnos, tamanho e a distância para o resto do local. Ele foi treinado com as três eleições juntas, para medir todas com a mesma régua. O LOF (<a class="vf-src" href="https://doi.org/10.1145/342009.335388" target="_blank" rel="noopener">Breunig et al., 2000</a>), outro método, serve de segunda opinião.</p>
-                <p><b>Os dados:</b> acima do corte de <span data-source="tres_eleicoes" data-where="id=meta" data-field="cut" data-fmt="dec2">—</span>, ficam <span data-source="tres_eleicoes" data-where="id=iso|2026" data-field="per_100k" data-fmt="int">—</span> seções por 100 mil em 2026, <span data-source="tres_eleicoes" data-where="id=iso|2022" data-field="per_100k" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=iso|2018" data-field="per_100k" data-fmt="int">—</span> em 2018. Sem as seções no exterior, que são a maioria das apontadas (poucos votantes, voto muito de um lado), são <span data-source="tres_eleicoes" data-where="id=iso|2026" data-field="per_100k_brazil" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=iso|2022" data-field="per_100k_brazil" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=iso|2018" data-field="per_100k_brazil" data-fmt="int">—</span> em 2018. Das 50 mais estranhas de 2026, <span data-source="tres_eleicoes" data-where="id=iso|top50" data-field="kind_abroad" data-fmt="int">—</span> são no exterior, <span data-source="tres_eleicoes" data-where="id=iso|top50" data-field="kind_indigenous" data-fmt="int">—</span> em aldeias ou escolas indígenas e <span data-source="tres_eleicoes" data-where="id=iso|top50" data-field="kind_prison" data-fmt="int">—</span> em presídios ou unidades de internação; <span data-source="tres_eleicoes" data-where="id=iso|top50" data-field="in_lof_top5" data-fmt="int">—</span> das 50 também estão entre as 5% mais estranhas para o LOF. Entre as apontadas, as que votaram bem mais no PT que o resto do local foram <span data-source="tres_eleicoes" data-where="id=iso|2026" data-field="lean_lula" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=iso|2022" data-field="lean_lula" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=iso|2018" data-field="lean_lula" data-fmt="int">—</span> em 2018, e as que votaram bem mais no adversário, <span data-source="tres_eleicoes" data-where="id=iso|2026" data-field="lean_right" data-fmt="int">—</span> em 2026, <span data-source="tres_eleicoes" data-where="id=iso|2022" data-field="lean_right" data-fmt="int">—</span> em 2022 e <span data-source="tres_eleicoes" data-where="id=iso|2018" data-field="lean_right" data-fmt="int">—</span> em 2018.</p>
-                <p><b>Com a fraude plantada:</b> votos para Lula acrescentados até o comparecimento chegar a 98% em 100 seções sorteadas: <span data-source="tres_eleicoes" data-where="id=iso|planted|extreme" data-field="caught" data-fmt="int">—</span> passam do corte, e <span data-source="tres_eleicoes" data-where="id=iso|planted|extreme" data-field="caught_top1pct" data-fmt="int">—</span> ficam entre as 1% mais estranhas de 2026. Com 10% do eleitorado acrescentado para Lula em 1.000 seções: <span data-source="tres_eleicoes" data-where="id=iso|planted|incremental" data-field="caught" data-fmt="int">—</span> e <span data-source="tres_eleicoes" data-where="id=iso|planted|incremental" data-field="caught_top1pct" data-fmt="int">—</span>.</p>
-                <p><b>Por que 2018 tem mais:</b> o que mais afasta do comum as seções apontadas de 2018 é o tamanho da seção (<span data-source="tres_eleicoes" data-where="id=iso|2018" data-field="driver_logaptos" data-fmt="int">—</span>), o comparecimento do 2º turno (<span data-source="tres_eleicoes" data-where="id=iso|2018" data-field="driver_t2" data-fmt="int">—</span>) e os brancos e nulos do 2º turno (<span data-source="tres_eleicoes" data-where="id=iso|2018" data-field="driver_bn2" data-fmt="int">—</span>), que em 2018 tinham outros níveis; em 2026, é o comparecimento do 1º turno (<span data-source="tres_eleicoes" data-where="id=iso|2026" data-field="driver_t1" data-fmt="int">—</span>), das seções no exterior. Como o detector mede todos os anos com a mesma régua, um ano com níveis típicos diferentes tem mais seções apontadas sem ser mais irregular. A comparação que vale é 2026 com 2022, que têm os mesmos motivos e taxas parecidas.</p>
-                <p><b>Leitura:</b> o detector acha o que é incomum, e o que é incomum nas eleições são seções no exterior, pequenas, em presídios e em aldeias, nos três anos. Ele é fraco para fraude: um enchimento moderado se esconde entre as seções que já são incomuns por natureza. Por isso ele aqui é um complemento dos testes feitos para cada tipo de fraude, não um substituto.</p>
-                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-iso">Ver gráfico</button>
-                <div class="vf-testchart" id="g-iso" hidden><p class="vf-note">Fração das seções com escore igual ou maior que cada valor, em escala logarítmica: no corte de 0,60, cada linha marca a parte das seções que o detector aponta. As tracejadas vermelhas são as seções com fraude plantada, no nosso cenário hipotético.</p><div class="vf-chart dash-skeleton" id="iso-chart" role="img" aria-label="Gráfico de linhas: fração das seções com escore acima de cada valor, em 2026 e 2022 quase iguais, em 2018 um pouco acima, e nas seções com fraude plantada, mais acima, mas com a maioria antes do corte de 0,60."></div></div></dd>
+              <dt>{{tres-eleicoes.dt.5}}</dt>
+              <dd><p>{{tres-eleicoes.p.18}}</p>
+                <p>{{tres-eleicoes.p.19}}</p>
+                <p>{{tres-eleicoes.p.20}}</p>
+                <p>{{tres-eleicoes.p.21}}</p>
+                <p>{{tres-eleicoes.p.22}}</p>
+                <button type="button" class="vf-showchart" aria-expanded="false" aria-controls="g-iso">{{tres-eleicoes.button.4}}</button>
+                <div class="vf-testchart" id="g-iso" hidden><p class="vf-note">{{g-iso.p.1}}</p><div class="vf-chart dash-skeleton" id="iso-chart" role="img" aria-label="{{iso-chart.arialabel.1}}"></div></div></dd>
             </div>
           </dl>
         </div>
         <div class="vf-card vf-wide" id="um-ganhou">
-          <h3>Seções em que um candidato ganhou votos e o outro perdeu, do 1º para o 2º turno</h3>
-          <p class="vf-note">Em cima, quantas seções o candidato que mais ganhou votos tem para cada uma do adversário, nos dados e num modelo em que cada seção segue o ganho médio do seu município, com desvios sorteados entre seções do mesmo estado com ganhos parecidos. Embaixo, os dados divididos pelo modelo: perto de 1 nos três anos, e mais alto se houvesse fraude em parte das urnas, no nosso cenário hipotético.</p>
-          <div class="vf-chart dash-skeleton" id="quad-chart" role="img" aria-label="Gráfico de barras: razão entre as seções em que um candidato ganhou votos e o outro perdeu, nos dados e no modelo sem nada de anormal, em 2026, 2022 e 2018, quase iguais; e os dados divididos pelo modelo, perto de 1 nos três anos e mais alto com fraude plantada em uma de cada cinco urnas." data-source="tres_eleicoes"></div>
+          <h3>{{um-ganhou.h3.1}}</h3>
+          <p class="vf-note">{{um-ganhou.p.1}}</p>
+          <div class="vf-chart dash-skeleton" id="quad-chart" role="img" aria-label="{{quad-chart.arialabel.1}}" data-source="tres_eleicoes"></div>
         </div>
       </div>
     </section>
 
     <section id="metodo">
-      <h2>Como foi feito</h2>
+      <h2>{{metodo.h2.1}}</h2>
       <ul class="vf-method">
-        <li>Dados: dados abertos do TSE (dadosabertos.tse.jus.br, resultados-2026 e resultados-2022), arquivos de votação por seção e de detalhes por seção (comparecimento, horário de recebimento do boletim, modelo de urna), baixados em 26 de outubro de 2026; para conferir o 2º turno, os totais por município e zona, a votação de cada candidato por município e zona e o relatório oficial de totalização, baixados em 27 de outubro. Apenas presidente.</li>
-        <li>Unidade: a seção eleitoral, ou seja, uma urna e o seu boletim de urna impresso.</li>
-        <li>Referência: a eleição de 2022, com o mesmo tipo de urna eletrônica e o mesmo formato de arquivo, processada pelo mesmo código; na seção “Com 2018 também”, a de 2018 como segunda referência, dos mesmos arquivos do TSE.</li>
-        <li>Testes: último dígito (Beber e Scacco, 2012), excesso de múltiplos de 10, picos em percentuais inteiros (Kobak, Shpilkin e Pshenichnikov, 2016) comparados a uma reamostragem das próprias contagens, desvio de cada seção em relação ao seu local de votação, a “impressão digital” comparecimento × percentual (Klimek et al., 2012), mudanças atípicas entre turnos, ordem de chegada dos boletins, modelo de urna e soma das seções contra os totais oficiais. Na seção “Mais testes”: tamanho da seção, migração proporcional entre turnos, um qui-quadrado por local de votação, o método de Shpilkin, o segundo algarismo de Benford (Mebane, 2006), um modelo de mistura (Klimek et al., 2012) e votos em rajada nos registros das urnas; nos que procuram um tipo de fraude, ela foi plantada nos dados reais para medir o que o teste veria. Na seção “Com 2018 também”: seções em que um candidato ganhou votos e o outro perdeu, comparadas a um modelo sem nada de anormal; concentração do voto; uma previsão do 2º turno de cada seção feita sem ver o seu município; e um detector automático (Isolation Forest, Liu, Ting e Zhou, 2008, e LOF, Breunig et al., 2000). As referências completas estão no fim da página.</li>
-        <li>Registros (logs) das urnas: <span data-source="urna_logs" data-where="id=check" data-field="read" data-fmt="int">—</span> urnas do 2º turno lidas no site de resultados do TSE: todas as quase unânimes, 250 outros redutos de Lula, 150 de Flávio e 1.000 sorteadas no país, com semente fixa. Em <span data-source="urna_logs" data-where="id=check" data-field="matched" data-fmt="int">—</span> delas, o número de votos do registro bate exatamente com o comparecimento oficial da seção; as outras <span data-source="urna_logs" data-where="id=check" data-field="replaced" data-fmt="int">—</span> são urnas substituídas durante a votação, cujo registro só tem os votos depois da troca. O horário de cada urna foi convertido para o de Brasília. Nas mesmas urnas, as assinaturas digitais do boletim, do RDV e do registro foram verificadas e os votos do RDV recontados, seguindo a documentação técnica do TSE (seção “Mais testes”).</li>
-        <li>Conferência externa: os totais nacionais somados aqui são os mesmos divulgados pelo TSE e noticiados pela imprensa, no 1º turno (<a class="vf-src" href="https://www.cartacapital.com.br/politica/tse-encerra-apuracao-do-1o-turno/" target="_blank" rel="noopener">CartaCapital</a>) e no 2º (<a class="vf-src" href="https://www.abcmais.com/politica/como-ficou-o-resultado-final-do-2o-turno-da-eleicao-presidencial-de-2026/" target="_blank" rel="noopener">ABC+</a>).</li>
-        <li>O voto é secreto, então nada aqui diz como um eleitor ou grupo de eleitores votou; todos os números vêm de contagens por seção.</li>
-        <li><b>Limites: esses testes pegam números inventados à mão e votos adicionados em seções individuais. Uma alteração que deslocasse todas as urnas na mesma proporção não deixaria nenhuma dessas marcas, porque os algarismos continuariam aleatórios e cada urna continuaria parecida com as vizinhas; verificar isso exige os boletins impressos e as auditorias de urna do TSE, que estão fora destes dados.</b></li>
+        <li>{{metodo.li.1}}</li>
+        <li>{{metodo.li.2}}</li>
+        <li>{{metodo.li.3}}</li>
+        <li>{{metodo.li.4}}</li>
+        <li>{{metodo.li.5}}</li>
+        <li>{{metodo.li.6}}</li>
+        <li>{{metodo.li.7}}</li>
+        <li>{{metodo.li.8}}</li>
       </ul>
     </section>
   </div>
 
   <div class="vf-page" id="fraude" data-page role="tabpanel" aria-labelledby="tab-fraude" hidden>
     <section>
-      <h2>Tente fraudar a eleição</h2>
-      <p class="vf-intro">Faça de conta que você quer mudar o resultado do 2º turno de 2026. Escolha quem favorecer e como fraudar: os testes desta página são refeitos na hora, sobre os boletins de todas as 499.205 urnas, e mostram se a sua fraude deixaria marcas. É uma simulação no seu navegador; nenhum dado real é alterado.</p>
+      <h2>{{fraude.h2.1}}</h2>
+      <p class="vf-intro">{{fraude.p.1}}</p>
     </section>
-    <div class="vf-card" id="sim-loading" role="status">Carregando os boletins das 499.205 urnas (2,8 MB)…</div>
+    <div class="vf-card" id="sim-loading" role="status">{{sim-loading.div.1}}</div>
     <div class="vf-sim" id="sim-app" hidden>
-      <form class="vf-card vf-sim-controls" aria-label="Sua fraude">
-        <h3>Sua fraude</h3>
+      <form class="vf-card vf-sim-controls" aria-label="{{sim-app.arialabel.1}}">
+        <h3>{{sim-app.h3.1}}</h3>
         <div class="vf-sim-field">
-          <span class="vf-filter-lbl" id="sim-ben-lbl">A favor de</span>
-          <div class="vf-seg" id="sim-ben" role="group" aria-labelledby="sim-ben-lbl"><button type="button" data-v="flavio" aria-pressed="true">Flávio</button><button type="button" data-v="lula" aria-pressed="false">Lula</button></div>
+          <span class="vf-filter-lbl" id="sim-ben-lbl">{{sim-ben-lbl.span.1}}</span>
+          <div class="vf-seg" id="sim-ben" role="group" aria-labelledby="sim-ben-lbl">{{sim-ben.div.1}}</div>
         </div>
         <fieldset class="vf-sim-types">
-          <legend>Como</legend>
-          <label><input type="radio" name="sim-type" value="software" checked><b>Programa em todas as urnas</b><span>Um código escondido troca, em cada urna do país, uma parte dos votos do adversário.</span></label>
-          <label><input type="radio" name="sim-type" value="flip"><b>Trocar votos em algumas urnas</b><span>Só as urnas que você escolher trocam votos.</span></label>
-          <label><input type="radio" name="sim-type" value="stuff"><b>Encher urnas</b><span>Mesários votam no lugar de quem faltou, sempre no seu candidato.</span></label>
-          <label><input type="radio" name="sim-type" value="invent"><b>Inventar números</b><span>O boletim é reescrito à mão, com mais votos para o seu candidato.</span></label>
+          <legend>{{sim-app.legend.1}}</legend>
+          <label><input type="radio" name="sim-type" value="software" checked><b>{{sim-app.b.1}}</b><span>{{sim-app.span.1}}</span></label>
+          <label><input type="radio" name="sim-type" value="flip"><b>{{sim-app.b.2}}</b><span>{{sim-app.span.2}}</span></label>
+          <label><input type="radio" name="sim-type" value="stuff"><b>{{sim-app.b.3}}</b><span>{{sim-app.span.3}}</span></label>
+          <label><input type="radio" name="sim-type" value="invent"><b>{{sim-app.b.4}}</b><span>{{sim-app.span.4}}</span></label>
         </fieldset>
-        <label class="vf-sim-check" id="sim-both-row"><input type="checkbox" id="sim-both" checked><b>O programa também agiu no 1º turno</b><span>Uma urna adulterada rodaria o mesmo programa nos dois turnos. Desmarque para fraudar só o 2º turno, o que deixa uma marca a mais: a mudança entre os turnos.</span></label>
-        <p class="vf-sim-note" id="sim-round-note" hidden>Esta fraude é feita só no 2º turno; o 1º turno fica como foi.</p>
+        <label class="vf-sim-check" id="sim-both-row"><input type="checkbox" id="sim-both" checked><b>{{sim-both-row.b.1}}</b><span>{{sim-both-row.span.1}}</span></label>
+        <p class="vf-sim-note" id="sim-round-note" hidden>{{sim-round-note.p.1}}</p>
         <div class="vf-sim-field" id="sim-where-row">
-          <label for="sim-where">Quais urnas</label>
+          <label for="sim-where">{{sim-where-row.label.1}}</label>
           <select id="sim-where">
-            <option value="random">Sorteadas no país</option>
-            <option value="reduto_adv">Onde o adversário é mais forte</option>
-            <option value="reduto_ben">Onde o seu candidato é mais forte</option>
-            <option value="model">Só um modelo de urna</option>
-            <option value="uf">Só um estado</option>
+            <option value="random">{{sim-where.option.1}}</option>
+            <option value="reduto_adv">{{sim-where.option.2}}</option>
+            <option value="reduto_ben">{{sim-where.option.3}}</option>
+            <option value="model">{{sim-where.option.4}}</option>
+            <option value="uf">{{sim-where.option.5}}</option>
           </select>
-          <select id="sim-model" aria-label="Modelo de urna" hidden></select>
-          <select id="sim-uf" aria-label="Estado" hidden></select>
+          <select id="sim-model" aria-label="{{sim-model.arialabel.1}}" hidden></select>
+          <select id="sim-uf" aria-label="{{sim-uf.arialabel.1}}" hidden></select>
         </div>
         <div class="vf-sim-field" id="sim-machines-row">
-          <label for="sim-machines">Urnas adulteradas</label>
+          <label for="sim-machines">{{sim-machines-row.label.1}}</label>
           <input type="range" id="sim-machines" min="0" max="1000" step="1">
-          <div class="vf-sim-inline"><input type="number" id="sim-machines-n" min="1" aria-label="Número de urnas adulteradas"><span id="sim-machines-of"></span></div>
+          <div class="vf-sim-inline"><input type="number" id="sim-machines-n" min="1" aria-label="{{sim-machines-n.arialabel.1}}"><span id="sim-machines-of"></span></div>
         </div>
         <div class="vf-sim-field">
-          <label for="sim-intensity" id="sim-intensity-lbl">Intensidade</label>
+          <label for="sim-intensity" id="sim-intensity-lbl">{{sim-intensity-lbl.label.1}}</label>
           <input type="range" id="sim-intensity">
           <div class="vf-sim-inline"><output for="sim-intensity" id="sim-intensity-out"></output></div>
         </div>
-        <div class="vf-sim-actions">
-          <button type="button" class="vf-btn vf-btn-main" id="sim-min">Mínimo para virar o resultado</button>
-          <button type="button" class="vf-btn" id="sim-reseed">Sortear de novo</button>
-          <button type="button" class="vf-btn" id="sim-reset">Voltar ao resultado real</button>
-        </div>
+        <div class="vf-sim-actions">{{sim-app.div.1}}</div>
         <p class="vf-sim-note" id="sim-min-note" aria-live="polite"></p>
       </form>
       <div class="vf-sim-main">
         <div class="vf-card" id="sim-result"></div>
         <p class="vf-sr" id="sim-status" role="status"></p>
         <div class="vf-card">
-          <h3>O que os testes desta página veriam</h3>
+          <h3>{{sim-app.h3.2}}</h3>
           <p id="sim-score"></p>
           <div class="vf-sim-scroll">
             <table class="vf-table" id="sim-tests">
-              <thead><tr><th scope="col">Teste</th><th scope="col" class="vf-n">Real</th><th scope="col" class="vf-n">Com a fraude</th><th scope="col">A fraude aparece?</th></tr></thead>
+              <thead><tr><th scope="col">{{sim-tests.th.1}}</th><th scope="col" class="vf-n">{{sim-tests.th.2}}</th><th scope="col" class="vf-n">{{sim-tests.th.3}}</th><th scope="col">{{sim-tests.th.4}}</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
-          <p class="vf-after">“Sim” quer dizer que a fraude mudou o número mais do que o acaso explicaria, em comparação com o resultado real (no último dígito, p &lt; 0,001; nos outros testes, mais de 4 desvios-padrão). A coluna não diz se o número real é normal; isso é o que o resto da página avalia, e nos números reais um teste já chamou atenção: as urnas com comparecimento de 95% ou mais e 90% ou mais dos votos para Lula (pergunta 4 do Resumo). A soma das urnas contra os totais oficiais não está na lista: os totais saem dos mesmos boletins, então ela bate com qualquer fraude feita dentro da urna.</p>
+          <p class="vf-after">{{sim-app.p.1}}</p>
         </div>
         <div class="vf-card" id="sim-charts-card">
-          <h3>Dois gráficos da página, refeitos com a fraude</h3>
-          <p class="vf-note">À esquerda, cada seção comparada com o resto do seu local de votação (a curva normal da Versão técnica): as barras são a simulação e a linha cinza, o resultado real; uma fraude em algumas urnas aparece como seções além de ±4. À direita, comparecimento × percentual do candidato favorecido, uma célula por ponto, como um analista veria; em “O que a fraude mudou”, as células que ganharam seções ficam em destaque. Uma fraude igual em todas as urnas sobe a grade inteira um pouco: sem o resultado real ao lado, ela parece uma eleição normal.</p>
-          <div class="vf-seg" id="sim-fp-mode" role="group" aria-label="Grade comparecimento × percentual"><button type="button" data-v="plain" aria-pressed="true">Como um analista veria</button><button type="button" data-v="diff" aria-pressed="false">O que a fraude mudou</button></div>
-          <div class="vf-chart" id="sim-charts" role="img" aria-label="Dois gráficos refeitos a cada mudança: o desvio de cada seção em relação ao seu local de votação, com a simulação e o resultado real, e a grade comparecimento × percentual do candidato favorecido, que pode destacar as células que ganharam seções."></div>
+          <h3>{{sim-charts-card.h3.1}}</h3>
+          <p class="vf-note">{{sim-charts-card.p.1}}</p>
+          <div class="vf-seg" id="sim-fp-mode" role="group" aria-label="{{sim-fp-mode.arialabel.1}}">{{sim-fp-mode.div.1}}</div>
+          <div class="vf-chart" id="sim-charts" role="img" aria-label="{{sim-charts.arialabel.1}}"></div>
         </div>
         <div class="vf-card">
-          <h3>E fora destes dados?</h3>
+          <h3>{{sim-app.h3.3}}</h3>
           <div id="sim-outside"></div>
         </div>
       </div>
@@ -804,43 +803,44 @@
   </div>
 
   <div class="vf-card vf-explain vf-refs" id="referencias">
-    <h2>Referências</h2>
-    <p>Os dados, as notícias e os artigos usados para escrever e conferir esta página.</p>
+    <h2>{{referencias.h2.1}}</h2>
+    <p>{{referencias.p.1}}</p>
     <ol>
-      <li>Tribunal Superior Eleitoral. <a href="https://dadosabertos.tse.jus.br/" target="_blank" rel="noopener">Portal de Dados Abertos</a>: votação por seção, detalhes por seção e totais por município e zona, eleições de 2026 e 2022.</li>
-      <li>Tribunal Superior Eleitoral. <a href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener">Resultados: arquivos de urna por seção</a> (boletim de urna, registro digital do voto e registro de eventos da urna), 2º turno de 2026.</li>
-      <li>Tribunal Superior Eleitoral. <a href="https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip" target="_blank" rel="noopener">Relatório Resultado da Totalização, 1º e 2º turnos de 2026</a>.</li>
-      <li>Tribunal Superior Eleitoral. <a href="https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2026.zip" target="_blank" rel="noopener">Votação nominal por município e zona, 2026</a> (publicada com o 2º turno em 27 out. 2026).</li>
-      <li>Tribunal Superior Eleitoral. <a href="https://www.tse.jus.br/eleicoes/eleicoes-2022/documentacao-tecnica-do-software-da-urna-eletronica" target="_blank" rel="noopener">Documentação técnica do software da urna eletrônica</a>: formato do boletim de urna, do registro digital do voto e da assinatura digital.</li>
-      <li>CartaCapital. <a href="https://www.cartacapital.com.br/politica/tse-encerra-apuracao-do-1o-turno/" target="_blank" rel="noopener">“TSE encerra apuração do 1º turno”</a>, 5 out. 2026.</li>
-      <li>ABC+. <a href="https://www.abcmais.com/politica/como-ficou-o-resultado-final-do-2o-turno-da-eleicao-presidencial-de-2026/" target="_blank" rel="noopener">“Como ficou o resultado final do 2º turno da eleição presidencial de 2026”</a>, 26 out. 2026.</li>
-      <li>Terra. <a href="https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html" target="_blank" rel="noopener">“Eleições 2026: confira como foi a apuração do 2º turno”</a>, 25 out. 2026.</li>
-      <li>Rádio Senado. <a href="https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026" target="_blank" rel="noopener">“Prorrogação do horário de votação marca o segundo turno de 2026”</a>, 26 out. 2026.</li>
-      <li>Exame. <a href="https://exame.com/brasil/o-horario-da-votacao-sera-estendido/" target="_blank" rel="noopener">“O horário da votação será estendido? Veja decisão do STF”</a>, 25 out. 2026.</li>
-      <li>CNN Brasil. <a href="https://www.cnnbrasil.com.br/eleicoes/leonardo-avalanche-do-prtb-desiste-de-candidatura-a-presidencia/" target="_blank" rel="noopener">“Leonardo Avalanche, do PRTB, desiste de candidatura à Presidência”</a>, 30 set. 2026.</li>
-      <li>InfoMoney. <a href="https://www.infomoney.com.br/politica/flavio-nao-reconhece-resultado-da-eleicao-e-diz-que-pedira-anulacao-ao-tse/" target="_blank" rel="noopener">“Flávio não reconhece resultado da eleição e diz que pedirá anulação ao TSE”</a>, 25 out. 2026.</li>
-      <li>Gazeta do Povo. <a href="https://www.gazetadopovo.com.br/eleicoes/2026/flavio-bolsonaro-pronunciamento-anulacao-eleicao/" target="_blank" rel="noopener">“Flávio Bolsonaro diz que vai pedir anulação da eleição”</a>, 25 out. 2026.</li>
-      <li>Diario de Pernambuco. <a href="https://www.diariodepernambuco.com.br/politica/2026/10/11727686-sem-provas-eduardo-bolsonaro-acusa-fraude-e-pede-que-comunidade-internacional-nao-reconheca-vitoria-de-lula.html" target="_blank" rel="noopener">“Sem provas, Eduardo Bolsonaro acusa fraude e pede que comunidade internacional não reconheça vitória de Lula”</a>, 26 out. 2026.</li>
-      <li>Estado de Minas. <a href="https://www.em.com.br/politica/2026/10/7527778-nikolas-sugere-que-houve-fraude-na-eleicao.html" target="_blank" rel="noopener">“Nikolas sugere que houve fraude na eleição”</a>, 26 out. 2026.</li>
-      <li>Gazeta do Povo. <a href="https://www.gazetadopovo.com.br/eleicoes/2026/tse-responde-flavio-e-diz-que-fiscais-nao-foram-retirados-da-sala-cofre/" target="_blank" rel="noopener">“TSE responde Flávio e diz que fiscais do PL não foram retirados da sala-cofre”</a>, 26 out. 2026.</li>
-      <li>Diário do Nordeste. <a href="https://diariodonordeste.verdesmares.com.br/pontopoder/pl-reconhece-resultado-das-eleicoes-2026-mas-cobras-esclarecimentos-apos-derrota-de-flavio-1.3801638" target="_blank" rel="noopener">“PL reconhece resultado das Eleições 2026, mas cobra ‘esclarecimentos’ após derrota de Flávio”</a>, 26 out. 2026.</li>
-      <li>Fast Company Brasil. <a href="https://fastcompanybrasil.com/news/eleicoes-2026-verdade-mentira-sobre-2-turno/" target="_blank" rel="noopener">“Eleições 2026: o que é verdade e o que é mentira sobre o 2º turno”</a>, 15 out. 2026.</li>
-      <li>Exame. <a href="https://exame.com/brasil/pesquisa-quaest-na-vespera-do-2o-turno-flavio-bolsonaro-tem-51-e-lula-49/" target="_blank" rel="noopener">“Pesquisa Quaest: na véspera do 2º turno, Flávio Bolsonaro tem 51% e Lula, 49%”</a>, 24 out. 2026.</li>
-      <li>O Povo. <a href="https://www.opovo.com.br/eleicoes-2022/2022/10/29/pesquisa-datafolha-lula-52-bolsonaro-48-no-2-turno.html" target="_blank" rel="noopener">“Pesquisa Datafolha: Lula 52%, Bolsonaro 48% no 2º turno”</a>, 29 out. 2022.</li>
-      <li>Gazeta do Povo. <a href="https://www.gazetadopovo.com.br/eleicoes/2022/teste-pedido-por-militares-nao-detectou-falhas-nas-urnas-eletronicas-diz-moraes/" target="_blank" rel="noopener">“Teste pedido por militares não detectou falhas nas urnas eletrônicas, diz Moraes”</a>, 6 out. 2022.</li>
-      <li>Jovem Pan. <a href="https://jovempan.com.br/noticias/politica/relatorio-da-defesa-sobre-urnas-nao-aponta-fraude-nas-eleicoes.html" target="_blank" rel="noopener">“Relatório das Forças Armadas não aponta fraude nas urnas, mas diz que sistema não está isento de código malicioso”</a>, 9 nov. 2022.</li>
-      <li>Ministério da Defesa. <a href="https://www.gov.br/defesa/pt-br/centrais-de-conteudo/relatorio-das-forcas-armadas-nao-excluiu-a-possibilidade-de-fraude-ou-inconsistencia-nas-urnas-eletronicas" target="_blank" rel="noopener">“Relatório das Forças Armadas não excluiu a possibilidade de fraude ou inconsistência nas urnas eletrônicas”</a>, nota, 10 nov. 2022.</li>
-      <li>Beber, B.; Scacco, A. <a href="https://doi.org/10.1093/pan/mps003" target="_blank" rel="noopener">“What the Numbers Say: A Digit-Based Test for Election Fraud”</a>. <i>Political Analysis</i>, 2012.</li>
-      <li>Kobak, D.; Shpilkin, S.; Pshenichnikov, M. S. <a href="https://doi.org/10.1214/16-AOAS904" target="_blank" rel="noopener">“Integer percentages as electoral falsification fingerprints”</a>. <i>The Annals of Applied Statistics</i>, 2016.</li>
-      <li>Klimek, P.; Yegorov, Y.; Hanel, R.; Thurner, S. <a href="https://doi.org/10.1073/pnas.1210722109" target="_blank" rel="noopener">“Statistical detection of systematic election irregularities”</a>. <i>PNAS</i>, 2012.</li>
-      <li>Liu, F. T.; Ting, K. M.; Zhou, Z.-H. <a href="https://doi.org/10.1109/ICDM.2008.17" target="_blank" rel="noopener">“Isolation Forest”</a>. <i>IEEE International Conference on Data Mining</i>, 2008.</li>
-      <li>Breunig, M. M.; Kriegel, H.-P.; Ng, R. T.; Sander, J. <a href="https://doi.org/10.1145/342009.335388" target="_blank" rel="noopener">“LOF: Identifying Density-Based Local Outliers”</a>. <i>ACM SIGMOD</i>, 2000.</li>
-      <li>Mebane, W. R. <a href="https://public.websites.umich.edu/~wmebane/fraud06.pdf" target="_blank" rel="noopener">“Election Forensics: The Second-digit Benford’s Law Test and Recent American Presidential Elections”</a>, 2006.</li>
-      <li>Zabala, F. J. <a href="https://filipezabala.com/fs/" target="_blank" rel="noopener"><i>Fundamentals of Statistics</i></a> (em inglês).</li>
+      <li>{{referencias.li.1}}</li>
+      <li>{{referencias.li.2}}</li>
+      <li>{{referencias.li.3}}</li>
+      <li>{{referencias.li.4}}</li>
+      <li>{{referencias.li.5}}</li>
+      <li>{{referencias.li.6}}</li>
+      <li>{{referencias.li.7}}</li>
+      <li>{{referencias.li.8}}</li>
+      <li>{{referencias.li.9}}</li>
+      <li>{{referencias.li.10}}</li>
+      <li>{{referencias.li.11}}</li>
+      <li>{{referencias.li.12}}</li>
+      <li>{{referencias.li.13}}</li>
+      <li>{{referencias.li.14}}</li>
+      <li>{{referencias.li.15}}</li>
+      <li>{{referencias.li.16}}</li>
+      <li>{{referencias.li.17}}</li>
+      <li>{{referencias.li.18}}</li>
+      <li>{{referencias.li.19}}</li>
+      <li>{{referencias.li.20}}</li>
+      <li>{{referencias.li.21}}</li>
+      <li>{{referencias.li.22}}</li>
+      <li>{{referencias.li.23}}</li>
+      <li>{{referencias.li.24}}</li>
+      <li>{{referencias.li.25}}</li>
+      <li>{{referencias.li.26}}</li>
+      <li>{{referencias.li.27}}</li>
+      <li>{{referencias.li.28}}</li>
+      <li>{{referencias.li.29}}</li>
+      <li>{{referencias.li.30}}</li>
     </ol>
   </div>
 </div>
 
+<script src="i18n.js"></script>
 <script src="core.js"></script>
 <script src="charts.js"></script>
 <script src="testcharts.js"></script>

@@ -1,22 +1,23 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="{{shell.lang}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eleições 2026 - Estatística Forense</title>
-<meta name="description" content="Os números da eleição presidencial de 2026 mostram sinais de fraude? Testes estatísticos nos boletins de urna de Lula e Flávio Bolsonaro, comparados com 2022, a partir dos dados abertos do TSE.">
-<link rel="canonical" href="https://eleicoes.radzkitech.com/">
+<title>{{shell.title}}</title>
+<meta name="description" content="{{shell.description}}">
+<link rel="canonical" href="{{url}}">
+{{alternates}}
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://eleicoes.radzkitech.com/">
-<meta property="og:site_name" content="Eleições 2026 - Estatística Forense">
-<meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="Eleições 2026 - Estatística Forense">
-<meta property="og:description" content="Testes estatísticos nos boletins de urna do 2º turno, comparados com 2022, a partir dos dados abertos do TSE.">
+<meta property="og:url" content="{{url}}">
+<meta property="og:site_name" content="{{shell.title}}">
+<meta property="og:locale" content="{{shell.og_locale}}">
+<meta property="og:title" content="{{shell.title}}">
+<meta property="og:description" content="{{shell.og_description}}">
 <meta property="og:image" content="https://eleicoes.radzkitech.com/og.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Os números da eleição de 2026 mostram sinais de fraude? Não foram encontrados sinais de fraude manual capazes de mudar o resultado. Ao lado, o último algarismo das contagens de Lula e de Flávio, todos perto de 1 em cada 10.">
+<meta property="og:image:alt" content="{{shell.og_image_alt}}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:,">
@@ -32,10 +33,10 @@
 <div id="dash-root">
 {{body}}
 <footer class="site-foot">
-  <a class="site-foot-repo" href="https://github.com/radzki/AnaliseEleicoes"><svg viewBox="0 0 16 16" width="36" height="36" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span><span class="site-foot-name">radzki/AnaliseEleicoes</span><span class="site-foot-what">Código aberto no GitHub: cada conta desta página pode ser refeita a partir dos dados do TSE.</span></span></a>
-  <p>Fonte: dados abertos do Tribunal Superior Eleitoral (TSE), resultados presidenciais por seção de 2026, 2022 e 2018.</p>
-  <p>Última atualização em <time datetime="{{updated_iso}}">{{updated}}</time> (horário de Brasília). Esta página muda conforme novos testes e correções entram; o <a href="https://github.com/radzki/AnaliseEleicoes/commits/main">histórico de mudanças</a> mostra cada uma.</p>
-  <p>Os dados exatos de cada gráfico e tabela, em JSON:</p>
+  <a class="site-foot-repo" href="https://github.com/radzki/AnaliseEleicoes"><svg viewBox="0 0 16 16" width="36" height="36" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span><span class="site-foot-name">radzki/AnaliseEleicoes</span><span class="site-foot-what">{{shell.foot_what}}</span></span></a>
+  <p>{{shell.foot_source}}</p>
+  <p>{{shell.foot_updated}}</p>
+  <p>{{shell.foot_data}}</p>
   <ul>
 {{datasets}}
   </ul>

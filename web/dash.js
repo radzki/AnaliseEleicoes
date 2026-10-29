@@ -5,6 +5,9 @@
 window.dash = (() => {
   const DEFAULTS = JSON.parse(document.currentScript.dataset.params ?? '{}');
   const DATASETS = new Set((document.currentScript.dataset.datasets ?? '').split(' ').filter(Boolean));
+  // Files resolve from the site root, where this script is, so a page in /en/ finds data/ there too.
+  const ROOT = new URL('.', document.currentScript.src);
+  const url = (path) => new URL(path, ROOT).href;
   const store = new Map();
   const calcs = new Map();
   const cache = new Map();
@@ -51,7 +54,7 @@ window.dash = (() => {
   function load(id) {
     const s = { status: 'loading', data: [] };
     store.set(id, s);
-    fetch(`data/${encodeURIComponent(id)}.json`)
+    fetch(url(`data/${encodeURIComponent(id)}.json`))
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
@@ -160,6 +163,7 @@ window.dash = (() => {
     setParams,
     resetParams: () => setParams(Object.fromEntries(Object.keys(params).map((k) => [k, DEFAULTS[k] ?? null]))),
     setLink,
+    url,
     theme: () => theme,
     setTheme,
     refresh: () => {},

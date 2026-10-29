@@ -1,5 +1,6 @@
 // The plain-language tab: its calculations and its four simple charts. Loads last, then starts the tabs.
 (() => {
+  const t = vf.t;
   const MUTED = 'var(--cds-chart-muted)';
   const REF = 'var(--cds-chart-reference)';
   const pct0 = vf.f('.0%');
@@ -36,7 +37,7 @@
     dBox.replaceChildren();
     const tip = vf.tooltip(dBox);
     const shown = vf.cands();
-    const cells = vf.panels(dBox, shown.map((c) => `Votos de ${vf.cand[c].name}`));
+    const cells = vf.panels(dBox, shown.map((c) => t('simple.digits.panel', { name: vf.cand[c].name })));
     shown.forEach((c, i) => {
       const v = c === 'lula' ? 'Lula' : 'Right candidate';
       const { s, w, h } = vf.svg(cells[i], 180);
@@ -52,11 +53,12 @@
         .attr('x', (r) => x(r.digit)).attr('width', x.bandwidth())
         .attr('y', (r) => y(r.share)).attr('height', (r) => y(0) - y(r.share)).attr('rx', 3)
         .style('fill', vf.cand[c].color())
-        .on('pointermove pointerdown', (ev, r) => tip.show(ev, `Votos terminados em ${r.digit}`, [{ label: '', value: `${pct1(r.share)} das urnas` }]))
+        .on('pointermove pointerdown', (ev, r) => tip.show(ev, t('simple.digits.tip', { d: r.digit }),
+          [{ label: '', value: t('simple.digits.tip_value', { v: pct1(r.share) }) }]))
         .on('pointerleave', tip.leave);
       s.append('line').attr('x1', ml).attr('x2', w - 4).attr('y1', y(0.1)).attr('y2', y(0.1))
         .style('stroke', REF).attr('stroke-dasharray', '4 3');
-      s.append('text').attr('class', 'vf-tick').attr('x', w - 4).attr('y', y(0.1) - 6).attr('text-anchor', 'end').text('1 em cada 10');
+      s.append('text').attr('class', 'vf-tick').attr('x', w - 4).attr('y', y(0.1) - 6).attr('text-anchor', 'end').text(t('simple.digits.reference'));
     });
   });
 
@@ -67,24 +69,24 @@
     const sc = dash.data('scorecard').data;
     const val = (id) => sc.find((r) => r.id === id).observed;
     const groups = vf.cands().map((c) => ({
-      label: c === 'lula' ? 'A favor de Lula' : 'A favor de Flávio (em 2022, Jair)',
+      label: t(c === 'lula' ? 'simple.outliers.lula' : 'simple.outliers.flavio'),
       key: c === 'lula' ? 'pz|pos|2' : 'pz|neg|2', color: vf.cand[c].color(),
     }));
-    const bars = groups.flatMap((g) => [2026, 2022].map((year) => ({ g: g.label, year, n: val(`${g.key}|${year}`) })));
+    const bars = groups.flatMap((g) => [2026, 2022].map((year) => ({ g: g.key, year, n: val(`${g.key}|${year}`) })));
     oBox.replaceChildren();
     // Each group: its label on a line of its own, then a bar for 2026 and one for 2022.
     const { s, w } = vf.svg(oBox, groups.length * 84);
-    const valueW = vf.textWidth(s, bars.map((b) => `${nf(b.n)} em ${b.year}`)) + 8;
+    const valueW = vf.textWidth(s, bars.map((b) => t('simple.outliers.value', { n: nf(b.n), year: b.year }))) + 8;
     const x = d3.scaleLinear([0, d3.max(bars, (b) => b.n)], [0, w - valueW]);
     groups.forEach((g, gi) => {
       const top = gi * 84;
       s.append('text').attr('class', 'vf-tick vf-strong').attr('x', 0).attr('y', top + 9).attr('dy', '0.32em').text(g.label);
       [2026, 2022].forEach((year, i) => {
-        const b = bars.find((d) => d.g === g.label && d.year === year);
+        const b = bars.find((d) => d.g === g.key && d.year === year);
         const y0 = top + 22 + i * 26;
         s.append('rect').attr('x', 0).attr('y', y0).attr('height', 20).attr('rx', 4)
           .attr('width', Math.max(2, x(b.n))).style('fill', year === 2026 ? g.color : MUTED);
-        s.append('text').attr('class', 'vf-tick').attr('x', x(b.n) + 6).attr('y', y0 + 10).attr('dy', '0.32em').text(`${nf(b.n)} em ${year}`);
+        s.append('text').attr('class', 'vf-tick').attr('x', x(b.n) + 6).attr('y', y0 + 10).attr('dy', '0.32em').text(t('simple.outliers.value', { n: nf(b.n), year }));
       });
     });
   });
@@ -97,7 +99,10 @@
   vf.draw(() => {
     if (!vf.gate(bBox, 'between_rounds')) return;
     const order = ['lula', 'flavio', 'others', 'absent', 'blank_null'];
-    const label = { lula: 'Lula', flavio: 'Flávio', others: 'Candidatos que saíram', absent: 'Abstenções', blank_null: 'Brancos e nulos' };
+    const label = {
+      lula: t('simple.balance.lula'), flavio: t('simple.balance.flavio'), others: t('simple.balance.others'),
+      absent: t('simple.balance.absent'), blank_null: t('simple.balance.blank_null'),
+    };
     const rows = order.map((id) => dash.data('between_rounds').data.find((r) => r.id === id));
     bBox.replaceChildren();
     // Narrow (a phone): each label goes on its own line above its bar instead of to the left.

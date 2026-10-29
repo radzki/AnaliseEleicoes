@@ -1,10 +1,21 @@
 // Shared helpers for the report: formatting, load states, tooltips, filled text, tables and chart frames.
 window.vf = (() => {
-  // Brazilian number format: 499.205 · 51,8% · 4,43 mi
-  const f = d3.formatLocale({ decimal: ',', thousands: '.', grouping: [3], currency: ['R$', ''], minus: '−', percent: '%' }).format;
+  // Text in the page's language: window.VF_I18N, the "js." strings of locales/<lang>.json, written to i18n.js by
+  // scripts/05_site.py. {name} in a string is replaced by vars.name.
+  const I18N = window.VF_I18N ?? {};
+  function t(key, vars) {
+    const s = I18N[`js.${key}`];
+    if (s === undefined) {
+      console.warn('i18n: no text for', key);
+      return key;
+    }
+    return vars ? s.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m)) : s;
+  }
+  // Number format of the page's language; in Portuguese: 499.205 · 51,8% · 4,43 mi
+  const f = d3.formatLocale({ decimal: t('locale.decimal'), thousands: t('locale.thousands'), grouping: [3], currency: ['R$', ''], minus: '−', percent: '%' }).format;
   const nf = f(',');
-  const compact = new Intl.NumberFormat('pt-BR', { notation: 'compact', maximumFractionDigits: 2 });
-  const compact0 = new Intl.NumberFormat('pt-BR', { notation: 'compact', maximumFractionDigits: 0 });
+  const compact = new Intl.NumberFormat(t('locale.intl'), { notation: 'compact', maximumFractionDigits: 2 });
+  const compact0 = new Intl.NumberFormat(t('locale.intl'), { notation: 'compact', maximumFractionDigits: 0 });
   const signed = (v, s) => (v > 0 ? '+' : v < 0 ? '−' : '') + s;
   const dec = (v, n) => f(`.${n}f`)(Math.abs(v));
   const fmt = {
@@ -17,16 +28,16 @@ window.vf = (() => {
     absCompact: (v) => compact.format(Math.abs(v)),
     pct: (v) => f('.1%')(v),
     pctv: (v) => `${f('.2f')(v)}%`,
-    pp: (v) => signed(v, `${dec(v, 1)} p.p.`),
-    pp2: (v) => `${dec(v, 2)} p.p.`,
-    spp2: (v) => signed(v, `${dec(v, 2)} p.p.`),
-    pph: (v) => signed(v, `${dec(v, 2)} p.p./h`),
-    hm: (v) => `${Math.floor(v)}h${String(Math.floor((v % 1) * 60 + 1e-9)).padStart(2, '0')}`,
+    pp: (v) => signed(v, t('fmt.pp', { v: dec(v, 1) })),
+    pp2: (v) => t('fmt.pp', { v: dec(v, 2) }),
+    spp2: (v) => signed(v, t('fmt.pp', { v: dec(v, 2) })),
+    pph: (v) => signed(v, t('fmt.pph', { v: dec(v, 2) })),
+    hm: (v) => t('fmt.hm', { h: Math.floor(v), m: String(Math.floor((v % 1) * 60 + 1e-9)).padStart(2, '0') }),
     dec2: (v) => f('.2f')(v),
     dec3: (v) => f('.3f')(v),
-    ratio: (v) => `${f('.1f')(v)} para 1`,
-    dec1x: (v) => `${f('.1f')(v)} vezes`,
-    times2: (v) => `${f('.2f')(v)} ${v < 2 ? 'vez' : 'vezes'}`,
+    ratio: (v) => t('fmt.ratio', { v: f('.1f')(v) }),
+    dec1x: (v) => t('fmt.times', { v: f('.1f')(v) }),
+    times2: (v) => t(v < 2 ? 'fmt.time' : 'fmt.times', { v: f('.2f')(v) }),
   };
   const format = (kind, v) => (v === null || v === undefined || Number.isNaN(v) ? '—' : (fmt[kind] ?? fmt.str)(v));
 
@@ -67,7 +78,7 @@ window.vf = (() => {
       f.className = 'vf-fail';
       const dot = document.createElement('span');
       dot.className = 'vf-dot';
-      f.append(dot, 'Falha ao carregar');
+      f.append(dot, t('load.failed'));
       el.append(f);
     }
     return false;
@@ -294,8 +305,8 @@ window.vf = (() => {
   const cands = () => CANDS[dash.params().cand] ?? CANDS.ambos;
   // Party colors, not palette slots: Lula red, Flávio blue (--vf-lula / --vf-flavio in index.html, light and dark).
   const cand = {
-    lula: { name: 'Lula', name22: 'Lula', color: () => 'var(--vf-lula)' },
-    flavio: { name: 'Flávio', name22: 'Jair Bolsonaro', color: () => 'var(--vf-flavio)' },
+    lula: { name: t('cand.lula'), name22: t('cand.lula22'), color: () => 'var(--vf-lula)' },
+    flavio: { name: t('cand.flavio'), name22: t('cand.flavio22'), color: () => 'var(--vf-flavio)' },
   };
   const pick = document.getElementById('cand-pick');
   pick.addEventListener('click', (ev) => {
@@ -324,7 +335,8 @@ window.vf = (() => {
   const root = document.getElementById('dash-root');
   const QUESTIONS = new Map([...root.querySelectorAll('.vf-q')].map((a) => [
     a.querySelector('.vf-q-n').textContent.trim(), { id: a.id, title: a.querySelector('h3').textContent.trim() }]));
-  const QREF = /\b(perguntas?)(\s+)(\d+(?:\s*(?:,|e)\s*\d+)*)/gi;
+  // the word for question(s) and for "and" come from the language: "perguntas 3 e 4", "questions 3 and 4"
+  const QREF = new RegExp(`\\b(${t('qref.word')})(\\s+)(\\d+(?:\\s*(?:,|${t('qref.and')})\\s*\\d+)*)`, 'gi');
   const hasQref = new RegExp(QREF.source, 'i');
   // a direct child of #dash-root, outside the .vf container, so position: fixed follows the viewport
   const qpop = document.createElement('div');
@@ -339,7 +351,7 @@ window.vf = (() => {
     b.className = 'vf-qref';
     b.dataset.q = n;
     b.textContent = text;
-    b.setAttribute('aria-label', `Pergunta ${n}: ${QUESTIONS.get(n).title}`);
+    b.setAttribute('aria-label', t('qref.aria', { n, title: QUESTIONS.get(n).title }));
     b.setAttribute('aria-expanded', 'false');
     b.setAttribute('aria-controls', 'vf-qpop');
     return b;
@@ -387,7 +399,7 @@ window.vf = (() => {
     go.className = 'vf-link';
     go.dataset.goto = 'simples';
     go.dataset.target = q.id;
-    go.textContent = 'Ir para a pergunta';
+    go.textContent = t('qref.go');
     qpop.replaceChildren(head, title, go);
     qpop.hidden = false;
     qOpen = b;
@@ -440,7 +452,7 @@ window.vf = (() => {
     const panel = document.getElementById(b.getAttribute('aria-controls'));
     const open = b.getAttribute('aria-expanded') !== 'true';
     b.setAttribute('aria-expanded', String(open));
-    b.textContent = open ? 'Esconder gráfico' : 'Ver gráfico';
+    b.textContent = open ? t('chart.hide') : t('chart.show');
     panel.hidden = !open;
     if (open) for (const [box, fn] of boxes) if (panel.contains(box)) fn();
   });
@@ -454,5 +466,5 @@ window.vf = (() => {
   }).observe(root, { childList: true, subtree: true, characterData: true });
 
   dash.onData(fill);
-  return { f, format, gate, table, sortable, tooltip, svg, panels, textWidth, axis, legend, resolve, segmented, draw, tabs, cands, cand };
+  return { t, f, format, gate, table, sortable, tooltip, svg, panels, textWidth, axis, legend, resolve, segmented, draw, tabs, cands, cand };
 })();

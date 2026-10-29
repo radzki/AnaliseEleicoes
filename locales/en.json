@@ -1,0 +1,2882 @@
+{
+ "shell.lang": {
+  "text": "en",
+  "from": "2a67f1a467"
+ },
+ "shell.title": {
+  "text": "Elections 2026 - Statistical Forensics",
+  "from": "14832222b1"
+ },
+ "shell.description": {
+  "text": "Do the numbers from the 2026 presidential election show signs of fraud? Statistical tests on the tally reports for Lula and Flávio Bolsonaro, compared with 2022, from the TSE's open data.",
+  "from": "5959a3ca71"
+ },
+ "shell.og_description": {
+  "text": "Statistical tests on the runoff's tally reports, compared with 2022, from the TSE's open data.",
+  "from": "7cd5ac9eff"
+ },
+ "shell.og_image_alt": {
+  "text": "Do the numbers from the 2026 election show signs of fraud? No signs of manual fraud capable of changing the result were found. Beside it, the last digit of Lula's and Flávio's counts, all close to 1 in 10.",
+  "from": "a7267d1036"
+ },
+ "shell.og_locale": {
+  "text": "en_US",
+  "from": "11bb446e9d"
+ },
+ "shell.foot_what": {
+  "text": "Open source on GitHub: every calculation on this page can be redone from the TSE's data.",
+  "from": "4e55104254"
+ },
+ "shell.foot_source": {
+  "text": "Source: open data from the Superior Electoral Court (TSE), presidential results by section for 2026, 2022 and 2018.",
+  "from": "70a7dee99e"
+ },
+ "shell.foot_updated": {
+  "text": "Last updated <time datetime=\"{{updated_iso}}\">{{updated}}</time> (Brasília time). This page changes as new tests and corrections come in; the <a href=\"https://github.com/radzki/AnaliseEleicoes/commits/main\">history of changes</a> shows each one.",
+  "from": "a9305dde08"
+ },
+ "shell.foot_data": {
+  "text": "The exact data for each chart and table, in JSON:",
+  "from": "0263d855f2"
+ },
+ "shell.date_fmt": {
+  "text": "%b %d, %Y, at %H:%M",
+  "from": "db0ede12c6"
+ },
+ "topo.h1.1": {
+  "text": "2026 presidential election: do the numbers show signs of fraud?",
+  "from": "0da728a66a"
+ },
+ "cand-lbl.span.1": {
+  "text": "Show:",
+  "from": "a0521898fe"
+ },
+ "cand-pick.div.1": {
+  "text": "<button type=\"button\" data-v=\"lula\" aria-pressed=\"false\">Lula</button><button type=\"button\" data-v=\"flavio\" aria-pressed=\"false\">Flávio</button><button type=\"button\" data-v=\"ambos\" aria-pressed=\"true\">Both</button>",
+  "from": "373c82462d"
+ },
+ "theme-lbl.span.1": {
+  "text": "Theme:",
+  "from": "30ffa5818a"
+ },
+ "theme-pick.div.1": {
+  "text": "<button type=\"button\" data-v=\"auto\" aria-pressed=\"true\">Automatic</button><button type=\"button\" data-v=\"claro\" aria-pressed=\"false\">Light</button><button type=\"button\" data-v=\"escuro\" aria-pressed=\"false\">Dark</button>",
+  "from": "64b5886ca9"
+ },
+ "vf-tabs.arialabel.1": {
+  "text": "Report version",
+  "from": "5480d8a9e9"
+ },
+ "vf-tabs.div.1": {
+  "text": "\n      <button type=\"button\" role=\"tab\" id=\"tab-simples\" data-tab=\"simples\" aria-controls=\"simples\" aria-selected=\"true\">Summary for everyone</button>\n      <button type=\"button\" role=\"tab\" id=\"tab-tecnico\" data-tab=\"tecnico\" aria-controls=\"tecnico\" aria-selected=\"false\">Technical version</button>\n      <button type=\"button\" role=\"tab\" id=\"tab-fraude\" data-tab=\"fraude\" aria-controls=\"fraude\" aria-selected=\"false\">Try to rig it!</button>\n    ",
+  "from": "8b0ff8d97d"
+ },
+ "simples.div.1": {
+  "text": "Short answer",
+  "from": "d92ef3f0a4"
+ },
+ "simples.p.1": {
+  "text": "No signs of manual fraud capable of changing the result were found.",
+  "from": "9b6866d96c"
+ },
+ "simples.p.2": {
+  "text": "We analyzed the <b data-source=\"summary\" data-where=\"year=2026&amp;round=2\" data-field=\"sections\" data-fmt=\"int\">—</b> tally reports from the runoff (the result each voting machine prints at the end of voting) with tests published in scientific journals and already used in elections in Sweden, Senegal, Nigeria and Russia to uncover made-up numbers or “padded” voting machines (<a class=\"vf-src\" href=\"#referencias\">references at the end of the page</a>). In almost all of them, 2026 behaves like a normal election, just like 2022. The main exception is voting machines where almost everyone voted, and almost all for Lula: they became more common than in 2022, and this data does not explain why. But there are too few of them to change the result (question 4).",
+  "from": "92bfb284de"
+ },
+ "simples.div.2": {
+  "text": "Lula",
+  "from": "37b5073e4e"
+ },
+ "simples.div.3": {
+  "text": "of valid votes in the runoff · in the first round, <span data-source=\"summary\" data-where=\"year=2026&amp;round=1\" data-field=\"lula_share\" data-fmt=\"pct\">—</span>",
+  "from": "fada85776d"
+ },
+ "simples.div.4": {
+  "text": "Flávio",
+  "from": "c1fee03166"
+ },
+ "simples.div.5": {
+  "text": "of valid votes in the runoff · in the first round, <span data-source=\"summary\" data-where=\"year=2026&amp;round=1\" data-field=\"right_share\" data-fmt=\"pct\">—</span>",
+  "from": "32ed041084"
+ },
+ "simples.div.6": {
+  "text": "Final margin",
+  "from": "6c056091e5"
+ },
+ "simples.div.7": {
+  "text": "votes in Lula's favor · in the first round, Flávio was <span data-source=\"summary\" data-where=\"year=2026&amp;round=1\" data-field=\"margin\" data-fmt=\"absCompact\">—</span> ahead",
+  "from": "aac0275446"
+ },
+ "como-checamos.h2.1": {
+  "text": "How the data was checked, in 1 minute",
+  "from": "415ef7ed4c"
+ },
+ "como-checamos.p.1": {
+  "text": "People are terrible at making up numbers that look random: in experiments, even people paid to draw digits at random use some more than others (<a class=\"vf-src\" href=\"https://doi.org/10.1093/pan/mps003\" target=\"_blank\" rel=\"noopener\">Beber and Scacco, 2012</a>). Whoever alters results by hand leaves traces without noticing: digits repeated too often, percentages that are too round (<a class=\"vf-src\" href=\"https://doi.org/10.1214/16-AOAS904\" target=\"_blank\" rel=\"noopener\">Kobak, Shpilkin and Pshenichnikov, 2016</a>), voting machines with almost everyone voting for the same candidate (<a class=\"vf-src\" href=\"https://doi.org/10.1073/pnas.1210722109\" target=\"_blank\" rel=\"noopener\">Klimek et al., 2012</a>). We looked for these traces in the official data of the TSE (Superior Electoral Court), machine by machine.",
+  "from": "29248caade"
+ },
+ "como-checamos.p.2": {
+  "text": "To know what is “normal”, we used two yardsticks: what pure chance produces, and the 2022 election, with the same type of voting machine, the same TSE files and exactly the same method. If 2026 stays within both yardsticks, there is nothing out of the ordinary.",
+  "from": "06ec09e5d6"
+ },
+ "numeros-inventados.h3.1": {
+  "text": "Do the numbers look made up?",
+  "from": "04e21f085f"
+ },
+ "numeros-inventados.span.1": {
+  "text": "Normal",
+  "from": "a7248eeb45"
+ },
+ "numeros-inventados.p.1": {
+  "text": "Look at the last digit of each vote count: 1,234 ends in 4; 870 ends in 0. In real votes, this last digit is like a lottery draw: each number from 0 to 9 shows up in roughly 1 out of every 10 voting machines. People who make up numbers tend to use some digits more than others (<a class=\"vf-src\" href=\"https://doi.org/10.1093/pan/mps003\" target=\"_blank\" rel=\"noopener\">Beber and Scacco, 2012</a>), and that would show up as taller bars.",
+  "from": "f4bb6dea82"
+ },
+ "s-digits.arialabel.1": {
+  "text": "Bar chart: share of vote counts ending in each digit, from 0 to 9, for each candidate in the 2026 runoff. The result is in the text below the chart.",
+  "from": "62b915b72d"
+ },
+ "numeros-inventados.p.2": {
+  "text": "<b>Result:</b> in 2026, each digit appears at the end of <span data-source=\"digit_range\" data-row=\"0\" data-field=\"min\" data-fmt=\"pct\">—</span> to <span data-source=\"digit_range\" data-row=\"0\" data-field=\"max\" data-fmt=\"pct\">—</span> of the counts, for both candidates (we counted the voting machines where the candidate got 10 votes or more). That is exactly what a lottery draw would give.",
+  "from": "4053bfd8d8"
+ },
+ "resultados-redondos.h3.1": {
+  "text": "Are there voting machines with results that are too “round”?",
+  "from": "87623c1ece"
+ },
+ "resultados-redondos.span.1": {
+  "text": "Normal",
+  "from": "a7248eeb45"
+ },
+ "resultados-redondos.p.1": {
+  "text": "If someone adjusted results by hand, there would be too many voting machines with neat percentages, like Lula with exactly 50%, 60% or 70% of the votes: that is what was seen in elections in Russia (<a class=\"vf-src\" href=\"https://doi.org/10.1214/16-AOAS904\" target=\"_blank\" rel=\"noopener\">Kobak, Shpilkin and Pshenichnikov, 2016</a>). Some voting machines always land on round numbers by pure arithmetic (in a small machine, 100 votes split 50 to 50 give exactly 50%), so the result was compared with what chance produces on its own.",
+  "from": "9f352b8b0f"
+ },
+ "resultados-redondos.p.2": {
+  "text": "In the runoff there are only two candidates, so when Lula has a round percentage, Flávio does too (50% and 50%, 60% and 40%). The test covers both at the same time.",
+  "from": "b79ad5bb2e"
+ },
+ "resultados-redondos.p.3": {
+  "text": "<b>Result:</b> <span data-source=\"scorecard\" data-where=\"id=int|Lula share|2|2026\" data-field=\"observed\" data-fmt=\"int\">—</span> voting machines gave Lula an exact whole-number percentage. Chance alone would give about <span data-source=\"scorecard\" data-where=\"id=int|Lula share|2|2026\" data-field=\"expected\" data-fmt=\"int\">—</span>. Practically the same number.",
+  "from": "fde812e234"
+ },
+ "urnas-que-destoam.h3.1": {
+  "text": "Does any voting machine stand out too much from its neighbors?",
+  "from": "e8a2f57ced"
+ },
+ "urnas-que-destoam.span.1": {
+  "text": "Normal",
+  "from": "a7248eeb45"
+ },
+ "urnas-que-destoam.p.1": {
+  "text": "A single school usually has several voting machines, with voters from the same neighborhood; that is why their results tend to be similar: in the data, the typical difference between a machine and its neighbors is only <span data-source=\"scorecard\" data-where=\"id=pz|pos|2|2026\" data-field=\"stat\" data-fmt=\"dec2\">—</span> times what pure chance would give. A tampered machine would look very different from its neighbors. Even so, some machines stand out naturally: in 2022, <span data-source=\"scorecard\" data-where=\"id=pz|pos|2|2022\" data-field=\"observed\" data-fmt=\"int\">—</span> were far above their neighbors and <span data-source=\"scorecard\" data-where=\"id=pz|neg|2|2022\" data-field=\"observed\" data-fmt=\"int\">—</span> far below, when pure chance would give about <span data-source=\"scorecard\" data-where=\"id=pz|pos|2|2022\" data-field=\"expected\" data-fmt=\"int\">—</span> on each side. That is why what matters is the comparison with 2022. Below, how many voting machines were very different from their neighbors, on each side:",
+  "from": "9b82aa85c3"
+ },
+ "s-outliers.arialabel.1": {
+  "text": "Bar chart: how many voting machines were very different from their neighbors, in favor of each candidate, in 2026 and in 2022.",
+  "from": "5071455928"
+ },
+ "urnas-que-destoam.p.2": {
+  "text": "<b>Result:</b> the numbers are practically the same as in 2022, on both sides, a tiny fraction of the almost 500 thousand voting machines. <span data-cand=\"lula\">And <span data-source=\"scorecard\" data-where=\"id=persist|2026\" data-field=\"observed\" data-fmt=\"pctv\">—</span> of those that stood out in Lula's favor in the runoff were already above their neighbors in the first round, by a slightly looser yardstick (in 2022, <span data-source=\"scorecard\" data-where=\"id=persist|2022\" data-field=\"observed\" data-fmt=\"pctv\">—</span>): these are places that already voted differently, not machines that suddenly changed.</span>",
+  "from": "9252cb9e9d"
+ },
+ "urnas-quase-unanimes.h3.1": {
+  "text": "What about the voting machines where almost everyone voted for the same candidate?",
+  "from": "9c6a9617af"
+ },
+ "urnas-quase-unanimes.span.1": {
+  "text": "Stood out",
+  "from": "fe01c29156"
+ },
+ "urnas-quase-unanimes.p.1": {
+  "text": "A voting machine where almost everyone voted, and almost all for the same candidate, is the classic sign of a “padded” machine: that is how ballot stuffing was measured in elections in Russia (<a class=\"vf-src\" href=\"https://doi.org/10.1073/pnas.1210722109\" target=\"_blank\" rel=\"noopener\">Klimek et al., 2012</a>). So we counted the runoff voting machines with 95% or more turnout and 90% or more of the votes for a single candidate.",
+  "from": "2f2df00a17"
+ },
+ "urnas-quase-unanimes.p.2": {
+  "text": "<b>Lula:</b> there were <span data-source=\"corner_summary\" data-where=\"candidate=lula\" data-field=\"sections\" data-fmt=\"int\">—</span> voting machines; in 2022 there were <span data-source=\"scorecard\" data-where=\"id=corner|2|2022\" data-field=\"observed\" data-fmt=\"int\">—</span>. <span data-source=\"corner_summary\" data-where=\"candidate=lula\" data-field=\"strong_r1\" data-fmt=\"int\">—</span> of them already gave Lula 90% or more in the first round. What changed was turnout: among the machines where Lula got 90% or more, the share with 95% or more turnout went from <span data-source=\"strongholds\" data-where=\"id=2022|2|lula90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> in 2022 to <span data-source=\"strongholds\" data-where=\"id=2026|2|lula90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> in 2026. Comparing the same machines one by one, the number of registered voters barely changed (<span data-source=\"strongholds\" data-where=\"id=matched|lula90\" data-field=\"eligible_change\" data-fmt=\"pct\">—</span>), but the number of people who voted rose <span data-source=\"strongholds\" data-where=\"id=matched|lula90\" data-field=\"voters_change\" data-fmt=\"pct\">—</span>; in evenly split machines, the number who voted changed <span data-source=\"strongholds\" data-where=\"id=matched|mid\" data-field=\"voters_change\" data-fmt=\"pct\">—</span>.",
+  "from": "1c36297293"
+ },
+ "urnas-quase-unanimes.p.3": {
+  "text": "In Flávio's strongholds, this did not happen (<span data-source=\"strongholds\" data-where=\"id=2022|2|right90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> in 2022, <span data-source=\"strongholds\" data-where=\"id=2026|2|right90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> in 2026), and the pattern already appeared in the first round, which Flávio won. The data shows that more people voted in these places; it does not show why. The size, however, is small: the <span data-source=\"corner_summary\" data-where=\"candidate=lula\" data-field=\"sections\" data-fmt=\"int\">—</span> voting machines have <span data-source=\"corner_vs_margin\" data-row=\"0\" data-field=\"eligible\" data-fmt=\"int\">—</span> voters, <span data-source=\"corner_vs_margin\" data-row=\"0\" data-field=\"share\" data-fmt=\"pct\">—</span> of the final margin. And if turnout in all of Lula's strongholds had stayed at the 2022 level, there would have been about <span data-source=\"stronghold_excess\" data-row=\"0\" data-field=\"excess\" data-fmt=\"int\">—</span> fewer voters, <span data-source=\"stronghold_excess\" data-row=\"0\" data-field=\"share\" data-fmt=\"pct\">—</span> of the margin.",
+  "from": "f3b25f9d68"
+ },
+ "urnas-quase-unanimes.p.4": {
+  "text": "<b>Flávio:</b> there were <span data-source=\"corner_summary\" data-where=\"candidate=flavio\" data-field=\"sections\" data-fmt=\"int\">—</span> voting machines; in 2022, Jair Bolsonaro had <span data-source=\"scorecard\" data-where=\"id=corner|2|2022\" data-field=\"stat\" data-fmt=\"int\">—</span>. They are small places in the countryside, four of them in the South, that already voted heavily for him in the first round. Together, they have <span data-source=\"corner_summary\" data-where=\"candidate=flavio\" data-field=\"eligible\" data-fmt=\"int\">—</span> voters.",
+  "from": "f6a0b24118"
+ },
+ "urnas-quase-unanimes.p.5": {
+  "text": "<b>Result:</b> this is the test where 2026 departs most from 2022, and this data does not explain why. But the effect is too small to change the result.",
+  "from": "c45f1b7f68"
+ },
+ "urnas-quase-unanimes.button.1": {
+  "text": "Show the full list of these voting machines",
+  "from": "7f59a0529f"
+ },
+ "virada-na-apuracao.h3.1": {
+  "text": "Is the turnaround during the count suspicious?",
+  "from": "3b6f63ee5e"
+ },
+ "virada-na-apuracao.span.1": {
+  "text": "Normal",
+  "from": "a7248eeb45"
+ },
+ "virada-na-apuracao.p.1": {
+  "text": "On election night, the lead changed hands twice. Lula opened the count in front; at 7:45 pm, with 13% of the voting machines counted, Flávio took the lead; at 8:25 pm, with 47%, Lula went back in front and did not lose the lead again (<a class=\"vf-src\" href=\"https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html\" target=\"_blank\" rel=\"noopener\">Terra</a>). Tally reports do not arrive in random order: each place finishes voting and transmission at its own time, and the ones that arrived last voted more for Lula. 2022 was similar: Bolsonaro led at the start and Lula pulled ahead with about two thirds of the votes counted (chart below).",
+  "from": "f23f98c0f7"
+ },
+ "virada-na-apuracao.p.2": {
+  "text": "In 2026 there was one more detail. Around 5 pm, Justice Cristiano Zanin, of the STF, extended voting until 7 pm, because of a lack of buses in cities in several states; the exact time varies between sources (4:32 pm according to Rádio Senado, shortly after 5 pm according to <a class=\"vf-src\" href=\"https://www.gazetadopovo.com.br/eleicoes/2026/tse-responde-flavio-e-diz-que-fiscais-nao-foram-retirados-da-sala-cofre/\" target=\"_blank\" rel=\"noopener\">Gazeta do Povo</a>). The press disagreed on its scope: according to <a class=\"vf-src\" href=\"https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026\" target=\"_blank\" rel=\"noopener\">Rádio Senado</a>, it applied to the whole country, but sections that had already closed did not reopen, and in the Federal District it was not applied in the end; according to <a class=\"vf-src\" href=\"https://exame.com/brasil/o-horario-da-votacao-sera-estendido/\" target=\"_blank\" rel=\"noopener\">Exame</a>, it applied only to the affected sections. The TSE only began releasing the count at 7 pm (<a class=\"vf-src\" href=\"https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html\" target=\"_blank\" rel=\"noopener\">Terra</a>), and <span data-source=\"late_share\" data-row=\"0\" data-field=\"share\" data-fmt=\"pct\">—</span> of the votes reached the TSE after that time. In the logs of <span data-source=\"urna_logs\" data-where=\"id=random|2\" data-field=\"machines\" data-fmt=\"int\">—</span> randomly drawn voting machines, half had closed by <span data-source=\"urna_logs\" data-where=\"id=random|2\" data-field=\"close_median\" data-fmt=\"hm\">—</span>: the arrival time shows when the tally report was received by the TSE, not when the machine closed (question 8).",
+  "from": "bbe09c78f0"
+ },
+ "virada-na-apuracao.p.3": {
+  "text": "Each line shows one candidate's percentage of the two as the votes were counted. The bottom axis is how much of the count had already been done.",
+  "from": "252c8d4231"
+ },
+ "s-progress.arialabel.1": {
+  "text": "Line chart: each candidate's percentage of the two as the votes were counted, in the 2022 and 2026 runoffs.",
+  "from": "c0c3b99298"
+ },
+ "virada-na-apuracao.p.4": {
+  "text": "<b>Result:</b> the two elections have the same shape. And, comparing voting machines in the same electoral zone, the ones that arrived late barely differ from the ones that arrived early: the turnaround comes from which places finish counting last, not from the time the votes arrived.",
+  "from": "46881e12e9"
+ },
+ "de-onde-veio-a-virada.h3.1": {
+  "text": "Where did the turnaround come from?",
+  "from": "915c90a6c6"
+ },
+ "de-onde-veio-a-virada.span.1": {
+  "text": "The numbers add up",
+  "from": "5e42d801db"
+ },
+ "de-onde-veio-a-virada.p.1": {
+  "text": "In the first round, Flávio got <span data-source=\"summary\" data-where=\"year=2026&amp;round=1\" data-field=\"margin\" data-fmt=\"absCompact\">—</span> more votes than Lula. In the runoff, Lula finished <span data-source=\"summary\" data-where=\"year=2026&amp;round=2\" data-field=\"margin\" data-fmt=\"absCompact\">—</span> ahead. How? The <span data-source=\"between_rounds\" data-where=\"id=others\" data-field=\"r1\" data-fmt=\"compact\">—</span> votes of the candidates who left the race were freed up, turnout rose by <span data-source=\"between_rounds\" data-where=\"id=turnout\" data-field=\"change\" data-fmt=\"absCompact\">—</span> and blank and spoiled votes fell by <span data-source=\"between_rounds\" data-where=\"id=blank_null\" data-field=\"change\" data-fmt=\"absCompact\">—</span>. These votes were split: Lula gained <span data-source=\"between_rounds\" data-where=\"id=lula\" data-field=\"change\" data-fmt=\"absCompact\">—</span> and Flávio <span data-source=\"between_rounds\" data-where=\"id=flavio\" data-field=\"change\" data-fmt=\"absCompact\">—</span>.",
+  "from": "8bd12d8ad1"
+ },
+ "de-onde-veio-a-virada.p.2": {
+  "text": "How much each group gained (right) or lost (left) from the first round to the runoff.",
+  "from": "d31cb10d3b"
+ },
+ "s-balance.arialabel.1": {
+  "text": "Bar chart: how much each group gained or lost from the first round to the 2026 runoff: Lula, Flávio, candidates who left the race, abstentions, blank and spoiled votes.",
+  "from": "2000e7e854"
+ },
+ "de-onde-veio-a-virada.p.3": {
+  "text": "<b>Result:</b> the vote is secret, so nobody knows whom each voter voted for. But the numbers add up: everything that left one side came in on the other.",
+  "from": "9b72dcc19a"
+ },
+ "soma-oficial.h3.1": {
+  "text": "Does the sum of the voting machines match the official result?",
+  "from": "809f09fbfc"
+ },
+ "soma-oficial.span.1": {
+  "text": "Normal",
+  "from": "a7248eeb45"
+ },
+ "soma-oficial.p.1": {
+  "text": "The tally reports were added up machine by machine and compared with the totals the TSE publishes by municipality and electoral zone, across the <span data-source=\"consistency\" data-where=\"id=2026|1|QT_APTOS\" data-field=\"units\" data-fmt=\"int\">—</span> first-round units. Eligible voters, turnout, abstentions, blank and spoiled votes matched exactly in all of them.",
+  "from": "42f74aea20"
+ },
+ "soma-oficial.p.2": {
+  "text": "Valid votes differ in <span data-source=\"consistency\" data-where=\"id=2026|1|QT_VOTOS_NOMINAIS\" data-field=\"units_with_difference\" data-fmt=\"int\">—</span> units, and in each of them the difference is exactly the number of votes cast for Leonardo Alves de Araújo (Leonardo Avalanche, of the PRTB, number 28), <span data-source=\"consistency\" data-where=\"id=2026|1|QT_VOTOS_NOMINAIS\" data-field=\"abs_difference\" data-fmt=\"int\">—</span> in total. He withdrew his presidential candidacy on September 30, four days before the first round (<a class=\"vf-src\" href=\"https://www.cnnbrasil.com.br/eleicoes/leonardo-avalanche-do-prtb-desiste-de-candidatura-a-presidencia/\" target=\"_blank\" rel=\"noopener\">CNN Brasil</a>), when his number was already on the voting machine. In the per-machine files, these votes appear as votes for him; in the official total, the TSE counts them as “technical spoiled votes”, and the official first-round report shows exactly that number (<a class=\"vf-src\" href=\"https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip\" target=\"_blank\" rel=\"noopener\">TSE</a>). None of this has anything to do with the race between Lula and Flávio.",
+  "from": "60afba5844"
+ },
+ "soma-oficial.p.3": {
+  "text": "The runoff totals by municipality and zone were published by the TSE on October 27. In the <span data-source=\"consistency\" data-where=\"id=2026|2|QT_APTOS\" data-field=\"units\" data-fmt=\"int\">—</span> units, the sum of the voting machines matched exactly in every field: eligible voters, turnout, abstentions, blank votes, spoiled votes and each candidate's votes, <span data-source=\"consistency\" data-where=\"id=2026|2|13\" data-field=\"official\" data-fmt=\"int\">—</span> for Lula and <span data-source=\"consistency\" data-where=\"id=2026|2|22\" data-field=\"official\" data-fmt=\"int\">—</span> for Flávio. The same numbers were also checked against the official runoff tallying report (<a class=\"vf-src\" href=\"https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip\" target=\"_blank\" rel=\"noopener\">TSE</a>), for the country total and for each of the 27 states and Abroad, with no difference at all.",
+  "from": "595894f3d2"
+ },
+ "soma-oficial.p.4": {
+  "text": "What this check shows, and what it does not show: the totals by municipality come from the same count of the tally reports, so it confirms that the TSE's files agree with each other, not that each tally report correctly recorded the votes of its voting machine. That is checked against each machine's printed tally report, which is public, and with the TSE's audits. In 2022, the Armed Forces' inspection, sent to the TSE by the Ministry of Defense, compared tally reports with the TSE's numbers and found no discrepancy (<a class=\"vf-src\" href=\"https://jovempan.com.br/noticias/politica/relatorio-da-defesa-sobre-urnas-nao-aponta-fraude-nas-eleicoes.html\" target=\"_blank\" rel=\"noopener\">Jovem Pan</a>); the ministry noted that the work also did not rule out the possibility of fraud, citing, among other points, restrictions on the technicians' access to the voting machines' source code (<a class=\"vf-src\" href=\"https://www.gov.br/defesa/pt-br/centrais-de-conteudo/relatorio-das-forcas-armadas-nao-excluiu-a-possibilidade-de-fraude-ou-inconsistencia-nas-urnas-eletronicas\" target=\"_blank\" rel=\"noopener\">Ministério da Defesa</a>).",
+  "from": "10d81fae86"
+ },
+ "soma-oficial.p.5": {
+  "text": "<b>Result:</b> in both rounds, the sum of the voting machines reproduces the official totals. The only difference, in the first round, is the votes for a candidate who withdrew, counted as spoiled.",
+  "from": "4793a5e46f"
+ },
+ "alegacoes.h3.1": {
+  "text": "What about the fraud claims made after the runoff?",
+  "from": "3272b42032"
+ },
+ "alegacoes.p.1": {
+  "text": "On the night of the runoff, Flávio Bolsonaro said he did not recognize the election and would ask the TSE to annul it, citing the extension of voting and what he said was the removal of PL inspectors from the secure room (<a class=\"vf-src\" href=\"https://www.infomoney.com.br/politica/flavio-nao-reconhece-resultado-da-eleicao-e-diz-que-pedira-anulacao-ao-tse/\" target=\"_blank\" rel=\"noopener\">InfoMoney</a>, <a class=\"vf-src\" href=\"https://www.gazetadopovo.com.br/eleicoes/2026/flavio-bolsonaro-pronunciamento-anulacao-eleicao/\" target=\"_blank\" rel=\"noopener\">Gazeta do Povo</a>). The next day, the PL, Flávio's party, released a statement saying it recognizes “the presidential result, proclaimed by the Superior Electoral Court”, but that the questions raised need to be clarified; Flávio then said he would no longer ask for the annulment, and signaled support for a request to revoke the mandate of Lula's ticket (<a class=\"vf-src\" href=\"https://diariodonordeste.verdesmares.com.br/pontopoder/pl-reconhece-resultado-das-eleicoes-2026-mas-cobras-esclarecimentos-apos-derrota-de-flavio-1.3801638\" target=\"_blank\" rel=\"noopener\">Diário do Nordeste</a>). Eduardo Bolsonaro and Nikolas Ferreira also spoke of fraud, without presenting evidence (<a class=\"vf-src\" href=\"https://www.diariodepernambuco.com.br/politica/2026/10/11727686-sem-provas-eduardo-bolsonaro-acusa-fraude-e-pede-que-comunidade-internacional-nao-reconheca-vitoria-de-lula.html\" target=\"_blank\" rel=\"noopener\">Diario de Pernambuco</a>, <a class=\"vf-src\" href=\"https://www.em.com.br/politica/2026/10/7527778-nikolas-sugere-que-houve-fraude-na-eleicao.html\" target=\"_blank\" rel=\"noopener\">Estado de Minas</a>). Each argument is below, with what the data shows.",
+  "from": "980cb0e4e8"
+ },
+ "alegacoes.dt.1": {
+  "text": "“Lula's turnaround is statistically impossible”",
+  "from": "78b1e48e72"
+ },
+ "alegacoes.p.2": {
+  "text": "<b>The argument:</b> the eliminated candidates had about 9 million votes and Lula gained more than 10 million, so all of them would have had to go to Lula.",
+  "from": "9c2b192968"
+ },
+ "alegacoes.p.3": {
+  "text": "<b>The data:</b> the calculation leaves out two sources of votes. From the first round to the runoff, turnout rose by <span data-source=\"net_available\" data-row=\"0\" data-field=\"turnout_up\" data-fmt=\"absCompact\">—</span> and blank and spoiled votes fell by <span data-source=\"net_available\" data-row=\"0\" data-field=\"blank_null_down\" data-fmt=\"absCompact\">—</span>. Added to the <span data-source=\"net_available\" data-row=\"0\" data-field=\"eliminated\" data-fmt=\"absCompact\">—</span> from all the eliminated candidates, that left <span data-source=\"net_available\" data-row=\"0\" data-field=\"available\" data-fmt=\"absCompact\">—</span> votes for the two finalists. Lula gained <span data-source=\"net_available\" data-row=\"0\" data-field=\"lula_gain\" data-fmt=\"absCompact\">—</span> of them (<span data-source=\"net_available\" data-row=\"0\" data-field=\"lula_share\" data-fmt=\"pct\">—</span>) and Flávio, <span data-source=\"net_available\" data-row=\"0\" data-field=\"flavio_gain\" data-fmt=\"absCompact\">—</span>: they did not all need to go to Lula. Because the vote is secret, these numbers are net balances, not each voter's choice (question 6).",
+  "from": "c9abf4451c"
+ },
+ "alegacoes.dt.2": {
+  "text": "“Lula grew in every state”",
+  "from": "01ddcc10cf"
+ },
+ "alegacoes.p.4": {
+  "text": "<b>The data:</b> the same thing happened in 2022, in the opposite direction. From the first round to the runoff in 2022, Bolsonaro's share of the two candidates rose in <span data-source=\"swing_years\" data-where=\"year=2022\" data-field=\"right_up\" data-fmt=\"int\">—</span> of the <span data-source=\"swing_years\" data-where=\"year=2022\" data-field=\"units\" data-fmt=\"int\">—</span> units (the 27 states and Abroad), by between <span data-source=\"swing_years\" data-where=\"year=2022\" data-field=\"min\" data-fmt=\"pp\">—</span> and <span data-source=\"swing_years\" data-where=\"year=2022\" data-field=\"max\" data-fmt=\"pp\">—</span>; in 2026, Lula's rose in <span data-source=\"swing_years\" data-where=\"year=2026\" data-field=\"lula_up\" data-fmt=\"int\">—</span> of the <span data-source=\"swing_years\" data-where=\"year=2026\" data-field=\"units\" data-fmt=\"int\">—</span>, by between <span data-source=\"swing_years\" data-where=\"year=2026\" data-field=\"min\" data-fmt=\"pp\">—</span> and <span data-source=\"swing_years\" data-where=\"year=2026\" data-field=\"max\" data-fmt=\"pp\">—</span>. In both elections, whoever grew between the rounds grew across the whole country.",
+  "from": "2b588625cd"
+ },
+ "alegacoes.dt.3": {
+  "text": "“The extension until 7 pm changed the rules in the middle of the game”",
+  "from": "3d5f13ff72"
+ },
+ "alegacoes.p.5": {
+  "text": "<b>The facts:</b> Justice Cristiano Zanin, of the STF, extended voting at the request of Lula's campaign, because of the lack of buses; Flávio's campaign had also asked for an extension in municipalities in São Paulo, Paraná and Santa Catarina, because of rain (<a class=\"vf-src\" href=\"https://www.infomoney.com.br/politica/flavio-nao-reconhece-resultado-da-eleicao-e-diz-que-pedira-anulacao-ao-tse/\" target=\"_blank\" rel=\"noopener\">InfoMoney</a>). The time of the decision varies between sources: 4:32 pm according to <a class=\"vf-src\" href=\"https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026\" target=\"_blank\" rel=\"noopener\">Rádio Senado</a>, shortly after 5 pm according to <a class=\"vf-src\" href=\"https://www.gazetadopovo.com.br/eleicoes/2026/tse-responde-flavio-e-diz-que-fiscais-nao-foram-retirados-da-sala-cofre/\" target=\"_blank\" rel=\"noopener\">Gazeta do Povo</a>. Sections that had already closed did not reopen. The claim that PL inspectors were removed from the tallying room was classified as false by the TSE, which says it has videos showing the inspectors' access until the end of the count (<a class=\"vf-src\" href=\"https://www.gazetadopovo.com.br/eleicoes/2026/tse-responde-flavio-e-diz-que-fiscais-nao-foram-retirados-da-sala-cofre/\" target=\"_blank\" rel=\"noopener\">Gazeta do Povo</a>).",
+  "from": "88cc747c15"
+ },
+ "alegacoes.p.6": {
+  "text": "<b>The data:</b> the voting machines' logs, published by the TSE on the <a class=\"vf-src\" href=\"https://resultados.tse.jus.br/oficial/app/index.html\" target=\"_blank\" rel=\"noopener\">results site</a>, show what time each machine closed and when each vote was recorded. We read the logs of <span data-source=\"urna_logs\" data-where=\"id=random|2\" data-field=\"machines\" data-fmt=\"int\">—</span> voting machines drawn at random across the country. In the runoff, half of them had closed by <span data-source=\"urna_logs\" data-where=\"id=random|2\" data-field=\"close_median\" data-fmt=\"hm\">—</span>, and only <span data-source=\"urna_logs\" data-where=\"id=random|2\" data-field=\"late_pct\" data-fmt=\"pctv\">—</span> of the votes were recorded after 5 pm, Brasília time; in the first round, with no extension, it was <span data-source=\"urna_logs\" data-where=\"id=random|1\" data-field=\"late_pct\" data-fmt=\"pctv\">—</span>, from voters who were already in line at 5 pm. Only <span data-source=\"urna_logs\" data-where=\"id=random|2\" data-field=\"open_after_18\" data-fmt=\"pct\">—</span> of the machines stayed open after 6 pm, but the <span data-source=\"urna_logs\" data-where=\"id=open_late\" data-field=\"machines\" data-fmt=\"int\">—</span> that stayed open until close to 7 pm received, together, <span data-source=\"urna_logs\" data-where=\"id=open_late\" data-field=\"late\" data-fmt=\"int\">—</span> voters after 5 pm. Projected to the whole country, that would be about <span data-source=\"urna_logs\" data-where=\"id=national\" data-field=\"votes_est\" data-fmt=\"compact0\">—</span> votes after 5 pm (between <span data-source=\"urna_logs\" data-where=\"id=national\" data-field=\"est_low\" data-fmt=\"compact0\">—</span> and <span data-source=\"urna_logs\" data-where=\"id=national\" data-field=\"est_high\" data-fmt=\"compact0\">—</span>), <span data-source=\"urna_logs\" data-where=\"id=national\" data-field=\"margin_share\" data-fmt=\"pct\">—</span> of the final margin: even if all of them went to Lula, the result would be the same.",
+  "from": "495a8fe63e"
+ },
+ "alegacoes.dt.4": {
+  "text": "“Poll workers voted in place of absent voters” (so-called “voto espírita”, ghost voting)",
+  "from": "057268e04f"
+ },
+ "alegacoes.p.7": {
+  "text": "<b>The facts:</b> the TSE classified the claim as false: voters must show a photo ID, and the identification is recorded (<a class=\"vf-src\" href=\"https://fastcompanybrasil.com/news/eleicoes-2026-verdade-mentira-sobre-2-turno/\" target=\"_blank\" rel=\"noopener\">Fast Company Brasil</a>).",
+  "from": "4742bf9817"
+ },
+ "alegacoes.p.8": {
+  "text": "<b>The data:</b> there is a related point, shown in question 4: in the voting machines where Lula got 90% or more, more people voted than in 2022, with the same number of registered voters. If poll workers voted in place of absent voters, these machines would have more voters identified without a fingerprint, and votes after 5 pm. The machine logs show the opposite. In Lula's <span data-source=\"urna_logs\" data-where=\"id=corner_lula|2\" data-field=\"machines\" data-fmt=\"int\">—</span> near-unanimous voting machines, <span data-source=\"urna_logs\" data-where=\"id=corner_lula|2\" data-field=\"nofp_share\" data-fmt=\"pct\">—</span> of the runoff votes came from voters identified without a fingerprint, less than in the machines drawn at random across the country (<span data-source=\"urna_logs\" data-where=\"id=random|2\" data-field=\"nofp_share\" data-fmt=\"pct\">—</span>) and in Flávio's strongholds (<span data-source=\"urna_logs\" data-where=\"id=right90|2\" data-field=\"nofp_share\" data-fmt=\"pct\">—</span>); manual release by the poll worker, used when the fingerprint is not recognized, was <span data-source=\"urna_logs\" data-where=\"id=corner_lula|2\" data-field=\"manual_share\" data-fmt=\"pct\">—</span>, against <span data-source=\"urna_logs\" data-where=\"id=random|2\" data-field=\"manual_share\" data-fmt=\"pct\">—</span> in the country and <span data-source=\"urna_logs\" data-where=\"id=right90|2\" data-field=\"manual_share\" data-fmt=\"pct\">—</span> in Flávio's strongholds. Of the <span data-source=\"urna_logs\" data-where=\"id=corner_change\" data-field=\"added\" data-fmt=\"int\">—</span> additional voters from the first round to the runoff in these machines, <span data-source=\"urna_logs\" data-where=\"id=corner_change\" data-field=\"added_fp\" data-fmt=\"int\">—</span> were identified by fingerprint, and only <span data-source=\"urna_logs\" data-where=\"id=corner_lula|2\" data-field=\"late_pct\" data-fmt=\"pctv\">—</span> of their votes came after 5 pm. The rise in turnout compared with 2022 remains unexplained in this data, but even if all of it were fake, it would be about <span data-source=\"stronghold_excess\" data-row=\"0\" data-field=\"excess\" data-fmt=\"int\">—</span> voters, <span data-source=\"stronghold_excess\" data-row=\"0\" data-field=\"share\" data-fmt=\"pct\">—</span> of the final margin.",
+  "from": "34d9397605"
+ },
+ "alegacoes.dt.5": {
+  "text": "“The polls had Flávio ahead”",
+  "from": "1f0ae29539"
+ },
+ "alegacoes.p.9": {
+  "text": "<b>The facts:</b> the last Quaest poll, the day before, had Flávio with 51% and Lula with 49% of the valid votes, a statistical tie within the 2-point margin of error (<a class=\"vf-src\" href=\"https://exame.com/brasil/pesquisa-quaest-na-vespera-do-2o-turno-flavio-bolsonaro-tem-51-e-lula-49/\" target=\"_blank\" rel=\"noopener\">Exame</a>). Polls miss in both directions: in 2022, the Datafolha poll the day before gave Lula 52% of the valid votes (<a class=\"vf-src\" href=\"https://www.opovo.com.br/eleicoes-2022/2022/10/29/pesquisa-datafolha-lula-52-bolsonaro-48-no-2-turno.html\" target=\"_blank\" rel=\"noopener\">O Povo</a>), and he finished with <span data-source=\"summary\" data-where=\"year=2022&amp;round=2\" data-field=\"lula_share\" data-fmt=\"pct\">—</span>. Polls are not part of this data, and a difference between a poll and the ballot box is not, on its own, a sign of fraud.",
+  "from": "5350c86dcd"
+ },
+ "alegacoes.p.10": {
+  "text": "<b>Result:</b> the two most repeated calculations, the one about the turnaround and the one about the states, do not hold up against the official numbers. And the logs from a sample of voting machines show that the extension brought in few votes and that Lula's near-unanimous voting machines did not have more voters identified without a fingerprint than the rest of the country.",
+  "from": "92d7628fd1"
+ },
+ "outros-metodos.h3.1": {
+  "text": "What about other methods, and the voting machines' signatures?",
+  "from": "7cac5651c0"
+ },
+ "outros-metodos.span.1": {
+  "text": "Normal",
+  "from": "a7248eeb45"
+ },
+ "outros-metodos.p.1": {
+  "text": "We applied more tests, from other methods, each built for one type of fraud: a program that acted only on large voting machines, one that switched a fixed percentage of the votes in the runoff, machines standing out from the rest of the polling place, votes added in sections with high turnout, a model that estimates how many sections would have been rigged, and bursts of votes in the machine logs. In the section-size test and in the mixture model, the fraud each one looks for was planted in the real data, and the test found it. In the real data, none showed fraud capable of changing the result. The proportional-switch test cannot decide, but even in the worst case Lula would still win, by about <span data-source=\"more_tests\" data-where=\"id=prop|planted\" data-field=\"margin_without\" data-fmt=\"compact\">—</span> votes. The test for votes added under high turnout, applied to the whole country, gives an “excess” for Lula because turnout rose more in the states where he is strongest; state by state, the excess is larger for Flávio, as it was for Bolsonaro in 2022. Even counting all of it as fake, Lula would win by <span data-source=\"more_tests\" data-where=\"id=shpilkin|bound\" data-field=\"margin_after\" data-fmt=\"compact\">—</span>. And the second-digit test “fails” 2022 and 2026 equally: it is not suited to section counts.",
+  "from": "5a28bd7a49"
+ },
+ "outros-metodos.p.2": {
+  "text": "In addition, in <span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"checked\" data-fmt=\"int\">—</span> voting machines from the sample, the files' digital signatures were verified: nothing was altered after leaving the machine, the tally report has the published numbers, and the votes in the digital vote record, recounted, match the tally report.",
+  "from": "cc1676bdd5"
+ },
+ "outros-metodos.p.3": {
+  "text": "<b>Result:</b> the other methods reach the same conclusion as the earlier ones, and the files checked are the ones the voting machines signed. The details are in the Technical version, under “More tests”.",
+  "from": "40000a697e"
+ },
+ "com-2018.h3.1": {
+  "text": "And compared with 2018?",
+  "from": "e953968888"
+ },
+ "com-2018.span.1": {
+  "text": "Normal",
+  "from": "a7248eeb45"
+ },
+ "com-2018.p.1": {
+  "text": "The 2018 election (Haddad vs. Jair Bolsonaro) was added as a second reference, to see how much the numbers vary from one election to another without fraud. A number that circulated after the runoff: in <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"lula_up_right_down\" data-fmt=\"int\">—</span> sections Lula gained votes and Flávio lost, against <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"right_up_lula_down\" data-fmt=\"int\">—</span> the other way around, a ratio of <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"ratio\" data-fmt=\"ratio\">—</span>. The same calculation gives <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2022\" data-field=\"ratio\" data-fmt=\"ratio\">—</span> in favor of Jair Bolsonaro in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2018\" data-field=\"ratio\" data-fmt=\"ratio\">—</span> in favor of Haddad in 2018, and both of them lost. A model in which nothing abnormal happened, using only each candidate's gain in each municipality, already gives <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"null_ratio\" data-fmt=\"ratio\">—</span> in 2026: the ratio grows very quickly with the size of the turnaround.",
+  "from": "0d83f58aa6"
+ },
+ "com-2018.p.2": {
+  "text": "We also built a model that predicts each section's runoff without seeing its municipality, and an automatic detector of odd sections. In the model, 2026 falls between 2022 and 2018 or below both; in the detector, 2026 is close to 2022 (2018 has more sections flagged because it has different levels of blank votes, spoiled votes and section size). Both only catch large or concentrated fraud. The sections the detector finds oddest are, in all three years, those Abroad, small ones, those in prisons and those in Indigenous villages.",
+  "from": "8731971a0a"
+ },
+ "com-2018.p.3": {
+  "text": "<b>Result:</b> with two reference elections, 2026 does not stand out. The exception is the one in question 4: the near-unanimous sections for Lula (<span data-source=\"tres_eleicoes\" data-where=\"id=ref|2026\" data-field=\"corner_lula\" data-fmt=\"int\">—</span>) outnumber those in 2022 and 2018 (<span data-source=\"tres_eleicoes\" data-where=\"id=ref|2022\" data-field=\"corner_lula\" data-fmt=\"int\">—</span> and <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2018\" data-field=\"corner_lula\" data-fmt=\"int\">—</span>). The details are in the Technical version, under “With 2018 too”.",
+  "from": "2a07ff6059"
+ },
+ "limites.h2.1": {
+  "text": "What these tests cannot show",
+  "from": "048fc08e4c"
+ },
+ "limites.p.1": {
+  "text": "They find numbers made up by hand and “padded” voting machines. They do not find a change that altered every voting machine in the same proportion: all these tests compare each machine with its neighbors, with chance or with 2022, and an equal change in every machine would leave the digits random and each machine similar to its neighbors. For that there are other controls, which are outside this data: each machine's printed tally report, which is made public, and the TSE's audits and voting machine tests.",
+  "from": "1ebb0eea65"
+ },
+ "glossario.h2.1": {
+  "text": "Words used on this page",
+  "from": "f1be49097a"
+ },
+ "glossario.dt.1": {
+  "text": "Voting machine or section",
+  "from": "977b688b7a"
+ },
+ "glossario.dd.1": {
+  "text": "Each electoral section has one voting machine. Here, the two words are used as synonyms.",
+  "from": "6a4e7eb380"
+ },
+ "glossario.dt.2": {
+  "text": "Tally report (boletim de urna)",
+  "from": "da66d6c065"
+ },
+ "glossario.dd.2": {
+  "text": "The result each voting machine prints at the end of voting, with each candidate's votes. The TSE (Superior Electoral Court) publishes all of them.",
+  "from": "fc6ccf3801"
+ },
+ "glossario.dt.3": {
+  "text": "Turnout",
+  "from": "37c61f1503"
+ },
+ "glossario.dd.3": {
+  "text": "The share of eligible voters who went to vote.",
+  "from": "f19eb57abd"
+ },
+ "glossario.dt.4": {
+  "text": "Valid votes",
+  "from": "39187c4503"
+ },
+ "glossario.dd.4": {
+  "text": "Votes cast for candidates, not counting blank and spoiled votes.",
+  "from": "8c2ced5372"
+ },
+ "glossario.dt.5": {
+  "text": "Yardstick (2022)",
+  "from": "871652e60b"
+ },
+ "glossario.dd.5": {
+  "text": "The previous election, which shows how a normal election does on the same tests.",
+  "from": "7f6454bf7f"
+ },
+ "glossario.button.1": {
+  "text": "See all the tests in the technical version",
+  "from": "5e732c7a09"
+ },
+ "tecnico.p.1": {
+  "text": "In <b data-source=\"summary\" data-where=\"year=2026&amp;round=2\" data-field=\"sections\" data-fmt=\"int\">—</b> tally reports, neither the round-number tests nor the normal-curve tests show votes made up or added in a quantity capable of changing Lula's runoff victory, by a margin of <b data-source=\"summary\" data-where=\"year=2026&amp;round=2\" data-field=\"margin\" data-fmt=\"signedCompact\">—</b> votes. The pattern that departs most from 2022, used here as a reference, is sections with near-total turnout and almost all votes for Lula: they became more common, this data does not explain why, and even a generous bound on their effect comes to <b data-source=\"stronghold_excess\" data-row=\"0\" data-field=\"share\" data-fmt=\"pct\">—</b> of the margin.",
+  "from": "f81f828b74"
+ },
+ "como-ler.h2.1": {
+  "text": "How to read this version",
+  "from": "bef9db1f7a"
+ },
+ "como-ler.p.1": {
+  "text": "Here are all the tests, with the values and statistics for each one. For an explanation without jargon, see the <button type=\"button\" class=\"vf-inline\" data-goto=\"simples\">Summary for everyone</button>.",
+  "from": "183bfb52cb"
+ },
+ "como-ler.dt.1": {
+  "text": "p-value (p)",
+  "from": "10fe206660"
+ },
+ "como-ler.dd.1": {
+  "text": "The chance that a result this far from what is expected would appear by chance alone. Below 0.05 (5%) it is usually worth a closer look; but, with many tests, some fall below that by pure chance. <a href=\"https://filipezabala.com/fs/th-class#p-value\" target=\"_blank\" rel=\"noopener\">Learn more</a>",
+  "from": "8da4528629"
+ },
+ "como-ler.dt.2": {
+  "text": "z",
+  "from": "594e519ae4"
+ },
+ "como-ler.dd.2": {
+  "text": "How many standard deviations a value is from what is expected. In a normal curve, 95% of values fall between −2 and +2, and only 6 in 100,000 go beyond ±4.",
+  "from": "ca7ce1bb3d"
+ },
+ "como-ler.dt.3": {
+  "text": "Normal curve",
+  "from": "b9e4341448"
+ },
+ "como-ler.dd.3": {
+  "text": "The bell-shaped curve that describes how values spread around the mean when many small independent variations add up. <a href=\"https://filipezabala.com/fs/scd#normal\" target=\"_blank\" rel=\"noopener\">Learn more</a>",
+  "from": "8cb5142d03"
+ },
+ "como-ler.dt.4": {
+  "text": "Standard deviation (sd)",
+  "from": "6dcf79766c"
+ },
+ "como-ler.dd.4": {
+  "text": "The typical distance between the values and the mean. In a normal curve, 95% of cases fall less than 2 standard deviations from the mean. <a href=\"https://filipezabala.com/fs/measures-of-dispersion#standard-deviation\" target=\"_blank\" rel=\"noopener\">Learn more</a>",
+  "from": "8f08e70e1d"
+ },
+ "como-ler.dt.5": {
+  "text": "Logarithmic scale",
+  "from": "0c854ccbb8"
+ },
+ "como-ler.dd.5": {
+  "text": "Each line on the axis is worth 10 times the previous one. It lets very large and very small numbers be shown on the same chart.",
+  "from": "3cc2350c99"
+ },
+ "como-ler.dt.6": {
+  "text": "p.p. (percentage points)",
+  "from": "2c19683d8f"
+ },
+ "como-ler.dd.6": {
+  "text": "The difference between two percentages: from 50% to 52% is 2 p.p.",
+  "from": "0e7066e131"
+ },
+ "como-ler.dt.7": {
+  "text": "Correlation (r)",
+  "from": "c634915741"
+ },
+ "como-ler.dd.7": {
+  "text": "Measures whether two things rise together: 0 is no relationship, 1 is a perfect relationship. <a href=\"https://filipezabala.com/fs/correlation#pearson\" target=\"_blank\" rel=\"noopener\">Learn more</a>",
+  "from": "647f095a72"
+ },
+ "como-ler.dt.8": {
+  "text": "Mirror (Flávio)",
+  "from": "4fbd6b6daa"
+ },
+ "como-ler.dd.8": {
+  "text": "In the runoff there are only two candidates, so Flávio's percentage is exactly 100% minus Lula's. The charts of Flávio's percentage are the mirror image of Lula's, calculated from the same data. Vote counts (last digit, round numbers), on the other hand, are independent for each one.",
+  "from": "67973daa3e"
+ },
+ "como-ler.p.2": {
+  "text": "The “Learn more” links lead to the book <i>Fundamentals of Statistics</i>, by Filipe J. Zabala.",
+  "from": "498858d0e5"
+ },
+ "destaques.div.1": {
+  "text": "Lula, runoff",
+  "from": "08ce65b127"
+ },
+ "destaques.div.2": {
+  "text": "of valid votes · first round <span data-source=\"summary\" data-where=\"year=2026&amp;round=1\" data-field=\"lula_share\" data-fmt=\"pct\">—</span>",
+  "from": "ce84aacacd"
+ },
+ "destaques.div.3": {
+  "text": "Flávio, runoff",
+  "from": "179be6dc1c"
+ },
+ "destaques.div.4": {
+  "text": "of valid votes · first round <span data-source=\"summary\" data-where=\"year=2026&amp;round=1\" data-field=\"right_share\" data-fmt=\"pct\">—</span>",
+  "from": "d0d4418ac4"
+ },
+ "destaques.div.5": {
+  "text": "Lula's margin, runoff",
+  "from": "fa7ce95f24"
+ },
+ "destaques.div.6": {
+  "text": "first round <span data-source=\"summary\" data-where=\"year=2026&amp;round=1\" data-field=\"margin\" data-fmt=\"signedCompact\">—</span>, Flávio ahead",
+  "from": "9513fffaad"
+ },
+ "destaques.div.7": {
+  "text": "Turnout, runoff",
+  "from": "1a877f069d"
+ },
+ "destaques.div.8": {
+  "text": "first round <span data-source=\"summary\" data-where=\"year=2026&amp;round=1\" data-field=\"turnout\" data-fmt=\"pct\">—</span>",
+  "from": "209ca2d251"
+ },
+ "destaques.div.9": {
+  "text": "Sections analyzed, runoff",
+  "from": "afccbaad6e"
+ },
+ "destaques.div.10": {
+  "text": "each with one voting machine and one printed tally report",
+  "from": "da6e4189ae"
+ },
+ "numeros-redondos.h2.1": {
+  "text": "Round numbers",
+  "from": "89ef6679bb"
+ },
+ "numeros-redondos.p.1": {
+  "text": "When someone makes up or alters results by hand, the digits stop being random, because people use some more than others (<a class=\"vf-src\" href=\"https://doi.org/10.1093/pan/mps003\" target=\"_blank\" rel=\"noopener\">Beber and Scacco, 2012</a>), and too many sections land on round percentages, because of the pull of round numbers (<a class=\"vf-src\" href=\"https://doi.org/10.1214/16-AOAS904\" target=\"_blank\" rel=\"noopener\">Kobak, Shpilkin and Pshenichnikov, 2016</a>). We tested the counts of each section and also the sums by zone and by municipality.",
+  "from": "31e3ea6a43"
+ },
+ "ultimo-digito.h3.1": {
+  "text": "Last digit of each count, runoff",
+  "from": "f2e0fe97e9"
+ },
+ "ultimo-digito.p.1": {
+  "text": "Each digit should end about 10% of the counts. The shaded band is the variation chance produces 95% of the time.",
+  "from": "1ec1d6c9cd"
+ },
+ "ld-chart.arialabel.1": {
+  "text": "Dot chart: share of counts ending in each digit in the runoff, in 2026 and in 2022, with the band of variation that chance produces.",
+  "from": "a2f90d7663"
+ },
+ "percentuais-inteiros.h3.1": {
+  "text": "Sections by percentage, in steps of 0.1 point (2026 runoff)",
+  "from": "2eb41fdacc"
+ },
+ "percentuais-inteiros.p.1": {
+  "text": "Made-up results pile up on whole-number percentages, which would show up as a spike at every point (<a class=\"vf-src\" href=\"https://doi.org/10.1214/16-AOAS904\" target=\"_blank\" rel=\"noopener\">Kobak, Shpilkin and Pshenichnikov, 2016</a>). The only spikes are at simple fractions, like 50% and 66.7%: many combinations of votes give exactly the same value (100 of 200, 101 of 202, 150 of 300…), while a value like 50.37% has almost no combinations. The expected line, calculated from the counts themselves, has the same spikes.",
+  "from": "2128af3c86"
+ },
+ "pct-pick.arialabel.1": {
+  "text": "Measure",
+  "from": "c597f9ba47"
+ },
+ "pct-pick.div.1": {
+  "text": "<button type=\"button\" data-v=\"share\" aria-pressed=\"true\">Candidate's %</button><button type=\"button\" data-v=\"Turnout\" aria-pressed=\"false\">Turnout</button>",
+  "from": "befb38b0da"
+ },
+ "pct-chart.arialabel.1": {
+  "text": "Histogram: number of sections in each 0.1-percentage-point band in the 2026 runoff, with the line expected from the counts alone.",
+  "from": "52755dbab5"
+ },
+ "testes-numeros-redondos.h3.1": {
+  "text": "Round-number tests, 2026 next to 2022",
+  "from": "86df4610e9"
+ },
+ "testes-numeros-redondos.p.1": {
+  "text": "“Chance alone” is what a clean count produces on average. A p below 0.05, or a z beyond ±2, would deserve a closer look.",
+  "from": "9b33225621"
+ },
+ "tests-rn.th.1": {
+  "text": "Test",
+  "from": "89f308210c"
+ },
+ "tests-rn.th.2": {
+  "text": "Count",
+  "from": "d7e1086ef6"
+ },
+ "tests-rn.th.3": {
+  "text": "Round",
+  "from": "ed2d0f6eae"
+ },
+ "tests-rn.th.4": {
+  "text": "Chance alone",
+  "from": "e0688ea5ae"
+ },
+ "testes-numeros-redondos.p.2": {
+  "text": "2026 passes all of them. The 2022 reference “fails” two: Bolsonaro's last digit in the first round (p = <span data-source=\"scorecard\" data-where=\"id=ld|Right candidate|1|2022\" data-field=\"stat\" data-fmt=\"dec3\">—</span>) and in the runoff (p = <span data-source=\"scorecard\" data-where=\"id=ld|Right candidate|2|2022\" data-field=\"stat\" data-fmt=\"dec3\">—</span>). With the 5% threshold, about 1 in every 20 tests “fails” by pure chance, and this table has dozens of tests; that is why the reference matters. Blank and spoiled votes have slightly fewer round counts than expected, in both years and to the same degree; made-up numbers would produce the opposite, an excess of round numbers.",
+  "from": "1ad1379fcc"
+ },
+ "curva-normal.h2.1": {
+  "text": "Normal curve",
+  "from": "b9e4341448"
+ },
+ "curva-normal.p.1": {
+  "text": "Sections in the same polling place, usually a school, share the same neighborhood; that is why each section's result should be close to the polling place's average, spread out roughly like a normal curve, which is what chance produces when many independent votes add up. A tampered or “padded” voting machine would be far from its neighbors.",
+  "from": "e0b1055b7b"
+ },
+ "secao-vs-local.h3.1": {
+  "text": "Distance of each section from its polling place, runoff",
+  "from": "f6a183fe20"
+ },
+ "secao-vs-local.p.1": {
+  "text": "Distance in standard deviations; counts on a logarithmic scale. In practice, there are more sections far from their polling place than the perfect normal curve predicts: in the 2022 runoff, <span data-source=\"scorecard\" data-where=\"id=pz|pos|2|2022\" data-field=\"observed\" data-fmt=\"int\">—</span> sections were more than 4 standard deviations above their polling place and <span data-source=\"scorecard\" data-where=\"id=pz|neg|2|2022\" data-field=\"observed\" data-fmt=\"int\">—</span> below, when the curve would give about <span data-source=\"scorecard\" data-where=\"id=pz|pos|2|2022\" data-field=\"expected\" data-fmt=\"int\">—</span> on each side. That is why the yardstick is the 2022 line, not the textbook curve.",
+  "from": "4ee4d8a811"
+ },
+ "z-pick.arialabel.1": {
+  "text": "Measure",
+  "from": "c597f9ba47"
+ },
+ "z-pick.div.1": {
+  "text": "<button type=\"button\" data-v=\"share\" aria-pressed=\"true\">Candidate's %</button><button type=\"button\" data-v=\"Turnout\" aria-pressed=\"false\">Turnout</button><button type=\"button\" data-v=\"Swing\" aria-pressed=\"false\">Change between rounds</button>",
+  "from": "705166eaac"
+ },
+ "z-chart.arialabel.1": {
+  "text": "Histogram on a logarithmic scale: distance of each section from its polling place, with the perfect normal curve and the 2022 line.",
+  "from": "29b8f668e2"
+ },
+ "impressao-digital.h3.1": {
+  "text": "Turnout × candidate's %, all sections, runoff",
+  "from": "7703366e48"
+ },
+ "impressao-digital.p.1": {
+  "text": "The darker, the more sections. Ballot stuffing spreads results toward the highlighted box: near-total turnout, with almost all votes for one candidate (<a class=\"vf-src\" href=\"https://doi.org/10.1073/pnas.1210722109\" target=\"_blank\" rel=\"noopener\">Klimek et al., 2012</a>). Neither year shows this mass spreading, for either candidate; the few sections inside the box are listed further below.",
+  "from": "01c143e507"
+ },
+ "fp-chart.arialabel.1": {
+  "text": "Heat maps: sections by turnout and the candidate's percentage in the runoff, in 2026 and in 2022, with a dashed box in the corner of turnout of 95% or more and the candidate at 90% or more.",
+  "from": "72ded1de61"
+ },
+ "testes-curva-normal.h3.1": {
+  "text": "Normal-curve tests, 2026 alongside 2022",
+  "from": "5963be2ecc"
+ },
+ "testes-curva-normal.p.1": {
+  "text": "Atypical sections are those more than 4 standard deviations from their polling place; “chance alone” is the number a perfect normal curve would give.",
+  "from": "c300175257"
+ },
+ "tests-dist.th.1": {
+  "text": "Test",
+  "from": "89f308210c"
+ },
+ "tests-dist.th.2": {
+  "text": "Measure",
+  "from": "c597f9ba47"
+ },
+ "tests-dist.th.3": {
+  "text": "Round",
+  "from": "ed2d0f6eae"
+ },
+ "tests-dist.th.4": {
+  "text": "Chance alone",
+  "from": "e0688ea5ae"
+ },
+ "testes-curva-normal.p.2": {
+  "text": "Strongly pro-Lula sections are almost as common as in 2022, and <span data-source=\"scorecard\" data-where=\"id=persist|2026\" data-field=\"observed\" data-fmt=\"pctv\">—</span> of those in the runoff were already more than 2 standard deviations above their polling place in the first round (in 2022, <span data-source=\"scorecard\" data-where=\"id=persist|2022\" data-field=\"observed\" data-fmt=\"pctv\">—</span>): the same places, not new places. One tilt: among the <span data-source=\"scorecard\" data-where=\"id=hiT|2|2026\" data-field=\"stat\" data-fmt=\"int\">—</span> sections with atypically high turnout for their polling place, <span data-source=\"scorecard\" data-where=\"id=hiT|2|2026\" data-field=\"observed\" data-fmt=\"pctv\">—</span> also lean toward Lula, versus <span data-source=\"scorecard\" data-where=\"id=hiT|2|2022\" data-field=\"observed\" data-fmt=\"pctv\">—</span> in 2022.",
+  "from": "8c1fe26d56"
+ },
+ "secoes-quadro-vermelho.h3.1": {
+  "text": "Sections in the highlighted box in the runoff",
+  "from": "0f3456cb08"
+ },
+ "secoes-quadro-vermelho.p.1": {
+  "text": "<b>Lula:</b> <span data-source=\"corner_summary\" data-where=\"candidate=lula\" data-field=\"sections\" data-fmt=\"int\">—</span> sections (in 2022, <span data-source=\"scorecard\" data-where=\"id=corner|2|2022\" data-field=\"observed\" data-fmt=\"int\">—</span>), with <span data-source=\"corner_summary\" data-where=\"candidate=lula\" data-field=\"eligible\" data-fmt=\"int\">—</span> registered voters; <span data-source=\"corner_summary\" data-where=\"candidate=lula\" data-field=\"strong_r1\" data-fmt=\"int\">—</span> already gave Lula 90% or more in the first round, and <span data-source=\"corner_summary\" data-where=\"candidate=lula\" data-field=\"community\" data-fmt=\"int\">—</span> vote at places whose name indicates a village, hamlet, quilombo, farm, settlement or community. The increase comes from turnout: among sections with Lula ≥ 90%, the share with turnout ≥ 95% was <span data-source=\"strongholds\" data-where=\"id=2026|2|lula90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> in the 2026 runoff, versus <span data-source=\"strongholds\" data-where=\"id=2022|2|lula90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> in 2022 (in the first round, <span data-source=\"strongholds\" data-where=\"id=2026|1|lula90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> versus <span data-source=\"strongholds\" data-where=\"id=2022|1|lula90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span>). Compared one by one with 2022, these sections had a median change of <span data-source=\"strongholds\" data-where=\"id=matched|lula90\" data-field=\"eligible_change\" data-fmt=\"pct\">—</span> in registered voters and of <span data-source=\"strongholds\" data-where=\"id=matched|lula90\" data-field=\"voters_change\" data-fmt=\"pct\">—</span> in voters; in balanced sections (Lula between 40% and 60% in both years), voters changed by <span data-source=\"strongholds\" data-where=\"id=matched|mid\" data-field=\"voters_change\" data-fmt=\"pct\">—</span>. In the Bolsonaro candidate's strongholds (≥ 90%), the share was stable: <span data-source=\"strongholds\" data-where=\"id=2026|2|right90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> in 2026, <span data-source=\"strongholds\" data-where=\"id=2022|2|right90\" data-field=\"t95_share\" data-fmt=\"pct\">—</span> in 2022. These data do not show why more people voted in Lula's strongholds. If turnout in these sections had stayed at the 2022 level, there would have been <span data-source=\"stronghold_excess\" data-row=\"0\" data-field=\"excess\" data-fmt=\"int\">—</span> fewer voters, <span data-source=\"stronghold_excess\" data-row=\"0\" data-field=\"share\" data-fmt=\"pct\">—</span> of the margin.",
+  "from": "8e756f0b34"
+ },
+ "secoes-quadro-vermelho.p.2": {
+  "text": "<b>Flávio:</b> <span data-source=\"corner_summary\" data-where=\"candidate=flavio\" data-field=\"sections\" data-fmt=\"int\">—</span> sections (in 2022, Jair Bolsonaro had <span data-source=\"scorecard\" data-where=\"id=corner|2|2022\" data-field=\"stat\" data-fmt=\"int\">—</span>), with <span data-source=\"corner_summary\" data-where=\"candidate=flavio\" data-field=\"eligible\" data-fmt=\"int\">—</span> registered voters, in small places in the interior, four of them in the South, that already voted heavily for him in the first round.",
+  "from": "7fc0ea4778"
+ },
+ "corner-search.arialabel.1": {
+  "text": "Search sections",
+  "from": "00679299de"
+ },
+ "corner-search.placeholder.1": {
+  "text": "Search candidate, state, municipality or place",
+  "from": "eb29b96bfa"
+ },
+ "corner-table.th.1": {
+  "text": "Candidate",
+  "from": "408bae36d9"
+ },
+ "corner-table.th.2": {
+  "text": "State",
+  "from": "55852e07d3"
+ },
+ "corner-table.th.3": {
+  "text": "Municipality",
+  "from": "8e4309922c"
+ },
+ "corner-table.th.4": {
+  "text": "Polling place",
+  "from": "ad572b23b5"
+ },
+ "corner-table.th.5": {
+  "text": "Registered",
+  "from": "5183358102"
+ },
+ "corner-table.th.6": {
+  "text": "Turnout, 1st",
+  "from": "705f079d8a"
+ },
+ "corner-table.th.7": {
+  "text": "Turnout, 2nd",
+  "from": "319404511d"
+ },
+ "corner-table.th.8": {
+  "text": "Candidate, 1st",
+  "from": "cbbe955f26"
+ },
+ "corner-table.th.9": {
+  "text": "Candidate, 2nd",
+  "from": "c77c8183dd"
+ },
+ "outros-testes.h2.1": {
+  "text": "Count order, change between rounds and machines",
+  "from": "c4e8fde66e"
+ },
+ "outros-testes.p.1": {
+  "text": "Three more places where fraud could hide: in tally reports that arrive late, in sections that change differently from their neighbors, and in a specific voting machine model.",
+  "from": "9c0c3ed69d"
+ },
+ "progressao-apuracao.h3.1": {
+  "text": "Each candidate's % of the votes counted up to each moment",
+  "from": "85602db436"
+ },
+ "progressao-apuracao.p.1": {
+  "text": "Tally reports do not arrive in random order, and the places that finished transmitting last voted more for Lula; that is why his percentage rises over the count, in 2022 as in 2026. In the 2026 runoff, the STF extended voting until 7 pm (<a class=\"vf-src\" href=\"https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026\" target=\"_blank\" rel=\"noopener\">Rádio Senado</a>), the TSE only began releasing the count at that time (<a class=\"vf-src\" href=\"https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html\" target=\"_blank\" rel=\"noopener\">Terra</a>), and <span data-source=\"late_share\" data-row=\"0\" data-field=\"share\" data-fmt=\"pct\">—</span> of the votes arrived after 7 pm, including from sections that had already closed; that is why the axis shows the fraction of votes counted, not the time. Within the same zone, the sections that arrived later in the runoff lean toward Lula by only <span data-source=\"scorecard\" data-where=\"id=time|2|2026\" data-field=\"observed\" data-fmt=\"pph\">—</span>.",
+  "from": "c9dfb9f33b"
+ },
+ "time-chart.arialabel.1": {
+  "text": "Line chart: each candidate's percentage as the votes were counted, in both rounds of 2026 and in the 2022 runoff.",
+  "from": "6e3935af84"
+ },
+ "entre-turnos.h3.1": {
+  "text": "From the first round to the runoff, 2026",
+  "from": "0e632b7f33"
+ },
+ "entre-turnos.p.1": {
+  "text": "The vote is secret: there is no way to know whom each voter of Cury, Renan Santos or Caiado voted for in the runoff. What the data show are the net totals: <span data-source=\"between_rounds\" data-where=\"id=others\" data-field=\"r1\" data-fmt=\"compact\">—</span> votes for eliminated candidates, turnout changing by <span data-source=\"between_rounds\" data-where=\"id=turnout\" data-field=\"change\" data-fmt=\"signedCompact\">—</span>, and blank and spoiled votes changing by <span data-source=\"between_rounds\" data-where=\"id=blank_null\" data-field=\"change\" data-fmt=\"signedCompact\">—</span>. Lula gained <span data-source=\"between_rounds\" data-where=\"id=lula\" data-field=\"change\" data-fmt=\"signedCompact\">—</span> and Flávio <span data-source=\"between_rounds\" data-where=\"id=flavio\" data-field=\"change\" data-fmt=\"signedCompact\">—</span>, and the numbers add up.",
+  "from": "4c89f83aae"
+ },
+ "between-table.th.1": {
+  "text": "Votes",
+  "from": "83c662733a"
+ },
+ "between-table.th.2": {
+  "text": "First round",
+  "from": "50e710fa92"
+ },
+ "between-table.th.3": {
+  "text": "Runoff",
+  "from": "34c66b88f1"
+ },
+ "between-table.th.4": {
+  "text": "Change",
+  "from": "7a90174600"
+ },
+ "estados.h3.1": {
+  "text": "State by state, 2026",
+  "from": "10eda2efe4"
+ },
+ "estados.p.1": {
+  "text": "From the first round to the runoff, Lula's share of the two candidates' votes rose in every state and abroad (ZZ), by <span data-source=\"swing_range\" data-row=\"0\" data-field=\"min\" data-fmt=\"pp\">—</span> to <span data-source=\"swing_range\" data-row=\"0\" data-field=\"max\" data-fmt=\"pp\">—</span>, and Flávio's fell by the same amount. Within polling places, the sections where turnout rose most did not shift more toward Lula (correlation of <span data-source=\"scorecard\" data-where=\"id=swing|dturn|2026\" data-field=\"observed\" data-fmt=\"dec3\">—</span>); in other words, the extra runoff voters were not concentrated where Lula grew.",
+  "from": "38c012a8c4"
+ },
+ "states-table.th.1": {
+  "text": "State",
+  "from": "55852e07d3"
+ },
+ "states-table.th.2": {
+  "text": "Sections",
+  "from": "24c5e77004"
+ },
+ "states-table.th.3": {
+  "text": "Turnout, 1st",
+  "from": "705f079d8a"
+ },
+ "states-table.th.4": {
+  "text": "Turnout, 2nd",
+  "from": "319404511d"
+ },
+ "states-table.th.5": {
+  "text": "Lula, 2nd",
+  "from": "234af9b91d"
+ },
+ "states-table.th.6": {
+  "text": "Flávio, 2nd",
+  "from": "16cee8bac4"
+ },
+ "states-table.th.7": {
+  "text": "Change for Lula",
+  "from": "e90d28b43f"
+ },
+ "states-table.th.8": {
+  "text": "Change for Flávio",
+  "from": "bc58c97d89"
+ },
+ "urnas.h3.1": {
+  "text": "Voting machine model, 2026 runoff",
+  "from": "7ca034f9ec"
+ },
+ "urnas.p.1": {
+  "text": "Raw percentages vary by model because the models are not spread evenly across the country: the oldest, UE 2013, is concentrated in the Northeast, the South and abroad (TSE per-section detail files). Compared with other machines at the same polling place, no model differs by more than <span data-source=\"scorecard\" data-where=\"id=urna|2|2026\" data-field=\"observed\" data-fmt=\"pp2\">—</span>.",
+  "from": "df3ea2a6db"
+ },
+ "urna-table.th.1": {
+  "text": "Model",
+  "from": "a5ab3212da"
+ },
+ "urna-table.th.2": {
+  "text": "Sections",
+  "from": "24c5e77004"
+ },
+ "urna-table.th.3": {
+  "text": "Lula, raw",
+  "from": "c915059bee"
+ },
+ "urna-table.th.4": {
+  "text": "Flávio, raw",
+  "from": "7a2c1375ff"
+ },
+ "urna-table.th.5": {
+  "text": "Lula vs. same place",
+  "from": "263738e94e"
+ },
+ "urna-table.th.6": {
+  "text": "Flávio vs. same place",
+  "from": "ff18d4f047"
+ },
+ "testes-outros.h3.1": {
+  "text": "Tests of change between rounds, timing and machines, 2026 alongside 2022",
+  "from": "cc214476ba"
+ },
+ "testes-outros.p.1": {
+  "text": "Sections with atypical change are those that moved more than 4 standard deviations away from their polling place between rounds.",
+  "from": "5a2aa31eff"
+ },
+ "tests-other.th.1": {
+  "text": "Test",
+  "from": "89f308210c"
+ },
+ "tests-other.th.2": {
+  "text": "Round",
+  "from": "ed2d0f6eae"
+ },
+ "tests-other.th.3": {
+  "text": "Chance alone",
+  "from": "e0688ea5ae"
+ },
+ "conferencia.h2.1": {
+  "text": "Do the numbers add up?",
+  "from": "a86b3aeaa3"
+ },
+ "conferencia.p.1": {
+  "text": "The TSE publishes each section's tally report and, separately, the totals by municipality and zone. Added up, the sections reproduce the official totals in every field for the <span data-source=\"consistency\" data-where=\"id=2022|QT_APTOS\" data-field=\"units\" data-fmt=\"int\">—</span> municipality-zone units in both rounds of 2022. In the 2026 first round, of the <span data-source=\"consistency\" data-where=\"id=2026|1|QT_APTOS\" data-field=\"units\" data-fmt=\"int\">—</span> units, every field matches except valid votes in <span data-source=\"consistency\" data-where=\"id=2026|1|QT_VOTOS_NOMINAIS\" data-field=\"units_with_difference\" data-fmt=\"int\">—</span> of them. In the 2026 runoff, every field matches in all <span data-source=\"consistency\" data-where=\"id=2026|2|QT_APTOS\" data-field=\"units\" data-fmt=\"int\">—</span> units.",
+  "from": "701f162dfb"
+ },
+ "cons-table.th.1": {
+  "text": "Year",
+  "from": "1c5b700415"
+ },
+ "cons-table.th.2": {
+  "text": "Rounds",
+  "from": "2e3f2a0e45"
+ },
+ "cons-table.th.3": {
+  "text": "Field",
+  "from": "45789cc13c"
+ },
+ "cons-table.th.4": {
+  "text": "Units",
+  "from": "e73a83c8f6"
+ },
+ "cons-table.th.5": {
+  "text": "Units with a difference",
+  "from": "77c47f628e"
+ },
+ "cons-table.th.6": {
+  "text": "Difference",
+  "from": "0837686df6"
+ },
+ "cons-table.th.7": {
+  "text": "Sum of sections",
+  "from": "d8a59a2777"
+ },
+ "cons-table.th.8": {
+  "text": "Official total",
+  "from": "900429acf0"
+ },
+ "conferencia.p.2": {
+  "text": "In each of these units, the difference is exactly the number of votes for Leonardo Alves de Araújo (Leonardo Avalanche, PRTB, 28), <span data-source=\"consistency\" data-where=\"id=2026|1|QT_VOTOS_NOMINAIS\" data-field=\"abs_difference\" data-fmt=\"int\">—</span> in total: he withdrew his candidacy on September 30, four days before the first round (<a class=\"vf-src\" href=\"https://www.cnnbrasil.com.br/eleicoes/leonardo-avalanche-do-prtb-desiste-de-candidatura-a-presidencia/\" target=\"_blank\" rel=\"noopener\">CNN Brasil</a>), with his number already on the machine, and the TSE counts these votes as technical spoiled votes; the official first-round report lists exactly that number (<a class=\"vf-src\" href=\"https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip\" target=\"_blank\" rel=\"noopener\">TSE</a>). The totals by municipality and zone come from the same tallying of the tally reports: the check shows that the TSE's files are consistent with one another, not that each tally report correctly recorded its machine. The runoff numbers also match the official tallying report, for the national total, in each state and abroad.",
+  "from": "137af05799"
+ },
+ "mais-testes.h2.1": {
+  "text": "More tests",
+  "from": "a43c037de2"
+ },
+ "mais-testes.p.1": {
+  "text": "Other methods from election statistics, each designed for one type of fraud, were applied the same way to 2026, 2022 and 2018. The 2018 election serves as a second reference: Jair Bolsonaro won it, so no one would use it to claim there was fraud in favor of the PT. The last two tests, which use the machines' logs and signatures, cover 2026 only. For those that look for a specific fraud, that fraud was planted in the real data, at the size needed to turn around the 2026 result (switching <span data-source=\"more_tests\" data-where=\"id=prop|planted\" data-field=\"move\" data-fmt=\"int\">—</span> votes from one candidate to the other), to show what the test would have seen.",
+  "from": "670d922956"
+ },
+ "mais-testes.dt.1": {
+  "text": "Section size <span class=\"vf-chip vf-ok\">Normal</span>",
+  "from": "1d43991744"
+ },
+ "mais-testes.p.2": {
+  "text": "<b>What it looks for:</b> a program that only switches votes on machines with more than a certain number of voters. Lula's percentage, compared with the rest of the same polling place, would jump at that number.",
+  "from": "14b137a40d"
+ },
+ "mais-testes.p.3": {
+  "text": "<b>The data:</b> searching for the number of voters that best separates the sections above it from those below it, the largest difference in 2026 is <span data-source=\"more_tests\" data-where=\"id=size|2026\" data-field=\"step_pp\" data-fmt=\"spp2\">—</span> (<span data-source=\"more_tests\" data-where=\"id=size|2026\" data-field=\"at\" data-fmt=\"int\">—</span> voters), in 2022, <span data-source=\"more_tests\" data-where=\"id=size|2022\" data-field=\"step_pp\" data-fmt=\"spp2\">—</span> (<span data-source=\"more_tests\" data-where=\"id=size|2022\" data-field=\"at\" data-fmt=\"int\">—</span> voters), and in 2018, <span data-source=\"more_tests\" data-where=\"id=size|2018\" data-field=\"step_pp\" data-fmt=\"spp2\">—</span> (<span data-source=\"more_tests\" data-where=\"id=size|2018\" data-field=\"at\" data-fmt=\"int\">—</span> voters). There is no jump: in all three years, a polling place's smaller sections vote slightly more for the PT's candidate than its larger ones (chart below). The largest difference in 2018 is bigger because the curve bends at 125 voters, not at 270; the shape is the same.",
+  "from": "e4d6a7d067"
+ },
+ "mais-testes.p.4": {
+  "text": "<b>With the planted fraud:</b> switching votes only above 250 voters, enough to turn the result around, would require switching <span data-source=\"more_tests\" data-where=\"id=size|planted|250\" data-field=\"flip_share\" data-fmt=\"pct\">—</span> of Flávio's votes on those machines and would give a difference of <span data-source=\"more_tests\" data-where=\"id=size|planted|250\" data-field=\"step_pp\" data-fmt=\"spp2\">—</span>, with a clearly visible jump at 250 (dashed line); only above 150 voters, <span data-source=\"more_tests\" data-where=\"id=size|planted|150\" data-field=\"step_pp\" data-fmt=\"spp2\">—</span>; and only above 350 voters, the result could not be turned around, because those machines do not have enough votes.",
+  "from": "7d681c4d06"
+ },
+ "mais-testes.dt.2": {
+  "text": "Proportional swing between rounds <span class=\"vf-chip vf-warn\">Inconclusive</span>",
+  "from": "c1ce2f8bd4"
+ },
+ "mais-testes.p.5": {
+  "text": "<b>What it looks for:</b> a program that switches, in the runoff, a fixed percentage of one candidate's votes. It would take more votes where that candidate is strong, so the swing between rounds would grow with the opponent's local strength, comparing sections at the same polling place.",
+  "from": "d2083f6f73"
+ },
+ "mais-testes.p.6": {
+  "text": "<b>The data:</b> the slope says how many more points the PT gains from the first round to the runoff, in a section, for each extra point the right had there in the first round, compared with the rest of its polling place. It is <span data-source=\"more_tests\" data-where=\"id=prop|2026\" data-field=\"slope\" data-fmt=\"dec3\">—</span> in 2026, <span data-source=\"more_tests\" data-where=\"id=prop|2022\" data-field=\"slope\" data-fmt=\"dec3\">—</span> in 2022 and <span data-source=\"more_tests\" data-where=\"id=prop|2018\" data-field=\"slope\" data-fmt=\"dec3\">—</span> in 2018. A fraud that turned the result around would bring it to <span data-source=\"more_tests\" data-where=\"id=prop|planted\" data-field=\"slope\" data-fmt=\"dec3\">—</span>.",
+  "from": "5ee7ef3611"
+ },
+ "mais-testes.p.7": {
+  "text": "<b>Reading:</b> 2026 falls between 2022 and 2018. The slope changes a lot from one election to the next for reasons that are not fraud, such as how voters for eliminated candidates voted in the runoff: from 2018 to 2022 it changed by <span data-source=\"more_tests\" data-where=\"id=prop|years\" data-field=\"moved_2018_2022\" data-fmt=\"dec3\">—</span>, about <span data-source=\"more_tests\" data-where=\"id=prop|years\" data-field=\"times_added\" data-fmt=\"dec1x\">—</span> what a program that turned the result around would add. 2018 is so much steeper because, in that first round, <span data-source=\"more_tests\" data-where=\"id=prop|others\" data-field=\"others_2018\" data-fmt=\"pct\">—</span> of the votes went to other candidates, versus <span data-source=\"more_tests\" data-where=\"id=prop|others\" data-field=\"others_2022\" data-fmt=\"pct\">—</span> in 2022 and <span data-source=\"more_tests\" data-where=\"id=prop|others\" data-field=\"others_2026\" data-fmt=\"pct\">—</span> in 2026. These voters choose again in the runoff without following their polling place's split between the finalists, which pulls sections toward a similar mix and tilts the line. In 2018, the more votes a state gave to other candidates, the steeper its line (correlation of <span data-source=\"more_tests\" data-where=\"id=prop|others\" data-field=\"corr_2018\" data-fmt=\"dec2\">—</span>): in Ceará, Ciro Gomes's state, it was <span data-source=\"more_tests\" data-where=\"id=prop|others\" data-field=\"top_others\" data-fmt=\"pct\">—</span>, and the slope was <span data-source=\"more_tests\" data-where=\"id=prop|others\" data-field=\"top_slope\" data-fmt=\"dec2\">—</span>, the highest in the country. State by state, the difference between 2026 and 2022 ranges from <span data-source=\"more_tests\" data-where=\"id=prop|states\" data-field=\"gap_min\" data-fmt=\"dec3\">—</span> to <span data-source=\"more_tests\" data-where=\"id=prop|states\" data-field=\"gap_max\" data-fmt=\"dec3\">—</span> and is negative in <span data-source=\"more_tests\" data-where=\"id=prop|states\" data-field=\"negative\" data-fmt=\"int\">—</span> of the <span data-source=\"more_tests\" data-where=\"id=prop|states\" data-field=\"units\" data-fmt=\"int\">—</span> units (against 2018, it ranges from <span data-source=\"more_tests\" data-where=\"id=prop|states|2018\" data-field=\"gap_min\" data-fmt=\"dec3\">—</span> to <span data-source=\"more_tests\" data-where=\"id=prop|states|2018\" data-field=\"gap_max\" data-fmt=\"dec3\">—</span>), while a program on every machine would add <span data-source=\"more_tests\" data-where=\"id=prop|planted\" data-field=\"added\" data-fmt=\"dec3\">—</span> in all of them. With a variation so much larger than the effect being sought, the test does not decide. It gives a limit: even if the entire difference from 2022 came from such a program, it would have switched about <span data-source=\"more_tests\" data-where=\"id=prop|planted\" data-field=\"gap_votes\" data-fmt=\"compact0\">—</span> votes, and Lula would still win by about <span data-source=\"more_tests\" data-where=\"id=prop|planted\" data-field=\"margin_without\" data-fmt=\"compact\">—</span>. A program that acted the same way in both rounds does not change the swing; only the integrity test catches that case (“Try to rig it!” tab).",
+  "from": "0e55488ea5"
+ },
+ "mais-testes.button.1": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-prop.p.1": {
+  "text": "At top, the country's sections in 20 groups of equal size, by the right's first-round advantage over the rest of its polling place; each dot is the group's average, and each line's slope is the test's number. The red line is 2026 with the planted fraud, in our hypothetical scenario. The 2018 line is the steepest because <span data-source=\"more_tests\" data-where=\"id=prop|others\" data-field=\"others_2018\" data-fmt=\"pct\">—</span> of the votes in that first round went to other candidates, not because of fraud (see the reading above). Below, the difference between 2026 and each reference election, state by state: a program on every machine would add the dashed line's value in all of them.",
+  "from": "8d29328d6e"
+ },
+ "prop-chart.arialabel.1": {
+  "text": "Line chart: how much more the PT gained in the runoff according to the right's strength in the first round, in 2018, 2022, 2026 and with planted fraud; the 2018 line is the steepest, the 2022 and 2026 lines nearly coincide. Then, a dot chart with the difference between 2026 and each reference election in each state.",
+  "from": "36cb69b36e"
+ },
+ "mais-testes.dt.3": {
+  "text": "Machines at the same polling place, all together <span class=\"vf-chip vf-ok\">Normal</span>",
+  "from": "9798040832"
+ },
+ "mais-testes.p.8": {
+  "text": "<b>What it looks for:</b> machines at a polling place that differ too much from one another, as in question 3, but with a single test (chi-square) for each whole polling place.",
+  "from": "7e9b70ad22"
+ },
+ "mais-testes.p.9": {
+  "text": "<b>The data:</b> the test gives p &lt; 0.001 in <span data-source=\"more_tests\" data-where=\"id=homog|2026\" data-field=\"p001\" data-fmt=\"pct\">—</span> of the <span data-source=\"more_tests\" data-where=\"id=homog|2026\" data-field=\"places\" data-fmt=\"int\">—</span> polling places in 2026, in <span data-source=\"more_tests\" data-where=\"id=homog|2022\" data-field=\"p001\" data-fmt=\"pct\">—</span> of those in 2022 and in <span data-source=\"more_tests\" data-where=\"id=homog|2018\" data-field=\"p001\" data-fmt=\"pct\">—</span> of those in 2018. The median dispersion is <span data-source=\"more_tests\" data-where=\"id=homog|2026\" data-field=\"phi_median\" data-fmt=\"dec2\">—</span> in 2026, <span data-source=\"more_tests\" data-where=\"id=homog|2022\" data-field=\"phi_median\" data-fmt=\"dec2\">—</span> in 2022 and <span data-source=\"more_tests\" data-where=\"id=homog|2018\" data-field=\"phi_median\" data-fmt=\"dec2\">—</span> in 2018 (1 would be chance alone): in all three years, the machines at a polling place vary a little more than chance alone, because each section's voters are not drawn at random.",
+  "from": "4c603149a4"
+ },
+ "mais-testes.button.2": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-homog.p.1": {
+  "text": "Fraction of polling places in each band of the test's p-value. If each polling place's machines differed only by chance, each band would hold 5% of the polling places (dashed line); the pile near zero shows the polling places whose machines vary more than chance, similar in all three years.",
+  "from": "d07d846b30"
+ },
+ "homog-chart.arialabel.1": {
+  "text": "Bar chart: distribution of the chi-square p-value by polling place, 2026, 2022 and 2018, nearly identical, with more polling places near zero than chance would give.",
+  "from": "11fe4ea909"
+ },
+ "mais-testes.dt.4": {
+  "text": "Votes above the most common turnout (Shpilkin's method) <span class=\"vf-chip vf-ok\">Normal</span>",
+  "from": "bbcfbf43eb"
+ },
+ "mais-testes.p.10": {
+  "text": "<b>What it looks for:</b> votes added in high-turnout sections. The method, used in Russian elections, assumes that a candidate's percentage does not rise with turnout and counts as “excess” the votes above the percentage the candidate has in the sections with the most common turnout.",
+  "from": "e17a7cbe43"
+ },
+ "mais-testes.p.11": {
+  "text": "<b>The data:</b> state by state, the excess is <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Lula and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Flávio in 2026, <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Lula and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Bolsonaro in 2022, and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_lula\" data-fmt=\"compact0\">—</span> for Haddad and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"state_right\" data-fmt=\"compact0\">—</span> for Bolsonaro in 2018: in all three years, larger for the right.",
+  "from": "aaae01eaa1"
+ },
+ "mais-testes.p.12": {
+  "text": "<b>Nationwide:</b> without separating the states, the method attributes <span data-source=\"more_tests\" data-where=\"id=shpilkin|2026\" data-field=\"national_lula\" data-fmt=\"compact\">—</span> to Lula in 2026 (<span data-source=\"more_tests\" data-where=\"id=shpilkin|2022\" data-field=\"national_lula\" data-fmt=\"compact0\">—</span> in 2022, and <span data-source=\"more_tests\" data-where=\"id=shpilkin|2018\" data-field=\"national_lula\" data-fmt=\"compact0\">—</span> to Haddad in 2018, who lost). This comes from the difference between states, not from within them: from 2022 to 2026, runoff turnout rose on average by <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"lula60_change_pp\" data-fmt=\"pp\">—</span> in the <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"lula60_states\" data-fmt=\"int\">—</span> states where Lula had 60% or more, and by <span data-source=\"more_tests\" data-where=\"id=shpilkin|states\" data-field=\"other_change_pp\" data-fmt=\"pp\">—</span> in the others. Even if they were all fake votes, Lula would win by <span data-source=\"more_tests\" data-where=\"id=shpilkin|bound\" data-field=\"margin_after\" data-fmt=\"compact\">—</span>.",
+  "from": "bcdf7fa22b"
+ },
+ "mais-testes.button.3": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-shp.p.1": {
+  "text": "At top, the PT candidate's percentage by 0.5-point turnout band, in the runoff; below, how many votes there are in each band. The method assumes that, above the most common turnout (the band with the most votes), the percentage would stay at the height of the dashed line, and counts whatever exceeds it as excess.",
+  "from": "2d93763038"
+ },
+ "shp-chart.arialabel.1": {
+  "text": "Line chart: the PT candidate's percentage by turnout band in 2026, 2022 and 2018, and the distribution of votes by band, with the horizontal line that Shpilkin's method assumes above the most common turnout.",
+  "from": "150de458fb"
+ },
+ "mais-testes.dt.5": {
+  "text": "Second digit (Benford's law) <span class=\"vf-chip\">Not suitable here</span>",
+  "from": "3997535922"
+ },
+ "mais-testes.p.13": {
+  "text": "<b>What it looks for:</b> the second digit of the counts should follow Benford's law, and deviations are used as a sign of fraud (<a class=\"vf-src\" href=\"https://public.websites.umich.edu/~wmebane/fraud06.pdf\" target=\"_blank\" rel=\"noopener\">Mebane, 2006</a>).",
+  "from": "d5137ad386"
+ },
+ "mais-testes.p.14": {
+  "text": "<b>The data:</b> in the runoff, the mean second digit is <span data-source=\"more_tests\" data-where=\"id=benford2|2026\" data-field=\"lula_mean\" data-fmt=\"dec2\">—</span> for Lula and <span data-source=\"more_tests\" data-where=\"id=benford2|2026\" data-field=\"right_mean\" data-fmt=\"dec2\">—</span> for Flávio in 2026, <span data-source=\"more_tests\" data-where=\"id=benford2|2022\" data-field=\"lula_mean\" data-fmt=\"dec2\">—</span> and <span data-source=\"more_tests\" data-where=\"id=benford2|2022\" data-field=\"right_mean\" data-fmt=\"dec2\">—</span> in 2022, and <span data-source=\"more_tests\" data-where=\"id=benford2|2018\" data-field=\"lula_mean\" data-fmt=\"dec2\">—</span> and <span data-source=\"more_tests\" data-where=\"id=benford2|2018\" data-field=\"right_mean\" data-fmt=\"dec2\">—</span> in 2018, versus <span data-source=\"more_tests\" data-where=\"id=benford2|2026\" data-field=\"expected\" data-fmt=\"dec2\">—</span> under Benford's law. The test “fails” in all three years and for both candidates: section counts, which have a few hundred votes, do not follow Benford's law. That is why it is left out of the conclusion.",
+  "from": "5ecfb0c9bf"
+ },
+ "mais-testes.button.4": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-benford.p.1": {
+  "text": "Frequency of each second digit in the runoff's per-section counts, in 2026 (bars), 2022 (line) and 2018 (dotted), against Benford's law (dashed). All three years depart from the law.",
+  "from": "8911019c62"
+ },
+ "benford-chart.arialabel.1": {
+  "text": "Bar chart: frequency of the second digit of each candidate's votes per section, 2026, 2022 and 2018, which depart from Benford's law in all three years.",
+  "from": "2b36dc54d5"
+ },
+ "mais-testes.dt.6": {
+  "text": "Mixture model (Klimek et al., 2012) <span class=\"vf-chip vf-ok\">Normal</span>",
+  "from": "6b4c0896ea"
+ },
+ "mais-testes.p.15": {
+  "text": "<b>What it looks for:</b> the model assumes a clean distribution of turnout × the winner's percentage and estimates what share of sections received “incremental” fraud (a few extra votes) or “extreme” fraud (turnout and percentage near 100%) (<a class=\"vf-src\" href=\"https://doi.org/10.1073/pnas.1210722109\" target=\"_blank\" rel=\"noopener\">Klimek et al., 2012</a>). Because the vote for Lula varies a lot from one region to another, the clean distribution was fitted state by state.",
+  "from": "23699938a5"
+ },
+ "mais-testes.p.16": {
+  "text": "<b>The data:</b> the estimated extreme fraud is <span data-source=\"more_tests\" data-where=\"id=mixture|2026\" data-field=\"sections_extreme\" data-fmt=\"int\">—</span> sections in 2026, <span data-source=\"more_tests\" data-where=\"id=mixture|2022\" data-field=\"sections_extreme\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"more_tests\" data-where=\"id=mixture|2018\" data-field=\"sections_extreme\" data-fmt=\"int\">—</span> in 2018. Incremental fraud comes out at <span data-source=\"more_tests\" data-where=\"id=mixture|2026\" data-field=\"f_i\" data-fmt=\"pct\">—</span> of sections in 2026, <span data-source=\"more_tests\" data-where=\"id=mixture|2022\" data-field=\"f_i\" data-fmt=\"pct\">—</span> in 2022 and <span data-source=\"more_tests\" data-where=\"id=mixture|2018\" data-field=\"f_i\" data-fmt=\"pct\">—</span> in 2018 and improves the fit only slightly (<span data-source=\"more_tests\" data-where=\"id=mixture|2026\" data-field=\"fit_gain\" data-fmt=\"pct\">—</span>): it is the clean distribution that does not fit perfectly, the same way in all three years.",
+  "from": "9769ba4305"
+ },
+ "mais-testes.p.17": {
+  "text": "<b>With the planted fraud:</b> with extreme fraud planted in 92 randomly drawn sections, the same number as the near-unanimous sections in question 4, the model estimates about <span data-source=\"more_tests\" data-where=\"id=mixture|planted|92|2026\" data-field=\"found_sections\" data-fmt=\"int\">—</span>; in 250, about <span data-source=\"more_tests\" data-where=\"id=mixture|planted|250|2026\" data-field=\"found_sections\" data-fmt=\"int\">—</span>; in 1,000, about <span data-source=\"more_tests\" data-where=\"id=mixture|planted|1000|2026\" data-field=\"found_sections\" data-fmt=\"int\">—</span> (it estimates in steps of about 125 sections). In the real data, it estimates zero, in all three years: for the model, the <span data-source=\"scorecard\" data-where=\"id=corner|2|2026\" data-field=\"observed\" data-fmt=\"int\">—</span> near-unanimous sections fit within their states' clean distribution.",
+  "from": "602cade2f7"
+ },
+ "mais-testes.button.5": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-mix.p.1": {
+  "text": "Sections with extreme fraud planted in the 2026 data, in our hypothetical scenario, and how many the model estimates, next to what it estimates in the real data for 2026, 2022 and 2018.",
+  "from": "cc6f540f78"
+ },
+ "mix-chart.arialabel.1": {
+  "text": "Bar chart: sections with planted fraud and sections estimated by the mixture model; in the real data for 2026, 2022 and 2018, the model estimates zero.",
+  "from": "03b428f0e8"
+ },
+ "mais-testes.dt.7": {
+  "text": "Votes in bursts in the machine logs <span class=\"vf-chip vf-ok\">Normal</span>",
+  "from": "b8fea9a178"
+ },
+ "mais-testes.p.18": {
+  "text": "<b>What it looks for:</b> poll workers voting in place of absent voters would leave, in the machine log, votes closer together than real voters can manage (each one is identified, released and votes), in sequence and released by the poll worker instead of by fingerprint. Logs exist only for the 2026 sample, so the comparison is between groups of machines.",
+  "from": "8adaf67d59"
+ },
+ "mais-testes.p.19": {
+  "text": "<b>The data:</b> on Lula's <span data-source=\"more_tests\" data-where=\"id=bursts|corner_lula|2\" data-field=\"machines\" data-fmt=\"int\">—</span> near-unanimous machines, <span data-source=\"more_tests\" data-where=\"id=bursts|corner_lula|2\" data-field=\"fast_gap_share\" data-fmt=\"pct\">—</span> of the runoff votes came within 30 seconds of the previous one, versus <span data-source=\"more_tests\" data-where=\"id=bursts|random|2\" data-field=\"fast_gap_share\" data-fmt=\"pct\">—</span> on the randomly sampled machines and <span data-source=\"more_tests\" data-where=\"id=bursts|right90|2\" data-field=\"fast_gap_share\" data-fmt=\"pct\">—</span> in Flávio's strongholds; <span data-source=\"more_tests\" data-where=\"id=bursts|corner_lula|2\" data-field=\"machines_with_fast_run_5\" data-fmt=\"pct\">—</span> of them had 5 votes in a row like that, versus <span data-source=\"more_tests\" data-where=\"id=bursts|random|2\" data-field=\"machines_with_fast_run_5\" data-fmt=\"pct\">—</span> of the sampled ones. The longest run of voters released by the poll worker was <span data-source=\"more_tests\" data-where=\"id=bursts|corner_lula|2\" data-field=\"longest_poll_worker_run_max\" data-fmt=\"int\">—</span> on the near-unanimous machines and <span data-source=\"more_tests\" data-where=\"id=bursts|random|2\" data-field=\"longest_poll_worker_run_max\" data-fmt=\"int\">—</span> on the sampled ones. No group had a machine with 5 fast votes in a row without fingerprint.",
+  "from": "9879f30d00"
+ },
+ "mais-testes.p.20": {
+  "text": "<b>With the planted fraud:</b> with <span data-source=\"more_tests\" data-where=\"id=bursts|planted|run\" data-field=\"extra_votes\" data-fmt=\"int\">—</span> extra votes, released by the poll worker, in sequence at the end of the day, on each near-unanimous machine, the <span data-source=\"more_tests\" data-where=\"id=bursts|planted|run\" data-field=\"caught\" data-fmt=\"int\">—</span> machines would be flagged. Mixed in with real voters, the same votes do not form a sequence and the test does not see them (<span data-source=\"more_tests\" data-where=\"id=bursts|planted|mixed\" data-field=\"caught\" data-fmt=\"int\">—</span> flagged), but the share of voters released by the poll worker on those machines would rise from <span data-source=\"more_tests\" data-where=\"id=bursts|corner_lula|2\" data-field=\"poll_worker_share\" data-fmt=\"pct\">—</span> to <span data-source=\"more_tests\" data-where=\"id=bursts|planted|mixed\" data-field=\"poll_worker_share\" data-fmt=\"pct\">—</span>, which the comparison in question 8 would see.",
+  "from": "14d2ed5e2b"
+ },
+ "mais-testes.button.6": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-bursts.p.1": {
+  "text": "By group of machines in the sample, in the runoff: the share of votes that came within 30 seconds of the previous one, and the share of voters released by the poll worker instead of by fingerprint, with the planted fraud mixed in with real voters, in our hypothetical scenario.",
+  "from": "f73ab669ee"
+ },
+ "bursts-chart.arialabel.1": {
+  "text": "Bar chart: fast votes and voters released by the poll worker by group of machines, similar across groups, and more releases with the planted fraud.",
+  "from": "6660e97597"
+ },
+ "mais-testes.dt.8": {
+  "text": "Digital signatures and vote recount <span class=\"vf-chip vf-ok\">Checks out</span>",
+  "from": "c31fde3f3f"
+ },
+ "mais-testes.p.21": {
+  "text": "<b>What it looks for:</b> files altered after leaving the machine, on the way to tallying, which no statistical test catches. Each machine signs with its key the tally report, the digital vote record (RDV, the list of votes, shuffled to keep the ballot secret) and the event log, and the TSE publishes the files and the signatures on the results website. The verification followed the TSE's technical documentation (<a class=\"vf-src\" href=\"https://www.tse.jus.br/eleicoes/eleicoes-2022/documentacao-tecnica-do-software-da-urna-eletronica\" target=\"_blank\" rel=\"noopener\">TSE</a>).",
+  "from": "c8ed794b0b"
+ },
+ "mais-testes.p.22": {
+  "text": "<b>The data:</b> of the <span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"sampled\" data-fmt=\"int\">—</span> machines in the log sample, <span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"checked\" data-fmt=\"int\">—</span> have files marked as tallied by the TSE. On all of them, the signatures are valid (<span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"signatures_valid\" data-fmt=\"int\">—</span>), the machine's certificate was issued by the TSE's voting machine certificate authority (<span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"certificates_ok\" data-fmt=\"int\">—</span>), the tally report has the same numbers as the open data (<span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"bu_equals_published\" data-fmt=\"int\">—</span>), and the votes recounted from the RDV match the tally report, candidate by candidate (<span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"rdv_equals_bu\" data-fmt=\"int\">—</span>), totaling <span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"votes\" data-fmt=\"int\">—</span> votes. On each machine, it was checked that altering a single bit makes the signature fail. The other <span data-source=\"urna_assinaturas\" data-where=\"id=summary\" data-field=\"not_totalized\" data-fmt=\"int\">—</span> only had files marked as received and were left out.",
+  "from": "3d440b450e"
+ },
+ "mais-testes.p.23": {
+  "text": "<b>What this does not show:</b> the machine signs what its program produced, and the tally report and the RDV come from the same program; the verification shows that nothing changed after the machine, not that the program counted correctly, which is the role of the integrity test. The certificate authorities' keys come from the TSE's technical documentation package, obtained from public copies that match one another, because the TSE website blocks automated downloads; the root certificates are not available for download and were not checked, and the published certificate of the authority that issues those of the oldest machines (2013 and 2015 models) expired in July 2026, although its key verifies the signatures. The program's signature uses a government algorithm with no public specification (CEPESC) and could not be verified.",
+  "from": "9eea2b3854"
+ },
+ "tamanho-secao.h3.1": {
+  "text": "PT candidate's % versus the rest of the polling place, by the section's number of voters (runoff)",
+  "from": "5a2d633fe4"
+ },
+ "tamanho-secao.p.1": {
+  "text": "Difference, in percentage points, between the PT candidate's percentage (Lula; in 2018, Haddad) in each section and in the rest of its polling place, on average, by band of 25 voters; bands with at least 500 sections. A program that acted only above a certain number of voters would make the line jump at that point, like the dashed one.",
+  "from": "2b6697f9e6"
+ },
+ "size-chart.arialabel.1": {
+  "text": "Line chart: difference between Lula's percentage in the section and in the rest of the polling place, by number of voters, in 2026, in 2022, in 2018 and with a fraud planted above 250 voters, which makes the line jump.",
+  "from": "fedb878b0f"
+ },
+ "tres-eleicoes.h2.1": {
+  "text": "With 2018 too",
+  "from": "3b9bde5c1f"
+ },
+ "tres-eleicoes.p.1": {
+  "text": "The tests in this section also use the 2018 election (Haddad × Jair Bolsonaro) as a second reference. With two reference elections, one can see how much a number varies from one election to another without fraud. The 2018 data come from the same TSE portal, in the same format, processed by the same code; in the two tests that were already on the page, the 2026 and 2022 numbers are the same as in questions 3 and 4.",
+  "from": "528fcceb45"
+ },
+ "tres-eleicoes.dt.1": {
+  "text": "The tests from questions 3 and 4, with 2018 <span class=\"vf-chip vf-warn\">Stood out</span>",
+  "from": "e1c980622f"
+ },
+ "tres-eleicoes.p.2": {
+  "text": "<b>Near-unanimous sections</b> (turnout of 95% or more and 90% or more of the votes for one candidate, with 100 or more registered voters, in the runoff): for the PT's candidate, <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2026\" data-field=\"corner_lula\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2022\" data-field=\"corner_lula\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2018\" data-field=\"corner_lula\" data-fmt=\"int\">—</span> in 2018; for the Bolsonaro candidate, <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2026\" data-field=\"corner_right\" data-fmt=\"int\">—</span>, <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2022\" data-field=\"corner_right\" data-fmt=\"int\">—</span> and <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2018\" data-field=\"corner_right\" data-fmt=\"int\">—</span>. The 2026 number in Lula's favor is the highest of the three years, as question 4 says; in 2018, Bolsonaro's side had <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2018\" data-field=\"corner_right\" data-fmt=\"int\">—</span>.",
+  "from": "8812617945"
+ },
+ "tres-eleicoes.p.3": {
+  "text": "<b>Sections that stand out from the rest of the polling place</b> (deviation greater than 4): in favor of the PT's candidate, <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2026\" data-field=\"place_pos4\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2022\" data-field=\"place_pos4\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2018\" data-field=\"place_pos4\" data-fmt=\"int\">—</span> in 2018; in favor of the opponent, <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2026\" data-field=\"place_neg4\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2022\" data-field=\"place_neg4\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=ref|2018\" data-field=\"place_neg4\" data-fmt=\"int\">—</span> in 2018. 2026 has fewer than both previous elections.",
+  "from": "b8c9e7c4ff"
+ },
+ "tres-eleicoes.button.1": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-ref.p.1": {
+  "text": "Runoff sections in each year, for the PT's candidate (red) and the opponent (blue).",
+  "from": "62fc53dde8"
+ },
+ "ref-chart.arialabel.1": {
+  "text": "Bar chart: near-unanimous sections and sections that stand out from the polling place, in favor of the PT and of the opponent, in 2026, 2022 and 2018.",
+  "from": "c3113ee892"
+ },
+ "tres-eleicoes.dt.2": {
+  "text": "Sections where one candidate gained votes and the other lost <span class=\"vf-chip vf-ok\">Normal</span>",
+  "from": "570415a97a"
+ },
+ "tres-eleicoes.p.4": {
+  "text": "<b>What it looks for:</b> from the first round to the runoff, in most sections both candidates gain votes, inherited from the eliminated ones. In the others, one gains and the other loses. In 2026, the count gave <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"lula_up_right_down\" data-fmt=\"int\">—</span> sections where Lula gained and Flávio lost, versus <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"right_up_lula_down\" data-fmt=\"int\">—</span> the other way around, <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"ratio\" data-fmt=\"ratio\">—</span>, a number that circulated as a sign of fraud.",
+  "from": "23a685c8a5"
+ },
+ "tres-eleicoes.p.5": {
+  "text": "<b>The data:</b> the same count gives <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2022\" data-field=\"ratio\" data-fmt=\"ratio\">—</span> in favor of Jair Bolsonaro in 2022, who lost, and <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2018\" data-field=\"ratio\" data-fmt=\"ratio\">—</span> in favor of Haddad in 2018, who also lost. To know how much of this comes just from the size of the turnaround, the test redoes the count with a model in which nothing abnormal happened: each section gets its municipality's average gain for each candidate, plus the deviation of another section, drawn at random from those in the same state whose municipalities had similar average gains, adjusted to its size. The model gives <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"null_ratio\" data-fmt=\"ratio\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2022\" data-field=\"null_ratio\" data-fmt=\"ratio\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2018\" data-field=\"null_ratio\" data-fmt=\"ratio\">—</span> in 2018 (chart below).",
+  "from": "4696224a3d"
+ },
+ "tres-eleicoes.p.6": {
+  "text": "<b>Reading:</b> the ratio compares two small tails, so it grows very quickly with the difference between the gains: Lula added <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"gain_lula\" data-fmt=\"compact\">—</span> votes and Flávio <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"gain_right\" data-fmt=\"compact\">—</span>; in 2022, Jair added <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2022\" data-field=\"gain_right\" data-fmt=\"compact\">—</span> and Lula <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2022\" data-field=\"gain_lula\" data-fmt=\"compact\">—</span>. The data are <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"leftover\" data-fmt=\"times2\">—</span> the model in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2022\" data-field=\"leftover\" data-fmt=\"times2\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2018\" data-field=\"leftover\" data-fmt=\"times2\">—</span> in 2018: the 21 to 1 is what a turnaround of this size gives with nothing abnormal.",
+  "from": "93d5e5ff73"
+ },
+ "tres-eleicoes.p.7": {
+  "text": "<b>With the planted fraud:</b> switching, in the runoff, votes from Flávio to Lula in one of every five sections, enough to turn the result around (<span data-source=\"tres_eleicoes\" data-where=\"id=quad|planted|fifth\" data-field=\"flip_share\" data-fmt=\"pct\">—</span> of his votes in those sections), the ratio would go to <span data-source=\"tres_eleicoes\" data-where=\"id=quad|planted|fifth\" data-field=\"ratio\" data-fmt=\"ratio\">—</span>, and the data would be at <span data-source=\"tres_eleicoes\" data-where=\"id=quad|planted|fifth\" data-field=\"leftover\" data-fmt=\"times2\">—</span> the model, in our hypothetical scenario.",
+  "from": "bef5aaf304"
+ },
+ "tres-eleicoes.p.8": {
+  "text": "<b>What this does not show:</b> the same votes switched in every section would take the ratio to <span data-source=\"tres_eleicoes\" data-where=\"id=quad|planted|all\" data-field=\"ratio\" data-fmt=\"ratio\">—</span>, but the model would follow along (data at <span data-source=\"tres_eleicoes\" data-where=\"id=quad|planted|all\" data-field=\"leftover\" data-fmt=\"times2\">—</span> the model), because the switch would also change each municipality's average gain, which the model takes as given. Only the integrity test catches that case (“Try to rig it!” tab).",
+  "from": "1a0b55c490"
+ },
+ "tres-eleicoes.p.9": {
+  "text": "<b>A correction:</b> an earlier version of the model drew the deviation from all sections in the state and gave <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"null_state_ratio\" data-fmt=\"ratio\">—</span> in 2026. It erred in the same direction in all three years: it predicted too many sections where the second-place candidate gained and the first-place one lost, in municipalities where the second-place candidate gained many votes, because the sections' deviation changes with the size of the average gain. With it, the data were at <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2026\" data-field=\"leftover_state\" data-fmt=\"times2\">—</span> the model in 2026 and <span data-source=\"tres_eleicoes\" data-where=\"id=quad|2022\" data-field=\"leftover_state\" data-fmt=\"times2\">—</span> in 2022, a leftover that came from the model, not from the election.",
+  "from": "da9cbb26ce"
+ },
+ "tres-eleicoes.dt.3": {
+  "text": "Vote concentration <span class=\"vf-chip vf-ok\">Normal</span>",
+  "from": "b88d3b2b02"
+ },
+ "tres-eleicoes.p.10": {
+  "text": "<b>What it looks for:</b> votes added in strongholds would increase the number of sections with the vote heavily concentrated on one candidate.",
+  "from": "833c84c495"
+ },
+ "tres-eleicoes.p.11": {
+  "text": "<b>The data:</b> in the runoff, sections with 90% or more for the PT's candidate: <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2026|2\" data-field=\"lula_90\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2022|2\" data-field=\"lula_90\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2018|2\" data-field=\"lula_90\" data-fmt=\"int\">—</span> in 2018 (Haddad, who lost); for the opponent: <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2026|2\" data-field=\"right_90\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2022|2\" data-field=\"right_90\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2018|2\" data-field=\"right_90\" data-fmt=\"int\">—</span> in 2018 (Jair Bolsonaro, who won). With 80% or more, for the PT, <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2026|2\" data-field=\"lula_80\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2022|2\" data-field=\"lula_80\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2018|2\" data-field=\"lula_80\" data-fmt=\"int\">—</span> in 2018; for the opponent, <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2026|2\" data-field=\"right_80\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2022|2\" data-field=\"right_80\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2018|2\" data-field=\"right_80\" data-fmt=\"int\">—</span> in 2018. Both sides peak in 2018, the runoff with the vote most divided between places (in <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2018|2\" data-field=\"one_sided_80\" data-fmt=\"pct\">—</span> of sections, one of the two had 80% or more, versus <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2022|2\" data-field=\"one_sided_80\" data-fmt=\"pct\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2026|2\" data-field=\"one_sided_80\" data-fmt=\"pct\">—</span> in 2026), and one of them lost: the number of extreme sections does not track who wins. In 2026, the PT's side has the lowest number of the three years.",
+  "from": "e70b0028a6"
+ },
+ "tres-eleicoes.p.12": {
+  "text": "<b>Why each side against itself:</b> comparing only the winners (Jair in 2018, Lula in 2022 and 2026) would make Lula's victories look full of extreme sections. This comes from the map of the vote, not from winning: between 80% and 87% of the sections with 90% or more for the PT are in the Northeast, where the vote is much more unanimous than in the right's strongholds, especially in the South, whether the PT wins or loses. The fair comparison is each side against its own numbers. And in the election the right won, in 2018, Jair had <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2018|2\" data-field=\"right_90\" data-fmt=\"int\">—</span> sections with 90% or more for him, versus <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2022|2\" data-field=\"right_90\" data-fmt=\"int\">—</span> in 2022.",
+  "from": "6dfe004548"
+ },
+ "tres-eleicoes.p.13": {
+  "text": "Sections with turnout of 90% or more and 90% or more for the PT numbered <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2026|2\" data-field=\"turnout_90_lula_90\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2022|2\" data-field=\"turnout_90_lula_90\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2018|2\" data-field=\"turnout_90_lula_90\" data-fmt=\"int\">—</span> in 2018. The increase since 2022 does not come from more sections with 90% for Lula, which decreased, but from more of these sections reaching 90% turnout. It is the same signal as in question 4: turnout rose more in Lula's strongholds than in the rest of the country, where it went from <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2022|2\" data-field=\"turnout\" data-fmt=\"pct\">—</span> to <span data-source=\"tres_eleicoes\" data-where=\"id=conc|2026|2\" data-field=\"turnout\" data-fmt=\"pct\">—</span> overall.",
+  "from": "f19f198229"
+ },
+ "tres-eleicoes.button.2": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-conc.p.1": {
+  "text": "At top, runoff sections with 90% or more for each side, the PT's candidate in red and the opponent in blue. Below, the fraction of sections by 2-point band of the PT's percentage, in each year: on the right, in red, the PT's strongholds (90% or more); on the left, in blue, the opponent's (the PT with 10% or less).",
+  "from": "581ee4cf86"
+ },
+ "conc-chart.arialabel.1": {
+  "text": "Bar and line chart: sections with 90% or more for the PT and for the opponent in 2026, 2022 and 2018, both highest in 2018, and the distribution of the PT's percentage by section in all three years.",
+  "from": "0f8fe0455a"
+ },
+ "tres-eleicoes.dt.4": {
+  "text": "Expected × observed, without seeing the municipality <span class=\"vf-chip vf-ok\">Normal, but weak</span>",
+  "from": "3ec78fd657"
+ },
+ "tres-eleicoes.p.14": {
+  "text": "<b>What it looks for:</b> a change applied to an entire municipality. A model learns, from the sections of other municipalities, how each section's first round (each candidate's votes, blank and spoiled votes, turnout, size, state) predicts its runoff, and then predicts the sections of the municipality it did not see. If an entire municipality had votes switched, it would be far from the prediction.",
+  "from": "fc4cb0525b"
+ },
+ "tres-eleicoes.p.15": {
+  "text": "<b>The data:</b> the typical prediction error for a section is <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2026\" data-field=\"robust_sd_pp\" data-fmt=\"pp2\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2022\" data-field=\"robust_sd_pp\" data-fmt=\"pp2\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2018\" data-field=\"robust_sd_pp\" data-fmt=\"pp2\">—</span> in 2018. Sections more than 4 times that error in favor of the PT's candidate: <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2026\" data-field=\"pos_4sd\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2022\" data-field=\"pos_4sd\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2018\" data-field=\"pos_4sd\" data-fmt=\"int\">—</span> in 2018; in favor of the opponent: <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2026\" data-field=\"neg_4sd\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2022\" data-field=\"neg_4sd\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2018\" data-field=\"neg_4sd\" data-fmt=\"int\">—</span> in 2018. Whole municipalities more than 4 times a municipality's typical error: in favor of the PT, <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2026\" data-field=\"mun_pos_4sd\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2022\" data-field=\"mun_pos_4sd\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2018\" data-field=\"mun_pos_4sd\" data-fmt=\"int\">—</span> in 2018; in favor of the opponent, <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2026\" data-field=\"mun_neg_4sd\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2022\" data-field=\"mun_neg_4sd\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2018\" data-field=\"mun_neg_4sd\" data-fmt=\"int\">—</span> in 2018. In all four numbers, 2026 falls between 2022 and 2018 or below both.",
+  "from": "2edc4aad0d"
+ },
+ "tres-eleicoes.p.16": {
+  "text": "<b>With planted fraud:</b> swapping, in the runoff, 5% of Flávio's votes to Lula in 1,000 randomly drawn municipalities (<span data-source=\"tres_eleicoes\" data-where=\"id=exp|planted|1000|0.05\" data-field=\"votes\" data-fmt=\"compact0\">—</span> votes), the test flags <span data-source=\"tres_eleicoes\" data-where=\"id=exp|planted|1000|0.05\" data-field=\"caught\" data-fmt=\"int\">—</span> of them; with 10% (<span data-source=\"tres_eleicoes\" data-where=\"id=exp|planted|1000|0.1\" data-field=\"votes\" data-fmt=\"compact0\">—</span> votes), <span data-source=\"tres_eleicoes\" data-where=\"id=exp|planted|1000|0.1\" data-field=\"caught\" data-fmt=\"int\">—</span>, in our hypothetical scenario. In each case the model was retrained on the altered data, as it would be with real fraud: it also learns from the altered municipalities in the other groups and comes to expect part of the swap. That is why the test only catches large swaps; with 2%, it flags <span data-source=\"tres_eleicoes\" data-where=\"id=exp|planted|1000|0.02\" data-field=\"caught\" data-fmt=\"int\">—</span>.",
+  "from": "742072e39e"
+ },
+ "tres-eleicoes.p.17": {
+  "text": "<b>What this does not show:</b> the same 5% in every municipality (<span data-source=\"tres_eleicoes\" data-where=\"id=exp|planted|refit\" data-field=\"votes\" data-fmt=\"compact0\">—</span> votes, enough to turn the result around) does not show up: the model learns from municipalities that changed in the same way, and flags <span data-source=\"tres_eleicoes\" data-where=\"id=exp|planted|refit\" data-field=\"flagged\" data-fmt=\"int\">—</span> municipalities in favor of Lula, fewer than the <span data-source=\"tres_eleicoes\" data-where=\"id=exp|2026\" data-field=\"mun_pos_4sd\" data-fmt=\"int\">—</span> in the real data. Only the integrity test catches this case (“Try to rig it!” tab).",
+  "from": "4ef6812aa8"
+ },
+ "tres-eleicoes.button.3": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-exp.p.1": {
+  "text": "How many municipalities fell at each distance from the prediction (in points of Lula's share of the two), on a logarithmic scale. The vertical lines mark 4 times the 2026 typical error; the dashed red one is 2026 with 10% of Flávio's votes swapped in 1,000 municipalities, in our hypothetical scenario, with the model retrained.",
+  "from": "49f95cfbad"
+ },
+ "exp-chart.arialabel.1": {
+  "text": "Histogram: each municipality's deviation from the prediction in 2026, 2022 and 2018, centered on zero, and with 10% of Flávio's votes swapped in 1,000 municipalities, which shifts some of them to the right, past the 4-typical-error line.",
+  "from": "5ffa459af2"
+ },
+ "tres-eleicoes.dt.5": {
+  "text": "Automatic detector (Isolation Forest and LOF) <span class=\"vf-chip vf-ok\">Normal</span>",
+  "from": "34b637a543"
+ },
+ "tres-eleicoes.p.18": {
+  "text": "<b>What it looks for:</b> sections that are odd in several numbers at once, even if none of them stands out on its own. The Isolation Forest (<a class=\"vf-src\" href=\"https://doi.org/10.1109/ICDM.2008.17\" target=\"_blank\" rel=\"noopener\">Liu, Ting and Zhou, 2008</a>) looks at 12 measures of each section in both rounds: each candidate's vote, blank and spoiled votes, turnout, changes between rounds, size and the distance to the rest of the polling place. It was trained on the three elections together, to measure them all with the same yardstick. LOF (<a class=\"vf-src\" href=\"https://doi.org/10.1145/342009.335388\" target=\"_blank\" rel=\"noopener\">Breunig et al., 2000</a>), another method, serves as a second opinion.",
+  "from": "ba28839309"
+ },
+ "tres-eleicoes.p.19": {
+  "text": "<b>The data:</b> above the cutoff of <span data-source=\"tres_eleicoes\" data-where=\"id=meta\" data-field=\"cut\" data-fmt=\"dec2\">—</span>, there are <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2026\" data-field=\"per_100k\" data-fmt=\"int\">—</span> sections per 100,000 in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2022\" data-field=\"per_100k\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2018\" data-field=\"per_100k\" data-fmt=\"int\">—</span> in 2018. Without the sections abroad, which are most of those flagged (few voters, votes heavily on one side), there are <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2026\" data-field=\"per_100k_brazil\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2022\" data-field=\"per_100k_brazil\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2018\" data-field=\"per_100k_brazil\" data-fmt=\"int\">—</span> in 2018. Of the 50 oddest in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=iso|top50\" data-field=\"kind_abroad\" data-fmt=\"int\">—</span> are abroad, <span data-source=\"tres_eleicoes\" data-where=\"id=iso|top50\" data-field=\"kind_indigenous\" data-fmt=\"int\">—</span> in indigenous villages or schools and <span data-source=\"tres_eleicoes\" data-where=\"id=iso|top50\" data-field=\"kind_prison\" data-fmt=\"int\">—</span> in prisons or juvenile detention units; <span data-source=\"tres_eleicoes\" data-where=\"id=iso|top50\" data-field=\"in_lof_top5\" data-fmt=\"int\">—</span> of the 50 are also among the 5% oddest for LOF. Among those flagged, the ones that voted much more for the PT than the rest of the polling place were <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2026\" data-field=\"lean_lula\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2022\" data-field=\"lean_lula\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2018\" data-field=\"lean_lula\" data-fmt=\"int\">—</span> in 2018, and the ones that voted much more for the opponent, <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2026\" data-field=\"lean_right\" data-fmt=\"int\">—</span> in 2026, <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2022\" data-field=\"lean_right\" data-fmt=\"int\">—</span> in 2022 and <span data-source=\"tres_eleicoes\" data-where=\"id=iso|2018\" data-field=\"lean_right\" data-fmt=\"int\">—</span> in 2018.",
+  "from": "58a673ccca"
+ },
+ "tres-eleicoes.p.20": {
+  "text": "<b>With planted fraud:</b> votes for Lula added until turnout reaches 98% in 100 randomly drawn sections: <span data-source=\"tres_eleicoes\" data-where=\"id=iso|planted|extreme\" data-field=\"caught\" data-fmt=\"int\">—</span> pass the cutoff, and <span data-source=\"tres_eleicoes\" data-where=\"id=iso|planted|extreme\" data-field=\"caught_top1pct\" data-fmt=\"int\">—</span> are among the 1% oddest of 2026. With 10% of the electorate added for Lula in 1,000 sections: <span data-source=\"tres_eleicoes\" data-where=\"id=iso|planted|incremental\" data-field=\"caught\" data-fmt=\"int\">—</span> and <span data-source=\"tres_eleicoes\" data-where=\"id=iso|planted|incremental\" data-field=\"caught_top1pct\" data-fmt=\"int\">—</span>.",
+  "from": "f13739fd5d"
+ },
+ "tres-eleicoes.p.21": {
+  "text": "<b>Why 2018 has more:</b> what most sets the flagged 2018 sections apart from the norm is section size (<span data-source=\"tres_eleicoes\" data-where=\"id=iso|2018\" data-field=\"driver_logaptos\" data-fmt=\"int\">—</span>), runoff turnout (<span data-source=\"tres_eleicoes\" data-where=\"id=iso|2018\" data-field=\"driver_t2\" data-fmt=\"int\">—</span>) and runoff blank and spoiled votes (<span data-source=\"tres_eleicoes\" data-where=\"id=iso|2018\" data-field=\"driver_bn2\" data-fmt=\"int\">—</span>), which in 2018 were at other levels; in 2026, it is first-round turnout (<span data-source=\"tres_eleicoes\" data-where=\"id=iso|2026\" data-field=\"driver_t1\" data-fmt=\"int\">—</span>), from the sections abroad. Since the detector measures every year with the same yardstick, a year with different typical levels has more sections flagged without being more irregular. The comparison that counts is 2026 with 2022, which have the same reasons and similar rates.",
+  "from": "c2e6c080bb"
+ },
+ "tres-eleicoes.p.22": {
+  "text": "<b>Reading:</b> the detector finds what is unusual, and what is unusual in elections is sections abroad, small ones, in prisons and in indigenous villages, in all three years. It is weak against fraud: moderate stuffing hides among sections that are already unusual by nature. That is why here it complements the tests built for each type of fraud, rather than replacing them.",
+  "from": "d0f2a47d2f"
+ },
+ "tres-eleicoes.button.4": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "g-iso.p.1": {
+  "text": "Fraction of sections with a score equal to or above each value, on a logarithmic scale: at the 0.60 cutoff, each line marks the share of sections the detector flags. The dashed red lines are the sections with planted fraud, in our hypothetical scenario.",
+  "from": "b48d38dbd7"
+ },
+ "iso-chart.arialabel.1": {
+  "text": "Line chart: fraction of sections with a score above each value, nearly equal in 2026 and 2022, slightly higher in 2018, and higher still in the sections with planted fraud, but with most of them before the 0.60 cutoff.",
+  "from": "7934f24229"
+ },
+ "um-ganhou.h3.1": {
+  "text": "Sections where one candidate gained votes and the other lost, from the first round to the runoff",
+  "from": "a3333b2829"
+ },
+ "um-ganhou.p.1": {
+  "text": "Top: how many sections the candidate who gained the most votes has for each one of the opponent's, in the data and in a model where each section follows its municipality's average gain, with deviations drawn among sections of the same state with similar gains. Bottom: the data divided by the model: close to 1 in all three years, and higher if there were fraud in some of the machines, in our hypothetical scenario.",
+  "from": "03754f21db"
+ },
+ "quad-chart.arialabel.1": {
+  "text": "Bar chart: ratio between the sections where one candidate gained votes and the other lost, in the data and in the model with nothing abnormal, in 2026, 2022 and 2018, nearly equal; and the data divided by the model, close to 1 in all three years and higher with planted fraud in one in every five machines.",
+  "from": "d23915856f"
+ },
+ "metodo.h2.1": {
+  "text": "How it was done",
+  "from": "0b0e728aaa"
+ },
+ "metodo.li.1": {
+  "text": "Data: TSE open data (dadosabertos.tse.jus.br, resultados-2026 and resultados-2022), files of votes by section and of details by section (turnout, time the tally report was received, machine model), downloaded on October 26, 2026; to check the runoff, the totals by municipality and zone, each candidate's vote by municipality and zone and the official tallying report, downloaded on October 27. President only.",
+  "from": "0c25e63570"
+ },
+ "metodo.li.2": {
+  "text": "Unit: the electoral section, that is, one voting machine and its printed tally report.",
+  "from": "1787bce24a"
+ },
+ "metodo.li.3": {
+  "text": "Reference: the 2022 election, with the same type of voting machine and the same file format, processed by the same code; in the “With 2018 too” section, the 2018 election as a second reference, from the same TSE files.",
+  "from": "b949c4d8ca"
+ },
+ "metodo.li.4": {
+  "text": "Tests: last digit (Beber and Scacco, 2012), excess of multiples of 10, spikes at whole percentages (Kobak, Shpilkin and Pshenichnikov, 2016) compared with a resampling of the counts themselves, each section's deviation from its polling place, the turnout × share “fingerprint” (Klimek et al., 2012), atypical changes between rounds, order of arrival of the tally reports, machine model and the sum of the sections against the official totals. In the “More tests” section: section size, proportional migration between rounds, a chi-square by polling place, Shpilkin's method, Benford's second digit (Mebane, 2006), a mixture model (Klimek et al., 2012) and burst votes in the machine logs; in those that look for a type of fraud, it was planted in the real data to measure what the test would see. In the “With 2018 too” section: sections where one candidate gained votes and the other lost, compared with a model with nothing abnormal; vote concentration; a runoff prediction for each section made without seeing its municipality; and an automatic detector (Isolation Forest, Liu, Ting and Zhou, 2008, and LOF, Breunig et al., 2000). The full references are at the end of the page.",
+  "from": "2a78d514bb"
+ },
+ "metodo.li.5": {
+  "text": "Machine logs: <span data-source=\"urna_logs\" data-where=\"id=check\" data-field=\"read\" data-fmt=\"int\">—</span> runoff machines read on the TSE results site: all the near-unanimous ones, 250 other Lula strongholds, 150 of Flávio's and 1,000 drawn at random nationwide, with a fixed seed. In <span data-source=\"urna_logs\" data-where=\"id=check\" data-field=\"matched\" data-fmt=\"int\">—</span> of them, the number of votes in the log matches the section's official turnout exactly; the other <span data-source=\"urna_logs\" data-where=\"id=check\" data-field=\"replaced\" data-fmt=\"int\">—</span> are machines replaced during voting, whose log only has the votes after the swap. Each machine's time was converted to Brasília time. On the same machines, the digital signatures of the tally report, the RDV and the log were verified and the RDV votes recounted, following the TSE's technical documentation (“More tests” section).",
+  "from": "ee5b08eb3c"
+ },
+ "metodo.li.6": {
+  "text": "External check: the national totals summed here are the same as those released by the TSE and reported by the press, in the first round (<a class=\"vf-src\" href=\"https://www.cartacapital.com.br/politica/tse-encerra-apuracao-do-1o-turno/\" target=\"_blank\" rel=\"noopener\">CartaCapital</a>) and in the runoff (<a class=\"vf-src\" href=\"https://www.abcmais.com/politica/como-ficou-o-resultado-final-do-2o-turno-da-eleicao-presidencial-de-2026/\" target=\"_blank\" rel=\"noopener\">ABC+</a>).",
+  "from": "fe8e2581b2"
+ },
+ "metodo.li.7": {
+  "text": "The vote is secret, so nothing here says how a voter or group of voters voted; all the numbers come from counts by section.",
+  "from": "a542a7c4b8"
+ },
+ "metodo.li.8": {
+  "text": "<b>Limits: these tests catch numbers made up by hand and votes added in individual sections. A change that shifted every machine by the same proportion would leave none of these marks, because the digits would remain random and each machine would remain similar to its neighbors; checking that requires the printed tally reports and the TSE's machine audits, which are outside this data.</b>",
+  "from": "7d8f2e10bf"
+ },
+ "fraude.h2.1": {
+  "text": "Try to rig the election",
+  "from": "d997166f95"
+ },
+ "fraude.p.1": {
+  "text": "Pretend you want to change the result of the 2026 runoff. Choose whom to favor and how to rig it: the tests on this page are rerun on the spot, on the tally reports of all 499,205 machines, and show whether your fraud would leave marks. It is a simulation in your browser; no real data is changed.",
+  "from": "c51f864378"
+ },
+ "sim-loading.div.1": {
+  "text": "Loading the tally reports of the 499,205 machines (2.8 MB)…",
+  "from": "6795906506"
+ },
+ "sim-app.arialabel.1": {
+  "text": "Your fraud",
+  "from": "1c9e6fa81e"
+ },
+ "sim-app.h3.1": {
+  "text": "Your fraud",
+  "from": "1c9e6fa81e"
+ },
+ "sim-ben-lbl.span.1": {
+  "text": "In favor of",
+  "from": "8d1afb8299"
+ },
+ "sim-ben.div.1": {
+  "text": "<button type=\"button\" data-v=\"flavio\" aria-pressed=\"true\">Flávio</button><button type=\"button\" data-v=\"lula\" aria-pressed=\"false\">Lula</button>",
+  "from": "8b75f4e6aa"
+ },
+ "sim-app.legend.1": {
+  "text": "How",
+  "from": "3cc49087b4"
+ },
+ "sim-app.b.1": {
+  "text": "Program in every machine",
+  "from": "034a56a9ee"
+ },
+ "sim-app.span.1": {
+  "text": "Hidden code swaps, in every machine in the country, part of the opponent's votes.",
+  "from": "5912893a79"
+ },
+ "sim-app.b.2": {
+  "text": "Swap votes in some machines",
+  "from": "3ecdfce10b"
+ },
+ "sim-app.span.2": {
+  "text": "Only the machines you choose swap votes.",
+  "from": "8d3c6ca697"
+ },
+ "sim-app.b.3": {
+  "text": "Stuff machines",
+  "from": "d7576c9a0e"
+ },
+ "sim-app.span.3": {
+  "text": "Poll workers vote in place of absent voters, always for your candidate.",
+  "from": "ff4d997ae8"
+ },
+ "sim-app.b.4": {
+  "text": "Make up numbers",
+  "from": "add1b5539d"
+ },
+ "sim-app.span.4": {
+  "text": "The tally report is rewritten by hand, with more votes for your candidate.",
+  "from": "e4de35c8dd"
+ },
+ "sim-both-row.b.1": {
+  "text": "The program also ran in the first round",
+  "from": "c411b37eab"
+ },
+ "sim-both-row.span.1": {
+  "text": "A tampered machine would run the same program in both rounds. Uncheck to rig only the runoff, which leaves one more mark: the change between rounds.",
+  "from": "cb3b8c9612"
+ },
+ "sim-round-note.p.1": {
+  "text": "This fraud is done only in the runoff; the first round stays as it was.",
+  "from": "e755da3357"
+ },
+ "sim-where-row.label.1": {
+  "text": "Which machines",
+  "from": "798e071a80"
+ },
+ "sim-where.option.1": {
+  "text": "Drawn nationwide",
+  "from": "7db78b2148"
+ },
+ "sim-where.option.2": {
+  "text": "Where the opponent is strongest",
+  "from": "40cf242298"
+ },
+ "sim-where.option.3": {
+  "text": "Where your candidate is strongest",
+  "from": "69a726a012"
+ },
+ "sim-where.option.4": {
+  "text": "Only one machine model",
+  "from": "6f475ab7ea"
+ },
+ "sim-where.option.5": {
+  "text": "Only one state",
+  "from": "b68c762c17"
+ },
+ "sim-model.arialabel.1": {
+  "text": "Machine model",
+  "from": "60a75782c1"
+ },
+ "sim-uf.arialabel.1": {
+  "text": "State",
+  "from": "98e5acddb6"
+ },
+ "sim-machines-row.label.1": {
+  "text": "Tampered machines",
+  "from": "c0fce0786a"
+ },
+ "sim-machines-n.arialabel.1": {
+  "text": "Number of tampered machines",
+  "from": "dc5041d433"
+ },
+ "sim-intensity-lbl.label.1": {
+  "text": "Intensity",
+  "from": "22046fdcea"
+ },
+ "sim-app.div.1": {
+  "text": "\n          <button type=\"button\" class=\"vf-btn vf-btn-main\" id=\"sim-min\">Minimum to turn the result around</button>\n          <button type=\"button\" class=\"vf-btn\" id=\"sim-reseed\">Draw again</button>\n          <button type=\"button\" class=\"vf-btn\" id=\"sim-reset\">Back to the real result</button>\n        ",
+  "from": "e281b77447"
+ },
+ "sim-app.h3.2": {
+  "text": "What the tests on this page would see",
+  "from": "07ad956ca8"
+ },
+ "sim-tests.th.1": {
+  "text": "Test",
+  "from": "89f308210c"
+ },
+ "sim-tests.th.2": {
+  "text": "Real",
+  "from": "e55fe37737"
+ },
+ "sim-tests.th.3": {
+  "text": "With the fraud",
+  "from": "d673f9c863"
+ },
+ "sim-tests.th.4": {
+  "text": "Does the fraud show?",
+  "from": "c03cc3b5ac"
+ },
+ "sim-app.p.1": {
+  "text": "“Yes” means the fraud changed the number more than chance would explain, compared with the real result (for the last digit, p &lt; 0.001; for the other tests, more than 4 standard deviations). The column does not say whether the real number is normal; that is what the rest of the page assesses, and in the real numbers one test already stood out: the machines with turnout of 95% or more and 90% or more of the votes for Lula (question 4 of the Summary). The sum of the machines against the official totals is not on the list: the totals come from the same tally reports, so it matches with any fraud done inside the machine.",
+  "from": "f7a85465dd"
+ },
+ "sim-charts-card.h3.1": {
+  "text": "Two of the page's charts, redrawn with the fraud",
+  "from": "32f864afb9"
+ },
+ "sim-charts-card.p.1": {
+  "text": "On the left, each section compared with the rest of its polling place (the normal curve from the Technical version): the bars are the simulation and the gray line, the real result; fraud in some machines shows up as sections beyond ±4. On the right, turnout × the favored candidate's share, one cell per point, as an analyst would see it; under “What the fraud changed”, the cells that gained sections are highlighted. Fraud that is the same in every machine raises the whole grid a little: without the real result beside it, it looks like a normal election.",
+  "from": "c46ef3f500"
+ },
+ "sim-fp-mode.arialabel.1": {
+  "text": "Turnout × share grid",
+  "from": "489437df22"
+ },
+ "sim-fp-mode.div.1": {
+  "text": "<button type=\"button\" data-v=\"plain\" aria-pressed=\"true\">As an analyst would see it</button><button type=\"button\" data-v=\"diff\" aria-pressed=\"false\">What the fraud changed</button>",
+  "from": "96e2d6307f"
+ },
+ "sim-charts.arialabel.1": {
+  "text": "Two charts redrawn with each change: each section's deviation from its polling place, with the simulation and the real result, and the turnout × share grid for the favored candidate, which can highlight the cells that gained sections.",
+  "from": "2169c8dba0"
+ },
+ "sim-app.h3.3": {
+  "text": "And outside this data?",
+  "from": "eae46d9ae9"
+ },
+ "referencias.h2.1": {
+  "text": "References",
+  "from": "7d688deddd"
+ },
+ "referencias.p.1": {
+  "text": "The data, news and articles used to write and check this page.",
+  "from": "cc8f981b85"
+ },
+ "referencias.li.1": {
+  "text": "Tribunal Superior Eleitoral. <a href=\"https://dadosabertos.tse.jus.br/\" target=\"_blank\" rel=\"noopener\">Portal de Dados Abertos</a>: votes by section, details by section and totals by municipality and zone, 2026 and 2022 elections.",
+  "from": "b4d9615910"
+ },
+ "referencias.li.2": {
+  "text": "Tribunal Superior Eleitoral. <a href=\"https://resultados.tse.jus.br/oficial/app/index.html\" target=\"_blank\" rel=\"noopener\">Resultados: arquivos de urna por seção</a> (tally report, digital vote record and machine event log), 2026 runoff.",
+  "from": "29bb2f5390"
+ },
+ "referencias.li.3": {
+  "text": "Tribunal Superior Eleitoral. <a href=\"https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_BR.zip\" target=\"_blank\" rel=\"noopener\">Relatório Resultado da Totalização, 1º e 2º turnos de 2026</a>.",
+  "from": "b7d638d162"
+ },
+ "referencias.li.4": {
+  "text": "Tribunal Superior Eleitoral. <a href=\"https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2026.zip\" target=\"_blank\" rel=\"noopener\">Votação nominal por município e zona, 2026</a> (published with the runoff on Oct 27, 2026).",
+  "from": "cd0fef7350"
+ },
+ "referencias.li.5": {
+  "text": "Tribunal Superior Eleitoral. <a href=\"https://www.tse.jus.br/eleicoes/eleicoes-2022/documentacao-tecnica-do-software-da-urna-eletronica\" target=\"_blank\" rel=\"noopener\">Documentação técnica do software da urna eletrônica</a>: format of the tally report, the digital vote record and the digital signature.",
+  "from": "7b553ef312"
+ },
+ "referencias.li.6": {
+  "text": "CartaCapital. <a href=\"https://www.cartacapital.com.br/politica/tse-encerra-apuracao-do-1o-turno/\" target=\"_blank\" rel=\"noopener\">“TSE encerra apuração do 1º turno”</a>, Oct 5, 2026.",
+  "from": "2427e4422d"
+ },
+ "referencias.li.7": {
+  "text": "ABC+. <a href=\"https://www.abcmais.com/politica/como-ficou-o-resultado-final-do-2o-turno-da-eleicao-presidencial-de-2026/\" target=\"_blank\" rel=\"noopener\">“Como ficou o resultado final do 2º turno da eleição presidencial de 2026”</a>, Oct 26, 2026.",
+  "from": "2e38295235"
+ },
+ "referencias.li.8": {
+  "text": "Terra. <a href=\"https://www.terra.com.br/ao-vivo/noticias/eleicoes/eleicoes-2026-acompanhe-ao-vivo-a-apuracao-do-2-turno,c1edbcf56b98dcf79864578a36a476336470wsfv.html\" target=\"_blank\" rel=\"noopener\">“Eleições 2026: confira como foi a apuração do 2º turno”</a>, Oct 25, 2026.",
+  "from": "527b41e591"
+ },
+ "referencias.li.9": {
+  "text": "Rádio Senado. <a href=\"https://www12.senado.leg.br/radio/1/noticia/2026/10/26/prorrogacao-do-horario-de-votacao-marca-o-segundo-turno-de-2026\" target=\"_blank\" rel=\"noopener\">“Prorrogação do horário de votação marca o segundo turno de 2026”</a>, Oct 26, 2026.",
+  "from": "e77db58768"
+ },
+ "referencias.li.10": {
+  "text": "Exame. <a href=\"https://exame.com/brasil/o-horario-da-votacao-sera-estendido/\" target=\"_blank\" rel=\"noopener\">“O horário da votação será estendido? Veja decisão do STF”</a>, Oct 25, 2026.",
+  "from": "a93c99be18"
+ },
+ "referencias.li.11": {
+  "text": "CNN Brasil. <a href=\"https://www.cnnbrasil.com.br/eleicoes/leonardo-avalanche-do-prtb-desiste-de-candidatura-a-presidencia/\" target=\"_blank\" rel=\"noopener\">“Leonardo Avalanche, do PRTB, desiste de candidatura à Presidência”</a>, Sep 30, 2026.",
+  "from": "afb820c175"
+ },
+ "referencias.li.12": {
+  "text": "InfoMoney. <a href=\"https://www.infomoney.com.br/politica/flavio-nao-reconhece-resultado-da-eleicao-e-diz-que-pedira-anulacao-ao-tse/\" target=\"_blank\" rel=\"noopener\">“Flávio não reconhece resultado da eleição e diz que pedirá anulação ao TSE”</a>, Oct 25, 2026.",
+  "from": "2774f9734c"
+ },
+ "referencias.li.13": {
+  "text": "Gazeta do Povo. <a href=\"https://www.gazetadopovo.com.br/eleicoes/2026/flavio-bolsonaro-pronunciamento-anulacao-eleicao/\" target=\"_blank\" rel=\"noopener\">“Flávio Bolsonaro diz que vai pedir anulação da eleição”</a>, Oct 25, 2026.",
+  "from": "c48f2ae6a7"
+ },
+ "referencias.li.14": {
+  "text": "Diario de Pernambuco. <a href=\"https://www.diariodepernambuco.com.br/politica/2026/10/11727686-sem-provas-eduardo-bolsonaro-acusa-fraude-e-pede-que-comunidade-internacional-nao-reconheca-vitoria-de-lula.html\" target=\"_blank\" rel=\"noopener\">“Sem provas, Eduardo Bolsonaro acusa fraude e pede que comunidade internacional não reconheça vitória de Lula”</a>, Oct 26, 2026.",
+  "from": "1345cb92a8"
+ },
+ "referencias.li.15": {
+  "text": "Estado de Minas. <a href=\"https://www.em.com.br/politica/2026/10/7527778-nikolas-sugere-que-houve-fraude-na-eleicao.html\" target=\"_blank\" rel=\"noopener\">“Nikolas sugere que houve fraude na eleição”</a>, Oct 26, 2026.",
+  "from": "7744b27a97"
+ },
+ "referencias.li.16": {
+  "text": "Gazeta do Povo. <a href=\"https://www.gazetadopovo.com.br/eleicoes/2026/tse-responde-flavio-e-diz-que-fiscais-nao-foram-retirados-da-sala-cofre/\" target=\"_blank\" rel=\"noopener\">“TSE responde Flávio e diz que fiscais do PL não foram retirados da sala-cofre”</a>, Oct 26, 2026.",
+  "from": "340d7cf7c0"
+ },
+ "referencias.li.17": {
+  "text": "Diário do Nordeste. <a href=\"https://diariodonordeste.verdesmares.com.br/pontopoder/pl-reconhece-resultado-das-eleicoes-2026-mas-cobras-esclarecimentos-apos-derrota-de-flavio-1.3801638\" target=\"_blank\" rel=\"noopener\">“PL reconhece resultado das Eleições 2026, mas cobra ‘esclarecimentos’ após derrota de Flávio”</a>, Oct 26, 2026.",
+  "from": "1ef639116b"
+ },
+ "referencias.li.18": {
+  "text": "Fast Company Brasil. <a href=\"https://fastcompanybrasil.com/news/eleicoes-2026-verdade-mentira-sobre-2-turno/\" target=\"_blank\" rel=\"noopener\">“Eleições 2026: o que é verdade e o que é mentira sobre o 2º turno”</a>, Oct 15, 2026.",
+  "from": "ec52927282"
+ },
+ "referencias.li.19": {
+  "text": "Exame. <a href=\"https://exame.com/brasil/pesquisa-quaest-na-vespera-do-2o-turno-flavio-bolsonaro-tem-51-e-lula-49/\" target=\"_blank\" rel=\"noopener\">“Pesquisa Quaest: na véspera do 2º turno, Flávio Bolsonaro tem 51% e Lula, 49%”</a>, Oct 24, 2026.",
+  "from": "a58a12daa2"
+ },
+ "referencias.li.20": {
+  "text": "O Povo. <a href=\"https://www.opovo.com.br/eleicoes-2022/2022/10/29/pesquisa-datafolha-lula-52-bolsonaro-48-no-2-turno.html\" target=\"_blank\" rel=\"noopener\">“Pesquisa Datafolha: Lula 52%, Bolsonaro 48% no 2º turno”</a>, Oct 29, 2022.",
+  "from": "c4e0663b6c"
+ },
+ "referencias.li.21": {
+  "text": "Gazeta do Povo. <a href=\"https://www.gazetadopovo.com.br/eleicoes/2022/teste-pedido-por-militares-nao-detectou-falhas-nas-urnas-eletronicas-diz-moraes/\" target=\"_blank\" rel=\"noopener\">“Teste pedido por militares não detectou falhas nas urnas eletrônicas, diz Moraes”</a>, Oct 6, 2022.",
+  "from": "e9427cd5a3"
+ },
+ "referencias.li.22": {
+  "text": "Jovem Pan. <a href=\"https://jovempan.com.br/noticias/politica/relatorio-da-defesa-sobre-urnas-nao-aponta-fraude-nas-eleicoes.html\" target=\"_blank\" rel=\"noopener\">“Relatório das Forças Armadas não aponta fraude nas urnas, mas diz que sistema não está isento de código malicioso”</a>, Nov 9, 2022.",
+  "from": "cbc6556e5d"
+ },
+ "referencias.li.23": {
+  "text": "Ministério da Defesa. <a href=\"https://www.gov.br/defesa/pt-br/centrais-de-conteudo/relatorio-das-forcas-armadas-nao-excluiu-a-possibilidade-de-fraude-ou-inconsistencia-nas-urnas-eletronicas\" target=\"_blank\" rel=\"noopener\">“Relatório das Forças Armadas não excluiu a possibilidade de fraude ou inconsistência nas urnas eletrônicas”</a>, statement, Nov 10, 2022.",
+  "from": "d0948f1270"
+ },
+ "referencias.li.24": {
+  "text": "Beber, B.; Scacco, A. <a href=\"https://doi.org/10.1093/pan/mps003\" target=\"_blank\" rel=\"noopener\">“What the Numbers Say: A Digit-Based Test for Election Fraud”</a>. <i>Political Analysis</i>, 2012.",
+  "from": "4c77d05f29"
+ },
+ "referencias.li.25": {
+  "text": "Kobak, D.; Shpilkin, S.; Pshenichnikov, M. S. <a href=\"https://doi.org/10.1214/16-AOAS904\" target=\"_blank\" rel=\"noopener\">“Integer percentages as electoral falsification fingerprints”</a>. <i>The Annals of Applied Statistics</i>, 2016.",
+  "from": "a6300256a3"
+ },
+ "referencias.li.26": {
+  "text": "Klimek, P.; Yegorov, Y.; Hanel, R.; Thurner, S. <a href=\"https://doi.org/10.1073/pnas.1210722109\" target=\"_blank\" rel=\"noopener\">“Statistical detection of systematic election irregularities”</a>. <i>PNAS</i>, 2012.",
+  "from": "cf2ce36b40"
+ },
+ "referencias.li.27": {
+  "text": "Liu, F. T.; Ting, K. M.; Zhou, Z.-H. <a href=\"https://doi.org/10.1109/ICDM.2008.17\" target=\"_blank\" rel=\"noopener\">“Isolation Forest”</a>. <i>IEEE International Conference on Data Mining</i>, 2008.",
+  "from": "852b79fde1"
+ },
+ "referencias.li.28": {
+  "text": "Breunig, M. M.; Kriegel, H.-P.; Ng, R. T.; Sander, J. <a href=\"https://doi.org/10.1145/342009.335388\" target=\"_blank\" rel=\"noopener\">“LOF: Identifying Density-Based Local Outliers”</a>. <i>ACM SIGMOD</i>, 2000.",
+  "from": "86fd780119"
+ },
+ "referencias.li.29": {
+  "text": "Mebane, W. R. <a href=\"https://public.websites.umich.edu/~wmebane/fraud06.pdf\" target=\"_blank\" rel=\"noopener\">“Election Forensics: The Second-digit Benford’s Law Test and Recent American Presidential Elections”</a>, 2006.",
+  "from": "734a57dce2"
+ },
+ "referencias.li.30": {
+  "text": "Zabala, F. J. <a href=\"https://filipezabala.com/fs/\" target=\"_blank\" rel=\"noopener\"><i>Fundamentals of Statistics</i></a>.",
+  "from": "5cb0600503"
+ },
+ "js.locale.intl": {
+  "text": "en-US",
+  "from": "2a67f1a467"
+ },
+ "js.locale.decimal": {
+  "text": ".",
+  "from": "d03502c43d"
+ },
+ "js.locale.thousands": {
+  "text": ",",
+  "from": "cdb4ee2aea"
+ },
+ "js.fmt.pp": {
+  "text": "{v} pp",
+  "from": "13477c390c"
+ },
+ "js.fmt.pph": {
+  "text": "{v} pp/h",
+  "from": "692130ad01"
+ },
+ "js.fmt.hm": {
+  "text": "{h}:{m}",
+  "from": "82e1723c89"
+ },
+ "js.fmt.ratio": {
+  "text": "{v} to 1",
+  "from": "8f27c7bb60"
+ },
+ "js.fmt.time": {
+  "text": "{v} time",
+  "from": "774214bdbe"
+ },
+ "js.fmt.times": {
+  "text": "{v} times",
+  "from": "3442b88ae5"
+ },
+ "js.load.failed": {
+  "text": "Failed to load",
+  "from": "828889030a"
+ },
+ "js.cand.lula": {
+  "text": "Lula",
+  "from": "37b5073e4e"
+ },
+ "js.cand.lula22": {
+  "text": "Lula",
+  "from": "37b5073e4e"
+ },
+ "js.cand.flavio": {
+  "text": "Flávio",
+  "from": "c1fee03166"
+ },
+ "js.cand.flavio22": {
+  "text": "Jair Bolsonaro",
+  "from": "2ebc0186cf"
+ },
+ "js.qref.word": {
+  "text": "questions?",
+  "from": "b876cb6f3a"
+ },
+ "js.qref.and": {
+  "text": "and",
+  "from": "3f79bb7b43"
+ },
+ "js.qref.aria": {
+  "text": "Question {n}: {title}",
+  "from": "a2cecb980a"
+ },
+ "js.qref.go": {
+  "text": "Go to the question",
+  "from": "0af978d7f1"
+ },
+ "js.chart.show": {
+  "text": "Show chart",
+  "from": "5baa70d0bc"
+ },
+ "js.chart.hide": {
+  "text": "Hide chart",
+  "from": "7c8b7837d4"
+ },
+ "js.sim.error.browser": {
+  "text": "This browser cannot open the compressed data. Try a recent version of Chrome, Firefox, Edge or Safari.",
+  "from": "815e4984ba"
+ },
+ "js.sim.error.not_found": {
+  "text": "The data was not found ({status}).",
+  "from": "e1ead769f0"
+ },
+ "js.sim.error.load": {
+  "text": "<b>The simulation could not be loaded.</b> {message}",
+  "from": "7fc7b69eed"
+ },
+ "js.sim.p.tiny": {
+  "text": "p < 0.0001",
+  "from": "c23d6829f6"
+ },
+ "js.sim.p.value": {
+  "text": "p = {p}",
+  "from": "8da026c2c9"
+ },
+ "js.sim.unit.pp": {
+  "text": "{v} pp",
+  "from": "13477c390c"
+ },
+ "js.sim.group.round": {
+  "text": "Round numbers",
+  "from": "89ef6679bb"
+ },
+ "js.sim.group.place": {
+  "text": "Neighboring machines",
+  "from": "9ec1e21852"
+ },
+ "js.sim.group.rounds": {
+  "text": "Between rounds",
+  "from": "4b9ad0e165"
+ },
+ "js.sim.test.ld_lula.label": {
+  "text": "Last digit of Lula's votes",
+  "from": "043f1ad3e4"
+ },
+ "js.sim.test.ld_lula.what": {
+  "text": "Numbers made up by hand don't end in 0 to 9 evenly.",
+  "from": "46489629cc"
+ },
+ "js.sim.test.ld_flavio.label": {
+  "text": "Last digit of Flávio's votes",
+  "from": "2ac349659f"
+ },
+ "js.sim.test.ld_turnout.label": {
+  "text": "Last digit of turnout",
+  "from": "a34053abfa"
+ },
+ "js.sim.test.heap_lula.label": {
+  "text": "Excess of 10, 20, 30… in Lula's votes",
+  "from": "c6116d40b0"
+ },
+ "js.sim.test.heap_lula.what": {
+  "text": "How many times more often round numbers appear than their neighbors.",
+  "from": "2689871c75"
+ },
+ "js.sim.test.heap_flavio.label": {
+  "text": "Excess of 10, 20, 30… in Flávio's votes",
+  "from": "7cae024148"
+ },
+ "js.sim.test.heap_turnout.label": {
+  "text": "Excess of 10, 20, 30… in turnout",
+  "from": "edc0d67bfc"
+ },
+ "js.sim.test.int_lula.label": {
+  "text": "Machines with an exact Lula share (50%, 61%…)",
+  "from": "70c17f43f9"
+ },
+ "js.sim.test.int_lula.what": {
+  "text": "Compared with what chance would give.",
+  "from": "8b8322f976"
+ },
+ "js.sim.test.int_turnout.label": {
+  "text": "Machines with turnout at an exact percentage",
+  "from": "8cc7ca5ad0"
+ },
+ "js.sim.test.place_lula.label": {
+  "text": "Machines that stand out from their polling place in Lula's favor",
+  "from": "db613dd5de"
+ },
+ "js.sim.test.place_lula.what": {
+  "text": "Compared with the other machines at the same polling place (z > 4).",
+  "from": "c1345d87f2"
+ },
+ "js.sim.test.place_flavio.label": {
+  "text": "Machines that stand out from their polling place in Flávio's favor",
+  "from": "d69956a62d"
+ },
+ "js.sim.test.corner_lula.label": {
+  "text": "Turnout ≥ 95% and Lula ≥ 90%",
+  "from": "52acaf7c2f"
+ },
+ "js.sim.test.corner_lula.what": {
+  "text": "The “fingerprint” of padded machines. In the real data, it already stood out (question 4).",
+  "from": "e6b55beff0"
+ },
+ "js.sim.test.corner_flavio.label": {
+  "text": "Turnout ≥ 95% and Flávio ≥ 90%",
+  "from": "167d3602f0"
+ },
+ "js.sim.test.model.label": {
+  "text": "Largest gap between machine models at the same place",
+  "from": "baac72f279"
+ },
+ "js.sim.test.model.what": {
+  "text": "A program tampered with in only one model would show up here.",
+  "from": "0ed4da85cf"
+ },
+ "js.sim.test.swing_lula.label": {
+  "text": "Machines that swung to Lula much more than their neighbors",
+  "from": "9e0953c1df"
+ },
+ "js.sim.test.swing_lula.what": {
+  "text": "Change from the first round to the runoff, compared with the rest of the place.",
+  "from": "fc12f99518"
+ },
+ "js.sim.test.swing_flavio.label": {
+  "text": "Machines that swung to Flávio much more than their neighbors",
+  "from": "adb451b296"
+ },
+ "js.sim.test.swing_turnout.label": {
+  "text": "Turnout rising along with the swing, at the same place",
+  "from": "bc480219e8"
+ },
+ "js.sim.test.swing_turnout.what": {
+  "text": "“Extra” votes tend to come with higher turnout.",
+  "from": "e00e1e74dc"
+ },
+ "js.sim.test.note.chance": {
+  "text": "chance would give about {n}",
+  "from": "0b394309f6"
+ },
+ "js.sim.test.note.y2022": {
+  "text": "in 2022: {n}",
+  "from": "f84d7ed1fd"
+ },
+ "js.sim.test.note.y2022_jair": {
+  "text": "in 2022, Jair: {n}",
+  "from": "cca82e1c49"
+ },
+ "js.sim.test.yes": {
+  "text": "Yes",
+  "from": "9313455e45"
+ },
+ "js.sim.test.no": {
+  "text": "No",
+  "from": "9bc947e58b"
+ },
+ "js.sim.intensity.software": {
+  "text": "Opponent's votes swapped in each machine",
+  "from": "ea0d92567c"
+ },
+ "js.sim.intensity.flip": {
+  "text": "Opponent's votes swapped in each tampered machine",
+  "from": "df96cda830"
+ },
+ "js.sim.intensity.stuff": {
+  "text": "Turnout the tampered machines end up with",
+  "from": "6e1e03aeaf"
+ },
+ "js.sim.intensity.invent": {
+  "text": "Opponent's votes moved to your candidate",
+  "from": "b2ec5dd612"
+ },
+ "js.sim.machines.of": {
+  "text": "of {max} ({share} of the country's machines)",
+  "from": "ae67d5d571"
+ },
+ "js.sim.min.btn_winner": {
+  "text": "The size of {name}'s win",
+  "from": "1e9d3fe9cb"
+ },
+ "js.sim.min.btn": {
+  "text": "Minimum to turn the result around",
+  "from": "6352934554"
+ },
+ "js.sim.result.tag": {
+  "text": " · simulation",
+  "from": "51005e21c8"
+ },
+ "js.sim.how.both": {
+  "text": " (and votes in the first too)",
+  "from": "4f51491a2e"
+ },
+ "js.sim.how.software": {
+  "text": "The program is in all {machines} machines and swapped {moved} votes in the runoff{both}.",
+  "from": "a0cb65d1ba"
+ },
+ "js.sim.how.flip": {
+  "text": "{machines} tampered machines ({share} of machines) swapped {moved} votes in the runoff{both}.",
+  "from": "18472a3752"
+ },
+ "js.sim.how.stuff": {
+  "text": "{moved} extra votes, from absent voters, in {machines} machines ({share} of machines).",
+  "from": "5503a50feb"
+ },
+ "js.sim.how.invent": {
+  "text": "{machines} rewritten tally reports ({share} of machines) moved {moved} votes to {name}.",
+  "from": "6774f89fda"
+ },
+ "js.sim.needed.add": {
+  "text": "add at least {n} votes",
+  "from": "1823a076bf"
+ },
+ "js.sim.needed.move": {
+  "text": "move at least {n} votes",
+  "from": "3094452c71"
+ },
+ "js.sim.chip.for_winner": {
+  "text": "Fraud in favor of {name}",
+  "from": "1888d8097e"
+ },
+ "js.sim.chip.flipped": {
+  "text": "The simulation turned the result around",
+  "from": "bc2dfa401e"
+ },
+ "js.sim.chip.not_flipped": {
+  "text": "The simulation did not turn the result around",
+  "from": "704b803411"
+ },
+ "js.sim.chip.real": {
+  "text": "Real result",
+  "from": "a5476d1b1a"
+ },
+ "js.sim.result.flag_sim": {
+  "text": "SIMULATION · not the real result",
+  "from": "6646b1ad77"
+ },
+ "js.sim.result.flag_real": {
+  "text": "Real runoff result, without fraud",
+  "from": "0b275c2472"
+ },
+ "js.sim.result.sim_line": {
+  "text": "{how} In the simulation, {name} wins by {n} votes.",
+  "from": "197b621b84"
+ },
+ "js.sim.result.real_line": {
+  "text": "Lula won by {n} votes.",
+  "from": "435b72aa65"
+ },
+ "js.sim.result.realline": {
+  "text": "Real result: Lula {lula} ({lula_pct}), Flávio {flavio} ({flavio_pct}).{fabricated}",
+  "from": "fdd25b8d0b"
+ },
+ "js.sim.result.fabricated": {
+  "text": " A fraud that had fabricated that win would need to {needed}; this one, applied on top of the real data, changes {moved}.",
+  "from": "b410e9c5bb"
+ },
+ "js.sim.score.none": {
+  "text": "Without fraud, there is nothing to show up: the numbers are the real ones. Choose a fraud alongside.",
+  "from": "6727b12199"
+ },
+ "js.sim.score.bad": {
+  "text": "<b>The fraud shows up in {bad} of the {total} tests.</b>",
+  "from": "caae331e0f"
+ },
+ "js.sim.score.clean": {
+  "text": "<b>The fraud does not show up in any of the {total} tests.</b> {why}",
+  "from": "883fc473b4"
+ },
+ "js.sim.score.why_software": {
+  "text": "A swap that is the same in every machine looks like an electorate that changed its mind a little: in the numbers, the two are identical{winner}.",
+  "from": "8ff53ed380"
+ },
+ "js.sim.score.why_software_winner": {
+  "text": ", and so the numbers alone do not rule out such a fraud in favor of {name}",
+  "from": "197dcf727e"
+ },
+ "js.sim.score.why_small": {
+  "text": "It is too small, or too spread out, to leave a mark on the numbers.",
+  "from": "f1e04a77f6"
+ },
+ "js.sim.score.integrity_software": {
+  "text": "<b>But the integrity test would catch it</b>, if the program cannot tell the test from a real vote: with the program in every machine, the machines drawn for the test would also be tampered with, and {swapped}. A single swapped vote is enough for the tally report not to match the paper ballots.",
+  "from": "2961c02d8f"
+ },
+ "js.sim.score.integrity_flip": {
+  "text": "Outside these numbers, the chance that the integrity test draws at least one of the {machines} tampered machines is <b>{chance}</b>.",
+  "from": "36eeada2f5"
+ },
+ "js.sim.score.winner_marks": {
+  "text": "If {name}'s win had come from a fraud like this, the real numbers would have these marks. Compare the Real column with 2022, noted below each number.",
+  "from": "67ff1cd283"
+ },
+ "js.sim.announce.sim": {
+  "text": "Simulation: {name} wins by {n} votes. The fraud shows up in {bad} of the {total} tests{integrity}.",
+  "from": "e8e7b19790"
+ },
+ "js.sim.announce.integrity": {
+  "text": ", but the integrity test would catch it, if the program cannot recognize the test",
+  "from": "6762019507"
+ },
+ "js.sim.announce.real": {
+  "text": "Real result, without fraud.",
+  "from": "bc2f7e516e"
+ },
+ "js.sim.chart.curve.title": {
+  "text": "{name} %: each section vs. its polling place",
+  "from": "dc9c19e03c"
+ },
+ "js.sim.chart.fp.title": {
+  "text": "Turnout × {name} %",
+  "from": "4a8a81ca5d"
+ },
+ "js.sim.chart.curve.tip": {
+  "text": "z from {from} to {to}",
+  "from": "2842db5941"
+ },
+ "js.sim.chart.fp.tip": {
+  "text": "Turnout {t0}–{t1}% · {name} {s0}–{s1}%",
+  "from": "6db8a27005"
+ },
+ "js.sim.chart.with_fraud": {
+  "text": "With the fraud",
+  "from": "d673f9c863"
+ },
+ "js.sim.chart.real": {
+  "text": "Real",
+  "from": "e55fe37737"
+ },
+ "js.sim.chart.normal": {
+  "text": "Normal curve",
+  "from": "b9e4341448"
+ },
+ "js.sim.legend.with_fraud": {
+  "text": "Sections with the fraud",
+  "from": "8fa46782bc"
+ },
+ "js.sim.legend.real": {
+  "text": "Real result",
+  "from": "a5476d1b1a"
+ },
+ "js.sim.legend.gained": {
+  "text": "Cells that gained sections",
+  "from": "be0fb8669e"
+ },
+ "js.sim.chance.certain": {
+  "text": "practically 100%",
+  "from": "1b25df6907"
+ },
+ "js.sim.chance.tiny": {
+  "text": "less than 0.01%",
+  "from": "eb36bdb9a1"
+ },
+ "js.sim.swapped": {
+  "text": "{rate}% of the {victim} votes typed in during the test would come out on the tally report as votes for {name}",
+  "from": "4d3019133d"
+ },
+ "js.sim.outside.none": {
+  "text": "Without fraud, there is nothing for the checks outside this data to find.",
+  "from": "b584068aaa"
+ },
+ "js.sim.outside.chip_all": {
+  "text": "The integrity test would catch it",
+  "from": "250f47b2f3"
+ },
+ "js.sim.outside.chip_chance": {
+  "text": "{chance} chance of being caught",
+  "from": "20cc50e28c"
+ },
+ "js.sim.outside.integrity": {
+  "text": "<b>Integrity test:</b> on election day, at least {a} randomly drawn machines (20 to 33 per state) are swapped for spare machines, and the originals receive, in a public place and on camera, known votes from paper ballots. The tally report has to match the ballots. {detail}.",
+  "from": "da02e4d49d"
+ },
+ "js.sim.outside.integrity_all": {
+  "text": "With the program in every machine, all the test machines would be tampered with: {swapped}. A single swapped vote is enough for the tally report not to match",
+  "from": "2c30fe9308"
+ },
+ "js.sim.outside.integrity_some": {
+  "text": "With {m} tampered machines out of {n}, the chance that at least one is drawn is <b>{chance}</b>; in a tampered machine, {swapped}",
+  "from": "4fbcc0302c"
+ },
+ "js.sim.outside.draw_btn": {
+  "text": "Draw the test machines ({per} per state)",
+  "from": "5348bbdaec"
+ },
+ "js.sim.outside.note": {
+  "text": "Like the draw, the chance is calculated state by state, with {per} machines per state (the minimum) and none abroad; with more machines drawn, it only goes up. This holds if the tampered program cannot tell the test from a real vote; that is why the test is filmed and, since 2022, some of the test machines are released with the biometrics of real voters (in 2022, 58 of the 641 test machines, with no discrepancy, according to <a class=\"vf-src\" href=\"https://www.gazetadopovo.com.br/eleicoes/2022/teste-pedido-por-militares-nao-detectou-falhas-nas-urnas-eletronicas-diz-moraes/\" target=\"_blank\" rel=\"noopener\">Gazeta do Povo</a>). The authenticity test checks, on other randomly drawn machines, the digital signature of the installed program.",
+  "from": "aaa525d565"
+ },
+ "js.sim.outside.stuff": {
+  "text": "<b>Stuffing machines is done by people, not by the program</b>, so the integrity test does not catch it. What catches it: the party monitors inside the section, the identification of each voter (biometrics or manual release by the poll worker, recorded in the machine's event log, which is public) and question 8 on this page, which looks at those logs. Voting in place of {moved} absent voters would require the complicity of the poll workers in {m} sections.",
+  "from": "0077041714"
+ },
+ "js.sim.outside.invent": {
+  "text": "<b>Rewriting the tally report after voting</b> runs into the printed tally report: a copy is posted at the section when voting ends, with a QR code, and the monitors and any voter can photograph it. The published file carries the machine's digital signature. A tally report with numbers different from the printed ones would be discovered by direct comparison, with no statistics at all.",
+  "from": "964f97b93c"
+ },
+ "js.sim.draw.found": {
+  "text": "Caught",
+  "from": "03fc221c61"
+ },
+ "js.sim.draw.passed": {
+  "text": "Passed",
+  "from": "ec61e87cb2"
+ },
+ "js.sim.draw.all": {
+  "text": "All {drawn} machines drawn were tampered with.",
+  "from": "b73f978207"
+ },
+ "js.sim.draw.some_one": {
+  "text": "{found} of the {drawn} machines drawn was tampered with.",
+  "from": "b94134a89e"
+ },
+ "js.sim.draw.some_many": {
+  "text": "{found} of the {drawn} machines drawn were tampered with.",
+  "from": "a8b6448613"
+ },
+ "js.sim.draw.none": {
+  "text": "None of the {drawn} machines drawn was tampered with this time.",
+  "from": "283975342b"
+ },
+ "js.sim.uf.abroad": {
+  "text": "Abroad",
+  "from": "cd41a1f4fd"
+ },
+ "js.sim.min.over": {
+  "text": "The simulation applies this fraud on top of the real data, to show the marks it would leave.",
+  "from": "fb8b0103f9"
+ },
+ "js.sim.min.impossible_fabricate": {
+  "text": "Even tampering with all {n} machines in this group, at this intensity, would not fabricate {name}'s win. Raise the intensity or choose another group.",
+  "from": "05e774b389"
+ },
+ "js.sim.min.impossible": {
+  "text": "Even tampering with all {n} machines in this group, at this intensity, the result would not turn around. Raise the intensity or choose another group.",
+  "from": "af7c0ea39a"
+ },
+ "js.sim.min.rate_too_high": {
+  "text": "It would take swapping {rate}% of {victim}'s votes in each machine.",
+  "from": "b17575dae2"
+ },
+ "js.sim.min.rate_fabricate": {
+  "text": "To fabricate {name}'s win, the program would have to swap about {rate}% of {victim}'s votes in each machine.",
+  "from": "887225f2ff"
+ },
+ "js.sim.min.rate": {
+  "text": "Swapping {rate}% of {victim}'s votes in every machine in the country is enough.",
+  "from": "f2c64b7298"
+ },
+ "js.sim.min.machines_fabricate": {
+  "text": "To fabricate {name}'s win this way, at least {n} tampered machines would be needed.",
+  "from": "c1d1e88b03"
+ },
+ "js.sim.min.machines": {
+  "text": "Minimum: {n} tampered machines, with a small margin, because the effect in each machine is drawn at random.",
+  "from": "2c9e020675"
+ },
+ "js.tables.test.ld": {
+  "text": "Counts ending in 0 (by section)",
+  "from": "4dc5d79889"
+ },
+ "js.tables.test.heap": {
+  "text": "Excess at 10, 20, 30… vs. neighboring values",
+  "from": "fe706ae2e7"
+ },
+ "js.tables.test.int": {
+  "text": "Sections with an exact whole percentage",
+  "from": "d8899806f8"
+ },
+ "js.tables.test.ldagg_zona": {
+  "text": "Lula votes ending in 0 (by zone)",
+  "from": "1f7aa42261"
+ },
+ "js.tables.test.ldagg_municipio": {
+  "text": "Lula votes ending in 0 (by municipality)",
+  "from": "f01b455702"
+ },
+ "js.tables.test.ldstate_flag": {
+  "text": "Last-digit tests by state failed after correction",
+  "from": "12bf10822a"
+ },
+ "js.tables.test.ldstate_p05": {
+  "text": "Last-digit tests by state with p < 0.05",
+  "from": "a6d82de5b6"
+ },
+ "js.tables.test.pz_pos": {
+  "text": "Sections far above their polling place (z > 4), pro-Lula",
+  "from": "74ad5883e4"
+ },
+ "js.tables.test.pz_neg": {
+  "text": "Sections far below their polling place (z < −4), pro-Bolsonaro",
+  "from": "74ea6c5d5c"
+ },
+ "js.tables.test.corner": {
+  "text": "Sections with turnout ≥ 95% and Lula ≥ 90%",
+  "from": "88d40bc7f9"
+ },
+ "js.tables.test.hit": {
+  "text": "Atypically high turnout (z > 4) leaning to Lula",
+  "from": "7a171f2a5c"
+ },
+ "js.tables.test.persist": {
+  "text": "Atypical pro-Lula runoff sections already high in the first round (z > 2)",
+  "from": "6b6106960a"
+ },
+ "js.tables.test.swing_pos": {
+  "text": "Sections that moved much more to Lula than their neighbors (> 4σ)",
+  "from": "c040d0d43f"
+ },
+ "js.tables.test.swing_neg": {
+  "text": "Sections that moved much more to Bolsonaro than their neighbors (> 4σ)",
+  "from": "2ad7731f41"
+ },
+ "js.tables.test.swing_dturn": {
+  "text": "Turnout rise × shift to Lula, at the same polling place",
+  "from": "dd60b00f24"
+ },
+ "js.tables.test.time": {
+  "text": "Lula % in the sections that arrived later, in the same zone",
+  "from": "447326c7ad"
+ },
+ "js.tables.test.urna": {
+  "text": "Largest gap between machine models at the same place",
+  "from": "baac72f279"
+ },
+ "js.tables.var.right": {
+  "text": "Bolsonaro",
+  "from": "655ace5c4f"
+ },
+ "js.tables.var.turnout": {
+  "text": "Turnout",
+  "from": "37c61f1503"
+ },
+ "js.tables.var.blank": {
+  "text": "Blank",
+  "from": "5d6bb04fa8"
+ },
+ "js.tables.var.null": {
+  "text": "Spoiled",
+  "from": "ba0f8a0205"
+ },
+ "js.tables.var.lula_share": {
+  "text": "Lula %",
+  "from": "7a5cf09180"
+ },
+ "js.tables.var.all": {
+  "text": "All",
+  "from": "bd02b9a7d7"
+ },
+ "js.tables.var.swing": {
+  "text": "Shift",
+  "from": "ddd5328bbd"
+ },
+ "js.tables.var.correlation": {
+  "text": "Correlation",
+  "from": "d3138b1f1a"
+ },
+ "js.tables.var.slope": {
+  "text": "Slope",
+  "from": "8448302cbb"
+ },
+ "js.tables.unit.pp": {
+  "text": "{v} pp",
+  "from": "13477c390c"
+ },
+ "js.tables.unit.pph": {
+  "text": "{v} pp/h",
+  "from": "692130ad01"
+ },
+ "js.tables.stat.p": {
+  "text": "p = {v}",
+  "from": "683c13c2dc"
+ },
+ "js.tables.stat.z": {
+  "text": "z = {v}",
+  "from": "509638182e"
+ },
+ "js.tables.stat.robust_sd": {
+  "text": "sd {v}",
+  "from": "1b8c0cdf22"
+ },
+ "js.tables.stat.corr": {
+  "text": "r = {v}",
+  "from": "b32a0f6241"
+ },
+ "js.tables.stat.skew": {
+  "text": "skewness {v}",
+  "from": "5512b3ffb2"
+ },
+ "js.tables.stat.same_corner": {
+  "text": "Bolsonaro {n}",
+  "from": "cb87d80870"
+ },
+ "js.tables.stat.outliers": {
+  "text": "{n} atypical",
+  "from": "a607f916fd"
+ },
+ "js.tables.stat.tests_run": {
+  "text": "of {n} tests",
+  "from": "77bd2a03f5"
+ },
+ "js.tables.stat.models": {
+  "text": "{n} models",
+  "from": "dfbaf3423b"
+ },
+ "js.tables.round.r1": {
+  "text": "1st",
+  "from": "7b81356426"
+ },
+ "js.tables.round.r2": {
+  "text": "2nd",
+  "from": "267c1e4de0"
+ },
+ "js.tables.round.both": {
+  "text": "Both",
+  "from": "727f1e0235"
+ },
+ "js.tables.between.lula": {
+  "text": "Lula",
+  "from": "37b5073e4e"
+ },
+ "js.tables.between.flavio": {
+  "text": "Flávio Bolsonaro",
+  "from": "76d87468c3"
+ },
+ "js.tables.between.others": {
+  "text": "Eliminated candidates",
+  "from": "e0bef41563"
+ },
+ "js.tables.between.blank_null": {
+  "text": "Blank and spoiled",
+  "from": "2c23ef7482"
+ },
+ "js.tables.between.absent": {
+  "text": "Abstentions",
+  "from": "2b731a4d81"
+ },
+ "js.tables.between.turnout": {
+  "text": "Turnout",
+  "from": "37c61f1503"
+ },
+ "js.tables.field.eligible": {
+  "text": "Eligible voters",
+  "from": "3346b9b5f4"
+ },
+ "js.tables.field.turnout": {
+  "text": "Turnout",
+  "from": "37c61f1503"
+ },
+ "js.tables.field.abstentions": {
+  "text": "Abstentions",
+  "from": "2b731a4d81"
+ },
+ "js.tables.field.blank": {
+  "text": "Blank votes",
+  "from": "dc422f124d"
+ },
+ "js.tables.field.null": {
+  "text": "Spoiled votes",
+  "from": "bcac99eb5b"
+ },
+ "js.tables.field.valid": {
+  "text": "Valid votes",
+  "from": "39187c4503"
+ },
+ "js.tables.field.lula": {
+  "text": "Votes for Lula",
+  "from": "e628cc2338"
+ },
+ "js.tables.field.flavio": {
+  "text": "Votes for Flávio",
+  "from": "e1faa89d24"
+ },
+ "js.tables.consistency.rounds": {
+  "text": "{a} and {b}",
+  "from": "9c24f201a0"
+ },
+ "js.simple.digits.panel": {
+  "text": "{name}'s votes",
+  "from": "e7ad7adfa6"
+ },
+ "js.simple.digits.tip": {
+  "text": "Votes ending in {d}",
+  "from": "62e5db5583"
+ },
+ "js.simple.digits.tip_value": {
+  "text": "{v} of machines",
+  "from": "80922480fc"
+ },
+ "js.simple.digits.reference": {
+  "text": "1 in 10",
+  "from": "4a3c886bf9"
+ },
+ "js.simple.outliers.lula": {
+  "text": "In favor of Lula",
+  "from": "6e667b7f9e"
+ },
+ "js.simple.outliers.flavio": {
+  "text": "In favor of Flávio (in 2022, Jair)",
+  "from": "12160dca71"
+ },
+ "js.simple.outliers.value": {
+  "text": "{n} in {year}",
+  "from": "488d8d4faf"
+ },
+ "js.simple.balance.lula": {
+  "text": "Lula",
+  "from": "37b5073e4e"
+ },
+ "js.simple.balance.flavio": {
+  "text": "Flávio",
+  "from": "c1fee03166"
+ },
+ "js.simple.balance.others": {
+  "text": "Candidates who dropped out",
+  "from": "10a29cb0f7"
+ },
+ "js.simple.balance.absent": {
+  "text": "Abstentions",
+  "from": "2b731a4d81"
+ },
+ "js.simple.balance.blank_null": {
+  "text": "Blank and spoiled",
+  "from": "2c23ef7482"
+ },
+ "js.charts.ld.lula_title": {
+  "text": "Lula's votes",
+  "from": "e17dc4eff8"
+ },
+ "js.charts.ld.right_title": {
+  "text": "Flávio's votes (in 2022, Jair)",
+  "from": "49f21b3064"
+ },
+ "js.charts.ld.turnout_title": {
+  "text": "Turnout",
+  "from": "37c61f1503"
+ },
+ "js.charts.ld.tip_head": {
+  "text": "{title} · count ends in {digit}",
+  "from": "2304469239"
+ },
+ "js.charts.ld.uniformity": {
+  "text": "Uniformity: p = {p26} (2026) · {p22} (2022)",
+  "from": "ed59d956f2"
+ },
+ "js.charts.ld.legend_2026": {
+  "text": "2026 (in each panel's color)",
+  "from": "3f8bca75f2"
+ },
+ "js.charts.ld.legend_chance": {
+  "text": "Chance variation",
+  "from": "1f16e4438b"
+ },
+ "js.charts.pct.turnout_title": {
+  "text": "Turnout",
+  "from": "37c61f1503"
+ },
+ "js.charts.pct.share_title": {
+  "text": "{name} %",
+  "from": "b1150234ea"
+ },
+ "js.charts.pct.tip_head": {
+  "text": "{title} {from}–{to}%",
+  "from": "3ea93c93b3"
+ },
+ "js.charts.pct.tip_sections": {
+  "text": "Sections",
+  "from": "24c5e77004"
+ },
+ "js.charts.pct.tip_expected": {
+  "text": "Expected",
+  "from": "bd091ce27e"
+ },
+ "js.charts.pct.legend_sections": {
+  "text": "Sections, 2026 runoff",
+  "from": "32e6ab891d"
+ },
+ "js.charts.pct.legend_expected": {
+  "text": "Expected from the counts alone",
+  "from": "02e2c070a7"
+ },
+ "js.charts.z.turnout_title": {
+  "text": "Turnout",
+  "from": "37c61f1503"
+ },
+ "js.charts.z.swing_title": {
+  "text": "Shift in favor of {name}",
+  "from": "1d7ecbba1b"
+ },
+ "js.charts.z.share_title": {
+  "text": "{name} %",
+  "from": "b1150234ea"
+ },
+ "js.charts.z.tip_head": {
+  "text": "{title}: z from {from} to {to}",
+  "from": "8ddf88379e"
+ },
+ "js.charts.z.tip_normal": {
+  "text": "Normal curve",
+  "from": "b9e4341448"
+ },
+ "js.charts.z.legend_sections": {
+  "text": "Sections, 2026 runoff",
+  "from": "32e6ab891d"
+ },
+ "js.charts.z.legend_normal": {
+  "text": "Perfect normal curve",
+  "from": "c1c31acfed"
+ },
+ "js.charts.z.legend_2022": {
+  "text": "2022 runoff",
+  "from": "4a0187aad2"
+ },
+ "js.charts.z.legend_beyond": {
+  "text": "Beyond ±4",
+  "from": "49572903a1"
+ },
+ "js.charts.fp.panel_title": {
+  "text": "{who}, {year} runoff",
+  "from": "6159c091c6"
+ },
+ "js.charts.fp.tip_head": {
+  "text": "{title} · turnout {t0}–{t1}% · {who} {s0}–{s1}%",
+  "from": "03aeee512e"
+ },
+ "js.charts.fp.tip_sections": {
+  "text": "Sections",
+  "from": "24c5e77004"
+ },
+ "js.charts.fp.legend_corner": {
+  "text": "Turnout ≥ 95% and candidate ≥ 90%",
+  "from": "b77c2db082"
+ },
+ "js.charts.fp.legend_scale": {
+  "text": "Darker = more sections (log scale, 1 to {max})",
+  "from": "51c60311cf"
+ },
+ "js.charts.timing.series": {
+  "text": "{who} {year}",
+  "from": "8efde6a576"
+ },
+ "js.charts.timing.series_r1": {
+  "text": "{who} {year}, first round",
+  "from": "e46f2f48fa"
+ },
+ "js.charts.timing.clock": {
+  "text": "{h}:{m}",
+  "from": "82e1723c89"
+ },
+ "js.charts.timing.tip_head": {
+  "text": "{pct} of votes counted",
+  "from": "9350347c36"
+ },
+ "js.charts.timing.tip_line": {
+  "text": "{label} (by {time})",
+  "from": "96bf5302e0"
+ },
+ "js.charts.size.planted": {
+  "text": "If there were fraud above 250 voters",
+  "from": "6879574309"
+ },
+ "js.charts.size.tip_head": {
+  "text": "Sections with {from} to {to} voters",
+  "from": "196bdf436a"
+ },
+ "js.charts.size.tip_value": {
+  "text": "{v} pp",
+  "from": "13477c390c"
+ },
+ "js.charts.quad.data": {
+  "text": "Data",
+  "from": "24b44a3113"
+ },
+ "js.charts.quad.null": {
+  "text": "Model with nothing abnormal",
+  "from": "32297f18a5"
+ },
+ "js.charts.quad.title_ratio": {
+  "text": "Sections where one gained and the other lost, for each one the other way",
+  "from": "a00780f821"
+ },
+ "js.charts.quad.title_leftover": {
+  "text": "Data ÷ model (1 = the model explains it all)",
+  "from": "70ff90d874"
+ },
+ "js.charts.quad.tip_head": {
+  "text": "{year}: sections where {leader} gained and {other} lost, for each one the other way",
+  "from": "d908530174"
+ },
+ "js.charts.quad.tip_null": {
+  "text": "{v} ({lo} to {hi} in 20 draws)",
+  "from": "af97babdf0"
+ },
+ "js.charts.quad.planted_fifth": {
+  "text": "2026, if there were fraud in 1 in 5 machines",
+  "from": "2c9d953a9e"
+ },
+ "js.charts.quad.planted_all": {
+  "text": "2026, if there were fraud in every machine",
+  "from": "8a75ba2fec"
+ },
+ "js.charts.quad.legend_planted": {
+  "text": "If there were fraud",
+  "from": "6644e8e34a"
+ },
+ "js.testcharts.prop.planted": {
+  "text": "2026, if there were fraud",
+  "from": "38e47b9b60"
+ },
+ "js.testcharts.prop.vs_ref": {
+  "text": "vs. {ref}",
+  "from": "72f26c8c47"
+ },
+ "js.testcharts.prop.title_national": {
+  "text": "Nationwide: how much more the PT gained in the runoff, by the right's strength in the first round",
+  "from": "2a19b8d963"
+ },
+ "js.testcharts.prop.title_states": {
+  "text": "Gap between 2026 and each reference election, state by state",
+  "from": "05e46ffa05"
+ },
+ "js.testcharts.prop.slope_legend": {
+  "text": "{label}: slope {slope}",
+  "from": "be9e0c821f"
+ },
+ "js.testcharts.prop.x_axis": {
+  "text": "right stronger than the rest of the polling place (points) →",
+  "from": "a73772e7d6"
+ },
+ "js.testcharts.prop.y_axis": {
+  "text": "↑ PT gained more than the rest of the polling place (points)",
+  "from": "e0a8299852"
+ },
+ "js.testcharts.prop.tip_head": {
+  "text": "Group {n} of 20 groups of sections",
+  "from": "6f5b46881a"
+ },
+ "js.testcharts.prop.tip_value": {
+  "text": "right {right}, PT {pt}",
+  "from": "50fe711e06"
+ },
+ "js.testcharts.prop.program_adds": {
+  "text": "what a program would add",
+  "from": "78a02ced3b"
+ },
+ "js.testcharts.prop.gap_label": {
+  "text": "2026 − {ref}",
+  "from": "637751bbb2"
+ },
+ "js.testcharts.homog.tip_head": {
+  "text": "p-value from {from} to {to}",
+  "from": "e8cca98f76"
+ },
+ "js.testcharts.homog.legend_chance": {
+  "text": "Chance alone (5% per bin)",
+  "from": "51abc3af16"
+ },
+ "js.testcharts.shp.title_share": {
+  "text": "PT candidate's % by turnout bin",
+  "from": "24d0b0d1fb"
+ },
+ "js.testcharts.shp.title_votes": {
+  "text": "Share of votes in each bin",
+  "from": "f53b7c41ec"
+ },
+ "js.testcharts.shp.tip_value": {
+  "text": "PT {pt}, {votes} of the votes",
+  "from": "086686bdc3"
+ },
+ "js.testcharts.shp.tip_head": {
+  "text": "Turnout from {from} to {to}",
+  "from": "73ee74e931"
+ },
+ "js.testcharts.shp.legend_flat": {
+  "text": "What the method assumes above the most common turnout",
+  "from": "35894690a1"
+ },
+ "js.testcharts.benford.title_pt": {
+  "text": "PT votes (Lula; in 2018, Haddad)",
+  "from": "82ae3108af"
+ },
+ "js.testcharts.benford.title_right": {
+  "text": "Flávio's votes (in 2022 and 2018, Jair)",
+  "from": "19e07174d4"
+ },
+ "js.testcharts.benford.tip_head": {
+  "text": "Second digit {digit}",
+  "from": "2dc880fbd7"
+ },
+ "js.testcharts.benford.tip_benford": {
+  "text": "Benford",
+  "from": "c9812f3c2d"
+ },
+ "js.testcharts.benford.legend_2026": {
+  "text": "2026 (in each candidate's color)",
+  "from": "ca20ec256f"
+ },
+ "js.testcharts.benford.legend_law": {
+  "text": "Benford's law",
+  "from": "97a130af1d"
+ },
+ "js.testcharts.mix.real": {
+  "text": "Real data, {year}",
+  "from": "f900a05287"
+ },
+ "js.testcharts.mix.planted_label": {
+  "text": "2026, if {n} had fraud",
+  "from": "8ce1e7ec77"
+ },
+ "js.testcharts.mix.key_planted": {
+  "text": "Sections with fraud, in the hypothetical scenario",
+  "from": "8011574529"
+ },
+ "js.testcharts.mix.key_found": {
+  "text": "Estimated by the model",
+  "from": "d8746a4466"
+ },
+ "js.testcharts.bursts.corner_lula": {
+  "text": "Near-unanimous for Lula ({n})",
+  "from": "4e9f36842c"
+ },
+ "js.testcharts.bursts.lula90": {
+  "text": "Lula strongholds ({n})",
+  "from": "4932654846"
+ },
+ "js.testcharts.bursts.right90": {
+  "text": "Flávio strongholds ({n})",
+  "from": "5c997fc482"
+ },
+ "js.testcharts.bursts.corner_right": {
+  "text": "Near-unanimous for Flávio ({n})",
+  "from": "929709c781"
+ },
+ "js.testcharts.bursts.random": {
+  "text": "Drawn nationwide ({n})",
+  "from": "9adf349950"
+ },
+ "js.testcharts.bursts.title_fast": {
+  "text": "Votes within 30 s of the previous one",
+  "from": "cf3f1b50ca"
+ },
+ "js.testcharts.bursts.title_worker": {
+  "text": "Voters released by the poll worker",
+  "from": "d6efdecaa1"
+ },
+ "js.testcharts.bursts.key_fast": {
+  "text": "Fast votes",
+  "from": "b756fcd0d9"
+ },
+ "js.testcharts.bursts.planted": {
+  "text": "Near-unanimous, if there were fraud",
+  "from": "bf4f08c184"
+ },
+ "js.testcharts.bursts.key_worker": {
+  "text": "Released by the poll worker",
+  "from": "a4b5ce12ed"
+ },
+ "js.testcharts.ref.title_corner": {
+  "text": "Near-unanimous sections (question 4)",
+  "from": "734ce023ce"
+ },
+ "js.testcharts.ref.title_place": {
+  "text": "Sections that stand out from the polling place (question 3)",
+  "from": "b401e003bb"
+ },
+ "js.testcharts.ref.key_pt": {
+  "text": "In favor of the PT",
+  "from": "ee84a11730"
+ },
+ "js.testcharts.ref.key_right": {
+  "text": "In favor of the opponent",
+  "from": "5106000a8c"
+ },
+ "js.testcharts.conc.title_90": {
+  "text": "Sections with 90% or more for each side",
+  "from": "db8e546ded"
+ },
+ "js.testcharts.conc.title_hist": {
+  "text": "Sections by the PT candidate's share",
+  "from": "1a6f147220"
+ },
+ "js.testcharts.conc.key_pt": {
+  "text": "PT candidate (Lula; in 2018, Haddad)",
+  "from": "249174e245"
+ },
+ "js.testcharts.conc.key_right": {
+  "text": "Opponent (Flávio; in 2022 and 2018, Jair)",
+  "from": "a095749304"
+ },
+ "js.testcharts.conc.year_label": {
+  "text": "{year} ({who} won)",
+  "from": "db9ce67368"
+ },
+ "js.testcharts.conc.tip_head": {
+  "text": "PT with {from} to {to} of the votes",
+  "from": "ee40471a70"
+ },
+ "js.testcharts.conc.tip_value": {
+  "text": "{pct} of sections",
+  "from": "f0b86f7552"
+ },
+ "js.testcharts.exp.planted": {
+  "text": "2026, if there were fraud",
+  "from": "38e47b9b60"
+ },
+ "js.testcharts.exp.tip_head": {
+  "text": "Deviation of {from} to {to} pp",
+  "from": "d2e589ae19"
+ },
+ "js.testcharts.exp.tip_value": {
+  "text": "{n} municipalities",
+  "from": "d390a0d4fb"
+ },
+ "js.testcharts.exp.legend_sd": {
+  "text": "4 times the 2026 typical error",
+  "from": "659a7c97d9"
+ },
+ "js.testcharts.iso.planted_extreme": {
+  "text": "If there were extreme stuffing",
+  "from": "d13e870153"
+ },
+ "js.testcharts.iso.planted_incremental": {
+  "text": "If there were 10% stuffing",
+  "from": "a4daf75b9b"
+ },
+ "js.testcharts.iso.tip_head": {
+  "text": "Score {score} or higher",
+  "from": "836131ff66"
+ },
+ "js.testcharts.iso.legend_cut": {
+  "text": "Cutoff of 0.60",
+  "from": "8e3602d3e3"
+ },
+ "shell.langs": {
+  "text": "Language",
+  "from": "7ae9d41835"
+ },
+ "shell.pending": {
+  "text": "Not translated yet",
+  "from": "07fecd6768"
+ }
+}

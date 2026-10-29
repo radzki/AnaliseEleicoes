@@ -63,7 +63,12 @@ scripts/12_urna_bursts.py  votos em rajada e liberações pelo mesário nos regi
 scripts/13_mixture.py      modelo de mistura (Klimek et al., 2012), por estado, com fraude plantada -> mixture_<ano>.json
 scripts/14_three_elections.py  2026, 2022 e 2018: testes de referência, um ganhou e o outro perdeu (com modelo nulo),
                            concentração, esperado × observado sem ver o município, Isolation Forest e LOF -> three_elections.json
-report/                    a página do relatório (HTML + JavaScript com d3), em português
+report/                    a página do relatório (HTML + JavaScript com d3); o texto fica em locales/
+locales/pt-BR.json         todo o texto da página: cada {{chave}} de report/index.html, web/page.html e
+                           web/404.html, e as chaves "js." que os scripts leem com vf.t() (core.js)
+locales/en.json, es.json   as traduções (páginas /en/ e /es/); cada texto guarda o hash do português de que
+                           foi traduzido, e onde o português mudou a página mostra o português, marcado
+scripts/15_i18n.py         status, textos a traduzir e merge de traduções (com o hash do português atual)
 web/                       o que o site estático acrescenta: dash.js (carrega os dados e roda os
                            cálculos da página), theme.css (cores, fontes, espaçamentos, claro e
                            escuro), o modelo da página, cabeçalhos HTTP e uma cópia do d3 7.9.0

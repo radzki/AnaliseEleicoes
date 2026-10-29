@@ -6,46 +6,50 @@
     description: 'O resultado de cada teste em 2026 e em 2022 lado a lado, pareados por teste, medida e turno, escritos em português com unidade e estatística do teste.',
     fn: (scorecard) => {
       const TEST = {
-        ld: 'Contagens terminadas em 0 (por seção)',
-        heap: 'Excesso em 10, 20, 30… frente a valores vizinhos',
-        int: 'Seções com percentual inteiro exato',
-        'ldagg|zona': 'Votos de Lula terminados em 0 (por zona)',
-        'ldagg|municipio': 'Votos de Lula terminados em 0 (por município)',
-        'ldstate|flag': 'Testes de último dígito por UF reprovados após correção',
-        'ldstate|p05': 'Testes de último dígito por UF com p < 0,05',
-        'pz|pos': 'Seções muito acima do seu local de votação (z > 4), pró-Lula',
-        'pz|neg': 'Seções muito abaixo do seu local de votação (z < −4), pró-Bolsonaro',
-        corner: 'Seções com comparecimento ≥ 95% e Lula ≥ 90%',
-        hiT: 'Comparecimento atipicamente alto (z > 4) pendendo para Lula',
-        persist: 'Seções atípicas pró-Lula no 2º turno que já eram altas no 1º (z > 2)',
-        'swing|pos': 'Seções que migraram bem mais para Lula que as vizinhas (> 4σ)',
-        'swing|neg': 'Seções que migraram bem mais para Bolsonaro que as vizinhas (> 4σ)',
-        'swing|dturn': 'Alta do comparecimento × migração para Lula, no mesmo local',
-        time: '% de Lula nas seções que chegaram mais tarde, na mesma zona',
-        urna: 'Maior diferença entre modelos de urna no mesmo local',
+        ld: vf.t('tables.test.ld'),
+        heap: vf.t('tables.test.heap'),
+        int: vf.t('tables.test.int'),
+        'ldagg|zona': vf.t('tables.test.ldagg_zona'),
+        'ldagg|municipio': vf.t('tables.test.ldagg_municipio'),
+        'ldstate|flag': vf.t('tables.test.ldstate_flag'),
+        'ldstate|p05': vf.t('tables.test.ldstate_p05'),
+        'pz|pos': vf.t('tables.test.pz_pos'),
+        'pz|neg': vf.t('tables.test.pz_neg'),
+        corner: vf.t('tables.test.corner'),
+        hiT: vf.t('tables.test.hit'),
+        persist: vf.t('tables.test.persist'),
+        'swing|pos': vf.t('tables.test.swing_pos'),
+        'swing|neg': vf.t('tables.test.swing_neg'),
+        'swing|dturn': vf.t('tables.test.swing_dturn'),
+        time: vf.t('tables.test.time'),
+        urna: vf.t('tables.test.urna'),
       };
-      const VAR = { 'Right candidate': 'Bolsonaro', Turnout: 'Comparecimento', Blank: 'Brancos', Null: 'Nulos', 'Lula share': '% de Lula', All: 'Todos', Swing: 'Migração', Correlation: 'Correlação', Slope: 'Inclinação' };
-      const dec = (v, n) => v.toFixed(n).replace('-', '−').replace('.', ',');
-      const int = (v) => Math.round(v).toLocaleString('pt-BR');
+      const VAR = {
+        'Right candidate': vf.t('tables.var.right'), Turnout: vf.t('tables.var.turnout'), Blank: vf.t('tables.var.blank'),
+        Null: vf.t('tables.var.null'), 'Lula share': vf.t('tables.var.lula_share'), All: vf.t('tables.var.all'),
+        Swing: vf.t('tables.var.swing'), Correlation: vf.t('tables.var.correlation'), Slope: vf.t('tables.var.slope'),
+      };
+      const dec = (v, n) => v.toFixed(n).replace('-', '−').replace('.', vf.t('locale.decimal'));
+      const int = (v) => Math.round(v).toLocaleString(vf.t('locale.intl'));
       const num = (v, unit) => {
         if (v === null) return '—';
         if (unit === '%') return dec(v, 2) + '%';
         if (unit === 'ratio' || unit === 'r') return dec(v, 3);
-        if (unit === 'pp') return dec(v, 2) + ' p.p.';
-        if (unit === 'pp / hour') return (v >= 0 ? '+' : '') + dec(v, 2) + ' p.p./h';
+        if (unit === 'pp') return vf.t('tables.unit.pp', { v: dec(v, 2) });
+        if (unit === 'pp / hour') return (v >= 0 ? '+' : '') + vf.t('tables.unit.pph', { v: dec(v, 2) });
         return int(v);
       };
       const stat = (v, name) => {
         if (v === null || name === null) return '';
-        if (name.startsWith('p ')) return ' · p = ' + dec(v, 3);
-        if (name === 'z') return ' · z = ' + dec(v, 2);
-        if (name === 'robust sd') return ' · dp ' + dec(v, 2);
-        if (name.startsWith('corr')) return ' · r = ' + dec(v, 2);
-        if (name === 'skew') return ' · assimetria ' + dec(v, 2);
-        if (name.startsWith('same corner')) return ' · Bolsonaro ' + int(v);
-        if (name === 'outliers') return ' · ' + int(v) + ' atípicas';
-        if (name === 'tests run') return ' · de ' + int(v) + ' testes';
-        if (name === 'models') return ' · ' + int(v) + ' modelos';
+        if (name.startsWith('p ')) return ' · ' + vf.t('tables.stat.p', { v: dec(v, 3) });
+        if (name === 'z') return ' · ' + vf.t('tables.stat.z', { v: dec(v, 2) });
+        if (name === 'robust sd') return ' · ' + vf.t('tables.stat.robust_sd', { v: dec(v, 2) });
+        if (name.startsWith('corr')) return ' · ' + vf.t('tables.stat.corr', { v: dec(v, 2) });
+        if (name === 'skew') return ' · ' + vf.t('tables.stat.skew', { v: dec(v, 2) });
+        if (name.startsWith('same corner')) return ' · ' + vf.t('tables.stat.same_corner', { n: int(v) });
+        if (name === 'outliers') return ' · ' + vf.t('tables.stat.outliers', { n: int(v) });
+        if (name === 'tests run') return ' · ' + vf.t('tables.stat.tests_run', { n: int(v) });
+        if (name === 'models') return ' · ' + vf.t('tables.stat.models', { n: int(v) });
         return ' · ' + int(v);
       };
       // Which candidate a row is about, for the page's candidate filter; the rest concern both.
@@ -56,7 +60,7 @@
         const t = out.get(r.key) ?? {
           key: r.key, section: r.section, test: TEST[p[0] + '|' + p[1]] ?? TEST[p[0]] ?? r.test,
           variable: VAR[r.variable] ?? r.variable,
-          round: r.round === 1 ? '1º' : r.round === 2 ? '2º' : 'Ambos',
+          round: vf.t(r.round === 1 ? 'tables.round.r1' : r.round === 2 ? 'tables.round.r2' : 'tables.round.both'),
           cand: CAND[p[0] + '|' + p[1]] ?? CAND[p[0]] ?? 'ambos',
         };
         t['y' + r.year] = num(r.observed, r.unit) + stat(r.stat, r.stat_name);
@@ -87,7 +91,7 @@
     inputs: ['corner'],
     title: 'Seções do quadro destacado, com nome do candidato',
     description: 'As seções do quadro destacado, com o nome do candidato que recebeu 90% ou mais dos votos.',
-    fn: (corner) => corner.map((r) => ({ ...r, nome: r.candidate === 'lula' ? 'Lula' : 'Flávio' })),
+    fn: (corner) => corner.map((r) => ({ ...r, nome: (r.candidate === 'lula' ? vf.cand.lula : vf.cand.flavio).name })),
   });
 
   dash.calc('stronghold_excess', {
@@ -170,12 +174,12 @@
       const [a, b] = [1, 2].map((t) => summary.find((r) => r.year === 2026 && r.round === t));
       const row = (id, item, f) => ({ id, item, r1: f(a), r2: f(b), change: f(b) - f(a) });
       return [
-        row('lula', 'Lula', (s) => s.lula),
-        row('flavio', 'Flávio Bolsonaro', (s) => s.right),
-        row('others', 'Candidatos eliminados', (s) => s.valid - s.lula - s.right),
-        row('blank_null', 'Brancos e nulos', (s) => s.brancos + s.nulos),
-        row('absent', 'Abstenções', (s) => s.aptos - s.comparecimento),
-        row('turnout', 'Comparecimento', (s) => s.comparecimento),
+        row('lula', vf.t('tables.between.lula'), (s) => s.lula),
+        row('flavio', vf.t('tables.between.flavio'), (s) => s.right),
+        row('others', vf.t('tables.between.others'), (s) => s.valid - s.lula - s.right),
+        row('blank_null', vf.t('tables.between.blank_null'), (s) => s.brancos + s.nulos),
+        row('absent', vf.t('tables.between.absent'), (s) => s.aptos - s.comparecimento),
+        row('turnout', vf.t('tables.between.turnout'), (s) => s.comparecimento),
       ];
     },
   });
@@ -185,8 +189,15 @@
     title: 'Seções vs. totais oficiais, por campo',
     description: 'A conferência das seções contra os totais oficiais, com o nome de cada campo em português.',
     fn: (consistency) => {
-      const name = { 'Eligible voters': 'Eleitores aptos', Turnout: 'Comparecimento', Abstentions: 'Abstenções', 'Blank votes': 'Votos brancos', 'Null votes': 'Votos nulos', 'Valid votes': 'Votos válidos', 'Lula votes': 'Votos em Lula', 'Flávio votes': 'Votos em Flávio' };
-      return consistency.map((r) => ({ ...r, campo: name[r.field] ?? r.field, turnos: r.rounds.replace('+', ' e ') }));
+      const name = {
+        'Eligible voters': vf.t('tables.field.eligible'), Turnout: vf.t('tables.field.turnout'),
+        Abstentions: vf.t('tables.field.abstentions'), 'Blank votes': vf.t('tables.field.blank'),
+        'Null votes': vf.t('tables.field.null'), 'Valid votes': vf.t('tables.field.valid'),
+        'Lula votes': vf.t('tables.field.lula'), 'Flávio votes': vf.t('tables.field.flavio'),
+      };
+      // "1+2" reads "1 e 2": only the first '+' is replaced.
+      const rounds = (s) => s.replace(/^(.*?)\+(.*)$/s, (m, a, b) => vf.t('tables.consistency.rounds', { a, b }));
+      return consistency.map((r) => ({ ...r, campo: name[r.field] ?? r.field, turnos: rounds(r.rounds) }));
     },
   });
 

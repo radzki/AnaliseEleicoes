@@ -5,11 +5,15 @@
   const page = document.getElementById('fraude');
   if (!page) return;
   const $ = (id) => document.getElementById(id);
-  const nf = new Intl.NumberFormat('pt-BR');
+  // the site's stand-in runtime resolves files from the site root (pages in /en/, /es/); claude.ai has none
+  const dataUrl = (path) => (dash.url ? dash.url(path) : path);
+  const nf = new Intl.NumberFormat(vf.t('locale.intl'));
   const int = (x) => nf.format(Math.round(x));
-  const dec = (x, d = 1) => x.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const dec = (x, d = 1) => x.toLocaleString(vf.t('locale.intl'), { minimumFractionDigits: d, maximumFractionDigits: d });
   const pct = (x, d = 1) => `${dec(100 * x, d)}%`;
-  const NAME = { lula: 'Lula', flavio: 'Flávio' };
+  // reader text comes from vf.t, keys "sim.*"; `t` is taken here (test results, temporaries), so the alias is tr
+  const tr = vf.t;
+  const NAME = { lula: vf.cand.lula.name, flavio: vf.cand.flavio.name };
 
   // ---------------------------------------------------------------- numerics
   function gln(xx) {
@@ -95,10 +99,10 @@
   // ---------------------------------------------------------------- data
   let D = null;
   async function load() {
-    const meta = await (await fetch('data/sim/meta.json')).json();
-    if (!('DecompressionStream' in window)) throw new Error('Este navegador não consegue abrir os dados compactados. Tente uma versão recente do Chrome, do Firefox, do Edge ou do Safari.');
-    const res = await fetch('data/sim/secoes_2026_t2.bin');
-    if (!res.ok) throw new Error(`Os dados não foram encontrados (${res.status}).`);
+    const meta = await (await fetch(dataUrl('data/sim/meta.json'))).json();
+    if (!('DecompressionStream' in window)) throw new Error(tr('sim.error.browser'));
+    const res = await fetch(dataUrl('data/sim/secoes_2026_t2.bin'));
+    if (!res.ok) throw new Error(tr('sim.error.not_found', { status: res.status }));
     const bytes = new Uint8Array(await new Response(res.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
     const n = meta.sections;
     const col = {};
@@ -434,25 +438,29 @@
   const REF = () => D.meta.reference;
   function verdicts(t) {
     const b = D.base, r22 = REF()['2022'];
-    const pv = (p) => (p < 0.0001 ? 'p < 0,0001' : `p = ${dec(p, p < 0.01 ? 4 : 2)}`);
+    const pv = (p) => (p < 0.0001 ? tr('sim.p.tiny') : tr('sim.p.value', { p: dec(p, p < 0.01 ? 4 : 2) }));
+    const pp = (v) => tr('sim.unit.pp', { v: dec(v, 2) });
+    const chance = (n) => tr('sim.test.note.chance', { n: int(n) });
+    const y22 = (n) => tr('sim.test.note.y2022', { n: int(n) });
     const count = (now, base) => now - base > 4 * Math.sqrt(base + 1);
+    // g groups the rows (an identifier); its heading is tr(`sim.group.…`) via GROUP below
     const rows = [
-      { g: 'Números redondos', label: 'Último dígito dos votos de Lula', what: 'Números inventados à mão não terminam em 0 a 9 por igual.', real: pv(b.ldL.p), now: pv(t.ldL.p), bad: t.ldL.p < 0.001 },
-      { g: 'Números redondos', label: 'Último dígito dos votos de Flávio', real: pv(b.ldF.p), now: pv(t.ldF.p), bad: t.ldF.p < 0.001 },
-      { g: 'Números redondos', label: 'Último dígito do comparecimento', real: pv(b.ldC.p), now: pv(t.ldC.p), bad: t.ldC.p < 0.001 },
-      { g: 'Números redondos', label: 'Excesso de 10, 20, 30… nos votos de Lula', what: 'Quantas vezes mais aparecem os números redondos que os vizinhos.', real: `×${dec(b.hpL.ratio, 2)}`, now: `×${dec(t.hpL.ratio, 2)}`, bad: t.hpL.z > 4 },
-      { g: 'Números redondos', label: 'Excesso de 10, 20, 30… nos votos de Flávio', real: `×${dec(b.hpF.ratio, 2)}`, now: `×${dec(t.hpF.ratio, 2)}`, bad: t.hpF.z > 4 },
-      { g: 'Números redondos', label: 'Excesso de 10, 20, 30… no comparecimento', real: `×${dec(b.hpC.ratio, 2)}`, now: `×${dec(t.hpC.ratio, 2)}`, bad: t.hpC.z > 4 },
-      { g: 'Números redondos', label: 'Urnas com percentual exato de Lula (50%, 61%…)', what: 'Comparado com o que o acaso daria.', real: int(b.intL.obs), now: int(t.intL.obs), bad: t.intL.z > 4, note: `o acaso daria cerca de ${int(t.intL.exp)}` },
-      { g: 'Números redondos', label: 'Urnas com comparecimento em percentual exato', real: int(b.intT.obs), now: int(t.intT.obs), bad: t.intT.z > 4, note: `o acaso daria cerca de ${int(t.intT.exp)}` },
-      { g: 'Urnas vizinhas', label: 'Urnas que destoam do seu local a favor de Lula', what: 'Comparadas às outras urnas do mesmo local de votação (z > 4).', real: int(b.place.pos), now: int(t.place.pos), bad: count(t.place.pos, b.place.pos), note: `em 2022: ${int(r22.place_pos4)}` },
-      { g: 'Urnas vizinhas', label: 'Urnas que destoam do seu local a favor de Flávio', real: int(b.place.neg), now: int(t.place.neg), bad: count(t.place.neg, b.place.neg), note: `em 2022: ${int(r22.place_neg4)}` },
-      { g: 'Urnas vizinhas', label: 'Comparecimento ≥ 95% e Lula ≥ 90%', what: 'A “impressão digital” de urnas engordadas. Nos dados reais, já chamou atenção (pergunta 4).', real: int(b.corner.lula), now: int(t.corner.lula), bad: count(t.corner.lula, b.corner.lula), note: `em 2022: ${int(r22.corner_lula)}` },
-      { g: 'Urnas vizinhas', label: 'Comparecimento ≥ 95% e Flávio ≥ 90%', real: int(b.corner.flavio), now: int(t.corner.flavio), bad: count(t.corner.flavio, b.corner.flavio), note: `em 2022, Jair: ${int(r22.corner_right)}` },
-      { g: 'Urnas vizinhas', label: 'Maior diferença entre modelos de urna no mesmo local', what: 'Um programa adulterado em um modelo só apareceria aqui.', real: `${dec(b.model.gap, 2)} p.p.`, now: `${dec(t.model.gap, 2)} p.p.`, bad: Math.abs(t.model.t) > 4 },
-      { g: 'Entre os turnos', label: 'Urnas que viraram para Lula bem mais que as vizinhas', what: 'Mudança do 1º para o 2º turno, comparada ao resto do local.', real: int(b.swing.pos), now: int(t.swing.pos), bad: count(t.swing.pos, b.swing.pos), note: `em 2022: ${int(r22.swing_pos4)}` },
-      { g: 'Entre os turnos', label: 'Urnas que viraram para Flávio bem mais que as vizinhas', real: int(b.swing.neg), now: int(t.swing.neg), bad: count(t.swing.neg, b.swing.neg), note: `em 2022: ${int(r22.swing_neg4)}` },
-      { g: 'Entre os turnos', label: 'Comparecimento subindo junto com a virada, no mesmo local', what: 'Votos “a mais” costumam vir com mais comparecimento.', real: dec(b.swing.corr, 3), now: dec(t.swing.corr, 3), bad: (Math.abs(t.swing.corr) - Math.abs(b.swing.corr)) * Math.sqrt(t.swing.pairs) > 4 },
+      { g: 'round', label: tr('sim.test.ld_lula.label'), what: tr('sim.test.ld_lula.what'), real: pv(b.ldL.p), now: pv(t.ldL.p), bad: t.ldL.p < 0.001 },
+      { g: 'round', label: tr('sim.test.ld_flavio.label'), real: pv(b.ldF.p), now: pv(t.ldF.p), bad: t.ldF.p < 0.001 },
+      { g: 'round', label: tr('sim.test.ld_turnout.label'), real: pv(b.ldC.p), now: pv(t.ldC.p), bad: t.ldC.p < 0.001 },
+      { g: 'round', label: tr('sim.test.heap_lula.label'), what: tr('sim.test.heap_lula.what'), real: `×${dec(b.hpL.ratio, 2)}`, now: `×${dec(t.hpL.ratio, 2)}`, bad: t.hpL.z > 4 },
+      { g: 'round', label: tr('sim.test.heap_flavio.label'), real: `×${dec(b.hpF.ratio, 2)}`, now: `×${dec(t.hpF.ratio, 2)}`, bad: t.hpF.z > 4 },
+      { g: 'round', label: tr('sim.test.heap_turnout.label'), real: `×${dec(b.hpC.ratio, 2)}`, now: `×${dec(t.hpC.ratio, 2)}`, bad: t.hpC.z > 4 },
+      { g: 'round', label: tr('sim.test.int_lula.label'), what: tr('sim.test.int_lula.what'), real: int(b.intL.obs), now: int(t.intL.obs), bad: t.intL.z > 4, note: chance(t.intL.exp) },
+      { g: 'round', label: tr('sim.test.int_turnout.label'), real: int(b.intT.obs), now: int(t.intT.obs), bad: t.intT.z > 4, note: chance(t.intT.exp) },
+      { g: 'place', label: tr('sim.test.place_lula.label'), what: tr('sim.test.place_lula.what'), real: int(b.place.pos), now: int(t.place.pos), bad: count(t.place.pos, b.place.pos), note: y22(r22.place_pos4) },
+      { g: 'place', label: tr('sim.test.place_flavio.label'), real: int(b.place.neg), now: int(t.place.neg), bad: count(t.place.neg, b.place.neg), note: y22(r22.place_neg4) },
+      { g: 'place', label: tr('sim.test.corner_lula.label'), what: tr('sim.test.corner_lula.what'), real: int(b.corner.lula), now: int(t.corner.lula), bad: count(t.corner.lula, b.corner.lula), note: y22(r22.corner_lula) },
+      { g: 'place', label: tr('sim.test.corner_flavio.label'), real: int(b.corner.flavio), now: int(t.corner.flavio), bad: count(t.corner.flavio, b.corner.flavio), note: tr('sim.test.note.y2022_jair', { n: int(r22.corner_right) }) },
+      { g: 'place', label: tr('sim.test.model.label'), what: tr('sim.test.model.what'), real: pp(b.model.gap), now: pp(t.model.gap), bad: Math.abs(t.model.t) > 4 },
+      { g: 'rounds', label: tr('sim.test.swing_lula.label'), what: tr('sim.test.swing_lula.what'), real: int(b.swing.pos), now: int(t.swing.pos), bad: count(t.swing.pos, b.swing.pos), note: y22(r22.swing_pos4) },
+      { g: 'rounds', label: tr('sim.test.swing_flavio.label'), real: int(b.swing.neg), now: int(t.swing.neg), bad: count(t.swing.neg, b.swing.neg), note: y22(r22.swing_neg4) },
+      { g: 'rounds', label: tr('sim.test.swing_turnout.label'), what: tr('sim.test.swing_turnout.what'), real: dec(b.swing.corr, 3), now: dec(t.swing.corr, 3), bad: (Math.abs(t.swing.corr) - Math.abs(b.swing.corr)) * Math.sqrt(t.swing.pairs) > 4 },
     ];
     return rows;
   }
@@ -463,11 +471,12 @@
   function sliderToMachines(v, max) { return Math.max(1, Math.round(Math.pow(max, v / 1000))); }
   function machinesToSlider(m, max) { return Math.round((1000 * Math.log(Math.max(1, m))) / Math.log(max)); }
   const INTENSITY = {
-    software: { label: 'Votos do adversário trocados em cada urna', min: 0, max: 20, step: 0.1, unit: '%' },
-    flip: { label: 'Votos do adversário trocados em cada urna adulterada', min: 1, max: 100, step: 1, unit: '%' },
-    stuff: { label: 'Comparecimento que as urnas adulteradas passam a ter', min: 80, max: 100, step: 1, unit: '%' },
-    invent: { label: 'Votos do adversário passados para o seu candidato', min: 1, max: 100, step: 1, unit: '%' },
+    software: { label: tr('sim.intensity.software'), min: 0, max: 20, step: 0.1, unit: '%' },
+    flip: { label: tr('sim.intensity.flip'), min: 1, max: 100, step: 1, unit: '%' },
+    stuff: { label: tr('sim.intensity.stuff'), min: 80, max: 100, step: 1, unit: '%' },
+    invent: { label: tr('sim.intensity.invent'), min: 1, max: 100, step: 1, unit: '%' },
   };
+  const GROUP = { round: tr('sim.group.round'), place: tr('sim.group.place'), rounds: tr('sim.group.rounds') };
 
   function syncControls() {
     for (const b of ui.ben.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.v === state.ben));
@@ -487,11 +496,11 @@
       ui.machRange.value = machinesToSlider(state.machines, max);
       if (document.activeElement !== ui.machNum) ui.machNum.value = state.machines;
       ui.machNum.max = max;
-      ui.machOf.textContent = `de ${int(max)} (${pct(state.machines / D.n, state.machines / D.n < 0.01 ? 2 : 1)} das urnas do país)`;
+      ui.machOf.textContent = tr('sim.machines.of', { max: int(max), share: pct(state.machines / D.n, state.machines / D.n < 0.01 ? 2 : 1) });
     }
     ui.where.value = state.where;
     ui.bothRow.hidden = !SOFTWARE(state.type); ui.roundNote.hidden = SOFTWARE(state.type);
-    ui.minBtn.textContent = state.ben === winner() ? `Do tamanho da vitória de ${NAME[state.ben]}` : 'Mínimo para virar o resultado';
+    ui.minBtn.textContent = state.ben === winner() ? tr('sim.min.btn_winner', { name: NAME[state.ben] }) : tr('sim.min.btn');
     ui.both.checked = state.both;
   }
 
@@ -512,45 +521,54 @@
     let l = 0, fl = 0;
     for (let i = 0; i < D.n; i++) { l += f.L[i]; fl += f.F[i]; }
     const tot = l + fl, win = l > fl ? 'lula' : 'flavio', flipped = win !== 'lula';
-    const sim = f.moved > 0, tag = sim ? ' · simulação' : '';
+    const sim = f.moved > 0, tag = sim ? tr('sim.result.tag') : '';
     const share = pct(f.machines / D.n, f.machines / D.n < 0.01 ? 2 : 1);
+    const both = state.both ? tr('sim.how.both') : '';
     const how = {
-      software: () => `O programa está em todas as ${int(f.machines)} urnas e trocou ${int(f.moved)} votos no 2º turno${state.both ? ' (e também votos no 1º)' : ''}.`,
-      flip: () => `${int(f.machines)} urnas adulteradas (${share} das urnas) trocaram ${int(f.moved)} votos no 2º turno${state.both ? ' (e também votos no 1º)' : ''}.`,
-      stuff: () => `${int(f.moved)} votos a mais, de eleitores ausentes, em ${int(f.machines)} urnas (${share} das urnas).`,
-      invent: () => `${int(f.machines)} boletins reescritos (${share} das urnas) passaram ${int(f.moved)} votos para ${NAME[state.ben]}.`,
+      software: () => tr('sim.how.software', { machines: int(f.machines), moved: int(f.moved), both }),
+      flip: () => tr('sim.how.flip', { machines: int(f.machines), share, moved: int(f.moved), both }),
+      stuff: () => tr('sim.how.stuff', { moved: int(f.moved), machines: int(f.machines), share }),
+      invent: () => tr('sim.how.invent', { machines: int(f.machines), share, moved: int(f.moved), name: NAME[state.ben] }),
     }[state.type];
     const T = D.meta.totals, realTot = T.lula + T.flavio;
     const forWinner = sim && state.ben === winner(), margin = Math.abs(T.lula - T.flavio);
-    const needed = state.type === 'stuff' ? `acrescentar pelo menos ${int(margin + 1)} votos` : `mover pelo menos ${int(Math.floor(margin / 2) + 1)} votos`;
+    const needed = state.type === 'stuff' ? tr('sim.needed.add', { n: int(margin + 1) }) : tr('sim.needed.move', { n: int(Math.floor(margin / 2) + 1) });
+    const chip = forWinner ? tr('sim.chip.for_winner', { name: NAME[state.ben] })
+      : sim ? (flipped ? tr('sim.chip.flipped') : tr('sim.chip.not_flipped')) : tr('sim.chip.real');
+    const fabricated = forWinner ? tr('sim.result.fabricated', { needed, moved: int(f.moved) }) : '';
     ui.result.innerHTML = `
-      <p class="vf-sim-flag${sim ? '' : ' vf-sim-real'}">${sim ? 'SIMULAÇÃO · não é o resultado real' : 'Resultado real do 2º turno, sem fraude'}</p>
+      <p class="vf-sim-flag${sim ? '' : ' vf-sim-real'}">${sim ? tr('sim.result.flag_sim') : tr('sim.result.flag_real')}</p>
       <div class="vf-sim-totals">
-        <div class="vf-sim-cand" data-c="lula"><span>Lula${tag}</span><b>${int(l)}</b><span>${pct(l / tot, 2)}</span></div>
-        <div class="vf-sim-cand" data-c="flavio"><span>Flávio${tag}</span><b>${int(fl)}</b><span>${pct(fl / tot, 2)}</span></div>
+        <div class="vf-sim-cand" data-c="lula"><span>${NAME.lula}${tag}</span><b>${int(l)}</b><span>${pct(l / tot, 2)}</span></div>
+        <div class="vf-sim-cand" data-c="flavio"><span>${NAME.flavio}${tag}</span><b>${int(fl)}</b><span>${pct(fl / tot, 2)}</span></div>
       </div>
       <div class="vf-sim-bar" aria-hidden="true"><i style="width:${(100 * l) / tot}%"></i></div>
-      <p class="vf-sim-verdict"><span class="vf-chip ${forWinner ? 'vf-warn' : flipped ? 'vf-bad' : 'vf-ok'}">${forWinner ? `Fraude a favor de ${NAME[state.ben]}` : sim ? (flipped ? 'A simulação virou o resultado' : 'A simulação não virou o resultado') : 'Resultado real'}</span>
-      ${sim ? `${how()} Na simulação, vence ${NAME[win]}, por ${int(Math.abs(l - fl))} votos.` : `Lula venceu por ${int(l - fl)} votos.`}</p>
-      ${sim ? `<p class="vf-sim-realline">Resultado real: Lula ${int(T.lula)} (${pct(T.lula / realTot, 2)}), Flávio ${int(T.flavio)} (${pct(T.flavio / realTot, 2)}).${forWinner ? ` Uma fraude que tivesse fabricado essa vitória precisaria ${needed}; esta, aplicada por cima dos dados reais, mexe em ${int(f.moved)}.` : ''}</p>` : ''}`;
+      <p class="vf-sim-verdict"><span class="vf-chip ${forWinner ? 'vf-warn' : flipped ? 'vf-bad' : 'vf-ok'}">${chip}</span>
+      ${sim ? tr('sim.result.sim_line', { how: how(), name: NAME[win], n: int(Math.abs(l - fl)) }) : tr('sim.result.real_line', { n: int(l - fl) })}</p>
+      ${sim ? `<p class="vf-sim-realline">${tr('sim.result.realline', { lula: int(T.lula), lula_pct: pct(T.lula / realTot, 2), flavio: int(T.flavio), flavio_pct: pct(T.flavio / realTot, 2), fabricated })}</p>` : ''}`;
 
     const rows = verdicts(t);
     const bad = rows.filter((r) => r.bad).length;
-    ui.score.innerHTML = !sim ? 'Sem fraude, não há o que aparecer: os números são os reais. Escolha uma fraude ao lado.'
-      : bad ? `<b>A fraude aparece em ${bad} dos ${rows.length} testes.</b>`
-        : `<b>A fraude não aparece em nenhum dos ${rows.length} testes.</b> ${state.type === 'software' ? `Uma troca igual em todas as urnas parece um eleitorado que mudou um pouco de ideia: nos números, as duas coisas são idênticas${forWinner ? `, e por isso os números sozinhos não descartam uma fraude assim a favor de ${NAME[state.ben]}` : ''}.` : 'Ela é pequena demais, ou espalhada demais, para deixar marca nos números.'}`;
+    const why = state.type === 'software'
+      ? tr('sim.score.why_software', { winner: forWinner ? tr('sim.score.why_software_winner', { name: NAME[state.ben] }) : '' })
+      : tr('sim.score.why_small');
+    ui.score.innerHTML = !sim ? tr('sim.score.none')
+      : bad ? tr('sim.score.bad', { bad, total: rows.length })
+        : tr('sim.score.clean', { total: rows.length, why });
     const caught = integrity(f);
-    if (sim && !bad && state.type === 'software') ui.score.innerHTML += ` <b>Mas o teste de integridade a pegaria</b>, se o programa não souber distinguir o teste de uma votação real: com o programa em todas as urnas, as urnas sorteadas para o teste também estariam adulteradas, e ${swapped()}. Basta um voto trocado para o boletim não bater com as cédulas de papel.`;
-    else if (sim && !bad && state.type === 'flip') ui.score.innerHTML += ` Fora destes números, a chance de o teste de integridade sortear pelo menos uma das ${int(f.machines)} urnas adulteradas é de <b>${caught.chance}</b>.`;
-    if (forWinner && bad) ui.score.innerHTML += ` Se a vitória de ${NAME[state.ben]} tivesse vindo de uma fraude assim, os números reais teriam essas marcas. Compare a coluna Real com 2022, anotado abaixo de cada número.`;
+    if (sim && !bad && state.type === 'software') ui.score.innerHTML += ` ${tr('sim.score.integrity_software', { swapped: swapped() })}`;
+    else if (sim && !bad && state.type === 'flip') ui.score.innerHTML += ` ${tr('sim.score.integrity_flip', { machines: int(f.machines), chance: caught.chance })}`;
+    if (forWinner && bad) ui.score.innerHTML += ` ${tr('sim.score.winner_marks', { name: NAME[state.ben] })}`;
     let g = '';
     ui.tbody.innerHTML = rows.map((r) => {
-      const head = r.g !== g ? `<tr class="vf-sim-group"><th colspan="4" scope="colgroup">${(g = r.g)}</th></tr>` : '';
-      return `${head}<tr${r.bad ? ' class="vf-sim-hit"' : ''}><th scope="row">${r.label}${r.what ? `<small>${r.what}</small>` : ''}</th><td class="vf-n">${r.real}</td><td class="vf-n">${r.now}${r.note ? `<small>${r.note}</small>` : ''}</td><td><span class="vf-chip ${r.bad ? 'vf-bad' : 'vf-ok'}">${r.bad ? 'Sim' : 'Não'}</span></td></tr>`;
+      const head = r.g !== g ? `<tr class="vf-sim-group"><th colspan="4" scope="colgroup">${GROUP[(g = r.g)]}</th></tr>` : '';
+      return `${head}<tr${r.bad ? ' class="vf-sim-hit"' : ''}><th scope="row">${r.label}${r.what ? `<small>${r.what}</small>` : ''}</th><td class="vf-n">${r.real}</td><td class="vf-n">${r.now}${r.note ? `<small>${r.note}</small>` : ''}</td><td><span class="vf-chip ${r.bad ? 'vf-bad' : 'vf-ok'}">${r.bad ? tr('sim.test.yes') : tr('sim.test.no')}</span></td></tr>`;
     }).join('');
     renderOutside(f, caught);
     drawCharts(t);
-    announce(sim ? `Simulação: vence ${NAME[win]}, por ${int(Math.abs(l - fl))} votos. A fraude aparece em ${bad} dos ${rows.length} testes${!bad && state.type === 'software' ? ', mas o teste de integridade a pegaria, se o programa não reconhecer o teste' : ''}.` : 'Resultado real, sem fraude.');
+    announce(sim
+      ? tr('sim.announce.sim', { name: NAME[win], n: int(Math.abs(l - fl)), bad, total: rows.length, integrity: !bad && state.type === 'software' ? tr('sim.announce.integrity') : '' })
+      : tr('sim.announce.real'));
   }
   // The page's curve and fingerprint, redrawn with the fraud, for the favoured candidate's share (for Flávio,
   // Lula's z bins and share cells are mirrored, since in the runoff his share is 1 minus Lula's).
@@ -572,7 +590,7 @@
     const nz = zs.reduce((a, b) => a + b, 0);
     box.replaceChildren();
     const tip = vf.tooltip(box);
-    const [c1, c2] = vf.panels(box, [`% de ${name}: cada seção frente ao seu local`, `Comparecimento × % de ${name}`]);
+    const [c1, c2] = vf.panels(box, [tr('sim.chart.curve.title', { name }), tr('sim.chart.fp.title', { name })]);
 
     // 1. the curve, log scale, as on the page
     {
@@ -582,13 +600,13 @@
       const top = Math.max(...zs, ...zr) * 1.5;
       const y = d3.scaleLog([0.5, top], [h - 24, 8]);
       const ticks = [1, 10, 100, 1000, 10000, 100000].filter((v) => v <= top);
-      const ml = vf.textWidth(s, ticks.map((v) => v.toLocaleString('pt-BR'))) + 8;
+      const ml = vf.textWidth(s, ticks.map((v) => v.toLocaleString(vf.t('locale.intl')))) + 8;
       const x = d3.scaleLinear([-10, 10], [ml, w - 8]);
       for (const [a, b] of [[-10, -4], [4, 10]]) {
         s.append('rect').attr('x', x(a)).attr('width', x(b) - x(a)).attr('y', 8).attr('height', h - 32).style('fill', 'var(--cds-chart-grid)').style('opacity', 0.6);
       }
       s.append('g').attr('transform', `translate(${ml},0)`)
-        .call(d3.axisLeft(y).tickValues(ticks).tickFormat((v) => v.toLocaleString('pt-BR')).tickSize(-(w - ml - 8))).call(vf.axis);
+        .call(d3.axisLeft(y).tickValues(ticks).tickFormat((v) => v.toLocaleString(vf.t('locale.intl'))).tickSize(-(w - ml - 8))).call(vf.axis);
       s.append('g').attr('transform', `translate(0,${h - 24})`)
         .call(d3.axisBottom(x).tickValues([-8, -4, 0, 4, 8]).tickFormat((d) => (d > 0 ? '+' : '') + d).tickSize(0).tickPadding(8)).call(vf.axis);
       const ks = d3.range(80);
@@ -602,10 +620,10 @@
       s.append('rect').attr('x', ml).attr('width', w - 8 - ml).attr('height', h).style('fill', 'transparent')
         .on('pointermove pointerdown', (ev) => {
           const k = Math.max(0, Math.min(79, Math.floor((x.invert(d3.pointer(ev)[0]) + 10) / step)));
-          tip.show(ev, `z de ${dec(z0(k), 2)} a ${dec(z0(k + 1), 2)}`, [
-            { label: 'Com a fraude', value: int(zs[k]), color },
-            { label: 'Real', value: int(zr[k]), color: MUTED, line: true },
-            { label: 'Curva normal', value: int(Math.round(normal(k))), color: FG, line: true },
+          tip.show(ev, tr('sim.chart.curve.tip', { from: dec(z0(k), 2), to: dec(z0(k + 1), 2) }), [
+            { label: tr('sim.chart.with_fraud'), value: int(zs[k]), color },
+            { label: tr('sim.chart.real'), value: int(zr[k]), color: MUTED, line: true },
+            { label: tr('sim.chart.normal'), value: int(Math.round(normal(k))), color: FG, line: true },
           ]);
         })
         .on('pointerleave', tip.leave);
@@ -652,18 +670,18 @@
         .on('pointermove pointerdown', (ev) => {
           const [px, py] = d3.pointer(ev);
           const i = Math.max(lo, Math.min(99, Math.floor(x.invert(px)))), j = Math.max(0, Math.min(99, Math.floor(y.invert(py))));
-          tip.show(ev, `Comparecimento ${i}–${i + 1}% · ${name} ${j}–${j + 1}%`, [
-            { label: 'Com a fraude', value: int(fpAt(t.fp, i, j)) },
-            { label: 'Real', value: int(fpAt(D.base.fp, i, j)) },
+          tip.show(ev, tr('sim.chart.fp.tip', { t0: i, t1: i + 1, name, s0: j, s1: j + 1 }), [
+            { label: tr('sim.chart.with_fraud'), value: int(fpAt(t.fp, i, j)) },
+            { label: tr('sim.chart.real'), value: int(fpAt(D.base.fp, i, j)) },
           ]);
         })
         .on('pointerleave', tip.leave);
     }
     vf.legend(box, [
-      { label: 'Seções com a fraude', color },
-      { label: 'Resultado real', color: MUTED, line: true },
-      { label: 'Curva normal', color: FG, line: true },
-      ...(fpMode === 'diff' ? [{ label: 'Células que ganharam seções', color: GAIN }] : []),
+      { label: tr('sim.legend.with_fraud'), color },
+      { label: tr('sim.legend.real'), color: MUTED, line: true },
+      { label: tr('sim.chart.normal'), color: FG, line: true },
+      ...(fpMode === 'diff' ? [{ label: tr('sim.legend.gained'), color: GAIN }] : []),
     ]);
   }
 
@@ -689,23 +707,28 @@
       for (let j = 0; j < a && pMiss > 1e-300; j++) pMiss *= Math.max(0, (N - m - j) / (N - j));
     });
     const pHit = f.machines ? 1 - pMiss : 0;
-    return { pHit, chance: pHit > 0.999999 ? 'praticamente 100%' : pHit === 0 ? '0%' : pHit < 0.0001 ? 'menos de 0,01%' : pct(pHit, pHit > 0.99 ? 2 : 1) };
+    return { pHit, chance: pHit > 0.999999 ? tr('sim.chance.certain') : pHit === 0 ? '0%' : pHit < 0.0001 ? tr('sim.chance.tiny') : pct(pHit, pHit > 0.99 ? 2 : 1) };
   }
   // what a tampered machine does to the known votes typed in during the integrity test
-  const swapped = () => `${Number.isInteger(state.intensity) ? state.intensity : dec(state.intensity)}% dos votos de ${NAME[state.ben === 'lula' ? 'flavio' : 'lula']} digitados no teste sairiam no boletim como votos de ${NAME[state.ben]}`;
+  const swapped = () => tr('sim.swapped', {
+    rate: Number.isInteger(state.intensity) ? state.intensity : dec(state.intensity),
+    victim: NAME[state.ben === 'lula' ? 'flavio' : 'lula'], name: NAME[state.ben],
+  });
 
   function renderOutside(f, { pHit, chance }) {
     const N = D.n, a = D.meta.integrity_test_machines, per = perUf();
     const M = f.machines;
     const sw = SOFTWARE(state.type);
+    const detail = M === N ? tr('sim.outside.integrity_all', { swapped: swapped() })
+      : tr('sim.outside.integrity_some', { m: int(M), n: int(N), chance, swapped: swapped() });
     let html;
-    if (!M) html = '<p>Sem fraude, não há nada para os controles de fora destes dados encontrarem.</p>';
-    else if (sw) html = `<p class="vf-sim-verdict"><span class="vf-chip ${pHit > 0.99 ? 'vf-bad' : 'vf-warn'}">${M === N ? 'O teste de integridade pegaria' : `${chance} de chance de ser pega`}</span></p>
-      <p><b>Teste de integridade:</b> no dia da eleição, pelo menos ${int(a)} urnas sorteadas (de 20 a 33 por estado) são trocadas por urnas reservas, e as originais recebem, em um local público e com filmagem, votos conhecidos de cédulas de papel. O boletim tem de bater com as cédulas. ${M === N ? `Com o programa em todas as urnas, todas as urnas do teste estariam adulteradas: ${swapped()}. Basta um voto trocado para o boletim não bater` : `Com ${int(M)} urnas adulteradas entre ${int(N)}, a chance de pelo menos uma ser sorteada é de <b>${chance}</b>; numa urna adulterada, ${swapped()}`}.</p>
-      <p class="vf-sim-actions"><button type="button" class="vf-btn" id="sim-draw">Sortear as urnas do teste (${int(per)} por estado)</button> <span id="sim-draw-out" aria-live="polite"></span></p>
-      <p class="vf-sim-note">Como o sorteio, a chance é calculada estado por estado, com ${int(per)} urnas por estado (o mínimo) e nenhuma no exterior; com mais urnas sorteadas, ela só aumenta. Isso vale se o programa adulterado não souber distinguir o teste de uma votação real; por isso o teste é filmado e, desde 2022, parte das urnas do teste é liberada com a biometria de eleitores de verdade (em 2022, 58 das 641 urnas do teste, sem nenhuma divergência, segundo a <a class="vf-src" href="https://www.gazetadopovo.com.br/eleicoes/2022/teste-pedido-por-militares-nao-detectou-falhas-nas-urnas-eletronicas-diz-moraes/" target="_blank" rel="noopener">Gazeta do Povo</a>). O teste de autenticidade confere, em outras urnas sorteadas, a assinatura digital do programa instalado.</p>`;
-    else if (state.type === 'stuff') html = `<p><b>Encher urnas é feito por pessoas, não pelo programa</b>, então o teste de integridade não pega. Quem pega: os fiscais dos partidos dentro da seção, a identificação de cada eleitor (biometria ou liberação manual pelo mesário, registrada no registro de eventos da urna, que é público) e a pergunta 8 desta página, que olha esses registros. Votar no lugar de ${int(f.moved)} ausentes exigiria a cumplicidade dos mesários de ${int(M)} seções.</p>`;
-    else html = `<p><b>Reescrever o boletim depois da votação</b> esbarra no boletim impresso: uma via fica afixada na seção ao fim da votação, com QR code, e os fiscais e qualquer eleitor podem fotografá-la. O arquivo publicado tem assinatura digital da urna. Um boletim com números diferentes dos impressos seria descoberto por comparação direta, sem estatística nenhuma.</p>`;
+    if (!M) html = `<p>${tr('sim.outside.none')}</p>`;
+    else if (sw) html = `<p class="vf-sim-verdict"><span class="vf-chip ${pHit > 0.99 ? 'vf-bad' : 'vf-warn'}">${M === N ? tr('sim.outside.chip_all') : tr('sim.outside.chip_chance', { chance })}</span></p>
+      <p>${tr('sim.outside.integrity', { a: int(a), detail })}</p>
+      <p class="vf-sim-actions"><button type="button" class="vf-btn" id="sim-draw">${tr('sim.outside.draw_btn', { per: int(per) })}</button> <span id="sim-draw-out" aria-live="polite"></span></p>
+      <p class="vf-sim-note">${tr('sim.outside.note', { per: int(per) })}</p>`;
+    else if (state.type === 'stuff') html = `<p>${tr('sim.outside.stuff', { moved: int(f.moved), m: int(M) })}</p>`;
+    else html = `<p>${tr('sim.outside.invent')}</p>`;
     ui.outside.innerHTML = html;
     const btn = document.getElementById('sim-draw');
     if (btn) btn.addEventListener('click', () => {
@@ -719,8 +742,10 @@
         drawn += seen.size;
       });
       document.getElementById('sim-draw-out').innerHTML = found
-        ? `<span class="vf-chip vf-bad">Descoberta</span> ${found === drawn ? `Todas as ${int(drawn)} urnas sorteadas estavam adulteradas` : `${int(found)} das ${int(drawn)} urnas sorteadas ${found === 1 ? 'estava adulterada' : 'estavam adulteradas'}`}.`
-        : `<span class="vf-chip vf-ok">Passou</span> Nenhuma das ${int(drawn)} urnas sorteadas estava adulterada desta vez.`;
+        ? `<span class="vf-chip vf-bad">${tr('sim.draw.found')}</span> ${found === drawn ? tr('sim.draw.all', { drawn: int(drawn) })
+          : found === 1 ? tr('sim.draw.some_one', { found: int(found), drawn: int(drawn) })
+            : tr('sim.draw.some_many', { found: int(found), drawn: int(drawn) })}`
+        : `<span class="vf-chip vf-ok">${tr('sim.draw.passed')}</span> ${tr('sim.draw.none', { drawn: int(drawn) })}`;
     });
   }
 
@@ -736,7 +761,7 @@
     ui.both = $('sim-both'); ui.bothRow = $('sim-both-row'); ui.roundNote = $('sim-round-note');
     page.querySelector('.vf-sim-controls').addEventListener('submit', (ev) => ev.preventDefault());
     ui.modelSel.innerHTML = D.meta.models.map((m, i) => `<option value="${i}">${m}</option>`).join('');
-    ui.ufSel.innerHTML = D.meta.ufs.map((u, i) => `<option value="${i}">${u === 'ZZ' ? 'Exterior' : u}</option>`).join('');
+    ui.ufSel.innerHTML = D.meta.ufs.map((u, i) => `<option value="${i}">${u === 'ZZ' ? tr('sim.uf.abroad') : u}</option>`).join('');
     ui.ufSel.value = D.meta.ufs.indexOf('SP');
     state.uf = Number(ui.ufSel.value);
 
@@ -754,21 +779,21 @@
     $('sim-min').addEventListener('click', () => {
       const m = minimumToFlip();
       const who = NAME[state.ben], victim = NAME[state.ben === 'lula' ? 'flavio' : 'lula'];
-      const over = ' A simulação aplica essa fraude por cima dos dados reais, para mostrar as marcas que ela deixaria.';
+      const over = ` ${tr('sim.min.over')}`;
       if (m.impossible) ui.minNote.textContent = m.fabricate
-        ? `Nem adulterando todas as ${int(m.available)} urnas deste grupo, com esta intensidade, daria para fabricar a vitória de ${who}. Aumente a intensidade ou escolha outro grupo.`
-        : `Nem adulterando todas as ${int(m.available)} urnas deste grupo, com esta intensidade, o resultado viraria. Aumente a intensidade ou escolha outro grupo.`;
+        ? tr('sim.min.impossible_fabricate', { n: int(m.available), name: who })
+        : tr('sim.min.impossible', { n: int(m.available) });
       else if (m.rate !== undefined) {
-        if (m.rate > INTENSITY.software.max) { ui.minNote.textContent = `Seria preciso trocar ${dec(m.rate)}% dos votos de ${victim} em cada urna.`; return; }
+        if (m.rate > INTENSITY.software.max) { ui.minNote.textContent = tr('sim.min.rate_too_high', { rate: dec(m.rate), victim }); return; }
         state.intensity = m.rate;
         ui.minNote.textContent = m.fabricate
-          ? `Para fabricar a vitória de ${who}, o programa teria de trocar cerca de ${dec(m.rate)}% dos votos de ${victim} em cada urna.${over}`
-          : `Basta trocar ${dec(m.rate)}% dos votos de ${victim} em cada urna do país.`;
+          ? `${tr('sim.min.rate_fabricate', { name: who, rate: dec(m.rate), victim })}${over}`
+          : tr('sim.min.rate', { rate: dec(m.rate), victim });
       } else {
         state.machines = m.machines;
         ui.minNote.textContent = m.fabricate
-          ? `Para fabricar a vitória de ${who} assim, seriam necessárias pelo menos ${int(m.machines)} urnas adulteradas.${over}`
-          : `Mínimo: ${int(m.machines)} urnas adulteradas, com uma pequena folga, porque o efeito em cada urna é sorteado.`;
+          ? `${tr('sim.min.machines_fabricate', { name: who, n: int(m.machines) })}${over}`
+          : tr('sim.min.machines', { n: int(m.machines) });
       }
       changed();
     });
@@ -789,7 +814,7 @@
       bind();
       update();
     } catch (e) {
-      box.innerHTML = `<b>Não foi possível carregar a simulação.</b> ${e.message ?? ''}`;
+      box.innerHTML = tr('sim.error.load', { message: e.message ?? '' });
       started = false;
     }
   }

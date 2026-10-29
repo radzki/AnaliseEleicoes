@@ -3,6 +3,7 @@
 Usage: python -I report/build_store.py <report_dir>
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -37,7 +38,14 @@ for i, (aid, title, desc) in DATASETS.items():
     docs.append(("datasets", i, {"title": title, "description": f"{desc} {SRC}",
                                   "source": {"kind": "file", "url": f"/_blob/{aid}", "name": f"{i}.json"},
                                   "updated": {**UPDATED, "at": UPDATED_AT.get(i, UPDATED["at"])}, "fixed": True}))
-for f in ("index.html", "core.js", "charts.js", "testcharts.js", "tables.js", "simple.js", "sim.js"):
+# the page's text is in locales/pt-BR.json: {{key}} in index.html is filled from it, and its "js." strings
+# become i18n.js, which the scripts read (as in scripts/05_site.py)
+TEXT = json.loads((rep.parent / "locales" / "pt-BR.json").read_text(encoding="utf-8"))
+page = re.sub(r"\{\{([\w-]+(?:\.[\w-]+)+)\}\}", lambda m: TEXT[m.group(1)], (rep / "index.html").read_text(encoding="utf-8"))
+docs.append(("files", "index.html", {"text": page}))
+docs.append(("files", "i18n.js", {"text": "window.VF_I18N = " + json.dumps(
+    {k: v for k, v in TEXT.items() if k.startswith("js.")}, ensure_ascii=False, indent=0) + ";\n"}))
+for f in ("core.js", "charts.js", "testcharts.js", "tables.js", "simple.js", "sim.js"):
     docs.append(("files", f, {"text": (rep / f).read_text(encoding="utf-8")}))
 for coll, doc_id, data in docs:
     p = out / f"{coll}__{doc_id}.json"
