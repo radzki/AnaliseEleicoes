@@ -42,7 +42,8 @@ for i, aid in DATASETS.items():
                                   "updated": {**UPDATED, "at": UPDATED_AT.get(i, UPDATED["at"])}, "fixed": True}))
 # the page's text is in locales/pt-BR.json: {{key}} in index.html is filled from it, and its "js." strings
 # become i18n.js, which the scripts read (as in scripts/05_site.py)
-page = re.sub(r"\{\{([\w-]+(?:\.[\w-]+)+)\}\}", lambda m: TEXT[m.group(1)], (rep / "index.html").read_text(encoding="utf-8"))
+fill = lambda s: re.sub(r"\{\{([\w-]+(?:\.[\w-]+)+)\}\}", lambda m: TEXT[m.group(1)], s)
+page = fill(fill((rep / "index.html").read_text(encoding="utf-8")))  # twice: texts can hold {{link.*}}
 docs.append(("files", "index.html", {"text": page}))
 docs.append(("files", "i18n.js", {"text": "window.VF_I18N = " + json.dumps(
     {k: v for k, v in TEXT.items() if k.startswith("js.")}, ensure_ascii=False, indent=0) + ";\n"}))

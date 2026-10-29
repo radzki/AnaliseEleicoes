@@ -80,7 +80,7 @@ def pending(key, text, note):
     """Portuguese shown in a translated page: marked where it is element content, as is where it is
     an attribute, a <title> or <meta>, an <option> or a script string."""
     kind = key.split(".")[-2] if key.count(".") >= 2 else ""
-    if key.startswith(("js.", "shell.", "404.", "data.", "og.")) or kind in ("arialabel", "placeholder", "title", "alt", "option"):
+    if key.startswith(("js.", "shell.", "404.", "data.", "og.", "link.")) or kind in ("arialabel", "placeholder", "title", "alt", "option"):
         return text
     return f'<span class="vf-pending" lang="pt-BR" title="{html.escape(note)}">{text}</span>'
 
@@ -111,7 +111,8 @@ def fill(text, T, where):
         if m.group(1) not in T:
             sys.exit(f"{where}: no text for {{{{{m.group(1)}}}}} in locales/pt-BR.json")
         return T[m.group(1)]
-    return KEY.sub(one, text)
+    # twice: a text can hold a link that differs by language ({{link.oas_report}})
+    return KEY.sub(one, KEY.sub(one, text))
 
 
 def fingerprint(text, page_dir):
