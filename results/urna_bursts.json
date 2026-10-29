@@ -184,18 +184,19 @@
   }
  ],
  "planted": {
-  "extra_votes": 20,
+  "extra_votes": 666,
+  "extra_median": 6.0,
   "gap_s": 25,
   "real_longest_poll_worker_run_max": 6,
   "run": {
    "machines": 92,
-   "caught": 92,
-   "poll_worker_share": 0.1625542019409457
+   "caught": 67,
+   "poll_worker_share": 0.10852840971535334
   },
   "mixed": {
    "machines": 92,
    "caught": 0,
-   "poll_worker_share": 0.1625542019409457
+   "poll_worker_share": 0.10852840971535334
   }
  }
 }

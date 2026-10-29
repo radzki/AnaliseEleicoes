@@ -108,7 +108,7 @@ for r in sample.itertuples(index=False):
         gaps_all += [(r.group, t, g) for g in gaps]
         rows.append({**{k: getattr(r, k) for k in SEC}, "group": r.group, "round": t, **m})
         if r.group == "corner_lula" and t == 2:
-            corner.append(v)
+            corner.append((v, int(r.QT_APTOS - r.QT_COMPARECIMENTO)))
 
 M = pd.DataFrame(rows)
 M.to_csv(out / "urna_bursts.csv", index=False)
@@ -128,23 +128,26 @@ for (grp, t), d in M.groupby(["group", "round"]):
         "machines_with_fast_nofp_run_5": float((d.longest_fast_nofp_run >= RUN_MIN).mean()),
         "booth_median_s": float(d.booth_median_s.median()),
     })
-# Planted stuffing, in the near-unanimous Lula machines (runoff): 20 extra votes per machine, released by
-# a poll worker, 25 seconds apart (typing the voter's number, the poll worker's fingerprint, the vote).
+# Planted stuffing, in the near-unanimous Lula machines (runoff): as many extra votes as the machine had
+# absentees, the most poll workers could add there (a fixed 20, used before, is more than any of these
+# machines had), released by a poll worker, 25 seconds apart (typing the voter's number, the poll
+# worker's fingerprint, the vote).
 # "run": all together at the end of the day; "mixed": one by one, between real voters at random.
 # A machine is caught when its longest run of poll-worker releases is longer than any seen in the real
 # sample, or when it has 5 fast votes in a row without a fingerprint.
 real = M[M["round"] == 2]
 pw_max, rng = int(real.longest_poll_worker_run.max()), np.random.default_rng(2026)
-summary["planted"] = {"extra_votes": 20, "gap_s": 25, "real_longest_poll_worker_run_max": pw_max}
+summary["planted"] = {"extra_votes": int(sum(a for _, a in corner)), "extra_median": float(np.median([a for _, a in corner])),
+                      "gap_s": 25, "real_longest_poll_worker_run_max": pw_max}
 for how in ("run", "mixed"):
     caught, pw, tot = 0, 0, 0
-    for v in corner:
+    for v, absent in corner:
         last = v[-1][1]
         if how == "run":
-            p = v + [(last + 25 * i, last + 25 * i + 10, "poll_worker") for i in range(1, 21)]
+            p = v + [(last + 25 * i, last + 25 * i + 10, "poll_worker") for i in range(1, absent + 1)]
         else:
             p = list(v)
-            for _ in range(20):
+            for _ in range(absent):
                 i = int(rng.integers(1, len(p)))
                 t0 = (p[i - 1][1] + p[i][1]) / 2
                 p.insert(i, (t0 - 10, t0, "poll_worker"))

@@ -33,6 +33,7 @@ DATASETS = {
     "urna_assinaturas": "PENDENTE",
     "urna_logs": "PENDENTE",
     "biometria": "PENDENTE",
+    "complementos": "PENDENTE",
 }
 UPDATED_AT = {"corner": "2026-10-27T02:22:38Z", "strongholds": "2026-10-27T05:59:06Z", "consistency": "2026-10-28T01:00:28Z"}
 docs = [("dash", "meta", {"title": "Eleições 2026 - Estatística Forense"}), ("dash", "params", {"cand": "ambos"})]

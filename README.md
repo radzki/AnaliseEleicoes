@@ -63,6 +63,9 @@ scripts/12_urna_bursts.py  votos em rajada e liberações pelo mesário nos regi
 scripts/13_mixture.py      modelo de mistura (Klimek et al., 2012), por estado, com fraude plantada -> mixture_<ano>.json
 scripts/16_biometria.py    eleitores liberados pelo mesário em todas as seções do 2º turno (boletins de urna), por grupo e
                            como votaram, estimado entre seções do mesmo local -> biometria.json
+scripts/17_complementos.py números pedidos pela revisão de 29/10/2026 (docs/): inclinação das seções de comparecimento
+                           atípico, aumento de comparecimento por força de Lula, qui-quadrado do acaso, modelos de urna nos
+                           locais mistos, percentual de Lula ao longo da apuração -> complementos.json
 scripts/14_three_elections.py  2026, 2022 e 2018: testes de referência, um ganhou e o outro perdeu (com modelo nulo),
                            concentração, esperado × observado sem ver o município, Isolation Forest e LOF -> three_elections.json
 report/                    a página do relatório (HTML + JavaScript com d3); o texto fica em locales/
@@ -129,6 +132,7 @@ python -I scripts/10_more_tests.py data/processed2018 results 2018
 python -I scripts/11_urna_assinaturas.py data/processed data/urna_files results   # baixa ~350 MB do TSE
 python -I scripts/12_urna_bursts.py data/urna_logs results
 python -I scripts/16_biometria.py data/raw/bweb2026 data/processed results   # depois do 07
+python -I scripts/17_complementos.py results data/processed data/processed2022 data/processed2018
 python -I scripts/13_mixture.py data/processed results 2026        # alguns minutos por ano
 python -I scripts/13_mixture.py data/processed2022 results 2022
 python -I scripts/13_mixture.py data/processed2018 results 2018

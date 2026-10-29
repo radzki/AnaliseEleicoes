@@ -375,7 +375,8 @@ B = json.loads((res_dir / "urna_bursts.json").read_text(encoding="utf-8"))
 for g in B["groups"]:
     rows.append({"id": f"bursts|{g['group']}|{g['round']}", **{k: v for k, v in g.items() if k not in ("group", "round")}})
 for how in ("run", "mixed"):
-    rows.append({"id": f"bursts|planted|{how}", "extra_votes": B["planted"]["extra_votes"], **B["planted"][how]})
+    rows.append({"id": f"bursts|planted|{how}", "extra_votes": B["planted"]["extra_votes"],
+                 "extra_median": B["planted"].get("extra_median"), **B["planted"][how]})
 dump("more_tests", rows)
 dump("size_curve", curve)
 
@@ -388,7 +389,9 @@ for y in map(str, T["years"]):
     q = T["quadrant"][y]
     rows.append({"id": f"quad|{y}", "year": int(y), **q, "both_up_share": q["both_up"] / q["sections"]})
     for t, c in T["concentration"][y].items():
-        rows.append({"id": f"conc|{y}|{t}", "year": int(y), "round": int(t), **{k: v for k, v in c.items() if k != "hist_lula"}})
+        rows.append({"id": f"conc|{y}|{t}", "year": int(y), "round": int(t), **{k: v for k, v in c.items() if k != "hist_lula"},
+                     # of the sections with 90% or more for the PT, the share that also had 90% or more turnout
+                     "t90_of_lula90": c["turnout_90_lula_90"] / c["lula_90"] if c.get("lula_90") else None})
     e = {k: v for k, v in T["expected"][y].items() if k not in ("mun_top", "mun_hist")}
     rows.append({"id": f"exp|{y}", "year": int(y), **e})
     i = T["isolation"]["years"][y]
@@ -484,3 +487,17 @@ if bp.exists():
     st = pd.Series(B["by_state"]).drop("ZZ", errors="ignore")  # no fingerprints are taken abroad
     rows.append({"id": "states", "max_share": st.max(), "max_uf": st.idxmax(), "min_share": st.min(), "min_uf": st.idxmin()})
     dump("biometria", rows)
+
+# numbers asked for by the adversarial review of 29/10/2026 (scripts/17_complementos.py) ------------
+cp = res_dir / "complementos.json"
+if cp.exists():
+    C = json.loads(cp.read_text(encoding="utf-8"))
+    rows = [{"id": f"tilt|{y}", **v} for y, v in C["tilt"].items()]
+    rows += [{"id": f"gradient|{i}", **g} for i, g in enumerate(C["gradient"])]
+    rows += [{"id": "bound70", **C["bound70"]}, {"id": "q4", **C["q4"]}]
+    rows += [{"id": f"homog_null|{y}", **v} for y, v in C["homog_null"].items()]
+    mm = C["model_mixed"]
+    rows.append({"id": "model_mixed", **{k: v for k, v in mm.items() if k != "models"}})
+    rows += [{"id": f"model_mixed|{k}", **v} for k, v in mm["models"].items()]
+    rows += [{"id": f"count|{y}", **v} for y, v in C["count"].items()]
+    dump("complementos", rows)
